@@ -2,6 +2,7 @@ const http = require('node:http');
 const app = require('./ungDung.js');
 const cauHinhChung = require('./cauHinh/cauHinhChung.js');
 const ketNoiCoSoDuLieu = require('./cauHinh/ketNoiCoSoDuLieu.js');
+const { khoiTaoSocket } = require('./cauHinh/cauHinhSocket.js');
 const ghiNhatKy = require('./tienIch/ghiNhatKy.js');
 
 async function khoiDongMayChu() {
@@ -10,10 +11,14 @@ async function khoiDongMayChu() {
         await ketNoiCoSoDuLieu.khoiTaoCoSoDuLieu();
 
         const server = http.createServer(app);
+        khoiTaoSocket(server);
+
         server.listen(cauHinhChung.congBackend, () => {
             ghiNhatKy.ghiThongTin(`Máy chủ Backend Quán Mộc đang chạy tại http://localhost:${cauHinhChung.congBackend}`);
             ghiNhatKy.ghiThongTin(`Môi trường: ${cauHinhChung.moiTruong}`);
         });
+
+        return server;
     } catch (loi) {
         ghiNhatKy.ghiLoi('Không thể khởi động máy chủ', loi);
         process.exit(1);

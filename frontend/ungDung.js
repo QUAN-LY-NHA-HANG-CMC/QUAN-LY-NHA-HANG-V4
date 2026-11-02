@@ -5,13 +5,23 @@ import { renderQuanLyThucDon } from './trang/quanLyThucDon/quanLyThucDon.js';
 import { renderNhanVien } from './trang/nhanVien/nhanVien.js';
 import { renderQuanTri } from './trang/quanTri/quanTri.js';
 
+// Sprint 2: E-Menu QR, Giỏ hàng & Theo dõi đơn Real-time
+import { renderThucDonQr } from './trang/thucDonQr/thucDonQr.js';
+import { renderGioHang } from './trang/gioHang/gioHang.js';
+import { renderTheoDoiDonMon } from './trang/theoDoiDonMon/theoDoiDonMon.js';
+
 const tuyenDuong = {
     '/dang-nhap': renderDangNhap,
     '/so-do-ban': renderQuanLyBanQr,
     '/thuc-don': renderQuanLyThucDon,
     '/nhan-vien': renderNhanVien,
-    '/quan-tri': renderQuanTri
+    '/quan-tri': renderQuanTri,
+    '/menu': renderThucDonQr,
+    '/gio-hang': renderGioHang,
+    '/theo-doi-don': renderTheoDoiDonMon
 };
+
+const tuyenDuongKhachHang = ['/menu', '/gio-hang', '/theo-doi-don'];
 
 function layNguoiDungHienTai() {
     try {
@@ -22,24 +32,27 @@ function layNguoiDungHienTai() {
     }
 }
 
-function capNhatGiaoDienNguoiDung() {
+function capNhatGiaoDienNguoiDung(duongDan) {
     const nguoiDung = layNguoiDungHienTai();
     const token = localStorage.getItem(KHOA_LUU_TRU.TOKEN);
 
     const thanhBen = document.getElementById('thanh-ben');
     const dauTrang = document.getElementById('dau-trang');
 
-    if (!token || !nguoiDung) {
-        thanhBen.style.display = 'none';
-        dauTrang.style.display = 'none';
+    // Nếu đang ở màn hình khách hàng quét QR hoặc đăng nhập -> ẩn thanh admin
+    if (tuyenDuongKhachHang.includes(duongDan) || duongDan === '/dang-nhap' || !token || !nguoiDung) {
+        if (thanhBen) thanhBen.style.display = 'none';
+        if (dauTrang) dauTrang.style.display = 'none';
         return;
     }
 
-    thanhBen.style.display = 'flex';
-    dauTrang.style.display = 'flex';
+    if (thanhBen) thanhBen.style.display = 'flex';
+    if (dauTrang) dauTrang.style.display = 'flex';
 
-    document.getElementById('nhan-vai-tro').textContent = nguoiDung.tenVaiTro || 'Nhân viên';
-    document.getElementById('ten-nguoi-dung').textContent = nguoiDung.hoTen || nguoiDung.tenDangNhap;
+    const elNhanVaiTro = document.getElementById('nhan-vai-tro');
+    const elTenNguoiDung = document.getElementById('ten-nguoi-dung');
+    if (elNhanVaiTro) elNhanVaiTro.textContent = nguoiDung.tenVaiTro || 'Nhân viên';
+    if (elTenNguoiDung) elTenNguoiDung.textContent = nguoiDung.hoTen || nguoiDung.tenDangNhap;
 
     // Phân quyền hiển thị menu
     const vaiTro = nguoiDung.vaiTro;
@@ -58,20 +71,23 @@ function dieuHuong() {
     const hash = window.location.hash.slice(1) || '/so-do-ban';
     const duongDan = hash.split('?')[0];
 
-    const token = localStorage.getItem(KHOA_LUU_TRU.TOKEN);
-    if (!token && duongDan !== '/dang-nhap') {
-        window.location.hash = '#/dang-nhap';
-        return;
+    // Tuyến đường khách hàng E-Menu QR không cần token nhân viên
+    if (!tuyenDuongKhachHang.includes(duongDan)) {
+        const token = localStorage.getItem(KHOA_LUU_TRU.TOKEN);
+        if (!token && duongDan !== '/dang-nhap') {
+            window.location.hash = '#/dang-nhap';
+            return;
+        }
+
+        if (token && duongDan === '/dang-nhap') {
+            window.location.hash = '#/so-do-ban';
+            return;
+        }
     }
 
-    if (token && duongDan === '/dang-nhap') {
-        window.location.hash = '#/so-do-ban';
-        return;
-    }
+    capNhatGiaoDienNguoiDung(duongDan);
 
-    capNhatGiaoDienNguoiDung();
-
-    // Đánh dấu active trên sidebar
+    // Đánh dấu active trên sidebar nếu có
     document.querySelectorAll('.menu-dieu-huong a').forEach(a => {
         if (a.getAttribute('href') === `#${duongDan}`) {
             a.classList.add('kich-hoat');
@@ -86,11 +102,14 @@ function dieuHuong() {
 }
 
 // Xử lý sự kiện đăng xuất
-document.getElementById('nut-dang-xuat').addEventListener('click', () => {
-    localStorage.removeItem(KHOA_LUU_TRU.TOKEN);
-    localStorage.removeItem(KHOA_LUU_TRU.NGUOI_DUNG);
-    window.location.hash = '#/dang-nhap';
-});
+const nutDangXuat = document.getElementById('nut-dang-xuat');
+if (nutDangXuat) {
+    nutDangXuat.addEventListener('click', () => {
+        localStorage.removeItem(KHOA_LUU_TRU.TOKEN);
+        localStorage.removeItem(KHOA_LUU_TRU.NGUOI_DUNG);
+        window.location.hash = '#/dang-nhap';
+    });
+}
 
 window.addEventListener('hashchange', dieuHuong);
 window.addEventListener('DOMContentLoaded', dieuHuong);

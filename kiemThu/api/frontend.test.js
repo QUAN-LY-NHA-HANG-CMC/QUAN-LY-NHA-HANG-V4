@@ -15,4 +15,15 @@ test('Kiểm tra sự tồn tại và cú pháp các tệp frontend', () => {
     const noiDungIndex = fs.readFileSync(duongDanIndex, 'utf8');
     assert.ok(noiDungIndex.includes('QUÁN MỘC POS'));
     assert.ok(noiDungIndex.includes('/ungDung.js'));
+
+    // Kiểm tra các tệp Frontend Sprint 2
+    const tepSocket = path.resolve(__dirname, '../../frontend/dungChung/ketNoiSocket.js');
+    const tepThucDonQr = path.resolve(__dirname, '../../frontend/trang/thucDonQr/thucDonQr.js');
+    const tepGioHang = path.resolve(__dirname, '../../frontend/trang/gioHang/gioHang.js');
+    const tepTheoDoi = path.resolve(__dirname, '../../frontend/trang/theoDoiDonMon/theoDoiDonMon.js');
+
+    assert.ok(fs.existsSync(tepSocket), 'ketNoiSocket.js phải tồn tại');
+    assert.ok(fs.existsSync(tepThucDonQr), 'thucDonQr.js phải tồn tại');
+    assert.ok(fs.existsSync(tepGioHang), 'gioHang.js phải tồn tại');
+    assert.ok(fs.existsSync(tepTheoDoi), 'theoDoiDonMon.js phải tồn tại');
 });

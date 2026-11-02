@@ -7,7 +7,12 @@
     "start": "node backend/mayChu.js",
     "test": "node --test --test-concurrency=1 kiemThu/**/*.test.js"
   },
-  "keywords": ["quan-ly-nha-hang", "goi-mon-qr", "pos", "kds"],
+  "keywords": [
+    "quan-ly-nha-hang",
+    "goi-mon-qr",
+    "pos",
+    "kds"
+  ],
   "author": "Nhom Phat Trien Quan Moc",
   "license": "ISC",
   "dependencies": {
@@ -17,6 +22,8 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.4",
+    "socket.io-client": "^4.8.4"
   }
 }
