@@ -92,7 +92,7 @@ async function khoiTaoThongTinBan() {
             maDinhDanhQr: params.get('token') || ''
         });
 
-        if (res.ok) {
+        if (res && res.ok) {
             thongTinBanHienTai = res.data.banAn;
             thongTinPhienHienTai = res.data.phienBan;
 
@@ -117,7 +117,7 @@ async function khoiTaoThongTinBan() {
 async function taiDanhMuc() {
     try {
         const res = await goiApi('/danh-muc-mon', 'GET');
-        if (res.ok) {
+        if (res && res.ok) {
             danhSachDanhMuc = Array.isArray(res.data) ? res.data : (res.data && res.data.danhSach ? res.data.danhSach : []);
             const container = document.getElementById('emenu-danh-muc');
             if (!container) return;
@@ -141,12 +141,33 @@ async function taiDanhMuc() {
 async function taiThucDon() {
     try {
         const res = await goiApi('/thuc-don', 'GET');
-        if (res.ok) {
+        if (res && res.ok) {
             danhSachMonAn = (res.data && res.data.danhSach) ? res.data.danhSach : (Array.isArray(res.data) ? res.data : []);
             renderDanhSachMon();
+        } else {
+            const container = document.getElementById('emenu-danh-sach-mon');
+            if (container) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #888;">
+                        <p style="font-size: 24px; margin-bottom: 8px;">🍽️</p>
+                        <p style="font-weight: 600;">Chưa có món ăn nào trong thực đơn</p>
+                    </div>
+                `;
+            }
         }
     } catch (e) {
         console.error('Lỗi tải thực đơn:', e);
+        const container = document.getElementById('emenu-danh-sach-mon');
+        if (container) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #888;">
+                    <p style="font-size: 28px; margin-bottom: 8px;">📶</p>
+                    <p style="font-weight: 600; color: #e74c3c; margin-bottom: 4px;">Không thể kết nối đến máy chủ</p>
+                    <p style="font-size: 13px; color: #777; margin-bottom: 14px;">Vui lòng kiểm tra lại dịch vụ backend hoặc nhấn thử lại.</p>
+                    <button class="nut nut-phu nut-nho" onclick="window.location.reload()" style="cursor: pointer; padding: 6px 16px;">🔄 Thử lại</button>
+                </div>
+            `;
+        }
     }
 }
 

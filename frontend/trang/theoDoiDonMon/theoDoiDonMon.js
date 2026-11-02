@@ -1,14 +1,16 @@
 /**
  * Màn hình Theo dõi Đơn món Thời gian thực & Gọi nhân viên tại bàn
- * Phụ trách: Phong (Frontend Developer)
+ * Phụ trách: Phong (Frontend Developer) & Quân (Đánh giá E-Menu)
  */
 import { goiApi } from '../../dungChung/api.js';
 import { dinhDangTien } from '../../dungChung/dinhDang.js';
 import { thamGiaBan, langNgheSuKien, huyLangNghe } from '../../dungChung/ketNoiSocket.js';
+import { hienThongBao } from '../../dungChung/thongBao.js';
 
 let thongTinBan = null;
 let thongTinPhien = null;
 let duLieuChiTietPhien = null;
+let soSaoChon = 5;
 
 export async function renderTheoDoiDonMon(container) {
     try {
@@ -52,6 +54,17 @@ export async function renderTheoDoiDonMon(container) {
                 </div>
             </div>
 
+            <!-- Khối nút Đánh giá món ăn -->
+            <div style="background: #fffdf9; border: 1px solid #fce8d5; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-weight: 600; font-size: 14px; color: #2c3e50;">Cảm nhận bữa ăn thế nào?</div>
+                    <div style="font-size: 12px; color: #7f8c8d;">Đánh giá giúp Quán Mộc nâng cao chất lượng</div>
+                </div>
+                <button id="nut-mo-danh-gia" class="nut nut-phu nut-nho" style="color: #e67e22; border-color: #e67e22; font-weight: 600; padding: 6px 12px;">
+                    ⭐ Đánh giá
+                </button>
+            </div>
+
             <!-- Danh sách các lượt gọi món -->
             <div id="danh-sach-cac-luot-goi" style="display: flex; flex-direction: column; gap: 14px;">
                 <div style="text-align: center; padding: 30px; color: #888;">Đang tải danh sách món...</div>
@@ -72,6 +85,39 @@ export async function renderTheoDoiDonMon(container) {
                 </div>
             </div>
         </div>
+
+        <!-- Modal Đánh Giá Bữa Ăn -->
+        <div id="modal-danh-gia-khach" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px;">
+            <div style="background: white; border-radius: 16px; width: 100%; max-width: 420px; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                <h3 style="margin-top: 0; text-align: center; font-size: 18px; color: #2c3e50;">Đánh Giá Trải Nghiệm Bữa Ăn</h3>
+                
+                <div style="display: flex; justify-content: center; gap: 10px; font-size: 32px; margin: 16px 0; cursor: pointer;" id="danh-sach-sao-chon">
+                    <span class="ngoi-sao" data-val="1">⭐</span>
+                    <span class="ngoi-sao" data-val="2">⭐</span>
+                    <span class="ngoi-sao" data-val="3">⭐</span>
+                    <span class="ngoi-sao" data-val="4">⭐</span>
+                    <span class="ngoi-sao" data-val="5">⭐</span>
+                </div>
+                <div id="chu-thich-so-sao" style="text-align: center; font-size: 13px; font-weight: 600; color: #e67e22; margin-bottom: 16px;">
+                    Rất tuyệt vời (5 sao)
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">Họ tên của bạn (tùy chọn):</label>
+                    <input type="text" id="nhap-ten-khach-dg" placeholder="Để trống nếu muốn ẩn danh" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px;">
+                </div>
+
+                <div style="margin-bottom: 18px;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">Nhận xét, góp ý cho nhà hàng:</label>
+                    <textarea id="nhap-nhan-xet-dg" rows="3" placeholder="Món ăn, thái độ nhân viên, không gian quán..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px;"></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button id="nut-huy-dg-khach" class="nut nut-phu">Để sau</button>
+                    <button id="nut-gui-dg-khach" class="nut nut-chinh">Gửi Đánh Giá</button>
+                </div>
+            </div>
+        </div>
     `;
 
     // 1. Tham gia Socket Room
@@ -85,12 +131,13 @@ export async function renderTheoDoiDonMon(container) {
 
     // 4. Gắn sự kiện các nút
     ganSuKienHoTro();
+    ganSuKienDanhGia();
 }
 
 async function taiChiTietPhien() {
     try {
         const res = await goiApi(`/phien-ban/${thongTinPhien.ma_phien}`, 'GET');
-        if (res.ok) {
+        if (res && res.ok) {
             duLieuChiTietPhien = res.data;
             hienThiDanhSachDon();
         }
@@ -145,56 +192,60 @@ function hienThiDanhSachDon() {
 
     container.innerHTML = html;
 
-    // Gắn sự kiện nút Hủy món
-    container.querySelectorAll('.nut-huy-mon-item').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const chiTietId = Number(btn.dataset.id);
-            const tenMon = btn.dataset.tenMon;
-            if (confirm(`Bạn có chắc muốn hủy món "${tenMon}"?`)) {
-                await xuLyHuyMon(chiTietId);
+    // Gắn sự kiện hủy món
+    container.querySelectorAll('.nut-huy-mon').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const chiTietId = btn.dataset.id;
+            if (confirm('Bạn chắc chắn muốn hủy món này?')) {
+                xuLyHuyMon(chiTietId);
             }
         });
     });
 }
 
 function taoDongMonAn(item) {
-    let nhanTrangThai = '';
-    let choPhepBaoHuy = false;
+    let mauTrangThai = '#6b7280';
+    let tenTrangThai = 'Chờ xác nhận';
 
     switch (item.trang_thai) {
         case 'cho_xac_nhan':
-            nhanTrangThai = `<span style="background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600;">🟡 Chờ xác nhận</span>`;
-            choPhepBaoHuy = true;
+            mauTrangThai = '#eab308';
+            tenTrangThai = '⏳ Chờ bếp nhận';
             break;
         case 'dang_che_bien':
-            nhanTrangThai = `<span style="background: #dbeafe; color: #1d4ed8; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600;">🔵 Đang nấu</span>`;
+            mauTrangThai = '#3b82f6';
+            tenTrangThai = '👨‍🍳 Đang nấu';
             break;
         case 'hoan_thanh':
+            mauTrangThai = '#10b981';
+            tenTrangThai = '🍲 Đã xong, chờ bưng';
+            break;
         case 'da_phuc_vu':
-            nhanTrangThai = `<span style="background: #d1fae5; color: #047857; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600;">🟢 Đã phục vụ</span>`;
+            mauTrangThai = '#059669';
+            tenTrangThai = '✅ Đã lên bàn';
             break;
         case 'da_huy':
-            nhanTrangThai = `<span style="background: #f3f4f6; color: #9ca3af; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; text-decoration: line-through;">⚪ Đã hủy</span>`;
+            mauTrangThai = '#ef4444';
+            tenTrangThai = '❌ Đã hủy';
             break;
-        default:
-            nhanTrangThai = `<span style="background: #f3f4f6; color: #6b7280; padding: 2px 8px; border-radius: 10px; font-size: 12px;">${item.trang_thai}</span>`;
     }
 
     return `
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed #f5f5f5;">
             <div style="flex: 1; min-width: 0;">
-                <div style="font-size: 14px; font-weight: 600; ${item.trang_thai === 'da_huy' ? 'text-decoration: line-through; color: #999;' : ''}">
+                <div style="font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                     ${item.ten_mon} <span style="color: var(--mau-chinh); font-weight: 700;">x${item.so_luong}</span>
                 </div>
-                ${item.ghi_chu_mon ? `<div style="font-size: 12px; color: #888;">Ghi chú: ${item.ghi_chu_mon}</div>` : ''}
-                <div style="font-size: 12px; color: #666; margin-top: 2px;">${dinhDangTien(item.thanh_tien)}</div>
+                ${item.ghi_chu ? `<div style="font-size: 12px; color: #888;">Ghi chú: ${item.ghi_chu}</div>` : ''}
             </div>
 
             <div style="display: flex; align-items: center; gap: 8px;">
-                ${nhanTrangThai}
-                ${choPhepBaoHuy ? `
-                    <button class="nut nut-nguy-hiem nut-nho nut-huy-mon-item" data-id="${item.id}" data-ten-mon="${item.ten_mon}" 
-                            style="padding: 2px 8px; font-size: 11px;">
+                <span style="font-size: 12px; padding: 2px 8px; border-radius: 4px; font-weight: 500; color: ${mauTrangThai}; background: ${mauTrangThai}15;">
+                    ${tenTrangThai}
+                </span>
+
+                ${item.trang_thai === 'cho_xac_nhan' ? `
+                    <button class="nut-huy-mon" data-id="${item.id}" style="background: none; border: 1px solid #ffccd5; color: #e63946; border-radius: 4px; padding: 2px 6px; font-size: 11px; cursor: pointer;">
                         Hủy
                     </button>
                 ` : ''}
@@ -206,30 +257,22 @@ function taoDongMonAn(item) {
 async function xuLyHuyMon(chiTietId) {
     try {
         const res = await goiApi(`/don-goi-mon/huy-mon/${chiTietId}`, 'PUT', { lyDo: 'Khách hàng yêu cầu hủy' });
-        if (res.ok) {
-            alert('Đã hủy món thành công!');
+        if (res && res.ok) {
+            hienThongBao('Đã hủy món thành công!', 'thanh_cong');
             await taiChiTietPhien();
         } else {
-            alert(res.msg || 'Không thể hủy món ăn này!');
+            hienThongBao((res && res.msg) || 'Không thể hủy món ăn này!', 'canh_bao');
         }
     } catch (e) {
         console.error('Lỗi khi hủy món:', e);
-        alert('Lỗi hệ thống khi hủy món!');
+        hienThongBao('Lỗi hệ thống khi hủy món!', 'loi');
     }
 }
 
 function dangKySocket() {
-    langNgheSuKien('don_mon_moi', () => {
-        taiChiTietPhien();
-    });
-
-    langNgheSuKien('cap_nhat_don_mon', () => {
-        taiChiTietPhien();
-    });
-
-    langNgheSuKien('huy_mon', () => {
-        taiChiTietPhien();
-    });
+    langNgheSuKien('don_mon_moi', () => taiChiTietPhien());
+    langNgheSuKien('cap_nhat_don_mon', () => taiChiTietPhien());
+    langNgheSuKien('huy_mon', () => taiChiTietPhien());
 }
 
 function ganSuKienHoTro() {
@@ -245,11 +288,11 @@ function ganSuKienHoTro() {
                         loaiYeuCau: 'goi_nhan_vien',
                         lyDo: lyDo
                     });
-                    if (res.ok) {
-                        alert('🛎️ Đã gửi yêu cầu tới nhân viên! Phục vụ sẽ có mặt ngay.');
+                    if (res && res.ok) {
+                        hienThongBao('🛎️ Đã gửi yêu cầu tới nhân viên! Phục vụ sẽ có mặt ngay.', 'thanh_cong');
                     }
                 } catch {
-                    alert('Lỗi khi gửi yêu cầu hỗ trợ!');
+                    hienThongBao('Lỗi khi gửi yêu cầu hỗ trợ!', 'loi');
                 }
             }
         });
@@ -266,8 +309,8 @@ function ganSuKienHoTro() {
                         loaiYeuCau: 'yeu_cau_thanh_toan',
                         lyDo: 'Khách yêu cầu tính tiền'
                     });
-                    if (res.ok) {
-                        alert('💳 Yêu cầu thanh toán đã được gửi tới quầy Thu ngân!');
+                    if (res && res.ok) {
+                        hienThongBao('💳 Yêu cầu thanh toán đã được gửi tới quầy Thu ngân!', 'thanh_cong');
                         const badge = document.getElementById('badge-trang-thai-ban');
                         if (badge) {
                             badge.textContent = 'Chờ thanh toán';
@@ -276,8 +319,67 @@ function ganSuKienHoTro() {
                         }
                     }
                 } catch {
-                    alert('Lỗi khi gửi yêu cầu thanh toán!');
+                    hienThongBao('Lỗi khi gửi yêu cầu thanh toán!', 'loi');
                 }
+            }
+        });
+    }
+}
+
+function ganSuKienDanhGia() {
+    const modal = document.getElementById('modal-danh-gia-khach');
+    const nutMo = document.getElementById('nut-mo-danh-gia');
+    const nutHuy = document.getElementById('nut-huy-dg-khach');
+    const nutGui = document.getElementById('nut-gui-dg-khach');
+
+    if (nutMo) nutMo.addEventListener('click', () => modal.style.display = 'flex');
+    if (nutHuy) nutHuy.addEventListener('click', () => modal.style.display = 'none');
+
+    // Chấm sao
+    const cacSao = document.querySelectorAll('.ngoi-sao');
+    const elChuThich = document.getElementById('chu-thich-so-sao');
+    const cacChuThich = {
+        1: 'Rất tệ (1 sao)',
+        2: 'Chưa hài lòng (2 sao)',
+        3: 'Bình thường (3 sao)',
+        4: 'Hài lòng (4 sao)',
+        5: 'Rất tuyệt vời (5 sao)'
+    };
+
+    cacSao.forEach(sao => {
+        sao.addEventListener('click', () => {
+            soSaoChon = Number(sao.dataset.val);
+            cacSao.forEach((s, idx) => {
+                s.style.opacity = idx < soSaoChon ? '1' : '0.25';
+            });
+            if (elChuThich) elChuThich.textContent = cacChuThich[soSaoChon];
+        });
+    });
+
+    if (nutGui) {
+        nutGui.addEventListener('click', async () => {
+            const ten = document.getElementById('nhap-ten-khach-dg').value.trim();
+            const nhanXet = document.getElementById('nhap-nhan-xet-dg').value.trim();
+
+            try {
+                const res = await goiApi('/danh-gia', 'POST', {
+                    phienBanId: thongTinPhien.id,
+                    soSao: soSaoChon,
+                    tenKhachHang: ten || 'Khách bàn ' + thongTinBan.ten_ban,
+                    nhanXet,
+                    anDanh: !ten
+                });
+
+                if (res && res.ok) {
+                    hienThongBao('Quán Mộc xin chân thành cảm ơn đánh giá quý báu của quý khách!', 'thanh_cong');
+                    modal.style.display = 'none';
+                    if (nutMo) {
+                        nutMo.textContent = '✅ Đã đánh giá';
+                        nutMo.disabled = true;
+                    }
+                }
+            } catch (e) {
+                hienThongBao(e.message || 'Lỗi gửi đánh giá', 'loi');
             }
         });
     }

@@ -14,12 +14,21 @@ import { renderTheoDoiDonMon } from './trang/theoDoiDonMon/theoDoiDonMon.js';
 import { renderDieuPhoiBep } from './trang/dieuPhoiBep/dieuPhoiBep.js';
 import { renderThanhToan } from './trang/thanhToan/thanhToan.js';
 
+// Sprint 4: Quản lý Ca làm việc, Thống kê doanh thu & Đánh giá khách hàng
+import { renderCaLamViec } from './trang/caLamViec/caLamViec.js';
+import { renderThongKe } from './trang/thongKe/thongKe.js';
+import { renderDanhGia } from './trang/danhGia/danhGia.js';
+
 const tuyenDuong = {
     '/dang-nhap': renderDangNhap,
     '/so-do-ban': renderQuanLyBanQr,
     '/bep': renderDieuPhoiBep,
     '/kds': renderDieuPhoiBep,
     '/thanh-toan': renderThanhToan,
+    '/ca-lam-viec': renderCaLamViec,
+    '/thong-ke': renderThongKe,
+    '/dashboard': renderThongKe,
+    '/danh-gia': renderDanhGia,
     '/thuc-don': renderQuanLyThucDon,
     '/nhan-vien': renderNhanVien,
     '/quan-tri': renderQuanTri,
@@ -65,6 +74,9 @@ function capNhatGiaoDienNguoiDung(duongDan) {
     const vaiTro = nguoiDung.vaiTro;
     const linkNhanVien = document.getElementById('link-nhan-vien');
     const linkQuanTri = document.getElementById('link-quan-tri');
+    const linkThongKe = document.getElementById('link-thong-ke');
+    const linkDanhGia = document.getElementById('link-danh-gia');
+    const linkCaLamViec = document.getElementById('link-ca-lam-viec');
 
     if (linkNhanVien) {
         linkNhanVien.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
@@ -72,6 +84,24 @@ function capNhatGiaoDienNguoiDung(duongDan) {
     if (linkQuanTri) {
         linkQuanTri.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
     }
+    if (linkThongKe) {
+        linkThongKe.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
+    }
+    if (linkDanhGia) {
+        linkDanhGia.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
+    }
+    if (linkCaLamViec) {
+        linkCaLamViec.parentElement.style.display = (vaiTro === 'quan_ly' || vaiTro === 'thu_ngan') ? 'block' : 'none';
+    }
+
+    // Đánh dấu menu đang chọn
+    document.querySelectorAll('.menu-dieu-huong a').forEach(a => {
+        if (a.getAttribute('href') === `#${duongDan}`) {
+            a.classList.add('kich-hoat');
+        } else {
+            a.classList.remove('kich-hoat');
+        }
+    });
 }
 
 function dieuHuong() {
@@ -100,23 +130,24 @@ function dieuHuong() {
         }
     }
 
-    capNhatGiaoDienNguoiDung(duongDan);
+    const hamRender = tuyenDuong[duongDan];
+    const container = document.getElementById('noi-dung-chinh');
 
-    // Đánh dấu active trên sidebar nếu có
-    document.querySelectorAll('.menu-dieu-huong a').forEach(a => {
-        if (a.getAttribute('href') === `#${duongDan}`) {
-            a.classList.add('kich-hoat');
-        } else {
-            a.classList.remove('kich-hoat');
-        }
-    });
-
-    const vungChinh = document.getElementById('noi-dung-chinh');
-    const hamRender = tuyenDuong[duongDan] || renderQuanLyBanQr;
-    hamRender(vungChinh);
+    if (hamRender && container) {
+        capNhatGiaoDienNguoiDung(duongDan);
+        hamRender(container);
+    } else if (container) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 50px;">
+                <h2>404 - Trang không tồn tại</h2>
+                <p>Đường dẫn bạn yêu cầu không hợp lệ.</p>
+                <a href="#/so-do-ban" class="nut nut-chinh">Quay lại trang chính</a>
+            </div>
+        `;
+    }
 }
 
-// Xử lý sự kiện đăng xuất
+// Xử lý đăng xuất
 const nutDangXuat = document.getElementById('nut-dang-xuat');
 if (nutDangXuat) {
     nutDangXuat.addEventListener('click', () => {

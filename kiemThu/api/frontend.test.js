@@ -35,4 +35,13 @@ test('Kiểm tra sự tồn tại và cú pháp các tệp frontend', () => {
     assert.ok(fs.existsSync(tepThongBao), 'thongBao.js phải tồn tại');
     assert.ok(fs.existsSync(tepDieuPhoiBep), 'dieuPhoiBep.js phải tồn tại');
     assert.ok(fs.existsSync(tepThanhToan), 'thanhToan.js phải tồn tại');
+
+    // Kiểm tra các tệp Frontend Sprint 4
+    const tepCaLamViec = path.resolve(__dirname, '../../frontend/trang/caLamViec/caLamViec.js');
+    const tepThongKe = path.resolve(__dirname, '../../frontend/trang/thongKe/thongKe.js');
+    const tepDanhGia = path.resolve(__dirname, '../../frontend/trang/danhGia/danhGia.js');
+
+    assert.ok(fs.existsSync(tepCaLamViec), 'caLamViec.js phải tồn tại');
+    assert.ok(fs.existsSync(tepThongKe), 'thongKe.js phải tồn tại');
+    assert.ok(fs.existsSync(tepDanhGia), 'danhGia.js phải tồn tại');
 });

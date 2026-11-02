@@ -97,6 +97,12 @@ async function khoiTaoCoSoDuLieu() {
             chayTruyVan(sqlSprint3);
         }
 
+        const duongDanSprint4 = path.resolve(__dirname, '../../database/migrationSprint4.sql');
+        if (fs.existsSync(duongDanSprint4)) {
+            const sqlSprint4 = fs.readFileSync(duongDanSprint4, 'utf8');
+            chayTruyVan(sqlSprint4);
+        }
+
         // Bổ sung các cột mở rộng cho Sprint 3 (nếu chưa có)
         try { layKetNoi().exec('ALTER TABLE phien_ban ADD COLUMN so_khach INTEGER DEFAULT 1;'); } catch (e) {}
         try { layKetNoi().exec('ALTER TABLE phien_ban ADD COLUMN ghi_chu TEXT;'); } catch (e) {}

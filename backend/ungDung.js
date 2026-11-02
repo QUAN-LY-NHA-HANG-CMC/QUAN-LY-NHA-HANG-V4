@@ -27,6 +27,12 @@ const khuyenMaiRoutes = require('./modules/khuyenMai/khuyenMai.routes.js');
 const hoaDonRoutes = require('./modules/hoaDon/hoaDon.routes.js');
 const thanhToanRoutes = require('./modules/thanhToan/thanhToan.routes.js');
 
+// Các Router nghiệp vụ Sprint 4
+const thongKeRoutes = require('./modules/thongKe/thongKe.routes.js');
+const danhGiaRoutes = require('./modules/danhGia/danhGia.routes.js');
+const caLamViecRoutes = require('./modules/caLamViec/caLamViec.routes.js');
+const xuatBaoCaoRoutes = require('./modules/xuatBaoCao/xuatBaoCao.routes.js');
+
 const app = express();
 
 // Middlewares bảo mật và phân tích dữ liệu
@@ -60,6 +66,12 @@ app.use('/api/kds', kdsRoutes);
 app.use('/api/khuyen-mai', khuyenMaiRoutes);
 app.use('/api/hoa-don', hoaDonRoutes);
 app.use('/api/thanh-toan', thanhToanRoutes);
+
+// Gắn các API Routes Sprint 4
+app.use('/api/thong-ke', thongKeRoutes);
+app.use('/api/danh-gia', danhGiaRoutes);
+app.use('/api/ca-lam-viec', caLamViecRoutes);
+app.use('/api/xuat-bao-cao', xuatBaoCaoRoutes);
 
 // Phục vụ giao diện Single Page Application (SPA fallback)
 app.use((req, res, next) => {
