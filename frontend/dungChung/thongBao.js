@@ -36,7 +36,7 @@ function hienThiToast(noiDung, loai = 'thong_tin', thoiGian = 3500) {
         mauNen = '#065f46';
         mauVien = '#059669';
         icon = '✅';
-    } else if (loai === 'that_bai') {
+    } else if (loai === 'that_bai' || loai === 'loi') {
         mauNen = '#991b1b';
         mauVien = '#dc2626';
         icon = '❌';
@@ -101,3 +101,7 @@ export const thongBao = {
         hienThiToast(noiDung, 'thong_tin', thoiGian);
     }
 };
+
+export function hienThongBao(noiDung, loai = 'thong_tin', thoiGian = 3500) {
+    hienThiToast(noiDung, loai, thoiGian);
+}

@@ -1,5 +1,6 @@
 import { goiApi } from '../../dungChung/api.js';
 import { dinhDangNgayGio } from '../../dungChung/dinhDang.js';
+import { hienThongBao } from '../../dungChung/thongBao.js';
 
 export async function renderQuanTri(container) {
     container.innerHTML = `
@@ -90,29 +91,36 @@ export async function renderQuanTri(container) {
         </div>
     `;
 
+    const ganGiaTri = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val !== undefined && val !== null ? val : '';
+    };
+
     async function taiCauHinh() {
         try {
             const res = await goiApi('/api/cau-hinh-nha-hang');
             const data = res.data || {};
-            document.getElementById('cfg-ten-nha-hang').value = data.ten_nha_hang || '';
-            document.getElementById('cfg-dia-chi').value = data.dia_chi || '';
-            document.getElementById('cfg-so-dien-thoai').value = data.so_dien_thoai || '';
-            document.getElementById('cfg-mat-khau-wifi').value = data.mat_khau_wifi || '';
-            document.getElementById('cfg-ty-le-thue-vat').value = data.ty_le_thue_vat || '8';
-            document.getElementById('cfg-phi-phuc-vu').value = data.phi_phuc_vu || '0';
-            document.getElementById('cfg-ngan-hang-vietqr').value = data.ngan_hang_vietqr || '';
-            document.getElementById('cfg-so-tai-khoan-vietqr').value = data.so_tai_khoan_vietqr || '';
-            document.getElementById('cfg-chu-tai-khoan-vietqr').value = data.chu_tai_khoan_vietqr || '';
+            ganGiaTri('cfg-ten-nha-hang', data.ten_nha_hang);
+            ganGiaTri('cfg-dia-chi', data.dia_chi);
+            ganGiaTri('cfg-so-dien-thoai', data.so_dien_thoai);
+            ganGiaTri('cfg-mat-khau-wifi', data.mat_khau_wifi);
+            ganGiaTri('cfg-ty-le-thue-vat', data.ty_le_thue_vat || '8');
+            ganGiaTri('cfg-phi-phuc-vu', data.phi_phuc_vu || '0');
+            ganGiaTri('cfg-ngan-hang-vietqr', data.ngan_hang_vietqr);
+            ganGiaTri('cfg-so-tai-khoan-vietqr', data.so_tai_khoan_vietqr);
+            ganGiaTri('cfg-chu-tai-khoan-vietqr', data.chu_tai_khoan_vietqr);
         } catch (loi) {
-            alert('Lỗi tải cấu hình: ' + loi.message);
+            hienThongBao('Lỗi tải cấu hình: ' + (loi.message || 'Lỗi mạng'), 'loi');
         }
     }
 
     async function taiNhatKy() {
         try {
+            const thanBang = document.getElementById('bang-nhat-ky-than');
+            if (!thanBang) return;
+
             const res = await goiApi('/api/cau-hinh-nha-hang/nhat-ky');
             const danhSach = res.data || [];
-            const thanBang = document.getElementById('bang-nhat-ky-than');
 
             if (danhSach.length === 0) {
                 thanBang.innerHTML = `<tr><td colspan="3" style="text-align: center; padding: 20px; color: #94a3b8;">Chưa có nhật ký nào.</td></tr>`;
@@ -131,33 +139,44 @@ export async function renderQuanTri(container) {
         }
     }
 
-    document.getElementById('form-cau-hinh').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const payload = {
-            ten_nha_hang: document.getElementById('cfg-ten-nha-hang').value.trim(),
-            dia_chi: document.getElementById('cfg-dia-chi').value.trim(),
-            so_dien_thoai: document.getElementById('cfg-so-dien-thoai').value.trim(),
-            mat_khau_wifi: document.getElementById('cfg-mat-khau-wifi').value.trim(),
-            ty_le_thue_vat: document.getElementById('cfg-ty-le-thue-vat').value,
-            phi_phuc_vu: document.getElementById('cfg-phi-phuc-vu').value,
-            ngan_hang_vietqr: document.getElementById('cfg-ngan-hang-vietqr').value.trim(),
-            so_tai_khoan_vietqr: document.getElementById('cfg-so-tai-khoan-vietqr').value.trim(),
-            chu_tai_khoan_vietqr: document.getElementById('cfg-chu-tai-khoan-vietqr').value.trim()
-        };
+    const form = document.getElementById('form-cau-hinh');
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const layGiaTri = (id) => {
+                const el = document.getElementById(id);
+                return el ? el.value.trim() : '';
+            };
 
-        try {
-            await goiApi('/api/cau-hinh-nha-hang', {
-                method: 'PUT',
-                body: payload
-            });
-            alert('Đã cập nhật cấu hình nhà hàng thành công!');
-            taiNhatKy();
-        } catch (loi) {
-            alert('Lỗi lưu cấu hình: ' + loi.message);
-        }
-    });
+            const payload = {
+                ten_nha_hang: layGiaTri('cfg-ten-nha-hang'),
+                dia_chi: layGiaTri('cfg-dia-chi'),
+                so_dien_thoai: layGiaTri('cfg-so-dien-thoai'),
+                mat_khau_wifi: layGiaTri('cfg-mat-khau-wifi'),
+                ty_le_thue_vat: layGiaTri('cfg-ty-le-thue-vat'),
+                phi_phuc_vu: layGiaTri('cfg-phi-phuc-vu'),
+                ngan_hang_vietqr: layGiaTri('cfg-ngan-hang-vietqr'),
+                so_tai_khoan_vietqr: layGiaTri('cfg-so-tai-khoan-vietqr'),
+                chu_tai_khoan_vietqr: layGiaTri('cfg-chu-tai-khoan-vietqr')
+            };
 
-    document.getElementById('nut-lam-moi-log').addEventListener('click', taiNhatKy);
+            try {
+                await goiApi('/api/cau-hinh-nha-hang', {
+                    method: 'PUT',
+                    body: payload
+                });
+                hienThongBao('Đã cập nhật cấu hình nhà hàng thành công!', 'thanh_cong');
+                taiNhatKy();
+            } catch (loi) {
+                hienThongBao('Lỗi lưu cấu hình: ' + (loi.message || 'Lỗi server'), 'loi');
+            }
+        });
+    }
+
+    const nutLamMoi = document.getElementById('nut-lam-moi-log');
+    if (nutLamMoi) {
+        nutLamMoi.addEventListener('click', taiNhatKy);
+    }
 
     taiCauHinh();
     taiNhatKy();
