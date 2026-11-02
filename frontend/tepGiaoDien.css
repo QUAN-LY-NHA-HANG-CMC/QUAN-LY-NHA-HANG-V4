@@ -469,3 +469,33 @@ input:checked + .con-truot:before {
         width: 100%;
     }
 }
+
+
+/* Sprint 3: Hiệu ứng nhấp nháy cảnh báo KDS quá 15 phút */
+@keyframes blinkBorder {
+    0% {
+        border-color: #e74c3c;
+        box-shadow: 0 0 5px rgba(231, 76, 60, 0.4);
+    }
+    100% {
+        border-color: #ff7675;
+        box-shadow: 0 0 16px rgba(255, 118, 117, 0.8);
+    }
+}
+
+/* In phiếu tạm tính K80 POS */
+@media print {
+    #thanh-ben, #dau-trang, .nut, #khung-thanh-toan > div:last-child {
+        display: none !important;
+    }
+    #khung-thanh-toan {
+        grid-template-columns: 1fr !important;
+    }
+    #khung-thanh-toan > div:first-child {
+        border: none !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        max-width: 80mm !important;
+        margin: 0 auto !important;
+    }
+}

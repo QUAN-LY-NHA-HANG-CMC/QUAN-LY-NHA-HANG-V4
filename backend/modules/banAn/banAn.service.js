@@ -122,6 +122,10 @@ async function xoaBanAn(id) {
     return true;
 }
 
+async function laySoDoChiTiet() {
+    return banAnModel.laySoDoChiTiet();
+}
+
 module.exports = {
     layDanhSach,
     layTheoId,
@@ -130,5 +134,6 @@ module.exports = {
     lamMoiQrToken,
     layAnhQrBan,
     doiTrangThai,
-    xoaBanAn
+    xoaBanAn,
+    laySoDoChiTiet
 };

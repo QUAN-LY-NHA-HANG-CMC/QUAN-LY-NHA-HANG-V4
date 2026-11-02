@@ -10,9 +10,16 @@ import { renderThucDonQr } from './trang/thucDonQr/thucDonQr.js';
 import { renderGioHang } from './trang/gioHang/gioHang.js';
 import { renderTheoDoiDonMon } from './trang/theoDoiDonMon/theoDoiDonMon.js';
 
+// Sprint 3: Điều phối Bếp (KDS) & POS Thu ngân / Thanh toán
+import { renderDieuPhoiBep } from './trang/dieuPhoiBep/dieuPhoiBep.js';
+import { renderThanhToan } from './trang/thanhToan/thanhToan.js';
+
 const tuyenDuong = {
     '/dang-nhap': renderDangNhap,
     '/so-do-ban': renderQuanLyBanQr,
+    '/bep': renderDieuPhoiBep,
+    '/kds': renderDieuPhoiBep,
+    '/thanh-toan': renderThanhToan,
     '/thuc-don': renderQuanLyThucDon,
     '/nhan-vien': renderNhanVien,
     '/quan-tri': renderQuanTri,

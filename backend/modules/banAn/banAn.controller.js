@@ -75,6 +75,15 @@ async function xoaBanAn(req, res, next) {
     }
 }
 
+async function laySoDoChiTiet(req, res, next) {
+    try {
+        const danhSach = await banAnService.laySoDoChiTiet();
+        return dinhDangPhanHoi.thanhCong(res, danhSach, 'Lấy sơ đồ bàn chi tiết thành công');
+    } catch (loi) {
+        next(loi);
+    }
+}
+
 module.exports = {
     layDanhSach,
     layTheoId,
@@ -83,5 +92,6 @@ module.exports = {
     lamMoiQrToken,
     layAnhQrBan,
     doiTrangThai,
-    xoaBanAn
+    xoaBanAn,
+    laySoDoChiTiet
 };

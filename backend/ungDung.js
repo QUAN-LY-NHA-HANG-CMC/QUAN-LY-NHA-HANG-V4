@@ -21,6 +21,12 @@ const donGoiMonRoutes = require('./modules/donGoiMon/donGoiMon.routes.js');
 const gioHangRoutes = require('./modules/gioHang/gioHang.routes.js');
 const yeuCauHoTroRoutes = require('./modules/yeuCauHoTro/yeuCauHoTro.routes.js');
 
+// Các Router nghiệp vụ Sprint 3
+const kdsRoutes = require('./modules/kds/kds.routes.js');
+const khuyenMaiRoutes = require('./modules/khuyenMai/khuyenMai.routes.js');
+const hoaDonRoutes = require('./modules/hoaDon/hoaDon.routes.js');
+const thanhToanRoutes = require('./modules/thanhToan/thanhToan.routes.js');
+
 const app = express();
 
 // Middlewares bảo mật và phân tích dữ liệu
@@ -48,6 +54,12 @@ app.use('/api/phien-ban', phienBanRoutes);
 app.use('/api/don-goi-mon', donGoiMonRoutes);
 app.use('/api/gio-hang', gioHangRoutes);
 app.use('/api/yeu-cau-ho-tro', yeuCauHoTroRoutes);
+
+// Gắn các API Routes Sprint 3
+app.use('/api/kds', kdsRoutes);
+app.use('/api/khuyen-mai', khuyenMaiRoutes);
+app.use('/api/hoa-don', hoaDonRoutes);
+app.use('/api/thanh-toan', thanhToanRoutes);
 
 // Phục vụ giao diện Single Page Application (SPA fallback)
 app.use((req, res, next) => {
