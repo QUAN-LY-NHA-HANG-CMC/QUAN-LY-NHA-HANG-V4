@@ -93,7 +93,11 @@ function laySoDoChiTiet() {
                ROUND((JULIANDAY('now') - JULIANDAY(pb.thoi_gian_bat_dau)) * 24 * 60) AS so_phut_ngoi
         FROM ban_an ba
         JOIN khu_vuc kv ON ba.khu_vuc_id = kv.id
-        LEFT JOIN phien_ban pb ON pb.ban_an_id = ba.id AND pb.trang_thai IN ('dang_su_dung', 'cho_thanh_toan')
+        LEFT JOIN phien_ban pb ON pb.id = (
+            SELECT id FROM phien_ban 
+            WHERE ban_an_id = ba.id AND trang_thai IN ('dang_su_dung', 'cho_thanh_toan') 
+            ORDER BY id DESC LIMIT 1
+        )
         ORDER BY kv.thu_tu_hien_thi ASC, ba.ma_ban ASC
     `;
     const danhSach = ketNoiCoSoDuLieu.layNhieu(sql);

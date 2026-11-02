@@ -76,7 +76,7 @@ export async function renderThucDonQr(container) {
 async function khoiTaoThongTinBan() {
     // Phân tích tham số từ URL Hash
     const hash = window.location.hash;
-    const queryString = hash.includes('?') ? hash.split('?')[1] : '';
+    const queryString = hash.includes('?') ? hash.split('?')[1] : (window.location.search ? window.location.search.slice(1) : '');
     const params = new URLSearchParams(queryString);
     
     let banId = params.get('banId') || params.get('ban') || '1';

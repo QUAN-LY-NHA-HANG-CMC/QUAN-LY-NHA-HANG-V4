@@ -75,7 +75,15 @@ function capNhatGiaoDienNguoiDung(duongDan) {
 }
 
 function dieuHuong() {
-    const hash = window.location.hash.slice(1) || '/so-do-ban';
+    let hash = window.location.hash.slice(1);
+    // Hỗ trợ cả pathname khi quét mã QR trực tiếp không có dấu #
+    if (!hash) {
+        if (window.location.pathname && window.location.pathname !== '/') {
+            hash = window.location.pathname + window.location.search;
+        } else {
+            hash = '/so-do-ban';
+        }
+    }
     const duongDan = hash.split('?')[0];
 
     // Tuyến đường khách hàng E-Menu QR không cần token nhân viên
@@ -114,9 +122,17 @@ if (nutDangXuat) {
     nutDangXuat.addEventListener('click', () => {
         localStorage.removeItem(KHOA_LUU_TRU.TOKEN);
         localStorage.removeItem(KHOA_LUU_TRU.NGUOI_DUNG);
-        window.location.hash = '#/dang-nhap';
+        if (window.location.hash === '#/dang-nhap') {
+            dieuHuong();
+        } else {
+            window.location.hash = '#/dang-nhap';
+        }
     });
 }
 
 window.addEventListener('hashchange', dieuHuong);
-window.addEventListener('DOMContentLoaded', dieuHuong);
+if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', dieuHuong);
+} else {
+    dieuHuong();
+}

@@ -63,7 +63,7 @@ app.use('/api/thanh-toan', thanhToanRoutes);
 
 // Phục vụ giao diện Single Page Application (SPA fallback)
 app.use((req, res, next) => {
-    if (req.path.startsWith('/api/')) {
+    if (req.path.startsWith('/api/') || path.extname(req.path)) {
         return next();
     }
     const duongDanIndex = path.resolve(__dirname, '../frontend/index.html');
