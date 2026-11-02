@@ -85,6 +85,22 @@ async function khoiTaoCoSoDuLieu() {
             chayTruyVan(sqlDuLieuMau);
         }
 
+        const duongDanSprint2 = path.resolve(__dirname, '../../database/migrationSprint2.sql');
+        if (fs.existsSync(duongDanSprint2)) {
+            const sqlSprint2 = fs.readFileSync(duongDanSprint2, 'utf8');
+            chayTruyVan(sqlSprint2);
+        }
+
+        const duongDanSprint3 = path.resolve(__dirname, '../../database/migrationSprint3.sql');
+        if (fs.existsSync(duongDanSprint3)) {
+            const sqlSprint3 = fs.readFileSync(duongDanSprint3, 'utf8');
+            chayTruyVan(sqlSprint3);
+        }
+
+        // Bổ sung các cột mở rộng cho Sprint 3 (nếu chưa có)
+        try { layKetNoi().exec('ALTER TABLE phien_ban ADD COLUMN so_khach INTEGER DEFAULT 1;'); } catch (e) {}
+        try { layKetNoi().exec('ALTER TABLE phien_ban ADD COLUMN ghi_chu TEXT;'); } catch (e) {}
+
         ghiNhatKy.ghiThongTin('Khởi tạo cơ sở dữ liệu thành công.');
         return true;
     } catch (loi) {

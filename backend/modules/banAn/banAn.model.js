@@ -86,6 +86,41 @@ function xoaBanAn(id) {
     return ketNoiCoSoDuLieu.thucThi('DELETE FROM ban_an WHERE id = ?', [id]);
 }
 
+function laySoDoChiTiet() {
+    const sql = `
+        SELECT ba.*, kv.ten_khu_vuc, kv.tang,
+               pb.id AS phien_ban_id, pb.ma_phien, pb.thoi_gian_bat_dau, pb.tong_tien_tam_tinh, pb.so_khach,
+               ROUND((JULIANDAY('now') - JULIANDAY(pb.thoi_gian_bat_dau)) * 24 * 60) AS so_phut_ngoi
+        FROM ban_an ba
+        JOIN khu_vuc kv ON ba.khu_vuc_id = kv.id
+        LEFT JOIN phien_ban pb ON pb.ban_an_id = ba.id AND pb.trang_thai IN ('dang_su_dung', 'cho_thanh_toan')
+        ORDER BY kv.thu_tu_hien_thi ASC, ba.ma_ban ASC
+    `;
+    const danhSach = ketNoiCoSoDuLieu.layNhieu(sql);
+    for (const ban of danhSach) {
+        ban.mon_cho = 0;
+        ban.mon_dang_nau = 0;
+        ban.mon_san_sang = 0;
+        ban.mon_da_phuc_vu = 0;
+        if (ban.phien_ban_id) {
+            const thongKe = ketNoiCoSoDuLieu.layNhieu(`
+                SELECT ct.trang_thai, SUM(ct.so_luong) as so_luong
+                FROM chi_tiet_don_mon ct
+                JOIN don_goi_mon d ON ct.don_goi_mon_id = d.id
+                WHERE d.phien_ban_id = ?
+                GROUP BY ct.trang_thai
+            `, [ban.phien_ban_id]);
+            for (const tk of thongKe) {
+                if (tk.trang_thai === 'cho_xac_nhan') ban.mon_cho += tk.so_luong;
+                else if (tk.trang_thai === 'dang_che_bien') ban.mon_dang_nau += tk.so_luong;
+                else if (tk.trang_thai === 'hoan_thanh') ban.mon_san_sang += tk.so_luong;
+                else if (tk.trang_thai === 'da_phuc_vu') ban.mon_da_phuc_vu += tk.so_luong;
+            }
+        }
+    }
+    return danhSach;
+}
+
 module.exports = {
     layDanhSach,
     layTheoId,
@@ -95,5 +130,6 @@ module.exports = {
     capNhatBanAn,
     capNhatQrToken,
     doiTrangThai,
-    xoaBanAn
+    xoaBanAn,
+    laySoDoChiTiet
 };

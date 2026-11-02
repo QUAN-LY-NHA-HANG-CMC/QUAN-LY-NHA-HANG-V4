@@ -4,6 +4,9 @@ const banAnController = require('./banAn.controller.js');
 const xacThucNguoiDung = require('../../middleware/xacThuc.js');
 const { kiemTraQuyen } = require('../../middleware/phanQuyen.js');
 
+// Sơ đồ bàn chi tiết thời gian thực (KDS/POS xem không bắt buộc chặn nếu nội bộ)
+router.get('/so-do-chi-tiet', banAnController.laySoDoChiTiet);
+
 // Xem danh sách bàn & lấy ảnh QR: Nhân viên các bộ phận đều có thể xem
 router.get('/', xacThucNguoiDung, banAnController.layDanhSach);
 router.get('/:id', xacThucNguoiDung, banAnController.layTheoId);
