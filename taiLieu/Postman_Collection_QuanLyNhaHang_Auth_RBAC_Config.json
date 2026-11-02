@@ -1,0 +1,465 @@
+{
+  "info": {
+    "_postman_id": "b3e098a5-d52f-48d6-95bc-79f977d0e41a",
+    "name": "Quản Lý Nhà Hàng & Gọi Món QR - Auth, RBAC & System Config",
+    "description": "Bộ sưu tập Postman Collection đầy đủ cho Sprint 1: Bảo mật, Tài khoản, Vai trò, Phân quyền RBAC, Cấu hình nhà hàng và Nhật ký hệ thống.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Xác thực & Tài khoản cá nhân (Auth & Profile)",
+      "item": [
+        {
+          "name": "1.1 Đăng nhập (Quản lý) - Tự động lưu Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.ok && res.data && res.data.tokens) {",
+                  "    pm.collectionVariables.set('accessToken', res.data.tokens.accessToken);",
+                  "    pm.collectionVariables.set('refreshToken', res.data.tokens.refreshToken);",
+                  "    console.log('Đã lưu Access Token và Refresh Token vào biến môi trường!');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenDangNhap\": \"quanly\",\n  \"matKhau\": \"MatKhau@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tai-khoan/dang-nhap",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tai-khoan", "dang-nhap"]
+            }
+          }
+        },
+        {
+          "name": "1.2 Đăng nhập (Thu ngân)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenDangNhap\": \"thungan\",\n  \"matKhau\": \"MatKhau@123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tai-khoan/dang-nhap",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tai-khoan", "dang-nhap"]
+            }
+          }
+        },
+        {
+          "name": "1.3 Làm mới Access Token (Refresh Token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.ok && res.data && res.data.accessToken) {",
+                  "    pm.collectionVariables.set('accessToken', res.data.accessToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tai-khoan/lam-moi-token",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tai-khoan", "lam-moi-token"]
+            }
+          }
+        },
+        {
+          "name": "1.4 Xem hồ sơ cá nhân",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/tai-khoan/ho-so",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tai-khoan", "ho-so"]
+            }
+          }
+        },
+        {
+          "name": "1.5 Cập nhật hồ sơ cá nhân",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hoTen\": \"Nguyễn Văn Quản Lý\",\n  \"soDienThoai\": \"0901234567\",\n  \"email\": \"quanly@quanmoc.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tai-khoan/ho-so",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tai-khoan", "ho-so"]
+            }
+          }
+        },
+        {
+          "name": "1.6 Đổi mật khẩu cá nhân",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"matKhauCu\": \"MatKhau@123\",\n  \"matKhauMoi\": \"MatKhauMoi@456\",\n  \"xacNhanMatKhauMoi\": \"MatKhauMoi@456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tai-khoan/doi-mat-khau",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tai-khoan", "doi-mat-khau"]
+            }
+          }
+        },
+        {
+          "name": "1.7 Đăng xuất khỏi hệ thống",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/tai-khoan/dang-xuat",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "tai-khoan", "dang-xuat"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Vai trò & Phân quyền (RBAC)",
+      "item": [
+        {
+          "name": "2.1 Xem danh sách vai trò",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro"]
+            }
+          }
+        },
+        {
+          "name": "2.2 Xem danh mục tất cả quyền",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro/danh-muc-quyen",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro", "danh-muc-quyen"]
+            }
+          }
+        },
+        {
+          "name": "2.3 Xem chi tiết vai trò theo ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro", "1"]
+            }
+          }
+        },
+        {
+          "name": "2.4 Tạo mới vai trò",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maVaiTro\": \"TO_TRUONG\",\n  \"tenVaiTro\": \"Tổ trưởng phục vụ\",\n  \"moTa\": \"Giám sát khu vực bàn và điều phối nhân sự\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro"]
+            }
+          }
+        },
+        {
+          "name": "2.5 Chỉnh sửa vai trò",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenVaiTro\": \"Tổ trưởng phục vụ ca\",\n  \"moTa\": \"Cập nhật mô tả vai trò\",\n  \"trangThai\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro/5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro", "5"]
+            }
+          }
+        },
+        {
+          "name": "2.6 Cấu hình quyền truy cập chi tiết cho vai trò",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"danhSachQuyenId\": [3, 4, 9]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro/5/quyen",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro", "5", "quyen"]
+            }
+          }
+        },
+        {
+          "name": "2.7 Gán vai trò cho nhân viên",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taiKhoanId\": 4,\n  \"danhSachVaiTroId\": [4]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro/gan-vai-tro",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro", "gan-vai-tro"]
+            }
+          }
+        },
+        {
+          "name": "2.8 Xem lịch sử thay đổi quyền (Audit Trail)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro/lich-su-thay-doi?trang=1&soLuong=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro", "lich-su-thay-doi"],
+              "query": [
+                { "key": "trang", "value": "1" },
+                { "key": "soLuong", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "2.9 Xóa vai trò tùy chỉnh",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/vai-tro/5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vai-tro", "5"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Quản trị nền tảng (System Config & Logs)",
+      "item": [
+        {
+          "name": "3.1 Xem thông tin nhà hàng (Công khai E-Menu)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/cong-khai",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "cong-khai"]
+            }
+          }
+        },
+        {
+          "name": "3.2 Xem cấu hình thông tin nhà hàng đầy đủ",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/thong-tin",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "thong-tin"]
+            }
+          }
+        },
+        {
+          "name": "3.3 Cập nhật cấu hình thông tin nhà hàng",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenNhaHang\": \"Nhà Hàng Quán Mộc\",\n  \"diaChi\": \"123 Đường Ẩm Thực, Quận 1, TP. Hồ Chí Minh\",\n  \"soDienThoai\": \"028 1234 5678\",\n  \"email\": \"lienhe@quanmoc.com\",\n  \"wifiTen\": \"QuanMoc_KhachHang\",\n  \"wifiMatKhau\": \"quanmoc2026\",\n  \"khauHieu\": \"Hương vị truyền thống, đậm đà tình thân\",\n  \"gioMoCua\": \"09:00\",\n  \"gioDongCua\": \"22:30\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/thong-tin",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "thong-tin"]
+            }
+          }
+        },
+        {
+          "name": "3.4 Xem cấu hình thuế VAT & Phí phục vụ",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/thue-phi",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "thue-phi"]
+            }
+          }
+        },
+        {
+          "name": "3.5 Cập nhật thuế VAT & Phí phục vụ",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vatPhanTram\": 8.0,\n  \"phiPhucVuPhanTram\": 0.0,\n  \"apDungVat\": 1,\n  \"apDungPhiPhucVu\": 0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/thue-phi",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "thue-phi"]
+            }
+          }
+        },
+        {
+          "name": "3.6 Xem thông tin tài khoản VietQR",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/viet-qr",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "viet-qr"]
+            }
+          }
+        },
+        {
+          "name": "3.7 Cập nhật thông tin tài khoản VietQR",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nganHangMa\": \"MB\",\n  \"nganHangTen\": \"Ngân hàng Quân Đội (MBBank)\",\n  \"soTaiKhoan\": \"0888999888\",\n  \"chuTaiKhoan\": \"NHA HANG QUAN MOC\",\n  \"cuPhapChuyenKhoan\": \"QUANMOC {maHoaDon}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/viet-qr",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "viet-qr"]
+            }
+          }
+        },
+        {
+          "name": "3.8 Tạo mã VietQR thanh toán động chuẩn Napas",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"soTien\": 250000,\n  \"maHoaDon\": \"HD-20261019-001\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/viet-qr/tao-ma",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "viet-qr", "tao-ma"]
+            }
+          }
+        },
+        {
+          "name": "3.9 Truy xuất nhật ký hệ thống (System Logs)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{accessToken}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/cau-hinh-nha-hang/nhat-ky-he-thong?trang=1&soLuong=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "cau-hinh-nha-hang", "nhat-ky-he-thong"],
+              "query": [
+                { "key": "trang", "value": "1" },
+                { "key": "soLuong", "value": "20" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

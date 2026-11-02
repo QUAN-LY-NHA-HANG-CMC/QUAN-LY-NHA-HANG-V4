@@ -1,0 +1,456 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Quản lý Nhà hàng & Gọi món QR (Quán Mộc)",
+    "description": "Tài liệu kỹ thuật API phục vụ Xác thực (Auth), Phân quyền theo vai trò (RBAC), Quản trị cấu hình và Nhật ký hệ thống (Sprint 1 - Nhật PM & Backend phụ trách).",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Nhật (Team Lead / PM, Backend)",
+      "email": "nhat.lead@quanmoc.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Máy chủ phát triển cục bộ (Local Development Server)"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Nhập JWT Access Token nhận được sau khi đăng nhập (Định dạng: Bearer <token>)"
+      }
+    },
+    "schemas": {
+      "PhanHoiThanhCong": {
+        "type": "object",
+        "properties": {
+          "ok": { "type": "boolean", "example": true },
+          "data": { "type": "object" },
+          "msg": { "type": "string", "example": "Thành công" }
+        }
+      },
+      "PhanHoiLoi": {
+        "type": "object",
+        "properties": {
+          "ok": { "type": "boolean", "example": false },
+          "data": { "type": "object", "nullable": true, "example": null },
+          "msg": { "type": "string", "example": "Dữ liệu không hợp lệ" }
+        }
+      },
+      "DangNhapYeuCau": {
+        "type": "object",
+        "required": ["tenDangNhap", "matKhau"],
+        "properties": {
+          "tenDangNhap": { "type": "string", "example": "quanly" },
+          "matKhau": { "type": "string", "example": "MatKhau@123" }
+        }
+      },
+      "LamMoiTokenYeuCau": {
+        "type": "object",
+        "properties": {
+          "refreshToken": { "type": "string", "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
+        }
+      },
+      "DoiMatKhauYeuCau": {
+        "type": "object",
+        "required": ["matKhauCu", "matKhauMoi", "xacNhanMatKhauMoi"],
+        "properties": {
+          "matKhauCu": { "type": "string", "example": "MatKhau@123" },
+          "matKhauMoi": { "type": "string", "example": "MatKhauMoi@456" },
+          "xacNhanMatKhauMoi": { "type": "string", "example": "MatKhauMoi@456" }
+        }
+      },
+      "CapNhatHoSoYeuCau": {
+        "type": "object",
+        "required": ["hoTen"],
+        "properties": {
+          "hoTen": { "type": "string", "example": "Nguyễn Văn Quản Lý" },
+          "soDienThoai": { "type": "string", "example": "0901234567" },
+          "email": { "type": "string", "example": "quanly@quanmoc.com" },
+          "anhDaiDien": { "type": "string", "nullable": true, "example": null }
+        }
+      },
+      "TaoVaiTroYeuCau": {
+        "type": "object",
+        "required": ["maVaiTro", "tenVaiTro"],
+        "properties": {
+          "maVaiTro": { "type": "string", "example": "TO_TRUONG" },
+          "tenVaiTro": { "type": "string", "example": "Tổ trưởng phục vụ" },
+          "moTa": { "type": "string", "example": "Hỗ trợ giám sát khu vực bàn và điều phối nhân sự" }
+        }
+      },
+      "CapNhatQuyenYeuCau": {
+        "type": "object",
+        "required": ["danhSachQuyenId"],
+        "properties": {
+          "danhSachQuyenId": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "example": [1, 2, 3, 5, 9, 10]
+          }
+        }
+      },
+      "GanVaiTroYeuCau": {
+        "type": "object",
+        "required": ["taiKhoanId", "danhSachVaiTroId"],
+        "properties": {
+          "taiKhoanId": { "type": "integer", "example": 2 },
+          "danhSachVaiTroId": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "example": [2]
+          }
+        }
+      },
+      "CapNhatThongTinNhaHangYeuCau": {
+        "type": "object",
+        "properties": {
+          "tenNhaHang": { "type": "string", "example": "Nhà Hàng Quán Mộc" },
+          "diaChi": { "type": "string", "example": "123 Đường Ẩm Thực, Quận 1, TP. Hồ Chí Minh" },
+          "soDienThoai": { "type": "string", "example": "028 1234 5678" },
+          "email": { "type": "string", "example": "lienhe@quanmoc.com" },
+          "wifiTen": { "type": "string", "example": "QuanMoc_KhachHang" },
+          "wifiMatKhau": { "type": "string", "example": "quanmoc2026" },
+          "khauHieu": { "type": "string", "example": "Hương vị truyền thống, đậm đà tình thân" },
+          "gioMoCua": { "type": "string", "example": "09:00" },
+          "gioDongCua": { "type": "string", "example": "22:30" }
+        }
+      },
+      "CapNhatThuePhiYeuCau": {
+        "type": "object",
+        "properties": {
+          "vatPhanTram": { "type": "number", "example": 8.0 },
+          "phiPhucVuPhanTram": { "type": "number", "example": 0.0 },
+          "apDungVat": { "type": "integer", "example": 1 },
+          "apDungPhiPhucVu": { "type": "integer", "example": 0 }
+        }
+      },
+      "CapNhatVietQrYeuCau": {
+        "type": "object",
+        "properties": {
+          "nganHangMa": { "type": "string", "example": "MB" },
+          "nganHangTen": { "type": "string", "example": "Ngân hàng Quân Đội (MBBank)" },
+          "soTaiKhoan": { "type": "string", "example": "0888999888" },
+          "chuTaiKhoan": { "type": "string", "example": "NHA HANG QUAN MOC" },
+          "cuPhapChuyenKhoan": { "type": "string", "example": "QUANMOC {maHoaDon}" }
+        }
+      },
+      "TaoMaVietQrYeuCau": {
+        "type": "object",
+        "properties": {
+          "soTien": { "type": "number", "example": 150000 },
+          "maHoaDon": { "type": "string", "example": "HD-20261019-001" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/kiem-tra-suc-khoe": {
+      "get": {
+        "summary": "Kiểm tra tình trạng hoạt động của API máy chủ",
+        "tags": ["Hệ thống"],
+        "responses": {
+          "200": { "description": "Hệ thống hoạt động bình thường" }
+        }
+      }
+    },
+    "/api/tai-khoan/dang-nhap": {
+      "post": {
+        "summary": "Đăng nhập hệ thống (US-007)",
+        "description": "Xác thực tài khoản bằng bcrypt, cấp JWT Access Token và Refresh Token, lưu phiên và ghi log.",
+        "tags": ["Tài khoản & Xác thực"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DangNhapYeuCau" } } }
+        },
+        "responses": {
+          "200": { "description": "Đăng nhập thành công, trả về Access Token và hồ sơ" },
+          "401": { "description": "Sai tên đăng nhập hoặc mật khẩu" },
+          "403": { "description": "Tài khoản bị khóa" },
+          "429": { "description": "Thử đăng nhập quá 5 lần / 15 phút (Rate limit)" }
+        }
+      }
+    },
+    "/api/tai-khoan/lam-moi-token": {
+      "post": {
+        "summary": "Làm mới Access Token bằng Refresh Token (US-003)",
+        "tags": ["Tài khoản & Xác thực"],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LamMoiTokenYeuCau" } } }
+        },
+        "responses": {
+          "200": { "description": "Cấp Access Token mới thành công" },
+          "401": { "description": "Refresh Token không hợp lệ hoặc đã bị thu hồi" }
+        }
+      }
+    },
+    "/api/tai-khoan/dang-xuat": {
+      "post": {
+        "summary": "Đăng xuất hệ thống (US-008)",
+        "description": "Thu hồi refresh token trong CSDL, xóa cookie phiên và ghi audit log.",
+        "tags": ["Tài khoản & Xác thực"],
+        "responses": {
+          "200": { "description": "Đăng xuất thành công" }
+        }
+      }
+    },
+    "/api/tai-khoan/doi-mat-khau": {
+      "put": {
+        "summary": "Đổi mật khẩu cá nhân (US-009)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Tài khoản & Xác thực"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/DoiMatKhauYeuCau" } } }
+        },
+        "responses": {
+          "200": { "description": "Đổi mật khẩu thành công" },
+          "400": { "description": "Mật khẩu cũ không chính xác hoặc dữ liệu không hợp lệ" },
+          "401": { "description": "Chưa đăng nhập" }
+        }
+      }
+    },
+    "/api/tai-khoan/ho-so": {
+      "get": {
+        "summary": "Xem thông tin hồ sơ cá nhân (US-010)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Tài khoản & Xác thực"],
+        "responses": {
+          "200": { "description": "Lấy thông tin hồ sơ thành công" },
+          "401": { "description": "Chưa đăng nhập" }
+        }
+      },
+      "put": {
+        "summary": "Cập nhật thông tin hồ sơ cá nhân (US-010)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Tài khoản & Xác thực"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CapNhatHoSoYeuCau" } } }
+        },
+        "responses": {
+          "200": { "description": "Cập nhật hồ sơ thành công" },
+          "400": { "description": "Dữ liệu cập nhật không hợp lệ" }
+        }
+      }
+    },
+    "/api/vai-tro": {
+      "get": {
+        "summary": "Xem danh sách các vai trò trong nhà hàng (US-015)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "responses": {
+          "200": { "description": "Lấy danh sách vai trò thành công" },
+          "403": { "description": "Chỉ Quản lý mới có quyền xem" }
+        }
+      },
+      "post": {
+        "summary": "Tạo mới vai trò (US-016)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TaoVaiTroYeuCau" } } }
+        },
+        "responses": {
+          "201": { "description": "Tạo vai trò mới thành công" },
+          "409": { "description": "Mã vai trò đã tồn tại" }
+        }
+      }
+    },
+    "/api/vai-tro/danh-muc-quyen": {
+      "get": {
+        "summary": "Lấy danh mục tất cả quyền có trong hệ thống",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "responses": {
+          "200": { "description": "Danh mục quyền hạn chi tiết" }
+        }
+      }
+    },
+    "/api/vai-tro/lich-su-thay-doi": {
+      "get": {
+        "summary": "Xem lịch sử thay đổi quyền hạn nhân sự (US-022)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "parameters": [
+          { "name": "trang", "in": "query", "schema": { "type": "integer", "default": 1 } },
+          { "name": "soLuong", "in": "query", "schema": { "type": "integer", "default": 20 } }
+        ],
+        "responses": {
+          "200": { "description": "Danh sách lịch sử phân quyền có phân trang" }
+        }
+      }
+    },
+    "/api/vai-tro/{id}": {
+      "get": {
+        "summary": "Lấy chi tiết một vai trò theo ID",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Chi tiết vai trò kèm danh sách quyền" },
+          "404": { "description": "Không tìm thấy vai trò" }
+        }
+      },
+      "put": {
+        "summary": "Chỉnh sửa tên/mô tả vai trò (US-016)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenVaiTro": { "type": "string", "example": "Quản lý ca" },
+                  "moTa": { "type": "string", "example": "Phụ trách điều hành ca trực" },
+                  "trangThai": { "type": "integer", "example": 1 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Cập nhật thành công" }
+        }
+      },
+      "delete": {
+        "summary": "Xóa vai trò tùy chỉnh (US-016)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Xóa thành công" },
+          "403": { "description": "Không thể xóa vai trò hệ thống mặc định" }
+        }
+      }
+    },
+    "/api/vai-tro/{id}/quyen": {
+      "put": {
+        "summary": "Cấu hình quyền truy cập chi tiết cho vai trò (US-018)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CapNhatQuyenYeuCau" } } }
+        },
+        "responses": {
+          "200": { "description": "Cập nhật quyền hạn cho vai trò thành công và đã ghi lịch sử (US-022)" }
+        }
+      }
+    },
+    "/api/vai-tro/gan-vai-tro": {
+      "post": {
+        "summary": "Gán vai trò cho nhân viên (US-017)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Vai trò & Phân quyền (RBAC)"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GanVaiTroYeuCau" } } }
+        },
+        "responses": {
+          "200": { "description": "Gán vai trò thành công và đã ghi lịch sử (US-022)" }
+        }
+      }
+    },
+    "/api/cau-hinh-nha-hang/cong-khai": {
+      "get": {
+        "summary": "Xem thông tin nhà hàng công khai (Không cần đăng nhập)",
+        "tags": ["Quản trị nền tảng"],
+        "responses": {
+          "200": { "description": "Thông tin quán, wifi, giờ mở cửa hiển thị trên E-Menu" }
+        }
+      }
+    },
+    "/api/cau-hinh-nha-hang/thong-tin": {
+      "get": {
+        "summary": "Xem đầy đủ cấu hình thông tin nhà hàng (US-041)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Quản trị nền tảng"],
+        "responses": { "200": { "description": "Thông tin nhà hàng" } }
+      },
+      "put": {
+        "summary": "Cập nhật cấu hình thông tin nhà hàng (US-041)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Quản trị nền tảng"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CapNhatThongTinNhaHangYeuCau" } } }
+        },
+        "responses": { "200": { "description": "Cập nhật thành công" } }
+      }
+    },
+    "/api/cau-hinh-nha-hang/thue-phi": {
+      "get": {
+        "summary": "Xem cấu hình thuế VAT và phí phục vụ (US-042)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Quản trị nền tảng"],
+        "responses": { "200": { "description": "Tỷ lệ VAT và phí dịch vụ" } }
+      },
+      "put": {
+        "summary": "Cập nhật thuế VAT và phí phục vụ (US-042)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Quản trị nền tảng"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CapNhatThuePhiYeuCau" } } }
+        },
+        "responses": { "200": { "description": "Cập nhật thành công" } }
+      }
+    },
+    "/api/cau-hinh-nha-hang/viet-qr": {
+      "get": {
+        "summary": "Xem thông tin tài khoản ngân hàng VietQR (US-043)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Quản trị nền tảng"],
+        "responses": { "200": { "description": "Thông tin tài khoản ngân hàng" } }
+      },
+      "put": {
+        "summary": "Cập nhật thông tin tài khoản ngân hàng VietQR (US-043)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Quản trị nền tảng"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CapNhatVietQrYeuCau" } } }
+        },
+        "responses": { "200": { "description": "Cập nhật thành công" } }
+      }
+    },
+    "/api/cau-hinh-nha-hang/viet-qr/tao-ma": {
+      "post": {
+        "summary": "Tạo mã QR thanh toán động VietQR (US-043)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Quản trị nền tảng"],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/TaoMaVietQrYeuCau" } } }
+        },
+        "responses": { "200": { "description": "Sinh link ảnh mã QR Napas thành công" } }
+      }
+    },
+    "/api/cau-hinh-nha-hang/nhat-ky-he-thong": {
+      "get": {
+        "summary": "Truy xuất nhật ký hoạt động hệ thống - System Logs (US-044)",
+        "security": [{ "BearerAuth": [] }],
+        "tags": ["Quản trị nền tảng"],
+        "parameters": [
+          { "name": "trang", "in": "query", "schema": { "type": "integer", "default": 1 } },
+          { "name": "soLuong", "in": "query", "schema": { "type": "integer", "default": 20 } },
+          { "name": "loaiHanhDong", "in": "query", "schema": { "type": "string" } },
+          { "name": "module", "in": "query", "schema": { "type": "string" } },
+          { "name": "tuNgay", "in": "query", "schema": { "type": "string", "example": "2026-10-01" } },
+          { "name": "denNgay", "in": "query", "schema": { "type": "string", "example": "2026-10-31" } }
+        ],
+        "responses": { "200": { "description": "Danh sách System Logs chi tiết" } }
+      }
+    }
+  }
+}

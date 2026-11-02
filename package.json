@@ -1,0 +1,31 @@
+{
+  "name": "quan-ly-nha-hang",
+  "version": "1.0.0",
+  "description": "Hệ thống Quản lý Nhà hàng và Gọi món QR (Quán Mộc)",
+  "main": "backend/mayChu.js",
+  "scripts": {
+    "start": "node backend/mayChu.js",
+    "dev": "node --watch backend/mayChu.js",
+    "test": "node kiemThu/chayKiemThu.js"
+  },
+  "keywords": [
+    "restaurant-management",
+    "qr-ordering",
+    "nodejs",
+    "express",
+    "rbac"
+  ],
+  "author": "Nhat (Team Lead / PM, Backend)",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.3.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
