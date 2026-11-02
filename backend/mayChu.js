@@ -1,48 +1,35 @@
-/**
- * Điểm khởi chạy máy chủ HTTP (mayChu.js)
- * Khởi tạo CSDL, nạp dữ liệu mẫu và lắng nghe kết nối
- */
-require('dotenv').config();
-const http = require('http');
-const app = require('./ungDung');
-const cauHinhChung = require('./cauHinh/cauHinhChung');
-const { khoiTaoCoSoDuLieu } = require('./cauHinh/ketNoiCoSoDuLieu');
+const http = require('node:http');
+const app = require('./ungDung.js');
+const cauHinhChung = require('./cauHinh/cauHinhChung.js');
+const ketNoiCoSoDuLieu = require('./cauHinh/ketNoiCoSoDuLieu.js');
+const { khoiTaoSocket } = require('./cauHinh/cauHinhSocket.js');
+const ghiNhatKy = require('./tienIch/ghiNhatKy.js');
 
-// 1. Tự động khởi tạo cấu trúc CSDL và dữ liệu mẫu nếu chưa có
-try {
-    khoiTaoCoSoDuLieu();
-    console.log('[CSDL] Đã kiểm tra và nạp cấu trúc cơ sở dữ liệu & dữ liệu mẫu thành công.');
-} catch (loi) {
-    console.error('[CSDL] Lỗi khi khởi tạo cơ sở dữ liệu:', loi.message);
+async function khoiDongMayChu() {
+    try {
+        // Tự động khởi tạo và đồng bộ CSDL
+        await ketNoiCoSoDuLieu.khoiTaoCoSoDuLieu();
+
+        const server = http.createServer(app);
+        khoiTaoSocket(server);
+
+        server.listen(cauHinhChung.congBackend, () => {
+            ghiNhatKy.ghiThongTin(`Máy chủ Backend Quán Mộc đang chạy tại http://localhost:${cauHinhChung.congBackend}`);
+            ghiNhatKy.ghiThongTin(`Môi trường: ${cauHinhChung.moiTruong}`);
+        });
+
+        return server;
+    } catch (loi) {
+        ghiNhatKy.ghiLoi('Không thể khởi động máy chủ', loi);
+        process.exit(1);
+    }
 }
 
-// 2. Tạo máy chủ HTTP
-const server = http.createServer(app);
-const PORT = cauHinhChung.congBackend;
+// Khởi chạy khi tệp được thực thi trực tiếp
+if (require.main === module) {
+    khoiDongMayChu();
+}
 
-server.listen(PORT, () => {
-    console.log('================================================================');
-    console.log(` MÁY CHỦ BACKEND NHÀ HÀNG QUÁN MỘC ĐÃ KHỞI CHẠY THÀNH CÔNG `);
-    console.log(` Cổng lắng nghe    : http://localhost:${PORT}`);
-    console.log(` Kiểm tra sức khỏe : http://localhost:${PORT}/api/kiem-tra-suc-khoe`);
-    console.log(` Tài liệu Swagger  : http://localhost:${PORT}/api-docs`);
-    console.log(` Swagger JSON      : http://localhost:${PORT}/api-docs.json`);
-    console.log(` Môi trường        : ${cauHinhChung.moiTruong}`);
-    console.log('================================================================');
-});
-
-// 3. Xử lý tắt máy chủ an toàn (Graceful Shutdown)
-process.on('SIGINT', () => {
-    console.log('\n[MÁY CHỦ] Đang đóng kết nối và tắt máy chủ an toàn...');
-    server.close(() => {
-        console.log('[MÁY CHỦ] Đã dừng toàn bộ tiến trình.');
-        process.exit(0);
-    });
-});
-
-process.on('SIGTERM', () => {
-    console.log('\n[MÁY CHỦ] Đang nhận tín hiệu SIGTERM để kết thúc...');
-    server.close(() => {
-        process.exit(0);
-    });
-});
+module.exports = {
+    khoiDongMayChu
+};

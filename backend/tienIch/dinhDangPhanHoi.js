@@ -1,40 +1,29 @@
 /**
- * Chuẩn hóa định dạng phản hồi API theo Mục 9 (QUY_TAC_LAM_DU_AN.txt)
- * Thành công: { "ok": true, "data": ..., "msg": "..." }
- * Thất bại: { "ok": false, "data": null, "msg": "..." }
+ * Tiện ích chuẩn hóa cấu trúc phản hồi HTTP toàn hệ thống
  */
 
-/**
- * Trả về phản hồi thành công chuẩn RESTful
- * @param {Object} res - Đối tượng response của Express
- * @param {any} duLieu - Dữ liệu trả về cho client
- * @param {string} thongBao - Thông điệp thông báo
- * @param {number} maHttp - Mã trạng thái HTTP (mặc định 200, tạo mới 201)
- */
-function phanHoiThanhCong(res, duLieu = {}, thongBao = 'Thành công', maHttp = 200) {
-    return res.status(maHttp).json({
+function thanhCong(res, data = {}, msg = 'Thành công', status = 200) {
+    return res.status(status).json({
         ok: true,
-        data: duLieu,
-        msg: thongBao
+        data: data,
+        msg: msg
     });
 }
 
-/**
- * Trả về phản hồi lỗi chuẩn
- * @param {Object} res - Đối tượng response của Express
- * @param {string} thongBaoLoi - Thông điệp lỗi
- * @param {number} maHttp - Mã trạng thái HTTP (400, 401, 403, 404, 409, 429, 500)
- * @param {any} chiTietLoi - Dữ liệu bổ sung nếu cần (mặc định null)
- */
-function phanHoiLoi(res, thongBaoLoi = 'Có lỗi xảy ra', maHttp = 400, chiTietLoi = null) {
-    return res.status(maHttp).json({
+function taoThanhCong(res, data = {}, msg = 'Tạo thành công') {
+    return thanhCong(res, data, msg, 201);
+}
+
+function thatBai(res, msg = 'Yêu cầu không hợp lệ', status = 400, data = null) {
+    return res.status(status).json({
         ok: false,
-        data: chiTietLoi,
-        msg: thongBaoLoi
+        data: data,
+        msg: msg
     });
 }
 
 module.exports = {
-    phanHoiThanhCong,
-    phanHoiLoi
+    thanhCong,
+    taoThanhCong,
+    thatBai
 };

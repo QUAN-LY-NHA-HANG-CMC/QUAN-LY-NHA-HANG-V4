@@ -17,3 +17,10 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Database files
+database/*.sqlite*
+
+# Uploaded files
+tepTaiLen/*
+!tepTaiLen/.gitkeep

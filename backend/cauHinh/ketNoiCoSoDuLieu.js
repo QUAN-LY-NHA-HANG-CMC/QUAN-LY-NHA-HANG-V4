@@ -1,135 +1,104 @@
-/**
- * Quản lý kết nối và thực thi truy vấn Cơ sở dữ liệu
- * Hỗ trợ SQLite (qua node:sqlite chuẩn của Node 22+) với Prepared Statements chống SQL Injection
- * Tuân thủ mục 8: Quy tắc cơ sở dữ liệu (QUY_TAC_LAM_DU_AN.txt)
- */
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const { DatabaseSync } = require('node:sqlite');
-const cauHinhChung = require('./cauHinhChung');
+const cauHinhChung = require('./cauHinhChung.js');
+const ghiNhatKy = require('../tienIch/ghiNhatKy.js');
 
-let ketNoiDb = null;
+// Đảm bảo thư mục database tồn tại
+const thuMucDb = path.dirname(cauHinhChung.duongDanCoSoDuLieu);
+if (!fs.existsSync(thuMucDb)) {
+    fs.mkdirSync(thuMucDb, { recursive: true });
+}
 
-/**
- * Lấy hoặc khởi tạo instance kết nối cơ sở dữ liệu
- */
+let db = null;
+
 function layKetNoi() {
-    if (!ketNoiDb) {
-        const duongDanThuMucDb = path.dirname(path.resolve(cauHinhChung.coSoDuLieu.duongDanSqlite));
-        if (!fs.existsSync(duongDanThuMucDb)) {
-            fs.mkdirSync(duongDanThuMucDb, { recursive: true });
-        }
-
-        ketNoiDb = new DatabaseSync(path.resolve(cauHinhChung.coSoDuLieu.duongDanSqlite));
-        
-        // Bật Foreign Keys trong SQLite
-        ketNoiDb.exec('PRAGMA foreign_keys = ON;');
-        ketNoiDb.exec('PRAGMA journal_mode = WAL;');
+    if (!db) {
+        db = new DatabaseSync(cauHinhChung.duongDanCoSoDuLieu);
+        db.exec('PRAGMA foreign_keys = ON;');
+        db.exec('PRAGMA journal_mode = WAL;');
+        db.exec('PRAGMA busy_timeout = 5000;');
     }
-    return ketNoiDb;
+    return db;
 }
 
-/**
- * Thực thi câu lệnh SQL trả về danh sách bản ghi (SELECT)
- * @param {string} cauLenhSql - Chuỗi SQL có chứa tham số ?
- * @param {Array} thamSo - Mảng tham số truyền vào Prepared Statement
- * @returns {Promise<Array>} Danh sách các dòng kết quả
- */
-async function truyVanDanhSach(cauLenhSql, thamSo = []) {
-    const db = layKetNoi();
-    const statement = db.prepare(cauLenhSql);
-    return statement.all(...thamSo);
+function layMot(sql, thamSo = []) {
+    const ketNoi = layKetNoi();
+    const lenh = ketNoi.prepare(sql);
+    return lenh.get(...thamSo);
 }
 
-/**
- * Thực thi câu lệnh SQL trả về một bản ghi duy nhất (SELECT)
- * @param {string} cauLenhSql - Chuỗi SQL
- * @param {Array} thamSo - Mảng tham số
- * @returns {Promise<Object|null>} Bản ghi đầu tiên hoặc null nếu không tìm thấy
- */
-async function truyVanMotBanGhi(cauLenhSql, thamSo = []) {
-    const db = layKetNoi();
-    const statement = db.prepare(cauLenhSql);
-    const row = statement.get(...thamSo);
-    return row !== undefined ? row : null;
+function layNhieu(sql, thamSo = []) {
+    const ketNoi = layKetNoi();
+    const lenh = ketNoi.prepare(sql);
+    return lenh.all(...thamSo);
 }
 
-/**
- * Thực thi câu lệnh thay đổi dữ liệu (INSERT, UPDATE, DELETE)
- * @param {string} cauLenhSql - Chuỗi SQL
- * @param {Array} thamSo - Mảng tham số
- * @returns {Promise<{changes: number, lastInsertRowid: number|bigint}>}
- */
-async function thucThi(cauLenhSql, thamSo = []) {
-    const db = layKetNoi();
-    const statement = db.prepare(cauLenhSql);
-    const ketQua = statement.run(...thamSo);
-    return {
-        changes: ketQua.changes,
-        lastInsertRowid: Number(ketQua.lastInsertRowid)
-    };
+function thucThi(sql, thamSo = []) {
+    const ketNoi = layKetNoi();
+    const lenh = ketNoi.prepare(sql);
+    return lenh.run(...thamSo);
 }
 
-/**
- * Thực thi một tập hợp các thao tác trong một giao dịch (Transaction)
- * Đảm bảo tính nguyên tử (Rule 8.8 & Rule 11.2)
- * @param {Function} hamNghiepVu - Hàm chứa các thao tác cần thực thi nguyên tử
- * @returns {Promise<any>}
- */
-async function thucThiGiaoDich(hamNghiepVu) {
-    const db = layKetNoi();
-    db.exec('BEGIN TRANSACTION;');
+function chayTruyVan(sql) {
+    const ketNoi = layKetNoi();
+    return ketNoi.exec(sql);
+}
+
+function chayGiaoDich(hamThucThi) {
+    const ketNoi = layKetNoi();
+    ketNoi.exec('BEGIN TRANSACTION;');
     try {
-        const ketQua = await hamNghiepVu({
-            truyVanDanhSach,
-            truyVanMotBanGhi,
-            thucThi
-        });
-        db.exec('COMMIT;');
+        const ketQua = hamThucThi(ketNoi);
+        ketNoi.exec('COMMIT;');
         return ketQua;
     } catch (loi) {
-        db.exec('ROLLBACK;');
+        ketNoi.exec('ROLLBACK;');
         throw loi;
     }
 }
 
-/**
- * Khởi tạo cấu trúc bảng, chỉ mục và dữ liệu mẫu nếu chưa có
- */
-function khoiTaoCoSoDuLieu() {
-    const db = layKetNoi();
-    const thuMucDatabase = path.resolve(__dirname, '../../database');
+async function khoiTaoCoSoDuLieu() {
+    try {
+        const duongDanTaoBang = path.resolve(__dirname, '../../database/taoBang.sql');
+        const duongDanChiMuc = path.resolve(__dirname, '../../database/chiMuc.sql');
+        const duongDanRangBuoc = path.resolve(__dirname, '../../database/rangBuoc.sql');
+        const duongDanDuLieuMau = path.resolve(__dirname, '../../database/duLieuMau.sql');
 
-    const tệpTaoBang = path.join(thuMucDatabase, 'taoBang.sql');
-    if (fs.existsSync(tệpTaoBang)) {
-        const sqlTaoBang = fs.readFileSync(tệpTaoBang, 'utf-8');
-        db.exec(sqlTaoBang);
-    }
+        if (fs.existsSync(duongDanTaoBang)) {
+            const sqlTaoBang = fs.readFileSync(duongDanTaoBang, 'utf8');
+            chayTruyVan(sqlTaoBang);
+        }
 
-    const tệpChiMuc = path.join(thuMucDatabase, 'chiMuc.sql');
-    if (fs.existsSync(tệpChiMuc)) {
-        const sqlChiMuc = fs.readFileSync(tệpChiMuc, 'utf-8');
-        db.exec(sqlChiMuc);
-    }
+        if (fs.existsSync(duongDanChiMuc)) {
+            const sqlChiMuc = fs.readFileSync(duongDanChiMuc, 'utf8');
+            chayTruyVan(sqlChiMuc);
+        }
 
-    const tệpRangBuoc = path.join(thuMucDatabase, 'rangBuoc.sql');
-    if (fs.existsSync(tệpRangBuoc)) {
-        const sqlRangBuoc = fs.readFileSync(tệpRangBuoc, 'utf-8');
-        db.exec(sqlRangBuoc);
-    }
+        if (fs.existsSync(duongDanRangBuoc)) {
+            const sqlRangBuoc = fs.readFileSync(duongDanRangBuoc, 'utf8');
+            chayTruyVan(sqlRangBuoc);
+        }
 
-    const tệpDuLieuMau = path.join(thuMucDatabase, 'duLieuMau.sql');
-    if (fs.existsSync(tệpDuLieuMau)) {
-        const sqlDuLieuMau = fs.readFileSync(tệpDuLieuMau, 'utf-8');
-        db.exec(sqlDuLieuMau);
+        if (fs.existsSync(duongDanDuLieuMau)) {
+            const sqlDuLieuMau = fs.readFileSync(duongDanDuLieuMau, 'utf8');
+            chayTruyVan(sqlDuLieuMau);
+        }
+
+        ghiNhatKy.ghiThongTin('Khởi tạo cơ sở dữ liệu thành công.');
+        return true;
+    } catch (loi) {
+        ghiNhatKy.ghiLoi('Lỗi khi khởi tạo cơ sở dữ liệu', loi);
+        throw loi;
     }
 }
 
 module.exports = {
     layKetNoi,
-    truyVanDanhSach,
-    truyVanMotBanGhi,
+    layMot,
+    layNhieu,
     thucThi,
-    thucThiGiaoDich,
+    chayTruyVan,
+    chayGiaoDich,
     khoiTaoCoSoDuLieu
 };

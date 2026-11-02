@@ -13,10 +13,14 @@ const cauHinhChung = require('./cauHinh/cauHinhChung');
 const { gioiHanChung } = require('./middleware/gioiHanYeuCau');
 const { xuLyKhongTimThay, xuLyLoiToanCuc } = require('./middleware/xuLyLoi');
 
-// Nạp các Routes của các Module
+// Nạp các Routes của các Module Sprint 1
 const { taiKhoanRoutes } = require('./modules/taiKhoan');
 const { vaiTroRoutes } = require('./modules/vaiTro');
 const { cauHinhNhaHangRoutes } = require('./modules/cauHinhNhaHang');
+
+// Nạp các Routes của Sprint 2 (Nhật - PM & Core Backend)
+const phienBanRoutes = require('./modules/phienBan/phienBan.routes');
+const donGoiMonRoutes = require('./modules/donGoiMon/donGoiMon.routes');
 
 // Nạp tài liệu Swagger
 const taiLieuSwagger = require('../taiLieu/swagger.json');
@@ -80,6 +84,10 @@ app.get('/api/kiem-tra-suc-khoe', (req, res) => {
 app.use('/api/tai-khoan', taiKhoanRoutes);
 app.use('/api/vai-tro', vaiTroRoutes);
 app.use('/api/cau-hinh-nha-hang', cauHinhNhaHangRoutes);
+
+// Gắn Router Sprint 2 (Nhật)
+app.use('/api/phien-ban', phienBanRoutes);
+app.use('/api/don-goi-mon', donGoiMonRoutes);
 
 // 8. Xử lý đường dẫn không tồn tại (404)
 app.use(xuLyKhongTimThay);
