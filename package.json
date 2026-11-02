@@ -1,0 +1,22 @@
+{
+  "name": "quan-ly-nha-hang",
+  "version": "1.0.0",
+  "description": "Website Quản lý Nhà hàng và Gọi món QR (Quán Mộc)",
+  "main": "backend/mayChu.js",
+  "scripts": {
+    "start": "node backend/mayChu.js",
+    "test": "node --test kiemThu/**/*.test.js"
+  },
+  "keywords": ["quan-ly-nha-hang", "goi-mon-qr", "pos", "kds"],
+  "author": "Nhom Phat Trien Quan Moc",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.1",
+    "qrcode": "^1.5.4"
+  }
+}
