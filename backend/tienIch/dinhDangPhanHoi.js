@@ -20,6 +20,13 @@ function phanHoiThanhCong(res, duLieu = {}, thongBao = 'Thành công', maHttp = 
 }
 
 /**
+ * Trả về phản hồi tạo mới thành công HTTP 201
+ */
+function taoThanhCong(res, duLieu = {}, thongBao = 'Tạo thành công') {
+    return phanHoiThanhCong(res, duLieu, thongBao, 201);
+}
+
+/**
  * Trả về phản hồi lỗi chuẩn
  * @param {Object} res - Đối tượng response của Express
  * @param {string} thongBaoLoi - Thông điệp lỗi
@@ -36,5 +43,9 @@ function phanHoiLoi(res, thongBaoLoi = 'Có lỗi xảy ra', maHttp = 400, chiTi
 
 module.exports = {
     phanHoiThanhCong,
-    phanHoiLoi
+    phanHoiLoi,
+    thanhCong: phanHoiThanhCong,
+    thatBai: phanHoiLoi,
+    loi: phanHoiLoi,
+    taoThanhCong
 };

@@ -13,7 +13,7 @@ const cauHinhChung = require('./cauHinh/cauHinhChung');
 const { gioiHanChung } = require('./middleware/gioiHanYeuCau');
 const { xuLyKhongTimThay, xuLyLoiToanCuc } = require('./middleware/xuLyLoi');
 
-// Nạp các Routes của các Module Sprint 1
+// Nạp các Routes Sprint 1 (Nhật & Phát & Minh)
 const { taiKhoanRoutes } = require('./modules/taiKhoan');
 const { vaiTroRoutes } = require('./modules/vaiTro');
 const { cauHinhNhaHangRoutes } = require('./modules/cauHinhNhaHang');
@@ -22,6 +22,12 @@ const { khuVucRoutes } = require('./modules/khuVuc');
 const { banAnRoutes } = require('./modules/banAn');
 const { danhMucMonRoutes } = require('./modules/danhMucMon');
 const { thucDonRoutes } = require('./modules/thucDon');
+
+// Nạp các Routes Sprint 2 (Nhật & Minh)
+const phienBanRoutes = require('./modules/phienBan/phienBan.routes');
+const donGoiMonRoutes = require('./modules/donGoiMon/donGoiMon.routes');
+const { gioHangRoutes } = require('./modules/gioHang');
+const { yeuCauHoTroRoutes } = require('./modules/yeuCauHoTro');
 
 // Nạp tài liệu Swagger
 const taiLieuSwagger = require('../taiLieu/swagger.json');
@@ -90,6 +96,12 @@ app.use('/api/khu-vuc', khuVucRoutes);
 app.use('/api/ban-an', banAnRoutes);
 app.use('/api/danh-muc-mon', danhMucMonRoutes);
 app.use('/api/thuc-don', thucDonRoutes);
+
+// Gắn các Router API nghiệp vụ Sprint 2
+app.use('/api/phien-ban', phienBanRoutes);
+app.use('/api/don-goi-mon', donGoiMonRoutes);
+app.use('/api/gio-hang', gioHangRoutes);
+app.use('/api/yeu-cau-ho-tro', yeuCauHoTroRoutes);
 
 // 8. Xử lý đường dẫn không tồn tại (404)
 app.use(xuLyKhongTimThay);
