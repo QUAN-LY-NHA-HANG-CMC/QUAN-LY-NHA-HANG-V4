@@ -118,7 +118,7 @@ async function taiDanhMuc() {
     try {
         const res = await goiApi('/danh-muc-mon', 'GET');
         if (res.ok) {
-            danhSachDanhMuc = res.data || [];
+            danhSachDanhMuc = Array.isArray(res.data) ? res.data : (res.data && res.data.danhSach ? res.data.danhSach : []);
             const container = document.getElementById('emenu-danh-muc');
             if (!container) return;
 
@@ -142,7 +142,7 @@ async function taiThucDon() {
     try {
         const res = await goiApi('/thuc-don', 'GET');
         if (res.ok) {
-            danhSachMonAn = res.data || [];
+            danhSachMonAn = (res.data && res.data.danhSach) ? res.data.danhSach : (Array.isArray(res.data) ? res.data : []);
             renderDanhSachMon();
         }
     } catch (e) {
