@@ -1,10 +1,42 @@
 /**
- * Tiện ích tạo thông tin VietQR theo chuẩn Napas
- * Phục vụ US-043 (Cấu hình thông tin tài khoản ngân hàng nhận thanh toán VietQR)
+ * Tiện ích tạo mã QR Code (Base64, SVG) và VietQR theo chuẩn Napas
+ * Hỗ trợ Sprint 1 (Bàn ăn & Định danh QR) và US-043 (VietQR)
  */
+const QRCode = require('qrcode');
 
 /**
- * Sinh URL hình ảnh mã VietQR thanh toán chuẩn
+ * Sinh chuỗi Base64 Data URI của mã QR
+ * @param {string} noiDung
+ * @param {Object} tuyChon
+ * @returns {Promise<string>}
+ */
+async function taoAnhQrBase64(noiDung, tuyChon = {}) {
+    const cauHinh = {
+        errorCorrectionLevel: 'H',
+        type: 'image/png',
+        margin: 2,
+        width: 300,
+        color: {
+            dark: '#1e293b',
+            light: '#ffffff'
+        },
+        ...tuyChon
+    };
+    return await QRCode.toDataURL(noiDung, cauHinh);
+}
+
+/**
+ * Sinh chuỗi SVG của mã QR
+ * @param {string} noiDung
+ * @param {Object} tuyChon
+ * @returns {Promise<string>}
+ */
+async function taoMaQrSvg(noiDung, tuyChon = {}) {
+    return await QRCode.toString(noiDung, { type: 'svg', ...tuyChon });
+}
+
+/**
+ * Sinh URL hình ảnh mã VietQR thanh toán chuẩn Napas (US-043)
  * @param {Object} thongTin
  * @param {string} thongTin.maNganHang - Mã định danh ngân hàng (VD: MB, VCB, TCB)
  * @param {string} thongTin.soTaiKhoan - Số tài khoản thụ hưởng
@@ -47,5 +79,7 @@ function taoUrlVietQr({
 }
 
 module.exports = {
+    taoAnhQrBase64,
+    taoMaQrSvg,
     taoUrlVietQr
 };

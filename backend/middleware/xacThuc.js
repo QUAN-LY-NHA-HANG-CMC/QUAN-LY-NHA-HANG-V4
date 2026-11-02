@@ -62,7 +62,7 @@ async function xacThuc(req, res, next) {
             return phanHoiLoi(res, 'Tài khoản không tồn tại trên hệ thống.', 401);
         }
 
-        if (taiKhoan.trang_thai !== 1) {
+        if (Number(taiKhoan.trang_thai) !== 1 && taiKhoan.trang_thai !== 'hoat_dong') {
             return phanHoiLoi(res, 'Tài khoản của bạn đã bị khóa hoặc ngừng hoạt động.', 403);
         }
 
@@ -106,6 +106,6 @@ async function xacThuc(req, res, next) {
     }
 }
 
-module.exports = {
-    xacThuc
-};
+xacThuc.xacThuc = xacThuc;
+
+module.exports = xacThuc;

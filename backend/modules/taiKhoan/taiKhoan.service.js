@@ -68,7 +68,7 @@ async function dangNhap({ tenDangNhap, matKhau, thongTinThietBi, diaChiIp }) {
         throw loi;
     }
 
-    if (taiKhoan.trang_thai !== 1) {
+    if (taiKhoan.trang_thai !== 1 && taiKhoan.trang_thai !== '1' && taiKhoan.trang_thai !== 'hoat_dong') {
         await ghiNhatKyHeThong({
             taiKhoanId: taiKhoan.id,
             loaiHanhDong: 'DANG_NHAP_BI_KHOA',
@@ -197,7 +197,7 @@ async function lamMoiToken({ refreshToken, diaChiIp, thongTinThietBi }) {
     }
 
     const taiKhoan = await taiKhoanModel.timTheoId(payload.taiKhoanId);
-    if (!taiKhoan || taiKhoan.trang_thai !== 1) {
+    if (!taiKhoan || (Number(taiKhoan.trang_thai) !== 1 && taiKhoan.trang_thai !== 'hoat_dong')) {
         const loi = new Error('Tài khoản không tồn tại hoặc đã bị khóa.');
         loi.status = 403;
         throw loi;
