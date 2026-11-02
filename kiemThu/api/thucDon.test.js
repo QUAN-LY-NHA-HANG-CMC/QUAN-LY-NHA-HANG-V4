@@ -36,10 +36,11 @@ test('Quản lý thực đơn món ăn (CRUD, validation, toggle, xóa mềm)', 
     const thucDonService = require('../../backend/modules/thucDon/thucDon.service.js');
 
     // Thêm món mới hợp lệ
+    const maMonNgauNhien = 'KV' + Math.floor(Math.random() * 899 + 100);
     const monMoi = await thucDonService.taoMonAn({
         danhMucId: 1,
-        maMon: 'KV99',
-        tenMon: 'Salad Rong Nho Sốt Mè',
+        maMon: maMonNgauNhien,
+        tenMon: 'Salad Rong Nho Sốt Mè ' + maMonNgauNhien,
         giaBan: 55000,
         donViTinh: 'Đĩa',
         moTa: 'Rong nho tươi giòn rụm',
@@ -49,7 +50,7 @@ test('Quản lý thực đơn món ăn (CRUD, validation, toggle, xóa mềm)', 
         ]
     });
     assert.ok(monMoi.id);
-    assert.strictEqual(monMoi.ma_mon, 'KV99');
+    assert.strictEqual(monMoi.ma_mon, maMonNgauNhien);
     assert.strictEqual(monMoi.trang_thai, 'dang_ban');
     assert.strictEqual(monMoi.tuyChon.length, 1);
 

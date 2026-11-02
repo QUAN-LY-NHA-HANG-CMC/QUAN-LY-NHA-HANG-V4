@@ -28,17 +28,18 @@ test('Nghiệp vụ Khu vực và Bàn ăn kèm mã QR định danh', async () =
     assert.strictEqual(khuVucMoi.ten_khu_vuc, 'Tầng Thượng Rooftop');
 
     // Thêm bàn mới vào khu vực vừa tạo
+    const maBanNgauNhien = 'RT' + Math.floor(Math.random() * 899 + 100);
     const banMoi = await banAnService.taoBanAn({
-        maBan: 'RT01',
+        maBan: maBanNgauNhien,
         tenBan: 'Bàn Rooftop 01',
         khuVucId: khuVucMoi.id,
         sucChua: 6
     });
 
     assert.ok(banMoi.id);
-    assert.strictEqual(banMoi.ma_ban, 'RT01');
+    assert.strictEqual(banMoi.ma_ban, maBanNgauNhien);
     assert.ok(banMoi.ma_qr_token, 'Phải tự động sinh mã QR token');
-    assert.ok(banMoi.url_ma_qr.includes('ban=RT01'), 'URL phải chứa mã bàn');
+    assert.ok(banMoi.url_ma_qr.includes(`ban=${maBanNgauNhien}`), 'URL phải chứa mã bàn');
 
     // Lấy ảnh QR của bàn
     const qrDuLieu = await banAnService.layAnhQrBan(banMoi.id);
