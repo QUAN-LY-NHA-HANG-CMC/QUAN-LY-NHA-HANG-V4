@@ -13,6 +13,16 @@ async function khoiDongMayChu() {
         const server = http.createServer(app);
         khoiTaoSocket(server);
 
+        server.on('error', (loi) => {
+            if (loi.code === 'EADDRINUSE') {
+                ghiNhatKy.ghiLoi(`[EADDRINUSE] Cổng ${cauHinhChung.congBackend} đang bị chiếm bởi một tiến trình Node khác.`);
+                ghiNhatKy.ghiThongTin(`Gợi ý: Máy chủ có thể đã đang chạy sẵn. Bạn có thể mở ngay trình duyệt tại http://localhost:${cauHinhChung.congBackend} hoặc chạy 'Stop-Process -Name node -Force' trước khi chạy lại 'npm start'.`);
+            } else {
+                ghiNhatKy.ghiLoi('Lỗi máy chủ', loi);
+            }
+            process.exit(1);
+        });
+
         server.listen(cauHinhChung.congBackend, () => {
             ghiNhatKy.ghiThongTin(`Máy chủ Backend Quán Mộc đang chạy tại http://localhost:${cauHinhChung.congBackend}`);
             ghiNhatKy.ghiThongTin(`Môi trường: ${cauHinhChung.moiTruong}`);
