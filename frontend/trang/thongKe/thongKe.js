@@ -66,10 +66,18 @@ export async function renderThongKe(container) {
                 <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
                         <h3 style="margin: 0; font-size: 17px; color: #2c3e50;">Biểu Đồ Doanh Thu</h3>
-                        <div style="display: flex; gap: 6px;">
-                            <button class="nut nut-phu nut-nho nut-chu-ky kich-hoat" data-ky="ngay">Ngày</button>
-                            <button class="nut nut-phu nut-nho nut-chu-ky" data-ky="tuan">Tuần</button>
-                            <button class="nut nut-phu nut-nho nut-chu-ky" data-ky="thang">Tháng</button>
+                        <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                            <div style="display: flex; gap: 4px; align-items: center;">
+                                <input type="date" id="loc-tu-ngay" style="padding: 4px 6px; border: 1px solid var(--mau-vien); border-radius: 6px; font-size: 11px;">
+                                <span style="font-size: 11px; color: #888;">-</span>
+                                <input type="date" id="loc-den-ngay" style="padding: 4px 6px; border: 1px solid var(--mau-vien); border-radius: 6px; font-size: 11px;">
+                                <button class="nut nut-phu nut-nho" id="nut-ap-dung-ngay" style="font-size: 11px; padding: 4px 8px;">Lọc</button>
+                            </div>
+                            <div style="display: flex; gap: 4px;">
+                                <button class="nut nut-phu nut-nho nut-chu-ky kich-hoat" data-ky="ngay">Ngày</button>
+                                <button class="nut nut-phu nut-nho nut-chu-ky" data-ky="tuan">Tuần</button>
+                                <button class="nut nut-phu nut-nho nut-chu-ky" data-ky="thang">Tháng</button>
+                            </div>
                         </div>
                     </div>
                     <div id="vung-ve-bieu-do-doanh-thu" style="width: 100%; height: 260px; position: relative;">

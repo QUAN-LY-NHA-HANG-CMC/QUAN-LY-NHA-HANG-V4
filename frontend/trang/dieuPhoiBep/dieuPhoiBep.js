@@ -1,3 +1,26 @@
+
+let amThanhBat = true;
+function phatAmBaoKds() {
+    if (!amThanhBat) return;
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+    } catch (e) {
+        console.warn('Web Audio error:', e);
+    }
+}
 /**
  * Giao diện Màn hình Điều phối Bếp (Kitchen Display System - KDS)
  * Phụ trách: Phong (Frontend Admin & Real-time)
@@ -65,6 +88,38 @@ export async function renderDieuPhoiBep(vungChua) {
         btnActive.style.background = '#ff9f43';
         btnActive.style.color = '#fff';
         btnActive.classList.add('kich-hoat');
+    }
+
+    const btnChuong = document.getElementById('nut-chuong-kds');
+    if (btnChuong) {
+        btnChuong.addEventListener('click', () => {
+            amThanhBat = !amThanhBat;
+            btnChuong.textContent = amThanhBat ? '🔔 Chuông Bật' : '🔕 Chuông Tắt';
+            btnChuong.style.background = amThanhBat ? '#4b6584' : '#e74c3c';
+            if (amThanhBat) phatAmBaoKds();
+        });
+    }
+
+    const btnFullscreen = document.getElementById('nut-toan-man-hinh');
+    if (btnFullscreen) {
+        btnFullscreen.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                vungChua.requestFullscreen().catch(err => console.warn(err));
+                btnFullscreen.textContent = '⏹ Thu nhỏ';
+            } else {
+                document.exitFullscreen();
+                btnFullscreen.textContent = '⛶ Toàn màn hình';
+            }
+        });
+    }
+
+    if (window.io) {
+        try {
+            const socket = window.io();
+            socket.on('don_mon_moi', () => {
+                phatAmBaoKds();
+            });
+        } catch (e) {}
     }
 
     btnHangDoi.addEventListener('click', () => {

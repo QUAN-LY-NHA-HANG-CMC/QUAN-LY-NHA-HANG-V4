@@ -19,11 +19,28 @@ export async function renderQuanLyBanQr(container) {
             </div>
         </div>
 
-        <div class="the" style="padding: 14px 20px;">
-            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                <span style="font-weight: 600; font-size: 14px;">Lọc theo khu vực:</span>
-                <div id="danh-sach-tab-khu-vuc" style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <button class="nut nut-chinh nut-nho tab-kv" data-id="">Tất cả</button>
+        <div class="the" style="padding: 16px 20px; display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-weight: 600; font-size: 13px; color: var(--mau-chu-phu);">Khu vực:</span>
+                    <div id="danh-sach-tab-khu-vuc" style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <button class="nut nut-chinh nut-nho tab-kv" data-id="">Tất cả</button>
+                    </div>
+                </div>
+
+                <div style="width: 260px; max-width: 100%;">
+                    <input type="text" id="tim-kiem-ban" placeholder="🔍 Tìm tên hoặc mã bàn..." 
+                           style="width: 100%; padding: 8px 12px; border: 1px solid var(--mau-vien); border-radius: 8px; font-size: 13px;">
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; border-top: 1px dashed var(--mau-vien); padding-top: 12px;">
+                <span style="font-weight: 600; font-size: 13px; color: var(--mau-chu-phu);">Trạng thái:</span>
+                <div id="danh-sach-tab-trang-thai" class="tab-trang-thai" style="display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button class="nut nut-chinh nut-nho tab-tt" data-tt="">Tất cả</button>
+                    <button class="nut nut-phu nut-nho tab-tt" data-tt="trong">🟢 Bàn trống</button>
+                    <button class="nut nut-phu nut-nho tab-tt" data-tt="dang_dung">🟡 Đang phục vụ</button>
+                    <button class="nut nut-phu nut-nho tab-tt" data-tt="cho_thanh_toan">🔴 Chờ thanh toán</button>
                 </div>
             </div>
         </div>
@@ -34,6 +51,8 @@ export async function renderQuanLyBanQr(container) {
     `;
 
     let khuVucHienTai = '';
+    let trangThaiHienTai = '';
+    let tuKhoaTimKiem = '';
     let danhSachKhuVuc = [];
     let danhSachBan = [];
 
