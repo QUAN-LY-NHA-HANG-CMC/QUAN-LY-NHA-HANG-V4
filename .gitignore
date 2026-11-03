@@ -15,5 +15,11 @@ Thumbs.db
 .idea/
 .vscode/
 
+# Database files
+database/*.sqlite
+database/*.sqlite-*
+*.sqlite
+*.sqlite-*
+
 # Logs
 *.log
