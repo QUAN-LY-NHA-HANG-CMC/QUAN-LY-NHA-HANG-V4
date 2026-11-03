@@ -61,10 +61,13 @@ export function renderDangNhap(container) {
             localStorage.setItem(KHOA_LUU_TRU.TOKEN, ketQua.data.token);
             localStorage.setItem(KHOA_LUU_TRU.NGUOI_DUNG, JSON.stringify(ketQua.data.nguoiDung));
 
-            if (window.location.hash === '#/so-do-ban') {
+            const vaiTro = ketQua.data.nguoiDung.vaiTro;
+            const trangDich = vaiTro === 'bep' ? '#/bep' : '#/so-do-ban';
+
+            if (window.location.hash === trangDich) {
                 window.dispatchEvent(new Event('hashchange'));
             } else {
-                window.location.hash = '#/so-do-ban';
+                window.location.hash = trangDich;
             }
         } catch (loi) {
             baoLoi.textContent = loi.message || 'Đăng nhập không thành công';

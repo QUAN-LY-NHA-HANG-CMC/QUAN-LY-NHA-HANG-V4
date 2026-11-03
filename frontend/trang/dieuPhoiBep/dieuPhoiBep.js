@@ -37,10 +37,13 @@ export async function renderDieuPhoiBep(vungChua) {
         <div class="kds-khung" style="padding: 16px; background: #1e1e2d; min-height: calc(100vh - 70px); color: #fff;">
             <!-- Thanh công cụ KDS -->
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
-                <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
                     <h2 style="margin: 0; font-size: 22px; color: #ff9f43; display: flex; align-items: center; gap: 8px;">
                         <span>🍳</span> ĐIỀU PHỐI BẾP (KDS)
                     </h2>
+                    <span style="background: #2a2b36; border: 1px solid #ff9f43; color: #ff9f43; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                        🧑‍🍳 Trực ban Đầu bếp
+                    </span>
                     <span id="kds-dem-tong" style="background: #e74c3c; color: white; padding: 4px 10px; border-radius: 20px; font-weight: bold; font-size: 13px;">
                         0 món chờ
                     </span>

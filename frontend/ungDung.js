@@ -39,6 +39,26 @@ const tuyenDuong = {
 
 const tuyenDuongKhachHang = ['/menu', '/gio-hang', '/theo-doi-don'];
 
+// Ma trận phân quyền các màn hình nội bộ theo vai trò nhân sự
+const PHAN_QUYEN_TUYEN_DUONG = {
+    '/so-do-ban': ['phuc_vu', 'thu_ngan', 'quan_ly'],
+    '/bep': ['bep', 'quan_ly'],
+    '/kds': ['bep', 'quan_ly'],
+    '/thanh-toan': ['thu_ngan', 'quan_ly'],
+    '/ca-lam-viec': ['thu_ngan', 'quan_ly'],
+    '/thuc-don': ['quan_ly'],
+    '/nhan-vien': ['quan_ly'],
+    '/quan-tri': ['quan_ly'],
+    '/thong-ke': ['quan_ly'],
+    '/dashboard': ['quan_ly'],
+    '/danh-gia': ['quan_ly']
+};
+
+export function layTrangMacDinhTheoVaiTro(vaiTro) {
+    if (vaiTro === 'bep') return '/bep';
+    return '/so-do-ban';
+}
+
 function layNguoiDungHienTai() {
     try {
         const duLieu = localStorage.getItem(KHOA_LUU_TRU.NGUOI_DUNG);
@@ -65,33 +85,70 @@ function capNhatGiaoDienNguoiDung(duongDan) {
     if (thanhBen) thanhBen.style.display = 'flex';
     if (dauTrang) dauTrang.style.display = 'flex';
 
+    const vaiTro = nguoiDung.vaiTro || '';
+
+    // Định danh trực ban chuyên trách trên thanh tiêu đề
     const elNhanVaiTro = document.getElementById('nhan-vai-tro');
     const elTenNguoiDung = document.getElementById('ten-nguoi-dung');
-    if (elNhanVaiTro) elNhanVaiTro.textContent = nguoiDung.tenVaiTro || 'Nhân viên';
+    const BIEU_TUONG_VAI_TRO = {
+        'quan_ly': '👑 Quản lý',
+        'thu_ngan': '💼 Thu ngân',
+        'bep': '🧑‍🍳 Đầu bếp',
+        'phuc_vu': '💁 Phục vụ'
+    };
+    if (elNhanVaiTro) elNhanVaiTro.textContent = BIEU_TUONG_VAI_TRO[vaiTro] || (nguoiDung.tenVaiTro || 'Nhân viên');
     if (elTenNguoiDung) elTenNguoiDung.textContent = nguoiDung.hoTen || nguoiDung.tenDangNhap;
 
-    // Phân quyền hiển thị menu
-    const vaiTro = nguoiDung.vaiTro;
-    const linkNhanVien = document.getElementById('link-nhan-vien');
-    const linkQuanTri = document.getElementById('link-quan-tri');
+    // Phân quyền chuyên biệt từng vai trò trên thanh Menu điều hướng
+    const linkSoDoBan = document.getElementById('link-so-do-ban');
+    const linkBep = document.getElementById('link-bep');
+    const linkThucDon = document.getElementById('link-thuc-don');
+    const linkCaLamViec = document.getElementById('link-ca-lam-viec');
     const linkThongKe = document.getElementById('link-thong-ke');
     const linkDanhGia = document.getElementById('link-danh-gia');
-    const linkCaLamViec = document.getElementById('link-ca-lam-viec');
+    const linkNhanVien = document.getElementById('link-nhan-vien');
+    const linkQuanTri = document.getElementById('link-quan-tri');
 
-    if (linkNhanVien) {
-        linkNhanVien.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
+    // 1. Sơ đồ bàn: Phục vụ, Thu ngân, Quản lý (Đầu bếp KHÔNG thấy)
+    if (linkSoDoBan) {
+        const hienThiSoDo = vaiTro === 'quan_ly' || vaiTro === 'thu_ngan' || vaiTro === 'phuc_vu';
+        linkSoDoBan.parentElement.style.display = hienThiSoDo ? 'block' : 'none';
+        if (vaiTro === 'phuc_vu') {
+            linkSoDoBan.innerHTML = '<span>🪑</span> Sơ đồ Bàn & Phục vụ';
+        } else if (vaiTro === 'thu_ngan') {
+            linkSoDoBan.innerHTML = '<span>🪑</span> Sơ đồ Bàn & POS';
+        } else {
+            linkSoDoBan.innerHTML = '<span>🪑</span> Sơ đồ Bàn & POS';
+        }
     }
-    if (linkQuanTri) {
-        linkQuanTri.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
+
+    // 2. Điều phối Bếp (KDS): Chỉ Đầu bếp và Quản lý (Phục vụ & Thu ngân KHÔNG thấy)
+    if (linkBep) {
+        linkBep.parentElement.style.display = (vaiTro === 'quan_ly' || vaiTro === 'bep') ? 'block' : 'none';
     }
+
+    // 3. Quản lý Ca & Quỹ: Chỉ Thu ngân và Quản lý (Phục vụ & Bếp KHÔNG thấy)
+    if (linkCaLamViec) {
+        linkCaLamViec.parentElement.style.display = (vaiTro === 'quan_ly' || vaiTro === 'thu_ngan') ? 'block' : 'none';
+    }
+
+    // 4. Quản lý Thực đơn: Chỉ Quản lý
+    if (linkThucDon) {
+        linkThucDon.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
+    }
+
+    // 5. Thống kê báo cáo, Đánh giá, Nhân sự, Cấu hình: Chỉ Quản lý
     if (linkThongKe) {
         linkThongKe.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
     }
     if (linkDanhGia) {
         linkDanhGia.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
     }
-    if (linkCaLamViec) {
-        linkCaLamViec.parentElement.style.display = (vaiTro === 'quan_ly' || vaiTro === 'thu_ngan') ? 'block' : 'none';
+    if (linkNhanVien) {
+        linkNhanVien.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
+    }
+    if (linkQuanTri) {
+        linkQuanTri.parentElement.style.display = vaiTro === 'quan_ly' ? 'block' : 'none';
     }
 
     // Đánh dấu menu đang chọn
@@ -106,12 +163,16 @@ function capNhatGiaoDienNguoiDung(duongDan) {
 
 function dieuHuong() {
     let hash = window.location.hash.slice(1);
+    const nguoiDung = layNguoiDungHienTai();
+    const vaiTro = nguoiDung ? (nguoiDung.vaiTro || '') : '';
+    const trangMacDinh = layTrangMacDinhTheoVaiTro(vaiTro);
+
     // Hỗ trợ cả pathname khi quét mã QR trực tiếp không có dấu #
     if (!hash) {
         if (window.location.pathname && window.location.pathname !== '/') {
             hash = window.location.pathname + window.location.search;
         } else {
-            hash = '/so-do-ban';
+            hash = trangMacDinh;
         }
     }
     const duongDan = hash.split('?')[0];
@@ -125,8 +186,21 @@ function dieuHuong() {
         }
 
         if (token && duongDan === '/dang-nhap') {
-            window.location.hash = '#/so-do-ban';
+            window.location.hash = '#' + trangMacDinh;
             return;
+        }
+
+        // Chặn truy cập trái phân quyền (Frontend Route Guard chuyên biệt)
+        if (token && PHAN_QUYEN_TUYEN_DUONG[duongDan]) {
+            const cacVaiTroChoPhep = PHAN_QUYEN_TUYEN_DUONG[duongDan];
+            if (!cacVaiTroChoPhep.includes(vaiTro)) {
+                import('./dungChung/thongBao.js').then(m => {
+                    const tenVaiTro = nguoiDung.tenVaiTro || vaiTro;
+                    m.thongBao.canhBao(`⚠️ Vai trò [${tenVaiTro}] chỉ thao tác tại màn hình chuyên trách của mình.`);
+                });
+                window.location.hash = '#' + trangMacDinh;
+                return;
+            }
         }
     }
 
