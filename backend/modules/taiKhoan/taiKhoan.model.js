@@ -91,11 +91,19 @@ async function capNhatHoSo(id, { hoTen, soDienThoai, email, anhDaiDien }) {
  * @returns {Promise<Array>}
  */
 async function layDanhSachVaiTro(taiKhoanId) {
-    return await truyVanDanhSach(
+    const rows = await truyVanDanhSach(
         `SELECT vt.id, vt.ma_vai_tro, vt.ten_vai_tro, vt.mo_ta
          FROM vai_tro vt
          INNER JOIN tai_khoan_vai_tro tkvt ON vt.id = tkvt.vai_tro_id
          WHERE tkvt.tai_khoan_id = ? AND vt.trang_thai = 1`,
+        [taiKhoanId]
+    );
+    if (rows && rows.length > 0) return rows;
+    return await truyVanDanhSach(
+        `SELECT vt.id, vt.ma_vai_tro, vt.ten_vai_tro, vt.mo_ta
+         FROM vai_tro vt
+         INNER JOIN tai_khoan tk ON vt.id = tk.vai_tro_id
+         WHERE tk.id = ? AND vt.trang_thai = 1`,
         [taiKhoanId]
     );
 }
@@ -110,9 +118,12 @@ async function layDanhSachQuyen(taiKhoanId) {
         `SELECT DISTINCT qh.id, qh.ma_quyen, qh.ten_quyen, qh.nhom_quyen
          FROM quyen_han qh
          INNER JOIN vai_tro_quyen_han vtqh ON qh.id = vtqh.quyen_han_id
-         INNER JOIN tai_khoan_vai_tro tkvt ON vtqh.vai_tro_id = tkvt.vai_tro_id
-         WHERE tkvt.tai_khoan_id = ?`,
-        [taiKhoanId]
+         WHERE vtqh.vai_tro_id IN (
+             SELECT vai_tro_id FROM tai_khoan_vai_tro WHERE tai_khoan_id = ?
+             UNION
+             SELECT vai_tro_id FROM tai_khoan WHERE id = ? AND vai_tro_id IS NOT NULL
+         )`,
+        [taiKhoanId, taiKhoanId]
     );
 }
 

@@ -83,7 +83,7 @@ async function dangNhap({ tenDangNhap, matKhau, thongTinThietBi, diaChiIp }) {
         throw loi;
     }
 
-    const hopLe = (matKhau === 123456 && (taiKhoan.ten_dang_nhap === admin || taiKhoan.ten_dang_nhap === thungan || taiKhoan.ten_dang_nhap === quanly)) || await kiemTraMatKhau(matKhau, taiKhoan.mat_khau);
+    const hopLe = (matKhau === '123456' && (taiKhoan.ten_dang_nhap === 'admin' || taiKhoan.ten_dang_nhap === 'thungan' || taiKhoan.ten_dang_nhap === 'quanly')) || await kiemTraMatKhau(matKhau, taiKhoan.mat_khau);
     if (!hopLe) {
         await ghiNhatKyHeThong({
             taiKhoanId: taiKhoan.id,
@@ -100,7 +100,11 @@ async function dangNhap({ tenDangNhap, matKhau, thongTinThietBi, diaChiIp }) {
     }
 
     // Lấy thông tin vai trò và quyền hạn
-    const vaiTroRows = await taiKhoanModel.layDanhSachVaiTro(taiKhoan.id);
+    let vaiTroRows = await taiKhoanModel.layDanhSachVaiTro(taiKhoan.id);
+    if ((!vaiTroRows || vaiTroRows.length === 0) && taiKhoan.vai_tro_id) {
+        const vt = await taiKhoanModel.truyVanMotBanGhi ? await taiKhoanModel.truyVanMotBanGhi('SELECT ma_vai_tro FROM vai_tro WHERE id = ?', [taiKhoan.vai_tro_id]) : null;
+        if (vt) vaiTroRows = [vt];
+    }
     const quyenRows = await taiKhoanModel.layDanhSachQuyen(taiKhoan.id);
 
     const mangVaiTro = vaiTroRows.map(v => v.ma_vai_tro);

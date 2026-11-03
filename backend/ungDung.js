@@ -34,6 +34,11 @@ const { khuyenMaiRoutes } = require('./modules/khuyenMai');
 const { hoaDonRoutes } = require('./modules/hoaDon');
 const { thanhToanRoutes } = require('./modules/thanhToan');
 
+// Nạp các Routes Sprint 4 (Minh)
+const { danhGiaRoutes } = require('./modules/danhGia');
+const { caLamViecRoutes } = require('./modules/caLamViec');
+const { xuatBaoCaoRoutes } = require('./modules/xuatBaoCao');
+
 // Nạp tài liệu Swagger
 const taiLieuSwagger = require('../taiLieu/swagger.json');
 
@@ -112,6 +117,11 @@ app.use('/api/yeu-cau-ho-tro', yeuCauHoTroRoutes);
 app.use('/api/khuyen-mai', khuyenMaiRoutes);
 app.use('/api/hoa-don', hoaDonRoutes);
 app.use('/api/thanh-toan', thanhToanRoutes);
+
+// Gắn các Router API nghiệp vụ Sprint 4
+app.use('/api/danh-gia', danhGiaRoutes);
+app.use('/api/ca-lam-viec', caLamViecRoutes);
+app.use('/api/xuat-bao-cao', xuatBaoCaoRoutes);
 
 // 8. Xử lý đường dẫn không tồn tại (404)
 app.use(xuLyKhongTimThay);
