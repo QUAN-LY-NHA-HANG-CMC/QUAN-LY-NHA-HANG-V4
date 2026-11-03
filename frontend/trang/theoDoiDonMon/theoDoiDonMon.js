@@ -317,6 +317,7 @@ function ganSuKienHoTro() {
                             badge.style.background = '#fef3c7';
                             badge.style.color = '#b45309';
                         }
+                        hienThiVietQrTaiBan();
                     }
                 } catch {
                     hienThongBao('Lỗi khi gửi yêu cầu thanh toán!', 'loi');
@@ -383,4 +384,44 @@ function ganSuKienDanhGia() {
             }
         });
     }
+}
+
+function hienThiVietQrTaiBan() {
+    let khung = document.getElementById('khung-vietqr-khach-tai-ban');
+    const container = document.querySelector('.theo-doi-don-container');
+    if (!container) return;
+
+    const tongTien = duLieuChiTietPhien ? (duLieuChiTietPhien.tong_tien_tam_tinh || 0) : 0;
+    const maBan = thongTinBan ? (thongTinBan.ma_ban || 'BAN') : 'BAN';
+    const qrUrl = `https://api.vietqr.io/image/970422-0901234567-compact.png?amount=${tongTien}&addInfo=THANHTOAN%20${encodeURIComponent(maBan)}`;
+
+    if (!khung) {
+        khung = document.createElement('div');
+        khung.id = 'khung-vietqr-khach-tai-ban';
+        const vungDon = document.getElementById('danh-sach-don-hang-khach');
+        if (vungDon && vungDon.parentNode) {
+            vungDon.parentNode.insertBefore(khung, vungDon);
+        } else {
+            container.appendChild(khung);
+        }
+    }
+
+    khung.innerHTML = `
+        <div style="background: white; border: 2px solid #f59e0b; border-radius: 12px; padding: 20px; margin: 16px 0; text-align: center; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.15);">
+            <div style="font-size: 14px; font-weight: 700; color: #b45309; margin-bottom: 6px;">
+                💳 BÀN ĐANG CHỜ THANH TOÁN
+            </div>
+            <p style="font-size: 13px; color: #475569; margin-bottom: 14px;">
+                Quý khách có thể quét mã Napas VietQR bên dưới để thanh toán chuyển khoản ngay tại bàn:
+            </p>
+            <div style="background: #f8fafc; padding: 12px; border-radius: 8px; display: inline-block; border: 1px solid #e2e8f0; margin-bottom: 10px;">
+                <img src="${qrUrl}" alt="Napas VietQR" style="max-width: 220px; width: 100%; border-radius: 6px; display: block; margin: 0 auto;">
+            </div>
+            <div style="font-size: 14px; color: #1e293b; margin-top: 6px;">
+                Số tiền: <b style="color: #e11d48; font-size: 18px;">${dinhDangTien(tongTien)}</b>
+            </div>
+            <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Nội dung CK: <b>THANHTOAN ${maBan}</b></div>
+            <div style="font-size: 12px; color: #16a34a; margin-top: 6px; font-weight: 600;">✓ Quầy Thu ngân sẽ tự động kiểm tra và hoàn tất hóa đơn</div>
+        </div>
+    `;
 }

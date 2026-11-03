@@ -1,3 +1,27 @@
+
+async function taiMauPhanHoi() {
+    try {
+        const res = await goiApi('/danh-gia/mau-phan-hoi', 'GET');
+        const vungMau = document.getElementById('vung-mau-phan-hoi');
+        if (!vungMau || !res || !res.data) return;
+
+        vungMau.innerHTML = res.data.map(m => `
+            <button type="button" class="nut nut-phu nut-nho nut-chon-mau-ph" data-nd="${encodeURIComponent(m.noiDung)}" style="font-size: 11px; padding: 4px 8px;">
+                💡 ${m.tieuDe}
+            </button>
+        `).join('');
+
+        vungMau.querySelectorAll('.nut-chon-mau-ph').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const nd = decodeURIComponent(btn.dataset.nd);
+                const txt = document.getElementById('nhap-loi-phan-hoi');
+                if (txt) txt.value = nd;
+            });
+        });
+    } catch (e) {
+        console.warn('Lỗi tải mẫu phản hồi:', e);
+    }
+}
 /**
  * Màn hình Quản trị Đánh giá & Phản hồi Khách hàng
  * Phụ trách: Quân (Frontend Developer)
@@ -47,6 +71,7 @@ export async function renderDanhGia(container) {
                 <div id="noi-dung-khach-viet" style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 14px; font-size: 13px; color: #555;"></div>
                 <div style="margin-bottom: 18px;">
                     <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px;">Lời cảm ơn hoặc giải trình của Quán:</label>
+                    <div id="vung-mau-phan-hoi" style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;"></div>
                     <textarea id="nhap-loi-phan-hoi" rows="4" placeholder="Nhập phản hồi từ Quán Mộc..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
                 </div>
                 <div style="display: flex; justify-content: flex-end; gap: 10px;">
@@ -161,7 +186,10 @@ function renderDanhSach() {
             if (elKhach) {
                 elKhach.innerHTML = `<strong>${btn.dataset.khach}:</strong> "${btn.dataset.nx}"`;
             }
-            if (modal) modal.style.display = 'flex';
+            if (modal) {
+                modal.style.display = 'flex';
+                taiMauPhanHoi();
+            }
         });
     });
 }

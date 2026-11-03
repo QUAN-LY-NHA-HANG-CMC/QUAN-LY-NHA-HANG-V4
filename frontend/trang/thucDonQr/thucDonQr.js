@@ -37,7 +37,7 @@ export async function renderThucDonQr(container) {
             </div>
 
             <!-- Danh mục dạng cuộn ngang -->
-            <div id="emenu-danh-muc" style="display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 12px 0; scrollbar-width: none;">
+            <div id="emenu-danh-muc" style="display: flex; gap: 8px; overflow-x: auto; padding: 8px 0; scrollbar-width: none; position: sticky; top: 0; background: var(--mau-nen); z-index: 50;">
                 <button class="nut nut-phu nut-nho kich-hoat" data-danh-muc="tat_ca">Tất cả</button>
             </div>
 
@@ -197,7 +197,7 @@ function renderDanhSachMon() {
         html += `
             <div class="the-mon-emenu" style="display: flex; gap: 12px; background: white; border-radius: 12px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); align-items: center;">
                 <div style="width: 76px; height: 76px; border-radius: 8px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0;">
-                    ${m.hinh_anh ? `<img src="${m.hinh_anh}" alt="${m.ten_mon}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">` : '🍲'}
+                    <img src="${m.hinh_anh || '/tepTaiLen/monAn/mac_dinh.svg'}" alt="${m.ten_mon}" onerror="this.onerror=null; this.src='/tepTaiLen/monAn/mac_dinh.svg';" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
                 </div>
                 <div style="flex: 1; min-width: 0;">
                     <div style="font-weight: 600; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
