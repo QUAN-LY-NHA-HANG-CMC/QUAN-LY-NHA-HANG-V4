@@ -13,6 +13,7 @@ router.post('/', danhGiaController.taoDanhGia);
 router.get('/diem-trung-binh', danhGiaController.layDiemTrungBinh);
 
 // Quản lý xem và duyệt đánh giá: Yêu cầu xác thực Quản lý
+router.get('/mau-phan-hoi', xacThuc, kiemTraVaiTro('quan_ly'), danhGiaController.layMauPhanHoi);
 router.get('/', xacThuc, kiemTraVaiTro('quan_ly'), danhGiaController.layDanhSach);
 router.patch('/:id/phan-hoi', xacThuc, kiemTraVaiTro('quan_ly'), danhGiaController.phanHoiDanhGia);
 router.patch('/:id/trang-thai', xacThuc, kiemTraVaiTro('quan_ly'), danhGiaController.doiTrangThai);

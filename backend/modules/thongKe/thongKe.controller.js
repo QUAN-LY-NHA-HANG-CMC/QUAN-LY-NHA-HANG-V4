@@ -17,8 +17,8 @@ async function layTongQuan(req, res, next) {
 
 async function layDoanhThu(req, res, next) {
     try {
-        const { ky } = req.query;
-        const ketQua = await thongKeService.layDoanhThu(ky);
+        const { ky, tuNgay, denNgay } = req.query;
+        const ketQua = await thongKeService.layDoanhThu(ky, tuNgay, denNgay);
         return dinhDangPhanHoi.thanhCong(res, ketQua, 'Lấy biểu đồ doanh thu thành công');
     } catch (loi) {
         next(loi);
@@ -45,9 +45,9 @@ async function layDanhMuc(req, res, next) {
 
 async function layTopMon(req, res, next) {
     try {
-        const gioiHan = Number(req.query.gioiHan) || 10;
-        const ketQua = await thongKeService.layTopMon(gioiHan);
-        return dinhDangPhanHoi.thanhCong(res, ketQua, 'Lấy bảng xếp hạng top món ăn thành công');
+        const { gioiHan } = req.query;
+        const ketQua = await thongKeService.layTopMon(gioiHan ? Number(gioiHan) : 5);
+        return dinhDangPhanHoi.thanhCong(res, ketQua, 'Lấy top món bán chạy/chậm thành công');
     } catch (loi) {
         next(loi);
     }
@@ -56,7 +56,7 @@ async function layTopMon(req, res, next) {
 async function layKhungGio(req, res, next) {
     try {
         const ketQua = await thongKeService.layKhungGio();
-        return dinhDangPhanHoi.thanhCong(res, ketQua, 'Lấy phân bố khung giờ cao điểm thành công');
+        return dinhDangPhanHoi.thanhCong(res, ketQua, 'Lấy thống kê khung giờ cao điểm thành công');
     } catch (loi) {
         next(loi);
     }

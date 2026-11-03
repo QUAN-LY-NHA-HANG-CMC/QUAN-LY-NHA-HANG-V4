@@ -122,8 +122,16 @@ async function xoaBanAn(id) {
     return true;
 }
 
-async function laySoDoChiTiet() {
-    return banAnModel.laySoDoChiTiet();
+async function laySoDoChiTiet(boLoc = {}) {
+    const danhSach = await banAnModel.laySoDoChiTiet();
+    if (!boLoc || !boLoc.trangThai) return danhSach;
+    const tt = boLoc.trangThai;
+    return danhSach.filter(ban => {
+        if (tt === 'trong') return ban.trang_thai === 'trong';
+        if (tt === 'dang_phuc_vu') return ban.trang_thai === 'dang_dung' || ban.trang_thai === 'dang_phuc_vu';
+        if (tt === 'cho_thanh_toan') return ban.trang_thai === 'cho_thanh_toan';
+        return ban.trang_thai === tt;
+    });
 }
 
 module.exports = {

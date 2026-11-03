@@ -52,7 +52,22 @@ function layTongQuanNgay(ngay = null) {
     };
 }
 
-function layDoanhThuTheoChuKy(ky = 'ngay') {
+function layDoanhThuTheoChuKy(ky = 'ngay', tuNgay = null, denNgay = null) {
+    if (tuNgay && denNgay) {
+        const sql = `
+            SELECT date(thoi_gian_tao) AS moc_thoi_gian,
+                   COALESCE(SUM(tong_thanh_toan), 0) AS doanh_thu,
+                   COUNT(id) AS so_don
+            FROM hoa_don
+            WHERE trang_thai = 'da_thanh_toan' 
+              AND date(thoi_gian_tao) >= date(?)
+              AND date(thoi_gian_tao) <= date(?)
+            GROUP BY moc_thoi_gian
+            ORDER BY moc_thoi_gian ASC
+        `;
+        return ketNoiCoSoDuLieu.layNhieu(sql, [tuNgay, denNgay]);
+    }
+
     let sql = '';
     if (ky === 'tuan') {
         sql = `

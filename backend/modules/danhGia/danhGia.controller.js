@@ -53,10 +53,20 @@ async function doiTrangThai(req, res, next) {
     }
 }
 
+function layMauPhanHoi(req, res) {
+    const mauPhanHoi = [
+        { id: 1, loai: 'tich_cuc', tieuDe: 'Cảm ơn khen ngợi', noiDung: 'Quán Mộc xin chân thành cảm ơn quý khách đã ghé thăm và dành lời khen ngợi quý báu. Rất mong được đón tiếp quý khách trong những bữa ăn tiếp theo!' },
+        { id: 2, loai: 'tiep_thu', tieuDe: 'Tiếp thu góp ý', noiDung: 'Quán Mộc xin trân trọng cảm ơn góp ý chân thành của quý khách. Đội ngũ quản lý và bếp đã ghi nhận để cải tiến chất lượng phục vụ ngay hôm nay!' },
+        { id: 3, loai: 'xin_loi', tieuDe: 'Xin lỗi trải nghiệm chưa tốt', noiDung: 'Quán Mộc xin gửi lời xin lỗi sâu sắc vì trải nghiệm dùng bữa chưa trọn vẹn của quý khách. Chúng tôi sẽ liên hệ trực tiếp để lắng nghe và có ưu đãi tạ lỗi gửi đến quý khách ạ!' }
+    ];
+    return dinhDangPhanHoi.thanhCong(res, mauPhanHoi, 'Lấy danh sách mẫu phản hồi thành công');
+}
+
 module.exports = {
     taoDanhGia,
     layDanhSach,
     layDiemTrungBinh,
     phanHoiDanhGia,
-    doiTrangThai
+    doiTrangThai,
+    layMauPhanHoi
 };

@@ -3,8 +3,7 @@ const dinhDangPhanHoi = require('../../tienIch/dinhDangPhanHoi.js');
 
 async function layDanhSach(req, res, next) {
     try {
-        const { khuVucId, trangThai } = req.query;
-        const danhSach = await banAnService.layDanhSach({ khuVucId, trangThai });
+        const danhSach = await banAnService.layDanhSach(req.query);
         return dinhDangPhanHoi.thanhCong(res, danhSach, 'Lấy danh sách bàn ăn thành công');
     } catch (loi) {
         next(loi);
@@ -14,7 +13,7 @@ async function layDanhSach(req, res, next) {
 async function layTheoId(req, res, next) {
     try {
         const ban = await banAnService.layTheoId(req.params.id);
-        return dinhDangPhanHoi.thanhCong(res, ban, 'Lấy thông tin bàn thành công');
+        return dinhDangPhanHoi.thanhCong(res, ban, 'Lấy thông tin bàn ăn thành công');
     } catch (loi) {
         next(loi);
     }
@@ -40,8 +39,8 @@ async function capNhatBanAn(req, res, next) {
 
 async function lamMoiQrToken(req, res, next) {
     try {
-        const banCapNhat = await banAnService.lamMoiQrToken(req.params.id);
-        return dinhDangPhanHoi.thanhCong(res, banCapNhat, 'Làm mới mã QR bàn thành công');
+        const ban = await banAnService.lamMoiQrToken(req.params.id);
+        return dinhDangPhanHoi.thanhCong(res, ban, 'Làm mới mã QR bàn thành công');
     } catch (loi) {
         next(loi);
     }
@@ -49,8 +48,8 @@ async function lamMoiQrToken(req, res, next) {
 
 async function layAnhQrBan(req, res, next) {
     try {
-        const qr = await banAnService.layAnhQrBan(req.params.id);
-        return dinhDangPhanHoi.thanhCong(res, qr, 'Lấy ảnh QR bàn thành công');
+        const duLieuQr = await banAnService.layAnhQrBan(req.params.id);
+        return dinhDangPhanHoi.thanhCong(res, duLieuQr, 'Lấy ảnh mã QR thành công');
     } catch (loi) {
         next(loi);
     }
@@ -77,7 +76,7 @@ async function xoaBanAn(req, res, next) {
 
 async function laySoDoChiTiet(req, res, next) {
     try {
-        const danhSach = await banAnService.laySoDoChiTiet();
+        const danhSach = await banAnService.laySoDoChiTiet(req.query);
         return dinhDangPhanHoi.thanhCong(res, danhSach, 'Lấy sơ đồ bàn chi tiết thành công');
     } catch (loi) {
         next(loi);

@@ -8,8 +8,8 @@ async function layTongQuan(ngay) {
     return thongKeModel.layTongQuanNgay(ngay);
 }
 
-async function layDoanhThu(ky) {
-    return thongKeModel.layDoanhThuTheoChuKy(ky);
+async function layDoanhThu(ky, tuNgay, denNgay) {
+    return thongKeModel.layDoanhThuTheoChuKy(ky, tuNgay, denNgay);
 }
 
 async function layPhuongThuc() {
