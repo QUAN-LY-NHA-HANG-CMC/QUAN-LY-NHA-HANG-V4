@@ -182,6 +182,8 @@ function dieuHuong() {
         const token = localStorage.getItem(KHOA_LUU_TRU.TOKEN);
         if (!token && duongDan !== '/dang-nhap') {
             window.location.hash = '#/dang-nhap';
+            const c = document.getElementById('noi-dung-chinh');
+            if (c) renderDangNhap(c);
             return;
         }
 
@@ -212,7 +214,16 @@ function dieuHuong() {
             capNhatGiaoDienNguoiDung(duongDan);
             const ketQua = hamRender(container);
             if (ketQua && typeof ketQua.catch === 'function') {
-                ketQua.catch(loi => console.error('Lỗi khi render trang:', loi));
+                ketQua.catch(loi => {
+                    console.error('Lỗi khi render trang:', loi);
+                    container.innerHTML = `
+                        <div style="padding: 40px; text-align: center; color: #dc2626;">
+                            <h3>Đã xảy ra lỗi khi tải giao diện</h3>
+                            <p style="color: #64748b; margin: 10px 0;">${loi.message}</p>
+                            <button onclick="window.location.reload()" class="nut nut-phu" style="margin-top: 12px;">Tải lại trang</button>
+                        </div>
+                    `;
+                });
             }
         } catch (loi) {
             console.error('Lỗi khi điều hướng:', loi);
