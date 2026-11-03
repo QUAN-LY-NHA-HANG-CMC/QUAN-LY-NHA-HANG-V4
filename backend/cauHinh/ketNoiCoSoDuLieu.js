@@ -139,6 +139,27 @@ function khoiTaoCoSoDuLieu() {
         const sqlDuLieuMau = fs.readFileSync(tepDuLieuMau, 'utf-8');
         db.exec(sqlDuLieuMau);
     }
+
+    const tepSprint2 = path.join(thuMucDatabase, 'migrationSprint2.sql');
+    if (fs.existsSync(tepSprint2)) {
+        const sqlSprint2 = fs.readFileSync(tepSprint2, 'utf-8');
+        db.exec(sqlSprint2);
+    }
+
+    const tepSprint3 = path.join(thuMucDatabase, 'migrationSprint3.sql');
+    if (fs.existsSync(tepSprint3)) {
+        const sqlSprint3 = fs.readFileSync(tepSprint3, 'utf-8');
+        db.exec(sqlSprint3);
+    }
+
+    const tepSprint4 = path.join(thuMucDatabase, 'migrationSprint4.sql');
+    if (fs.existsSync(tepSprint4)) {
+        const sqlSprint4 = fs.readFileSync(tepSprint4, 'utf-8');
+        db.exec(sqlSprint4);
+    }
+
+    try { db.exec('ALTER TABLE phien_ban ADD COLUMN so_khach INTEGER DEFAULT 1;'); } catch (e) {}
+    try { db.exec('ALTER TABLE phien_ban ADD COLUMN ghi_chu TEXT;'); } catch (e) {}
 }
 
 module.exports = {

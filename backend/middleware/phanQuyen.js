@@ -8,24 +8,32 @@ const { phanHoiLoi } = require('../tienIch/dinhDangPhanHoi');
  * Kiểm tra xem tài khoản có thuộc ít nhất một trong các vai trò được phép hay không
  * @param {Array<string>} danhSachVaiTroChoPhep - Ví dụ: ['QUAN_LY'], ['THU_NGAN', 'QUAN_LY']
  */
-function kiemTraVaiTro(danhSachVaiTroChoPhep = []) {
+function kiemTraVaiTro(...cacVaiTro) {
+    let danhSachVaiTroChoPhep = [];
+    if (cacVaiTro.length === 1 && Array.isArray(cacVaiTro[0])) {
+        danhSachVaiTroChoPhep = cacVaiTro[0];
+    } else {
+        danhSachVaiTroChoPhep = cacVaiTro;
+    }
+    const danhSachUpper = danhSachVaiTroChoPhep.map(v => String(v).toUpperCase());
+
     return (req, res, next) => {
         if (!req.taiKhoan) {
             return phanHoiLoi(res, 'Chưa xác thực thông tin người dùng.', 401);
         }
 
-        const vaiTroHienTai = req.taiKhoan.vaiTro || [];
+        const vaiTroHienTai = (req.taiKhoan.vaiTro || []).map(v => String(v).toUpperCase());
 
         // Quản lý mặc định có quyền truy cập quản trị
         if (vaiTroHienTai.includes('QUAN_LY')) {
             return next();
         }
 
-        const coQuyen = danhSachVaiTroChoPhep.some(vaiTro => vaiTroHienTai.includes(vaiTro));
+        const coQuyen = danhSachUpper.some(vaiTro => vaiTroHienTai.includes(vaiTro));
         if (!coQuyen) {
             return phanHoiLoi(
                 res,
-                'Bạn không có quyền truy cập vào chức năng này (Yêu cầu vai trò: ' + danhSachVaiTroChoPhep.join(', ') + ').',
+                'Bạn không có quyền truy cập vào chức năng này (Yêu cầu vai trò: ' + danhSachUpper.join(', ') + ').',
                 403
             );
         }

@@ -13,7 +13,7 @@ const cauHinhChung = require('./cauHinh/cauHinhChung');
 const { gioiHanChung } = require('./middleware/gioiHanYeuCau');
 const { xuLyKhongTimThay, xuLyLoiToanCuc } = require('./middleware/xuLyLoi');
 
-// Nạp các Routes của các Module Sprint 1
+// Nạp các Routes Sprint 1 (Nhật & Phát & Minh)
 const { taiKhoanRoutes } = require('./modules/taiKhoan');
 const { vaiTroRoutes } = require('./modules/vaiTro');
 const { cauHinhNhaHangRoutes } = require('./modules/cauHinhNhaHang');
@@ -22,6 +22,22 @@ const { khuVucRoutes } = require('./modules/khuVuc');
 const { banAnRoutes } = require('./modules/banAn');
 const { danhMucMonRoutes } = require('./modules/danhMucMon');
 const { thucDonRoutes } = require('./modules/thucDon');
+
+// Nạp các Routes Sprint 2 (Nhật & Minh)
+const phienBanRoutes = require('./modules/phienBan/phienBan.routes');
+const donGoiMonRoutes = require('./modules/donGoiMon/donGoiMon.routes');
+const { gioHangRoutes } = require('./modules/gioHang');
+const { yeuCauHoTroRoutes } = require('./modules/yeuCauHoTro');
+
+// Nạp các Routes Sprint 3 (Minh)
+const { khuyenMaiRoutes } = require('./modules/khuyenMai');
+const { hoaDonRoutes } = require('./modules/hoaDon');
+const { thanhToanRoutes } = require('./modules/thanhToan');
+
+// Nạp các Routes Sprint 4 (Minh)
+const { danhGiaRoutes } = require('./modules/danhGia');
+const { caLamViecRoutes } = require('./modules/caLamViec');
+const { xuatBaoCaoRoutes } = require('./modules/xuatBaoCao');
 
 // Nạp tài liệu Swagger
 const taiLieuSwagger = require('../taiLieu/swagger.json');
@@ -90,6 +106,22 @@ app.use('/api/khu-vuc', khuVucRoutes);
 app.use('/api/ban-an', banAnRoutes);
 app.use('/api/danh-muc-mon', danhMucMonRoutes);
 app.use('/api/thuc-don', thucDonRoutes);
+
+// Gắn các Router API nghiệp vụ Sprint 2
+app.use('/api/phien-ban', phienBanRoutes);
+app.use('/api/don-goi-mon', donGoiMonRoutes);
+app.use('/api/gio-hang', gioHangRoutes);
+app.use('/api/yeu-cau-ho-tro', yeuCauHoTroRoutes);
+
+// Gắn các Router API nghiệp vụ Sprint 3
+app.use('/api/khuyen-mai', khuyenMaiRoutes);
+app.use('/api/hoa-don', hoaDonRoutes);
+app.use('/api/thanh-toan', thanhToanRoutes);
+
+// Gắn các Router API nghiệp vụ Sprint 4
+app.use('/api/danh-gia', danhGiaRoutes);
+app.use('/api/ca-lam-viec', caLamViecRoutes);
+app.use('/api/xuat-bao-cao', xuatBaoCaoRoutes);
 
 // 8. Xử lý đường dẫn không tồn tại (404)
 app.use(xuLyKhongTimThay);

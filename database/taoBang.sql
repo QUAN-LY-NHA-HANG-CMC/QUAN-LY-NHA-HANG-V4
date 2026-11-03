@@ -174,7 +174,8 @@ CREATE TABLE IF NOT EXISTS tuy_chon_mon (
 
 CREATE TABLE IF NOT EXISTS cau_hinh_nha_hang (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    ma_cau_hinh TEXT NOT NULL UNIQUE,
+    khoa TEXT,
+    ma_cau_hinh TEXT,
     gia_tri TEXT,
     nhom_cau_hinh TEXT NOT NULL DEFAULT 'chung',
     kieu_du_lieu TEXT NOT NULL DEFAULT 'text',
@@ -211,6 +212,7 @@ CREATE TABLE IF NOT EXISTS phien_ban (
     thoi_gian_bat_dau TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     thoi_gian_ket_thuc TEXT,
     trang_thai TEXT NOT NULL DEFAULT 'dang_su_dung',
+    tong_tien_tam_tinh NUMERIC DEFAULT 0,
     ghi_chu TEXT,
     FOREIGN KEY (ban_an_id) REFERENCES ban_an(id)
 );

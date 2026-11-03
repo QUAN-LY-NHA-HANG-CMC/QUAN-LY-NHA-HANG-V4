@@ -47,6 +47,7 @@ INSERT OR IGNORE INTO vai_tro_quyen_han (vai_tro_id, quyen_han_id) VALUES
 -- 3. Tai khoan
 -- MatKhau@123 hash: $2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.
 INSERT OR IGNORE INTO tai_khoan (id, ten_dang_nhap, mat_khau, mat_khau_bam, ho_ten, so_dien_thoai, email, vai_tro_id, trang_thai) VALUES
+(10, 'admin', '$2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.', '$2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.', 'Quản trị viên', '0901234567', 'admin@example.test', 1, 1),
 (1, 'quanly', '$2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.', '$2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.', 'Nguyễn Văn Quản Lý', '0901111222', 'quanly@example.test', 1, 1),
 (2, 'thungan', '$2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.', '$2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.', 'Trần Thị Thu Ngân', '0903333444', 'thungan@example.test', 2, 1),
 (3, 'bep01', '$2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.', '$2b$10$t02k8PIMAbU.AW9vZh1EwutmfvMD811jnXPxS7crbX1fylhfa4zn.', 'Lê Văn Bếp Trưởng', '0905555666', 'bep@example.test', 3, 1),
@@ -70,7 +71,8 @@ INSERT OR IGNORE INTO ban_an (id, khu_vuc_id, ma_ban, ten_ban, suc_chua, trang_t
 (1, 1, 'B101', 'Bàn 01', 4, 'trong', 'dev-token-b101', 'http://localhost:3001/e-menu?ban=B101&token=dev-token-b101'),
 (2, 1, 'B102', 'Bàn 02', 4, 'trong', 'dev-token-b102', 'http://localhost:3001/e-menu?ban=B102&token=dev-token-b102'),
 (3, 2, 'B201', 'Bàn 11', 4, 'trong', 'dev-token-b201', 'http://localhost:3001/e-menu?ban=B201&token=dev-token-b201'),
-(4, 3, 'VIP1', 'Phòng VIP 1', 10, 'trong', 'dev-token-vip1', 'http://localhost:3001/e-menu?ban=VIP1&token=dev-token-vip1');
+(4, 3, 'VIP1', 'Phòng VIP 1', 10, 'trong', 'dev-token-vip1', 'http://localhost:3001/e-menu?ban=VIP1&token=dev-token-vip1'),
+(5, 1, 'B105', 'Bàn 05', 4, 'trong', 'dev-token-b105', 'http://localhost:3001/e-menu?ban=B105&token=dev-token-b105');
 
 -- 6. Danh muc mon
 INSERT OR IGNORE INTO danh_muc_mon (id, ten_danh_muc, mo_ta, thu_tu_hien_thi, trang_thai) VALUES
@@ -82,8 +84,8 @@ INSERT OR IGNORE INTO danh_muc_mon (id, ten_danh_muc, mo_ta, thu_tu_hien_thi, tr
 
 -- 7. Mon an
 INSERT OR IGNORE INTO mon_an (id, danh_muc_id, ma_mon, ten_mon, mo_ta, gia_ban, don_vi_tinh, hinh_anh, la_mon_noi_bat, trang_thai, da_xoa) VALUES
-(1, 1, 'KV001', 'Gỏi bò bóp thấu', 'Thịt bò tái bóp cùng khế, bắp chuối, hành tây thơm lừng', 95000, 'Đĩa', '/tepTaiLen/anhMonAn/goi-bo.jpg', 1, 'dang_ban', 0),
-(2, 2, 'MC001', 'Bò tơ hấp cuốn bánh tráng', 'Bò tơ Củ Chi hấp gừng sả kèm rau rừng và mắm nêm', 185000, 'Phần', '/tepTaiLen/anhMonAn/bo-to-hap.jpg', 1, 'dang_ban', 0),
+(1, 1, 'KV001', 'Gỏi bò bóp thấu', 'Thịt bò tái bóp cùng khế, bắp chuối, hành tây thơm lừng', 65000, 'Đĩa', '/tepTaiLen/anhMonAn/goi-bo.jpg', 1, 'dang_ban', 0),
+(2, 2, 'MC001', 'Bò tơ hấp cuốn bánh tráng', 'Bò tơ Củ Chi hấp gừng sả kèm rau rừng và mắm nêm', 45000, 'Phần', '/tepTaiLen/anhMonAn/bo-to-hap.jpg', 1, 'dang_ban', 0),
 (3, 3, 'L001', 'Lẩu bò nhúng dấm', 'Thịt bò tươi nhúng dấm nước dừa chua thanh ngọt dịu', 295000, 'Nồi', '/tepTaiLen/anhMonAn/lau-bo.jpg', 0, 'dang_ban', 0),
 (4, 4, 'DU001', 'Trà vải hoa nhài', 'Trà lài ủ lạnh kết hợp vải thiều mọng nước thanh mát', 35000, 'Ly', '/tepTaiLen/anhMonAn/tra-vai.jpg', 1, 'dang_ban', 0);
 

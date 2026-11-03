@@ -52,7 +52,7 @@ async function xacThuc(req, res, next) {
 
         // Kiểm tra tài khoản trong cơ sở dữ liệu
         const taiKhoan = await truyVanMotBanGhi(
-            `SELECT id, ten_dang_nhap, ho_ten, so_dien_thoai, email, trang_thai 
+            `SELECT id, ten_dang_nhap, ho_ten, so_dien_thoai, email, vai_tro_id, trang_thai 
              FROM tai_khoan 
              WHERE id = ?`,
             [payload.taiKhoanId]
@@ -75,16 +75,24 @@ async function xacThuc(req, res, next) {
             [taiKhoan.id]
         );
 
-        const mangMaVaiTro = danhSachVaiTro.map(v => v.ma_vai_tro);
+        let mangMaVaiTro = danhSachVaiTro.map(v => v.ma_vai_tro);
+        if (mangMaVaiTro.length === 0 && payload.vaiTro && payload.vaiTro.length > 0) {
+            mangMaVaiTro = payload.vaiTro;
+        } else if (mangMaVaiTro.length === 0 && taiKhoan.vai_tro_id) {
+            const vt = await truyVanMotBanGhi('SELECT ma_vai_tro FROM vai_tro WHERE id = ?', [taiKhoan.vai_tro_id]);
+            if (vt) mangMaVaiTro.push(vt.ma_vai_tro);
+        }
 
         // Lấy danh sách mã quyền hạn của tài khoản thông qua các vai trò
         const danhSachQuyen = await truyVanDanhSach(
             `SELECT DISTINCT qh.ma_quyen 
              FROM quyen_han qh
              INNER JOIN vai_tro_quyen_han vtqh ON qh.id = vtqh.quyen_han_id
-             INNER JOIN tai_khoan_vai_tro tkvt ON vtqh.vai_tro_id = tkvt.vai_tro_id
-             WHERE tkvt.tai_khoan_id = ?`,
-            [taiKhoan.id]
+             WHERE vtqh.vai_tro_id IN (
+                 SELECT vai_tro_id FROM tai_khoan_vai_tro WHERE tai_khoan_id = ?
+                 UNION SELECT ? AS vai_tro_id WHERE ? IS NOT NULL
+             )`,
+            [taiKhoan.id, taiKhoan.vai_tro_id, taiKhoan.vai_tro_id]
         );
 
         const mangMaQuyen = danhSachQuyen.map(q => q.ma_quyen);
@@ -92,6 +100,7 @@ async function xacThuc(req, res, next) {
         // Gắn thông tin tài khoản vào đối tượng req để các middleware và controller phía sau sử dụng
         req.taiKhoan = {
             id: taiKhoan.id,
+            taiKhoanId: taiKhoan.id,
             tenDangNhap: taiKhoan.ten_dang_nhap,
             hoTen: taiKhoan.ho_ten,
             soDienThoai: taiKhoan.so_dien_thoai,
@@ -99,6 +108,8 @@ async function xacThuc(req, res, next) {
             vaiTro: mangMaVaiTro,
             danhSachQuyen: mangMaQuyen
         };
+        req.nguoiDung = req.taiKhoan;
+        req.user = req.taiKhoan;
 
         next();
     } catch (loi) {
