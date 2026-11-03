@@ -181,3 +181,32 @@ if (document.readyState === 'loading') {
 } else {
     dieuHuong();
 }
+
+
+// Xử lý Mobile Drawer (Responsive Navigation)
+const nutHamburger = document.getElementById('nut-mo-menu-mobile');
+const nutDongDrawer = document.getElementById('nut-dong-drawer');
+const lopPhuDrawer = document.getElementById('lop-phu-drawer');
+const elThanhBen = document.getElementById('thanh-ben');
+
+function moDrawer() {
+    if (elThanhBen) elThanhBen.classList.add('kich-hoat-drawer');
+    if (lopPhuDrawer) lopPhuDrawer.classList.add('hien-thi');
+}
+
+function dongDrawer() {
+    if (elThanhBen) elThanhBen.classList.remove('kich-hoat-drawer');
+    if (lopPhuDrawer) lopPhuDrawer.classList.remove('hien-thi');
+}
+
+if (nutHamburger) nutHamburger.addEventListener('click', moDrawer);
+if (nutDongDrawer) nutDongDrawer.addEventListener('click', dongDrawer);
+if (lopPhuDrawer) lopPhuDrawer.addEventListener('click', dongDrawer);
+
+document.querySelectorAll('.menu-dieu-huong a').forEach(a => {
+    a.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            dongDrawer();
+        }
+    });
+});

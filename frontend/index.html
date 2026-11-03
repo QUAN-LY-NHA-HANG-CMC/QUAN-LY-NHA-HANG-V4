@@ -2,19 +2,23 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ Thống Quản Lý Nhà Hàng & Gọi Món QR - Quán Mộc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hệ Thống Quản Lý Nhà Hàng & Gọi Món QR - Quán Mộc POS</title>
     <link rel="stylesheet" href="/tepGiaoDien.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍲</text></svg>">
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     <div id="ung-dung-khung">
-        <!-- Thanh điều hướng bên (Sidebar) -->
+        <!-- Lớp phủ Drawer trên Mobile -->
+        <div id="lop-phu-drawer" class="lop-phu-drawer"></div>
+
+        <!-- Thanh điều hướng bên (Sidebar Drawer) -->
         <aside class="thanh-ben" id="thanh-ben">
             <div class="logo-quan">
-                <span>🍲</span>
-                <span>QUÁN MỘC POS</span>
+                <span class="logo-icon">🍲</span>
+                <span class="logo-chu">QUÁN MỘC POS</span>
+                <button class="nut-dong-drawer" id="nut-dong-drawer" aria-label="Đóng Menu">✕</button>
             </div>
             <ul class="menu-dieu-huong" id="menu-chinh">
                 <li><a href="#/so-do-ban" id="link-so-do-ban"><span>🪑</span> Sơ đồ Bàn & POS</a></li>
@@ -31,9 +35,18 @@
         <!-- Khung nội dung chính -->
         <div class="vung-chinh">
             <header class="dau-trang" id="dau-trang">
-                <div style="font-weight: 600; font-size: 16px;" id="ten-nha-hang-hien-thi">
-                    Nhà Hàng Quán Mộc
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <button class="nut-hamburger" id="nut-mo-menu-mobile" aria-label="Mở Menu">☰</button>
+                    <div>
+                        <div style="font-weight: 700; font-size: 16px; color: var(--mau-chu);" id="ten-nha-hang-hien-thi">
+                            Nhà Hàng Quán Mộc
+                        </div>
+                        <div class="chi-bao-ket-noi" id="chi-bao-mang">
+                            <span class="cham-xanh"></span> <span>Hệ thống trực tuyến</span>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="thong-tin-nguoi-dung" id="khung-nguoi-dung">
                     <span class="the-ten-vai-tro" id="nhan-vai-tro">Quản lý</span>
                     <span style="font-weight: 600;" id="ten-nguoi-dung">Quản Trị Viên</span>
