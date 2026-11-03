@@ -211,6 +211,7 @@ CREATE TABLE IF NOT EXISTS phien_ban (
     thoi_gian_bat_dau TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     thoi_gian_ket_thuc TEXT,
     trang_thai TEXT NOT NULL DEFAULT 'dang_su_dung',
+    tong_tien_tam_tinh NUMERIC DEFAULT 0,
     ghi_chu TEXT,
     FOREIGN KEY (ban_an_id) REFERENCES ban_an(id)
 );
