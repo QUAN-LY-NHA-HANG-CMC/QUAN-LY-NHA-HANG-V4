@@ -38,6 +38,7 @@ function layDonMonTheoBan(banId) {
 module.exports = {
     demSoLanGoiCuaPhien,
     timDonTheoId,
+    timTheoId: timDonTheoId,
     timChiTietTheoId,
     layChiTietTheoDonId,
     layDonMonTheoBan

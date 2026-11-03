@@ -174,7 +174,8 @@ CREATE TABLE IF NOT EXISTS tuy_chon_mon (
 
 CREATE TABLE IF NOT EXISTS cau_hinh_nha_hang (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    ma_cau_hinh TEXT NOT NULL UNIQUE,
+    khoa TEXT,
+    ma_cau_hinh TEXT,
     gia_tri TEXT,
     nhom_cau_hinh TEXT NOT NULL DEFAULT 'chung',
     kieu_du_lieu TEXT NOT NULL DEFAULT 'text',
