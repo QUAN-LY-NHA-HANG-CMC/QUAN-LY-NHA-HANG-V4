@@ -79,16 +79,20 @@ async function khoiTaoThongTinBan() {
     const queryString = hash.includes('?') ? hash.split('?')[1] : (window.location.search ? window.location.search.slice(1) : '');
     const params = new URLSearchParams(queryString);
     
-    let banId = params.get('banId') || params.get('ban') || '1';
-    // Chuyển B01 thành 1 nếu truyền chuỗi mã bàn
-    if (typeof banId === 'string' && banId.startsWith('B')) {
-        const so = parseInt(banId.slice(1), 10);
-        if (!isNaN(so)) banId = so;
+    let banId = params.get('banId') || params.get('ban') || params.get('maBan');
+    if (!banId) {
+        try {
+            const banLuu = JSON.parse(localStorage.getItem('emenu_ban_an') || 'null');
+            if (banLuu && (banLuu.ma_ban || banLuu.id)) {
+                banId = banLuu.ma_ban || banLuu.id;
+            }
+        } catch (e) {}
     }
+    banId = banId || 1;
 
     try {
         const res = await goiApi('/phien-ban/xac-thuc-qr', 'POST', {
-            banId: Number(banId) || 1,
+            banId: isNaN(Number(banId)) ? String(banId).trim() : Number(banId),
             maDinhDanhQr: params.get('token') || ''
         });
 
@@ -101,11 +105,23 @@ async function khoiTaoThongTinBan() {
 
             const elTenBan = document.getElementById('emenu-ten-ban');
             if (elTenBan) {
-                elTenBan.textContent = `${thongTinBanHienTai.ten_ban || 'Bàn ' + banId}`;
+                const ten = thongTinBanHienTai.ten_ban || `Bàn ${banId}`;
+                const ma = thongTinBanHienTai.ma_ban;
+                if (ma && !ten.includes(ma)) {
+                    elTenBan.textContent = `${ten} (${ma})`;
+                } else {
+                    elTenBan.textContent = ten;
+                }
             }
 
             // Tham gia room WebSockets của bàn
             thamGiaBan(thongTinBanHienTai.id, thongTinPhienHienTai.ma_phien);
+        } else {
+            const elTenBan = document.getElementById('emenu-ten-ban');
+            if (elTenBan) {
+                elTenBan.textContent = `Bàn không tồn tại [${banId}]`;
+                elTenBan.style.color = '#f87171';
+            }
         }
     } catch (e) {
         console.error('Lỗi xác thực bàn:', e);
