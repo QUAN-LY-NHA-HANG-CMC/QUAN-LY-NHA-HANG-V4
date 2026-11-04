@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const gioiHanYeuCau = require('./middleware/gioiHanYeuCau.js');
 const xuLyLoi = require('./middleware/xuLyLoi.js');
+const dinhDangPhanHoi = require('./tienIch/dinhDangPhanHoi.js');
 
 // Các Router nghiệp vụ Sprint 1
 const taiKhoanRoutes = require('./modules/taiKhoan/taiKhoan.routes.js');
@@ -72,6 +73,11 @@ app.use('/api/thong-ke', thongKeRoutes);
 app.use('/api/danh-gia', danhGiaRoutes);
 app.use('/api/ca-lam-viec', caLamViecRoutes);
 app.use('/api/xuat-bao-cao', xuatBaoCaoRoutes);
+
+// Xử lý 404 cho các route API không tồn tại (luôn phản hồi JSON)
+app.use('/api', (req, res) => {
+    return dinhDangPhanHoi.thatBai(res, `Đường dẫn API [${req.method} ${req.originalUrl}] không tồn tại trên hệ thống`, 404);
+});
 
 // Phục vụ giao diện Single Page Application (SPA fallback)
 app.use((req, res, next) => {

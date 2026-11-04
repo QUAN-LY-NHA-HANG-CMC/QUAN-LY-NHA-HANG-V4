@@ -8,6 +8,7 @@ const gioHangController = require('./gioHang.controller.js');
 
 router.post('/kiem-tra-gia', gioHangController.kiemTraGia);
 router.put('/tam-thoi/:phienBanId', gioHangController.luuGioHangTam);
+router.post('/tam-thoi/:phienBanId', gioHangController.luuGioHangTam);
 router.get('/tam-thoi/:phienBanId', gioHangController.layGioHangTam);
 
 module.exports = router;

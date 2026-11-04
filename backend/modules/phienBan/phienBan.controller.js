@@ -17,8 +17,9 @@ async function xacThucQr(req, res) {
 
 async function moBanTrucTiep(req, res) {
     try {
-        const { banId, soKhach, ghiChu } = req.body;
-        const ketQua = await phienBanService.moBanTrucTiep({ banId, soKhach, ghiChu });
+        const { banId, soKhach, soLuongKhach, ghiChu } = req.body;
+        const soKhachChuan = Number(soKhach || soLuongKhach || 1);
+        const ketQua = await phienBanService.moBanTrucTiep({ banId, soKhach: soKhachChuan, ghiChu: ghiChu || '' });
         return phanHoi.thanhCong(res, ketQua, 'Mở bàn thành công');
     } catch (loi) {
         return phanHoi.thatBai(res, loi.message || 'Lỗi khi mở bàn', 400);

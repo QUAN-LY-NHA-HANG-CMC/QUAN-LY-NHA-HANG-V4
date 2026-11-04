@@ -9,7 +9,8 @@ const phienBanController = require('./phienBan.controller.js');
 // Xác thực bàn qua mã QR và mở phiên
 router.post('/xac-thuc-qr', phienBanController.xacThucQr);
 
-// Mở bàn trực tiếp từ POS thu ngân / phục vụ
+// Mở bàn trực tiếp từ POS thu ngân / phục vụ (hỗ trợ cả /mo-ban và /mo-ban-truc-tiep)
+router.post('/mo-ban', phienBanController.moBanTrucTiep);
 router.post('/mo-ban-truc-tiep', phienBanController.moBanTrucTiep);
 
 // Chuyển bàn

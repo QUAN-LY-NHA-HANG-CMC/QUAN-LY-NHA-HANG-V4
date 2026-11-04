@@ -12,10 +12,25 @@ async function taoDonHang({ phienBanId, banAnId, danhSachMon, ghiChu }) {
         throw new Error('Dữ liệu đơn hàng không hợp lệ');
     }
 
-    // Xác thực phiên bàn còn hoạt động
-    const phienBan = phienBanModel.timTheoId(phienBanId);
+    // Xác thực phiên bàn còn hoạt động (tự động phục hồi phiên nếu bàn có phiên mới)
+    let phienBan = phienBanModel.timTheoId(phienBanId);
     if (!phienBan || phienBan.trang_thai !== 'dang_su_dung') {
-        throw new Error('Phiên bàn đã kết thúc hoặc không tồn tại');
+        const phienMoi = phienBanModel.timPhienDangHoatDongTheoBanId(banAnId);
+        if (phienMoi) {
+            phienBan = phienMoi;
+            phienBanId = phienMoi.id;
+        } else {
+            const banAn = ketNoiCoSoDuLieu.layMot('SELECT * FROM ban_an WHERE id = ?', [banAnId]);
+            if (banAn) {
+                const maPhien = `PB_${banAnId}_${Date.now()}`;
+                phienBan = phienBanModel.taoPhienBan({ banAnId, maPhien });
+                ketNoiCoSoDuLieu.thucThi(`UPDATE ban_an SET trang_thai = 'dang_dung' WHERE id = ?`, [banAnId]);
+                phatToanHeThong('cap_nhat_ban', { banId: banAnId, trangThai: 'dang_dung' });
+                phienBanId = phienBan.id;
+            } else {
+                throw new Error('Phiên bàn đã kết thúc hoặc không tồn tại');
+            }
+        }
     }
 
     // Đếm số lần gọi món của phiên này để gán lan_goi

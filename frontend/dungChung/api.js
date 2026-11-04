@@ -40,7 +40,15 @@ export async function goiApi(duongDan, thamSo2 = {}, thamSo3 = null) {
 
     try {
         const phanHoi = await fetch(url, cauHinh);
-        const duLieu = await phanHoi.json();
+        
+        let duLieu;
+        const contentType = phanHoi.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+            duLieu = await phanHoi.json();
+        } else {
+            const rawText = await phanHoi.text();
+            throw new Error(`Lỗi máy chủ (${phanHoi.status}): ${rawText.slice(0, 100)}`);
+        }
 
         if (!phanHoi.ok) {
             if (phanHoi.status === 401) {
