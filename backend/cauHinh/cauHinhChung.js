@@ -17,7 +17,8 @@ function layDiaChiIpLan() {
     return 'localhost';
 }
 
-const congBackend = Number(process.env.PORT || 3001);
+const rawPort = process.env.PORT;
+const congBackend = (rawPort && !isNaN(Number(rawPort))) ? Number(rawPort) : (rawPort || 3001);
 const lanIp = layDiaChiIpLan();
 const diaChiHostMacDinh = lanIp !== 'localhost' ? `http://${lanIp}:${congBackend}` : `http://localhost:${congBackend}`;
 

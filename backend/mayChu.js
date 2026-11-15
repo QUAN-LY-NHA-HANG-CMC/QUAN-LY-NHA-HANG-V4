@@ -8,6 +8,7 @@ const CONG_MAC_DINH = cauHinhChung.congBackend || 3001;
  * Tự động tìm và giải phóng cổng nếu bị tiến trình cũ chiếm dụng
  */
 function giaiPhongCong(cong) {
+    if (typeof cong !== 'number' || isNaN(cong)) return;
     try {
         if (process.platform !== 'win32') {
             const pids = execSync(`lsof -ti :${cong} 2>/dev/null || true`).toString().trim().split('\n').filter(Boolean);
