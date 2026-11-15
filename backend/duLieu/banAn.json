@@ -12,7 +12,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Gần cửa chính",
     "ngayTao": "2026-11-09T02:36:54.465Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T02:02:06.150Z"
   },
   {
     "id": 2,
@@ -27,7 +27,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Trung tâm sảnh",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T02:02:36.133Z"
   },
   {
     "id": 3,
@@ -42,7 +42,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Bàn gia đình",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T02:09:20.213Z"
   },
   {
     "id": 4,
@@ -57,7 +57,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Bàn đôi cạnh cửa sổ",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T01:38:00.506Z"
   },
   {
     "id": 5,
@@ -72,7 +72,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Tầng 2 view thoáng",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T01:38:00.506Z"
   },
   {
     "id": 6,
@@ -87,7 +87,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Gần cầu thang",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T01:38:00.506Z"
   },
   {
     "id": 7,
@@ -102,7 +102,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Bàn nhóm họp mặt",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T01:38:00.506Z"
   },
   {
     "id": 8,
@@ -117,7 +117,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Sân vườn ngoài trời",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T01:38:00.506Z"
   },
   {
     "id": 9,
@@ -132,7 +132,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Dưới tán cây",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T02:06:28.090Z"
   },
   {
     "id": 10,
@@ -147,7 +147,7 @@
     "daPhatSinhGiaoDich": false,
     "ghiChu": "View hồ nước",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T02:07:13.038Z"
   },
   {
     "id": 11,
@@ -158,11 +158,11 @@
     "sucChua": 10,
     "tokenBaoMat": "tok_vip01_dev011",
     "qrToken": "tok_vip01_dev011",
-    "trangThai": "Trong",
+    "trangThai": "TamKhoa",
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Phòng VIP Hoa Sen",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T01:38:00.506Z"
   },
   {
     "id": 12,
@@ -173,10 +173,10 @@
     "sucChua": 12,
     "tokenBaoMat": "tok_vip02_dev012",
     "qrToken": "tok_vip02_dev012",
-    "trangThai": "Trong",
+    "trangThai": "TamKhoa",
     "daPhatSinhGiaoDich": false,
     "ghiChu": "Phòng VIP Hoàng Gia",
     "ngayTao": "2026-11-09T02:36:54.466Z",
-    "ngayCapNhat": "2026-11-09T05:20:01.127Z"
+    "ngayCapNhat": "2026-11-11T01:38:00.506Z"
   }
 ]

@@ -167,8 +167,8 @@ class BaoCaoDoanhThuModule {
         const tyTrong = d.tyTrongThanhToan || d.phuongThucThanhToan || {};
         const tienMat = tyTrong.tienMat || 0;
         const vietQr = tyTrong.chuyenKhoan || tyTrong.vietQr || 0;
-        const tyLeTienMat = tyTrong.phanTramTienMat ?? tyTrong.tyLeTienMat ?? 50;
-        const tyLeVietQr = tyTrong.phanTramChuyenKhoan ?? tyTrong.tyLeVietQr ?? 50;
+        const tyLeTienMat = tyTrong.phanTramTienMat ?? tyTrong.tyLeTienMat ?? 0;
+        const tyLeVietQr = tyTrong.phanTramChuyenKhoan ?? tyTrong.tyLeVietQr ?? 0;
         const duLieu7Ngay = d.bieuDo7Ngay || d.doanhThu7Ngay || [];
         const dsDanhMuc = d.thongKeDanhMuc || [];
 
@@ -273,7 +273,7 @@ class BaoCaoDoanhThuModule {
                                     <td>
                                         <div class="thanh-tien-do-boc">
                                             <div class="thanh-tien-do-trong" style="width: ${dm.phanTram || dm.tyLe || 0}%; background-color: ${this.layMauTheoChiMuc(idx)};"></div>
-                                            <span class="nhan-phan-tram">${dm.phanTram || dm.tyLe || 0}%</span>
+                                            <span class="nhan-phan-tram" style="color: ${(dm.phanTram || dm.tyLe || 0) >= 88 ? '#ffffff' : '#475569'};">${dm.phanTram || dm.tyLe || 0}%</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -312,7 +312,7 @@ class BaoCaoDoanhThuModule {
                                         <div class="chi-tiet-mon-top">Đã bán: <strong>${mon.soLuongBan}</strong> lượt</div>
                                     </div>
                                     <div class="doanh-thu-mon-top text-primary">
-                                        ${this.dinhDangTien(mon.doanhThu)}
+                                        ${this.dinhDangTien(mon.doanhThu ?? mon.tongTien ?? 0)}
                                     </div>
                                 </div>
                                 <div class="thanh-tien-do-boc nho">
@@ -581,14 +581,14 @@ class BaoCaoDoanhThuModule {
      */
     locDanhSachHoaDon() {
         return this.danhSachHoaDon.filter(hd => {
-            // Lọc theo ngày
-            if (this.boLocHoaDon.tuNgay) {
-                const ngayHd = (hd.thoiGian || '').substring(0, 10);
-                if (ngayHd < this.boLocHoaDon.tuNgay) return false;
-            }
-            if (this.boLocHoaDon.denNgay) {
-                const ngayHd = (hd.thoiGian || '').substring(0, 10);
-                if (ngayHd > this.boLocHoaDon.denNgay) return false;
+            // Lọc theo ngày (chuẩn giờ Việt Nam GMT+7)
+            if (this.boLocHoaDon.tuNgay || this.boLocHoaDon.denNgay) {
+                const tg = hd.thoiDiemThanhToan || hd.thoiGianThanhToan || hd.thoiGian || '';
+                const ngayHd = (window.api && typeof window.api._layNgayIsoVN === 'function')
+                    ? window.api._layNgayIsoVN(tg)
+                    : String(tg).substring(0, 10);
+                if (this.boLocHoaDon.tuNgay && ngayHd < this.boLocHoaDon.tuNgay) return false;
+                if (this.boLocHoaDon.denNgay && ngayHd > this.boLocHoaDon.denNgay) return false;
             }
             // Lọc theo mã hóa đơn
             if (this.boLocHoaDon.maHoaDon) {
@@ -796,11 +796,15 @@ class BaoCaoDoanhThuModule {
     async xuatCsvDanhMucThucDon() {
         console.log('[BaoCaoDoanhThu] Bắt đầu xuất danh mục thực đơn CSV UTF-8 (US-134)...');
         let dsMon = [];
+        let dsDanhMuc = [];
         try {
             if (window.api.layDanhSachMonAn) {
                 dsMon = await window.api.layDanhSachMonAn();
             } else if (window.api.layThucDon) {
                 dsMon = await window.api.layThucDon();
+            }
+            if (window.api.layDanhSachDanhMuc) {
+                dsDanhMuc = await window.api.layDanhSachDanhMuc();
             }
         } catch (e) {
             console.warn('[BaoCaoDoanhThu] Lấy thực đơn lỗi:', e);
@@ -811,6 +815,11 @@ class BaoCaoDoanhThuModule {
             return;
         }
 
+        const mapDm = {};
+        (dsDanhMuc || []).forEach(dm => {
+            if (dm.id != null) mapDm[String(dm.id)] = dm.ten || dm.tenDanhMuc;
+        });
+
         const hangTieuDe = [
             'ID Món',
             'Tên Món Ăn',
@@ -820,14 +829,18 @@ class BaoCaoDoanhThuModule {
             'Trạng Thái Phục Vụ'
         ];
 
-        const danhSachHang = dsMon.map(m => [
-            `"${m.id || ''}"`,
-            `"${m.ten || m.tenMon || ''}"`,
-            `"${m.danhMuc || m.tenDanhMuc || 'Khác'}"`,
-            m.gia || m.donGia || 0,
-            `"${m.donViTinh || 'Đĩa/Phần'}"`,
-            `"${m.conHang !== false ? 'Đang phục vụ' : 'Tạm hết món'}"`
-        ]);
+        const danhSachHang = dsMon.map(m => {
+            const tenDm = m.danhMuc || m.tenDanhMuc || mapDm[String(m.danhMucId)] || 'Khác';
+            const dangBan = (m.trangThai === 1 || m.trangThai === 'DangBan' || m.trangThai === 'HoatDong' || m.conHang === true);
+            return [
+                `"${m.id || ''}"`,
+                `"${m.ten || m.tenMon || ''}"`,
+                `"${tenDm}"`,
+                m.giaBan ?? m.gia ?? m.donGia ?? 0,
+                `"${m.donViTinh || 'Đĩa/Phần'}"`,
+                `"${dangBan ? 'Đang phục vụ' : 'Tạm hết món'}"`
+            ];
+        });
 
         const noiDungCsv = '\uFEFF' + [
             hangTieuDe.join(','),
@@ -868,15 +881,16 @@ class BaoCaoDoanhThuModule {
         const gap = chartW / duLieu7Ngay.length;
 
         const cotSvg = duLieu7Ngay.map((d, i) => {
-            const h = (d.doanhThu / maxDoanhThu) * chartH;
+            const dt = Number(d.doanhThu || 0);
+            const h = (dt / maxDoanhThu) * chartH;
             const x = padL + i * gap + (gap - colW) / 2;
             const y = padT + chartH - h;
             const labelY = padT + chartH + 18;
-            const valLabel = (d.doanhThu / 1000000).toFixed(1) + 'M';
+            const valLabel = dt === 0 ? '0.0M' : (dt < 50000 ? `${Math.round(dt / 1000)}K` : `${(dt / 1000000).toFixed(1)}M`);
 
             return `
                 <g class="cot-bieu-do-group">
-                    <title>${d.ngay}: ${this.dinhDangTien(d.doanhThu)} (${d.soDon} đơn)</title>
+                    <title>${d.ngay}: ${this.dinhDangTien(dt)} (${d.soDon} đơn)</title>
                     <rect x="${x}" y="${y}" width="${colW}" height="${h}" rx="4" fill="#0d6efd" class="rect-cot"></rect>
                     <text x="${x + colW / 2}" y="${y - 6}" font-size="10" text-anchor="middle" fill="#0d6efd" font-weight="bold">${valLabel}</text>
                     <text x="${x + colW / 2}" y="${labelY}" font-size="11" text-anchor="middle" fill="#6c757d">${d.nhan || d.ngay}</text>
@@ -899,26 +913,31 @@ class BaoCaoDoanhThuModule {
      * VẼ BIỂU ĐỒ DONUT TỶ TRỌNG THANH TOÁN BẰNG SVG (US-125)
      */
     taoBieuDoDonutSvg(pt) {
-        const tyLeTm = pt.tyLeTienMat || 50;
+        const tong = Number(pt.tong ?? ((pt.tienMat || 0) + (pt.vietQr || 0)));
+        const tyLeTm = tong > 0 ? Math.max(0, Math.min(100, Number(pt.tyLeTienMat ?? 0))) : 0;
         const r = 50;
         const c = 2 * Math.PI * r; // ~ 314.159
-        const dashTm = (tyLeTm / 100) * c;
-        const dashQr = c - dashTm;
+        const dashTm = tong > 0 ? (tyLeTm / 100) * c : 0;
+        const dashQr = tong > 0 ? Math.max(0, c - dashTm) : 0;
 
         return `
             <svg viewBox="0 0 160 160" class="bieu-do-donut-svg">
                 <circle cx="80" cy="80" r="${r}" fill="none" stroke="#e9ecef" stroke-width="24" />
-                <!-- Phần Tiền mặt (Xanh lá) -->
-                <circle cx="80" cy="80" r="${r}" fill="none" stroke="#28a745" stroke-width="24"
-                        stroke-dasharray="${dashTm} ${c}" stroke-dashoffset="0"
-                        transform="rotate(-90 80 80)" stroke-linecap="round" />
-                <!-- Phần VietQR (Tím) -->
-                <circle cx="80" cy="80" r="${r}" fill="none" stroke="#6f42c1" stroke-width="24"
-                        stroke-dasharray="${dashQr} ${c}" stroke-dashoffset="-${dashTm}"
-                        transform="rotate(-90 80 80)" stroke-linecap="round" />
+                ${dashTm > 0 ? `
+                    <!-- Phần Tiền mặt (Xanh lá) -->
+                    <circle cx="80" cy="80" r="${r}" fill="none" stroke="#28a745" stroke-width="24"
+                            stroke-dasharray="${dashTm} ${c}" stroke-dashoffset="0"
+                            transform="rotate(-90 80 80)" stroke-linecap="butt" />
+                ` : ''}
+                ${dashQr > 0 ? `
+                    <!-- Phần VietQR (Tím) -->
+                    <circle cx="80" cy="80" r="${r}" fill="none" stroke="#6f42c1" stroke-width="24"
+                            stroke-dasharray="${dashQr} ${c}" stroke-dashoffset="-${dashTm}"
+                            transform="rotate(-90 80 80)" stroke-linecap="butt" />
+                ` : ''}
                 <!-- Tâm Donut -->
                 <text x="80" y="76" font-size="12" text-anchor="middle" fill="#6c757d">Tổng thu</text>
-                <text x="80" y="94" font-size="11" text-anchor="middle" font-weight="bold" fill="#212529">${this.dinhDangTien(pt.tong || (pt.tienMat + pt.vietQr))}</text>
+                <text x="80" y="94" font-size="11" text-anchor="middle" font-weight="bold" fill="#212529">${this.dinhDangTien(tong)}</text>
             </svg>
         `;
     }
@@ -1020,6 +1039,9 @@ class BaoCaoDoanhThuModule {
 
     dinhDangThoiGian(tgStr) {
         if (!tgStr) return '--:--';
+        if (window.DinhDang && typeof window.DinhDang.ngayGio === 'function') {
+            return window.DinhDang.ngayGio(tgStr);
+        }
         try {
             const d = new Date(tgStr);
             if (isNaN(d.getTime())) return tgStr;

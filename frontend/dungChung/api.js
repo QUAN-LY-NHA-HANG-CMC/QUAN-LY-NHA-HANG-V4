@@ -3280,10 +3280,9 @@ class ApiService {
     // =========================================================================
 
     /**
-     * Chuẩn hóa và làm giàu thông tin món ăn trên hóa đơn (danh mục, đơn giá, thành tiền)
+     * Tạo bản đồ tra cứu món ăn và danh mục phục vụ làm giàu dữ liệu thống kê/hóa đơn
      */
-    async lamGiauThongTinMonHoaDon(danhSachMon) {
-        if (!Array.isArray(danhSachMon)) return [];
+    async _taoBanDoDanhMucMon() {
         let dsMonThucDon = [];
         let dsDanhMuc = [];
         try {
@@ -3292,60 +3291,97 @@ class ApiService {
         } catch (e) {}
 
         const mapMonTheoId = {};
+        const mapMonTheoMa = {};
         const mapMonTheoTen = {};
         (dsMonThucDon || []).forEach(m => {
-            if (m.id) mapMonTheoId[String(m.id)] = m;
-            if (m.maMon) mapMonTheoId[String(m.maMon).toLowerCase()] = m;
+            if (m.id != null) mapMonTheoId[String(m.id)] = m;
+            if (m.maMon) mapMonTheoMa[String(m.maMon).toLowerCase().trim()] = m;
             if (m.tenMon) mapMonTheoTen[m.tenMon.toLowerCase().trim()] = m;
         });
 
         const mapDmTheoId = {};
         (dsDanhMuc || []).forEach(d => {
-            mapDmTheoId[String(d.id)] = d.ten || d.tenDanhMuc;
+            if (d.id != null) mapDmTheoId[String(d.id)] = d.ten || d.tenDanhMuc;
         });
 
-        return danhSachMon.map(m => {
-            let tenDm = m.danhMucTen || m.tenDanhMuc;
-            const mId = String(m.monAnId || m.monId || m.id || '');
-            const tenMon = (m.tenMon || m.ten || '').toLowerCase().trim();
+        return { dsMonThucDon, dsDanhMuc, mapMonTheoId, mapMonTheoMa, mapMonTheoTen, mapDmTheoId };
+    }
 
-            const monGoc = mapMonTheoId[mId] || mapMonTheoTen[tenMon];
-            if (monGoc) {
-                if (!tenDm && monGoc.danhMucId && mapDmTheoId[String(monGoc.danhMucId)]) {
-                    tenDm = mapDmTheoId[String(monGoc.danhMucId)];
-                } else if (!tenDm && (monGoc.danhMucTen || monGoc.tenDanhMuc)) {
-                    tenDm = monGoc.danhMucTen || monGoc.tenDanhMuc;
-                }
+    /**
+     * Làm giàu thông tin 1 dòng món ăn trên hóa đơn bằng bản đồ đã tải sẵn
+     */
+    _lamGiauMotMon(m, banDo) {
+        const { mapMonTheoId, mapMonTheoMa, mapMonTheoTen, mapDmTheoId } = banDo;
+        let tenDm = (m.danhMucTen || m.tenDanhMuc || '').trim();
+        const monIdTrucTiep = (m.monAnId != null && m.monAnId !== '') ? String(m.monAnId)
+            : ((m.monId != null && m.monId !== '') ? String(m.monId) : '');
+        const maMon = (m.maMon || '').toLowerCase().trim();
+        const tenMonRaw = (m.tenMon || m.ten || '').trim();
+        const tenMon = tenMonRaw.toLowerCase();
+        // Trường hợp tên món có kèm tùy chọn trong ngoặc, ví dụ: "1 Miếng Gà Giòn Vui Vẻ (Cay)"
+        const tenMonGoc = tenMon.replace(/\s*\([^)]*\)\s*$/, '').trim();
+
+        let monGoc = (monIdTrucTiep && mapMonTheoId[monIdTrucTiep])
+            || (maMon && mapMonTheoMa[maMon])
+            || mapMonTheoTen[tenMon]
+            || mapMonTheoTen[tenMonGoc];
+
+        if (!monGoc && m.id != null && !monIdTrucTiep) {
+            const ungVien = mapMonTheoId[String(m.id)];
+            if (ungVien && (!tenMon || (ungVien.tenMon || '').toLowerCase().trim() === tenMon)) {
+                monGoc = ungVien;
             }
+        }
 
-            // Phân loại danh mục dự phòng theo thực đơn chuẩn của nhà hàng
-            if (!tenDm) {
-                if (tenMon.includes('gà giòn') || tenMon.includes('gà rán') || tenMon.includes('popcorn') || tenMon.includes('chickenjoy')) {
-                    tenDm = 'Gà Giòn Vui Vẻ';
-                } else if (tenMon.includes('mì ý') || tenMon.includes('spaghetti')) {
-                    tenDm = 'Mì Ý Sốt Bò Bằm';
-                } else if (tenMon.includes('burger') || tenMon.includes('cơm')) {
-                    tenDm = 'Burger & Cơm';
-                } else if (tenMon.includes('khoai tây') || tenMon.includes('bánh pie') || tenMon.includes('kem') || tenMon.includes('trà') || tenMon.includes('nước') || tenMon.includes('uống')) {
-                    tenDm = 'Tráng Miệng & Thức Uống';
-                } else {
-                    tenDm = 'Món khác';
-                }
+        if (!tenDm && m.danhMucId != null && mapDmTheoId[String(m.danhMucId)]) {
+            tenDm = mapDmTheoId[String(m.danhMucId)];
+        }
+        if (!tenDm && monGoc) {
+            if (monGoc.danhMucId != null && mapDmTheoId[String(monGoc.danhMucId)]) {
+                tenDm = mapDmTheoId[String(monGoc.danhMucId)];
+            } else if (monGoc.danhMucTen || monGoc.tenDanhMuc) {
+                tenDm = monGoc.danhMucTen || monGoc.tenDanhMuc;
             }
+        }
 
-            const gia = Number(m.donGia || m.giaBan || (monGoc ? monGoc.giaBan : 0));
-            const sl = Number(m.soLuong || 1);
-            const thanhTien = Number(m.thanhTien) || (gia * sl);
+        // Phân loại danh mục dự phòng theo thực đơn chuẩn của nhà hàng
+        if (!tenDm) {
+            if (tenMon.includes('cơm') || tenMon.includes('burger')) {
+                tenDm = 'Burger & Cơm';
+            } else if (tenMon.includes('mì ý') || tenMon.includes('spaghetti') || tenMon.includes('combo gà giòn & mì ý')) {
+                tenDm = 'Mì Ý Sốt Bò Bằm';
+            } else if (tenMon.includes('gà giòn') || tenMon.includes('gà rán') || tenMon.includes('popcorn') || tenMon.includes('chickenjoy')) {
+                tenDm = 'Gà Giòn Vui Vẻ';
+            } else if (tenMon.includes('khoai tây') || tenMon.includes('bánh pie') || tenMon.includes('kem') || tenMon.includes('sundae') || tenMon.includes('trà') || tenMon.includes('nước') || tenMon.includes('uống')) {
+                tenDm = 'Tráng Miệng & Thức Uống';
+            } else {
+                tenDm = 'Món khác';
+            }
+        }
 
-            return {
-                ...m,
-                tenMon: m.tenMon || m.ten || (monGoc ? monGoc.tenMon : 'Món ăn'),
-                danhMucTen: tenDm,
-                donGia: gia,
-                soLuong: sl,
-                thanhTien: thanhTien
-            };
-        });
+        const gia = Number(m.donGia || m.giaBan || (monGoc ? monGoc.giaBan : 0));
+        const sl = Number(m.soLuong || 1);
+        const thanhTien = Number(m.thanhTien) || (gia * sl);
+
+        return {
+            ...m,
+            monAnId: m.monAnId || m.monId || (monGoc ? monGoc.id : m.id),
+            tenMon: tenMonRaw || (monGoc ? monGoc.tenMon : 'Món ăn'),
+            danhMucId: m.danhMucId || (monGoc ? monGoc.danhMucId : null),
+            danhMucTen: tenDm,
+            donGia: gia,
+            soLuong: sl,
+            thanhTien: thanhTien
+        };
+    }
+
+    /**
+     * Chuẩn hóa và làm giàu thông tin món ăn trên hóa đơn (danh mục, đơn giá, thành tiền)
+     */
+    async lamGiauThongTinMonHoaDon(danhSachMon) {
+        if (!Array.isArray(danhSachMon)) return [];
+        const banDo = await this._taoBanDoDanhMucMon();
+        return danhSachMon.map(m => this._lamGiauMotMon(m, banDo));
     }
 
     /**
@@ -3515,19 +3551,74 @@ class ApiService {
             caId: hd.caId || null,
             maCa: hd.maCa || null,
             daKetCa: Boolean(hd.daKetCa),
+            soKhach: hd.soKhach != null ? Number(hd.soKhach) : 2,
+            gioThanhToanInt: hd.gioThanhToanInt,
             thoiDiemThanhToan: isNaN(ts) ? Date.now() : ts,
             thoiGianThanhToan: tg,
             thoiGian: tg,
-            tamTinh: Number(hd.tongTienMon || hd.tamTinh || hd.tienMonAn || hd.tongThanhToan || 0),
-            giamGia: Number(hd.giamGia || hd.tienGiamGia || 0),
-            vat: Number(hd.vat || hd.tienVat || 0),
-            tongThanhToan: Number(hd.tongThanhToan || hd.tongTien || 0),
-            tongTien: Number(hd.tongThanhToan || hd.tongTien || 0),
-            phuongThuc: hd.phuongThuc || 'TIEN_MAT',
+            tamTinh: Number(hd.tongTienMon ?? hd.tamTinh ?? hd.tienMonAn ?? hd.tongThanhToan ?? 0),
+            giamGia: Number(hd.giamGia ?? hd.tienGiamGia ?? 0),
+            vat: Number(hd.vat ?? hd.tienVat ?? 0),
+            tongThanhToan: Number(hd.tongThanhToan ?? hd.tongTien ?? 0),
+            tongTien: Number(hd.tongThanhToan ?? hd.tongTien ?? 0),
+            phuongThuc: hd.phuongThuc || hd.phuongThucThanhToan || 'TIEN_MAT',
             thuNganTen: hd.thuNganTen || hd.thuNgan || macDinhThuNgan,
             thuNgan: hd.thuNganTen || hd.thuNgan || macDinhThuNgan,
             danhSachMon: Array.isArray(hd.danhSachMon) ? hd.danhSachMon : []
         };
+    }
+
+    /**
+     * Lấy chuỗi ngày YYYY-MM-DD theo múi giờ Việt Nam (Asia/Ho_Chi_Minh - GMT+7)
+     */
+    _layNgayIsoVN(giaTri) {
+        if (!giaTri) return '';
+        if (typeof giaTri === 'string') {
+            const s = giaTri.trim();
+            // Nếu chuỗi có dạng 'YYYY-MM-DD HH:mm:ss' (đã lưu sẵn theo giờ VN) thì lấy trực tiếp phần ngày
+            if (/^\d{4}-\d{2}-\d{2}(\s\d{2}:\d{2}(:\d{2})?)?$/.test(s)) {
+                return s.slice(0, 10);
+            }
+        }
+        const d = giaTri instanceof Date ? giaTri : new Date(giaTri);
+        if (isNaN(d.getTime())) return '';
+        try {
+            return new Intl.DateTimeFormat('sv-SE', {
+                timeZone: 'Asia/Ho_Chi_Minh',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            }).format(d);
+        } catch (e) {
+            return d.toISOString().slice(0, 10);
+        }
+    }
+
+    /**
+     * Lấy giờ trong ngày (0-23) theo múi giờ Việt Nam từ bản ghi hóa đơn
+     */
+    _layGioVN(hd) {
+        const tg = hd?.thoiGianThanhToan || hd?.thoiGian;
+        if (typeof tg === 'string') {
+            const m = tg.trim().match(/^\d{4}-\d{2}-\d{2}\s+(\d{2}):\d{2}/);
+            if (m) return parseInt(m[1], 10);
+        }
+        const ts = Number(hd?.thoiDiemThanhToan) || (tg ? Date.parse(tg) : NaN);
+        if (!isNaN(ts)) {
+            try {
+                const gioStr = new Intl.DateTimeFormat('en-GB', {
+                    timeZone: 'Asia/Ho_Chi_Minh',
+                    hour: '2-digit',
+                    hour12: false
+                }).format(new Date(ts));
+                const g = parseInt(gioStr, 10);
+                if (!isNaN(g)) return g % 24;
+            } catch (e) {}
+        }
+        if (hd?.gioThanhToanInt !== undefined && hd?.gioThanhToanInt !== null) {
+            return Number(hd.gioThanhToanInt);
+        }
+        return 12;
     }
 
     async layDanhSachHoaDon(boLoc = {}) {
@@ -3618,12 +3709,16 @@ class ApiService {
         // Áp dụng bộ lọc nếu có
         if (boLoc) {
             if (boLoc.tuNgay) {
-                const tu = new Date(boLoc.tuNgay).getTime();
-                ds = ds.filter(h => new Date(h.thoiGian).getTime() >= tu);
+                ds = ds.filter(h => {
+                    const ngayHd = this._layNgayIsoVN(h.thoiDiemThanhToan || h.thoiGianThanhToan || h.thoiGian);
+                    return ngayHd && ngayHd >= boLoc.tuNgay;
+                });
             }
             if (boLoc.denNgay) {
-                const den = new Date(boLoc.denNgay).getTime() + 86400000;
-                ds = ds.filter(h => new Date(h.thoiGian).getTime() <= den);
+                ds = ds.filter(h => {
+                    const ngayHd = this._layNgayIsoVN(h.thoiDiemThanhToan || h.thoiGianThanhToan || h.thoiGian);
+                    return ngayHd && ngayHd <= boLoc.denNgay;
+                });
             }
             if (boLoc.phuongThuc && boLoc.phuongThuc !== 'TAT_CA') {
                 ds = ds.filter(h => h.phuongThuc === boLoc.phuongThuc);
@@ -3718,52 +3813,61 @@ class ApiService {
      */
     async layThongKeDoanhThu(ky = 'HOM_NAY') {
         const dsTatCa = await this.layDanhSachHoaDon();
-        const homNayStr = new Date().toISOString().slice(0, 10);
+        const homNayStr = this._layNgayIsoVN(new Date());
 
-        // Lọc hóa đơn trong ngày hôm nay
+        // Lọc hóa đơn trong ngày hôm nay theo múi giờ Việt Nam (GMT+7)
         const dsHomNay = dsTatCa.filter(hd => {
-            const ngayHd = (hd.thoiGianThanhToan || hd.thoiGian || '').slice(0, 10);
+            const ngayHd = this._layNgayIsoVN(hd.thoiDiemThanhToan || hd.thoiGianThanhToan || hd.thoiGian);
             return ngayHd === homNayStr;
         });
 
-        // Tập hóa đơn sử dụng để tính KPIs chính
+        // Tập hóa đơn sử dụng để tính KPIs chính (hôm nay hoặc toàn bộ theo kỳ)
         const dsKpi = (ky === 'HOM_NAY' || !ky) ? dsHomNay : dsTatCa;
 
         let tongDoanhThu = 0;
-        let tongTienMat = 0;
-        let tongChuyenKhoan = 0;
         let tongMonPhucVu = 0;
         let tongKhach = 0;
         const soHoaDon = dsKpi.length;
 
         dsKpi.forEach(hd => {
-            const tien = Number(hd.tongThanhToan || hd.tongTien || 0);
+            const tien = Number(hd.tongThanhToan ?? hd.tongTien ?? 0);
             tongDoanhThu += tien;
-            if (hd.phuongThuc === 'TIEN_MAT') {
-                tongTienMat += tien;
-            } else {
-                tongChuyenKhoan += tien;
-            }
-
             tongKhach += Number(hd.soKhach || 2);
             (hd.danhSachMon || []).forEach(m => {
+                if (m.trangThai === 'DA_HUY' || m.trangThai === 'TU_CHOI') return;
                 tongMonPhucVu += Number(m.soLuong || 1);
             });
         });
 
         const giaTriTrungBinhDon = soHoaDon > 0 ? Math.round(tongDoanhThu / soHoaDon) : 0;
 
-        // Chuỗi dữ liệu biểu đồ doanh thu theo 7 ngày gần nhất dựa trên lịch thực tế của hệ thống
-        const bieuDo7Ngay = [];
-        const today = new Date();
-        for (let i = 6; i >= 0; i--) {
-            const d = new Date(today);
-            d.setDate(today.getDate() - i);
-            const isoDate = d.toISOString().slice(0, 10);
-            const label = (i === 0) ? 'Hôm nay' : `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+        // Tỷ trọng thanh toán (US-125): tính trên toàn bộ hóa đơn hợp lệ (đồng bộ với US-126 và Backend)
+        let tongTienMat = 0;
+        let tongChuyenKhoan = 0;
+        dsTatCa.forEach(hd => {
+            const tien = Number(hd.tongThanhToan ?? hd.tongTien ?? 0);
+            const pt = hd.phuongThuc || hd.phuongThucThanhToan || 'TIEN_MAT';
+            if (pt === 'TIEN_MAT') {
+                tongTienMat += tien;
+            } else {
+                tongChuyenKhoan += tien;
+            }
+        });
 
-            const dsNgay = dsTatCa.filter(hd => (hd.thoiGianThanhToan || hd.thoiGian || '').slice(0, 10) === isoDate);
-            const dtNgay = dsNgay.reduce((sum, h) => sum + Number(h.tongThanhToan || h.tongTien || 0), 0);
+        // Chuỗi dữ liệu biểu đồ doanh thu theo 7 ngày gần nhất theo lịch Việt Nam (GMT+7)
+        const bieuDo7Ngay = [];
+        const [namNay, thangNay, ngayNay] = homNayStr.split('-').map(Number);
+        for (let i = 6; i >= 0; i--) {
+            const d = new Date(Date.UTC(namNay, thangNay - 1, ngayNay - i, 12, 0, 0));
+            const isoDate = this._layNgayIsoVN(d);
+            const [, mm, dd] = isoDate.split('-');
+            const label = (i === 0) ? 'Hôm nay' : `${dd}/${mm}`;
+
+            const dsNgay = dsTatCa.filter(hd => {
+                const ngayHd = this._layNgayIsoVN(hd.thoiDiemThanhToan || hd.thoiGianThanhToan || hd.thoiGian);
+                return ngayHd === isoDate;
+            });
+            const dtNgay = dsNgay.reduce((sum, h) => sum + Number(h.tongThanhToan ?? h.tongTien ?? 0), 0);
             const donNgay = dsNgay.length;
 
             bieuDo7Ngay.push({
@@ -3776,6 +3880,9 @@ class ApiService {
         }
 
         const tongThuPt = tongTienMat + tongChuyenKhoan;
+        const phanTramTienMat = tongThuPt > 0 ? Math.round((tongTienMat / tongThuPt) * 100) : 0;
+        const phanTramChuyenKhoan = tongThuPt > 0 ? (100 - phanTramTienMat) : 0;
+
         return {
             tongDoanhThu,
             soHoaDon,
@@ -3785,8 +3892,8 @@ class ApiService {
             tyTrongThanhToan: {
                 tienMat: tongTienMat,
                 chuyenKhoan: tongChuyenKhoan,
-                phanTramTienMat: tongThuPt > 0 ? Math.round((tongTienMat / tongThuPt) * 100) : 0,
-                phanTramChuyenKhoan: tongThuPt > 0 ? Math.round((tongChuyenKhoan / tongThuPt) * 100) : 0
+                phanTramTienMat,
+                phanTramChuyenKhoan
             },
             bieuDo7Ngay
         };
@@ -3797,20 +3904,19 @@ class ApiService {
      */
     async layThongKeDoanhThuTheoDanhMuc() {
         const ds = await this.layDanhSachHoaDon();
-        let dsDanhMuc = [];
-        try {
-            dsDanhMuc = await this.layDanhSachDanhMuc();
-        } catch (e) {}
+        const banDo = await this._taoBanDoDanhMucMon();
 
         const mapDanhMuc = {};
         // Đảm bảo tất cả các danh mục có trong hệ thống đều xuất hiện
-        (dsDanhMuc || []).forEach(dm => {
+        (banDo.dsDanhMuc || []).forEach(dm => {
             const ten = dm.ten || dm.tenDanhMuc;
             if (ten) mapDanhMuc[ten] = { ten: ten, doanhThu: 0, soLuong: 0 };
         });
 
         ds.forEach(hd => {
-            (hd.danhSachMon || []).forEach(m => {
+            (hd.danhSachMon || []).forEach(rawMon => {
+                if (rawMon.trangThai === 'DA_HUY' || rawMon.trangThai === 'TU_CHOI') return;
+                const m = this._lamGiauMotMon(rawMon, banDo);
                 const tenDm = m.danhMucTen || 'Món khác';
                 if (!mapDanhMuc[tenDm]) mapDanhMuc[tenDm] = { ten: tenDm, doanhThu: 0, soLuong: 0 };
                 mapDanhMuc[tenDm].doanhThu += Number(m.thanhTien || 0);
@@ -3831,40 +3937,48 @@ class ApiService {
      */
     async layTopMonBanChay(gioiHan = 5) {
         const ds = await this.layDanhSachHoaDon();
+        const banDo = await this._taoBanDoDanhMucMon();
         const mapMon = {};
 
         ds.forEach(hd => {
-            (hd.danhSachMon || []).forEach(m => {
-                const key = m.monAnId || m.monId || m.tenMon;
+            (hd.danhSachMon || []).forEach(rawMon => {
+                if (rawMon.trangThai === 'DA_HUY' || rawMon.trangThai === 'TU_CHOI') return;
+                const m = this._lamGiauMotMon(rawMon, banDo);
+                const key = m.monAnId || m.tenMon;
                 if (!key) return;
                 if (!mapMon[key]) {
                     mapMon[key] = {
-                        monId: m.monAnId || m.monId || m.id,
+                        monId: m.monAnId,
                         tenMon: m.tenMon,
                         danhMucTen: m.danhMucTen || '',
                         soLuongBan: 0,
+                        doanhThu: 0,
                         tongTien: 0
                     };
                 }
-                mapMon[key].soLuongBan += Number(m.soLuong || 1);
-                mapMon[key].tongTien += Number(m.thanhTien || 0);
+                const sl = Number(m.soLuong || 1);
+                const tien = Number(m.thanhTien || 0);
+                mapMon[key].soLuongBan += sl;
+                mapMon[key].doanhThu += tien;
+                mapMon[key].tongTien += tien;
             });
         });
 
-        let ketQua = Object.values(mapMon).sort((a, b) => b.soLuongBan - a.soLuongBan || b.tongTien - a.tongTien);
+        let ketQua = Object.values(mapMon).sort((a, b) => b.soLuongBan - a.soLuongBan || b.doanhThu - a.doanhThu);
 
         // Nếu chưa phát sinh đơn bán, hiển thị các món ăn đặc sắc từ thực đơn
         if (ketQua.length === 0) {
-            try {
-                const dsMon = await this.layDanhSachMonAn();
-                ketQua = (dsMon || []).slice(0, gioiHan).map(m => ({
+            ketQua = (banDo.dsMonThucDon || [])
+                .filter(m => m.trangThai !== -1 && m.trangThai !== 'DaXoa')
+                .slice(0, gioiHan)
+                .map(m => ({
                     monId: m.id,
                     tenMon: m.tenMon,
-                    danhMucTen: m.tenDanhMuc || '',
+                    danhMucTen: banDo.mapDmTheoId[String(m.danhMucId)] || m.tenDanhMuc || '',
                     soLuongBan: 0,
+                    doanhThu: 0,
                     tongTien: 0
                 }));
-            } catch (e) {}
         }
 
         return ketQua.slice(0, gioiHan);
@@ -3874,24 +3988,33 @@ class ApiService {
      * US-128: Thống kê các món ăn ít người gọi để tối ưu thực đơn
      */
     async layThongKeMonBanCham(gioiHan = 5) {
-        const dsMonThucDon = await this.layDanhSachMonAn();
+        const banDo = await this._taoBanDoDanhMucMon();
         const topBan = await this.layTopMonBanChay(100);
-        const mapDaBan = {};
+        const mapDaBanTheoId = {};
+        const mapDaBanTheoTen = {};
         topBan.forEach(m => {
-            if (m.tenMon) mapDaBan[m.tenMon.toLowerCase().trim()] = m.soLuongBan;
+            if (m.monId != null) mapDaBanTheoId[String(m.monId)] = m.soLuongBan;
+            if (m.tenMon) mapDaBanTheoTen[m.tenMon.toLowerCase().trim()] = m.soLuongBan;
         });
 
-        const dsCham = (dsMonThucDon || []).map(m => {
-            const tenMonNorm = (m.tenMon || '').toLowerCase().trim();
-            const slBan = mapDaBan[tenMonNorm] || 0;
-            return {
-                id: m.id,
-                tenMon: m.tenMon,
-                giaBan: m.giaBan,
-                soLuongBan: slBan,
-                deXuat: slBan === 0 ? 'Chưa phát sinh lượt gọi nào trong ngày' : 'Sản lượng thấp, nên xem xét combo ưu đãi'
-            };
-        }).sort((a, b) => a.soLuongBan - b.soLuongBan).slice(0, gioiHan);
+        const dsCham = (banDo.dsMonThucDon || [])
+            .filter(m => m.trangThai !== -1 && m.trangThai !== 'DaXoa')
+            .map(m => {
+                const tenMonNorm = (m.tenMon || '').toLowerCase().trim();
+                const slBan = mapDaBanTheoId[String(m.id)] ?? mapDaBanTheoTen[tenMonNorm] ?? 0;
+                const tenDm = (m.danhMucId != null && banDo.mapDmTheoId[String(m.danhMucId)])
+                    || m.danhMucTen || m.tenDanhMuc || 'Món khác';
+                const goiY = slBan === 0 ? 'Chưa phát sinh lượt gọi nào' : 'Sản lượng thấp, nên xem xét combo ưu đãi';
+                return {
+                    id: m.id,
+                    tenMon: m.tenMon,
+                    danhMuc: tenDm,
+                    giaBan: m.giaBan,
+                    soLuongBan: slBan,
+                    khuyenNghi: goiY,
+                    deXuat: goiY
+                };
+            }).sort((a, b) => a.soLuongBan - b.soLuongBan).slice(0, gioiHan);
 
         return dsCham;
     }
@@ -3910,13 +4033,18 @@ class ApiService {
         ];
 
         ds.forEach(hd => {
-            const g = (hd.gioThanhToanInt !== undefined) ? hd.gioThanhToanInt : 12;
-            const tien = Number(hd.tongThanhToan || hd.tongTien || 0);
-            if (g >= 8 && g < 11) { khungGio[0].soDon++; khungGio[0].doanhThu += tien; }
+            const g = this._layGioVN(hd);
+            const tien = Number(hd.tongThanhToan ?? hd.tongTien ?? 0);
+            if (g >= 5 && g < 11) { khungGio[0].soDon++; khungGio[0].doanhThu += tien; }
             else if (g >= 11 && g < 14) { khungGio[1].soDon++; khungGio[1].doanhThu += tien; }
             else if (g >= 14 && g < 17) { khungGio[2].soDon++; khungGio[2].doanhThu += tien; }
             else if (g >= 17 && g < 21) { khungGio[3].soDon++; khungGio[3].doanhThu += tien; }
             else { khungGio[4].soDon++; khungGio[4].doanhThu += tien; }
+        });
+
+        const maxDon = Math.max(...khungGio.map(k => k.soDon), 0);
+        khungGio.forEach(kg => {
+            kg.mucDo = (kg.soDon > 0 && (kg.soDon === maxDon || kg.laCaoDiem)) ? 'CAO_DIEM' : 'BINH_THUONG';
         });
 
         return khungGio;
