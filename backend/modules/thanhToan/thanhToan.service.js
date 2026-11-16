@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SERVICE THANH TOÁN (thanhToan.service.js)
  * Xử lý thanh toán Tiền mặt, VietQR động, đóng phiên bàn và giải phóng bàn ăn (US-105 -> US-110)
  */
@@ -228,23 +228,47 @@ async function xacNhanThanhToanVietQr({ hoaDonId, maGiaoDichNganHang, thuNganId,
 /**
  * US-109 & US-110: Đóng toàn bộ phiên phục vụ và đưa bàn về trạng thái 'Bàn trống' (Trong)
  */
-async function dongPhienVaGiaiPhongBan(banId) {
+async function dongPhienVaGiaiPhongBan(banId, tuyChon = {}) {
     const ban = await banAnModel.layTheoId(banId);
     if (!ban) return;
 
-    // Kiểm tra xem bàn còn hóa đơn nào chưa thanh toán hay không
-    const hoaDonChuaThanhToan = await hoaDonModel.layHoaDonChoCuaBan(banId);
-    if (!hoaDonChuaThanhToan) {
-        // Đóng toàn bộ các đơn đặt món của bàn
-        await donGoiMonModel.dongDonCuaBan(banId);
-
-        // Làm mới token bảo mật QR và chuyển trạng thái về "Trong"
-        await banAnService.lamMoiTokenQr(banId);
-        await banAnModel.capNhat(banId, {
-            trangThai: 'Trong',
-            daPhatSinhGiaoDich: false
-        });
+    if (tuyChon && tuyChon.giuBan) {
+        await banAnModel.capNhat(banId, { daThanhToan: true, trangThai: 'DangDung' });
+        try {
+            const cacDon = await donGoiMonModel.layDonCuaBan(banId);
+            cacDon.forEach(d => { d.daThanhToan = true; });
+        } catch (e) {}
+        return;
     }
+
+    // Đóng toàn bộ các đơn đặt món của bàn (chuyển sang HOAN_THANH)
+    await donGoiMonModel.dongDonCuaBan(banId);
+
+    // Đóng các yêu cầu hỗ trợ/thanh toán của bàn
+    try {
+        const yeuCauModel = require('../yeuCauHoTro/yeuCauHoTro.model');
+        const dsYc = await yeuCauModel.layTatCa({ banId: ban.id });
+        for (const yc of dsYc) {
+            if (yeuCauModel.chuanHoaTrangThai(yc.trangThai) !== 'DA_XU_LY') {
+                await yeuCauModel.capNhatTrangThai(yc.id, 'DA_XU_LY');
+            }
+        }
+    } catch (e) {}
+
+    // Làm mới token bảo mật QR và chuyển trạng thái về "Trong"
+    try {
+        if (banAnService && banAnService.lamMoiTokenQr) {
+            await banAnService.lamMoiTokenQr(banId);
+        }
+    } catch (err) {
+        console.warn('Lỗi làm mới token QR:', err.message);
+    }
+
+    await banAnModel.capNhat(banId, {
+        trangThai: 'Trong',
+        daPhatSinhGiaoDich: false,
+        daThanhToan: false
+    });
 }
 
 async function layLichSuGiaoDich(boLoc = {}) {
@@ -258,3 +282,4 @@ module.exports = {
     layLichSuGiaoDich,
     dongPhienVaGiaiPhongBan
 };
+
