@@ -10,8 +10,7 @@
 
 class HoTroTaiBanComponent {
     constructor() {
-        this.banIdHienTai = 1;
-        this.tenBanHienTai = null;
+        this.banIdHienTai = 3; // Mặc định bàn 03
         this.yeuCauDangCho = [];
         this.daKhoiTao = false;
     }
@@ -19,8 +18,8 @@ class HoTroTaiBanComponent {
     /**
      * Khởi tạo widget nút nổi hỗ trợ tại bàn
      */
-    khoiTao(banId = 1) {
-        this.banIdHienTai = Number(banId) || 1;
+    khoiTao(banId = 3) {
+        this.banIdHienTai = banId;
         this.chenWidgetVaoTrang();
         this.dangKyLangNgheRealtime();
         this.taiDanhSachYeuCau();
@@ -30,41 +29,9 @@ class HoTroTaiBanComponent {
     /**
      * Thiết lập bàn hiện tại khi khách quét mã hoặc chọn bàn
      */
-    datBanHienTai(banId, tenBan = null) {
-        if (banId && !isNaN(Number(banId))) {
-            this.banIdHienTai = Number(banId);
-        }
-        this.tenBanHienTai = tenBan || null;
+    datBanHienTai(banId) {
+        this.banIdHienTai = Number(banId);
         this.taiDanhSachYeuCau();
-    }
-
-    /**
-     * Đồng bộ lại banId từ phân hệ đang hiển thị để tránh lệch bàn
-     */
-    dongBoBanTuNguCanh() {
-        const tab = window.ungDung?.tabHienTai;
-        if (tab === 'theoDoiDonMon' && window.theoDoiDonMonModule?.banIdHienTai) {
-            this.banIdHienTai = Number(window.theoDoiDonMonModule.banIdHienTai);
-            if (window.theoDoiDonMonModule.duLieuDonBan?.soBan) {
-                this.tenBanHienTai = window.theoDoiDonMonModule.duLieuDonBan.soBan;
-            }
-        } else if (tab === 'eMenuKhachHang' && window.thucDonQr?.banId && !isNaN(Number(window.thucDonQr.banId))) {
-            this.banIdHienTai = Number(window.thucDonQr.banId);
-            if (window.thucDonQr.thongTinBan?.tenBan) {
-                this.tenBanHienTai = window.thucDonQr.thongTinBan.tenBan;
-            }
-        }
-    }
-
-    layTenBanHienTai() {
-        if (this.tenBanHienTai) return this.tenBanHienTai;
-        if (window.ungDung?.tabHienTai === 'theoDoiDonMon' && window.theoDoiDonMonModule?.duLieuDonBan?.soBan) {
-            return window.theoDoiDonMonModule.duLieuDonBan.soBan;
-        }
-        if (window.ungDung?.tabHienTai === 'eMenuKhachHang' && window.thucDonQr?.thongTinBan?.tenBan) {
-            return window.thucDonQr.thongTinBan.tenBan;
-        }
-        return `Bàn ${String(this.banIdHienTai).padStart(2, '0')}`;
     }
 
     /**
@@ -135,18 +102,6 @@ class HoTroTaiBanComponent {
      */
     dangKyLangNgheRealtime() {
         if (!window.socketClient) return;
-
-        // Khi có yêu cầu hỗ trợ hoặc thanh toán mới
-        window.socketClient.khiCoSuKien('hoTro:yeuCauMoi', (duLieu) => {
-            if (duLieu && Number(duLieu.banId) === Number(this.banIdHienTai)) {
-                this.taiDanhSachYeuCau();
-            }
-        });
-        window.socketClient.khiCoSuKien('thanhToan:yeuCau', (duLieu) => {
-            if (duLieu && Number(duLieu.banId) === Number(this.banIdHienTai)) {
-                this.taiDanhSachYeuCau();
-            }
-        });
 
         // Khi nhân viên tiếp nhận yêu cầu (US-074)
         window.socketClient.khiCoSuKien('hoTro:tiepNhan', (duLieu) => {
@@ -222,10 +177,8 @@ class HoTroTaiBanComponent {
      */
     moModalGoiNhanVien() {
         this.dongMenu();
-        this.dongBoBanTuNguCanh();
         const modal = document.getElementById('khung-modal-toan-cuc');
         if (!modal) return;
-        const tenBan = this.layTenBanHienTai();
 
         const danhSachLyDo = window.HANG_SO?.LY_DO_HO_TRO || [
             { ma: 'THEM_BAT_DUA', ten: '🥢 Xin thêm bát, đĩa, đũa, thìa' },
@@ -239,7 +192,7 @@ class HoTroTaiBanComponent {
         modal.innerHTML = `
             <div class="hop-thoai-modal hop-thoai-ho-tro">
                 <div class="dau-modal">
-                    <h3>🙋 Gọi Nhân Viên Hỗ Trợ (${tenBan})</h3>
+                    <h3>🙋 Gọi Nhân Viên Hỗ Trợ (Bàn 03)</h3>
                     <button type="button" class="nut-dong-modal" onclick="window.hoTroTaiBan.dongModal()">✕</button>
                 </div>
                 <div class="than-modal">
@@ -312,16 +265,18 @@ class HoTroTaiBanComponent {
      */
     async moModalYeuCauThanhToan() {
         this.dongMenu();
-        this.dongBoBanTuNguCanh();
         const modal = document.getElementById('khung-modal-toan-cuc');
         if (!modal) return;
-        const tenBan = this.layTenBanHienTai();
 
         // Lấy tạm tính
         const kqDon = await window.api.layDanhSachDonTheoBan(this.banIdHienTai);
         const tongTien = kqDon.ok ? kqDon.data.tongTienLuyKe : 0;
         const cauHinh = await window.api.layCauHinhHeThong();
         const nganHang = cauHinh.nganHang || {};
+        const dsBan = await window.api.layDanhSachBanAn();
+        const ban = dsBan.find(b => Number(b.id) === Number(this.banIdHienTai));
+        const tenBan = ban ? ban.soBan : `Bàn ${this.banIdHienTai}`;
+        const soMonChoBung = kqDon.ok && kqDon.data.thongKe ? (kqDon.data.thongKe.daXong || 0) : 0;
 
         modal.innerHTML = `
             <div class="hop-thoai-modal hop-thoai-thanh-toan-ban">
@@ -334,6 +289,7 @@ class HoTroTaiBanComponent {
                         <span class="nhan-tong">Tổng tiền tạm tính lũy kế:</span>
                         <span class="so-tien-tong">${tongTien.toLocaleString('vi-VN')} đ</span>
                     </div>
+                    ${soMonChoBung > 0 ? `<div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; font-size: 12.5px; color: #b45309;">🔔 <strong>Lưu ý:</strong> Bàn còn <strong>${soMonChoBung} món</strong> Bếp đã nấu xong và nhân viên đang bưng ra. Bàn sẽ không bị dọn khi gọi thanh toán.</div>` : ''}
 
                     <p style="font-size: 13px; color: var(--mau-chu-phu); margin-bottom: 12px;">
                         Vui lòng chọn hình thức thanh toán mong muốn:
@@ -400,10 +356,6 @@ class HoTroTaiBanComponent {
             this.taiDanhSachYeuCau();
             if (window.theoDoiDonMonModule) {
                 window.theoDoiDonMonModule.taiDuLieuVaVe();
-            }
-        } else {
-            if (window.thongBao) {
-                window.thongBao.thatBai('Không thể gửi yêu cầu thanh toán', kq ? kq.msg : 'Có lỗi xảy ra');
             }
         }
     }
