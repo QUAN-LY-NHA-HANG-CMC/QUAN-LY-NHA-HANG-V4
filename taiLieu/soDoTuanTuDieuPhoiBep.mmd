@@ -1,0 +1,71 @@
+sequenceDiagram
+    autonumber
+    actor K as 👨‍🍳 Đầu bếp / Bar
+    participant KDS as 🖥️ Màn hình KDS Bếp
+    participant Ctrl as ⚙️ bepKDS.controller
+    participant Svc as 🧠 bepKDS.service
+    participant DB as 🗄️ SQLite3 Database
+    participant Sock as ⚡ Socket.io Gateway
+    participant W as 🤵 Phục vụ (Mobile App)
+    participant C as 📱 Khách (E-Menu Bàn)
+
+    Note over K,KDS: Màn hình KDS hiển thị thẻ đơn ở cột "Chờ chế biến" (trang_thai_mon = 'cho_duyet')
+    K->>KDS: Nhấn "Bắt đầu nấu" trên món ăn
+    activate KDS
+    KDS->>Ctrl: PATCH /api/kds/mon-an/:id_chi_tiet/trang-thai { trang_thai_mon: 'dang_nau', dau_bep_id: 3 }
+    activate Ctrl
+
+    Ctrl->>Svc: batDauCheBienMon(id_chi_tiet, dau_bep_id=3)
+    activate Svc
+    Svc->>DB: UPDATE chi_tiet_don_mon SET trang_thai_mon = 'dang_nau', dau_bep_id = 3, thoi_gian_bat_dau_nau = datetime('now','localtime') WHERE id = id_chi_tiet
+    activate DB
+    DB-->>Svc: 1 row affected
+    deactivate DB
+    Svc-->>Ctrl: Cập nhật thành công
+    deactivate Svc
+
+    Ctrl->>Sock: broadcastEvent('MON_AN_DANG_NAU', { id_chi_tiet, ban_id: 4, trang_thai_mon: 'dang_nau' })
+    activate Sock
+    Sock-)C: Emit: 'ban:mon_dang_nau' (Thanh tiến độ chuyển sang màu vàng)
+    deactivate Sock
+    Ctrl-->>KDS: HTTP 200 OK { ok: true, msg: "Đã chuyển sang Đang nấu" }
+    deactivate Ctrl
+    KDS-->>K: Thẻ món chuyển sang cột "Đang chế biến"
+    deactivate KDS
+
+    Note over K,KDS: Sau khi chế biến xong món ăn...
+    K->>KDS: Nhấn "Hoàn thành món" (Món sẵn sàng bưng ra bàn)
+    activate KDS
+    KDS->>Ctrl: PATCH /api/kds/mon-an/:id_chi_tiet/trang-thai { trang_thai_mon: 'hoan_thanh' }
+    activate Ctrl
+
+    Ctrl->>Svc: hoanThanhCheBienMon(id_chi_tiet)
+    activate Svc
+    Svc->>DB: UPDATE chi_tiet_don_mon SET trang_thai_mon = 'hoan_thanh', thoi_gian_hoan_thanh_nau = datetime('now','localtime') WHERE id = id_chi_tiet
+    activate DB
+    DB-->>Svc: 1 row affected
+    deactivate DB
+    Svc-->>Ctrl: Dữ liệu món hoàn thành
+    deactivate Svc
+
+    Ctrl->>Sock: broadcastEvent('MON_AN_HOAN_THANH', { id_chi_tiet, ten_mon: "Bò sốt tiêu đen", ban_id: 4, so_luong: 2 })
+    activate Sock
+    Sock-)W: Emit: 'phuc_vu:lay_mon' (Phát chuông thông báo & rung điện thoại: "Bàn 4 có món!")
+    Sock-)C: Emit: 'ban:mon_hoan_thanh' (Thông báo: "Món ăn đã xong, nhân viên đang mang tới")
+    deactivate Sock
+
+    Ctrl-->>KDS: HTTP 200 OK { ok: true, msg: "Món đã nấu xong" }
+    deactivate Ctrl
+    KDS-->>K: Thẻ món đổi màu xanh lá và chuyển sang cột "Hoàn thành"
+    deactivate KDS
+
+    Note over W: Nhân viên phục vụ đến quầy ra đồ bưng món tới Bàn 4
+    W->>Ctrl: POST /api/phuc-vu/xac-nhan-len-mon { id_chi_tiet, trang_thai_mon: 'da_phuc_vu' }
+    activate Ctrl
+    Ctrl->>DB: UPDATE chi_tiet_don_mon SET trang_thai_mon = 'da_phuc_vu' WHERE id = id_chi_tiet
+    activate DB
+    DB-->>Ctrl: OK
+    deactivate DB
+    Ctrl->>Sock: broadcastEvent('MON_DA_PHUC_VU', { id_chi_tiet, ban_id: 4 })
+    Ctrl-->>W: HTTP 200 OK { ok: true, msg: "Đã xác nhận lên món" }
+    deactivate Ctrl

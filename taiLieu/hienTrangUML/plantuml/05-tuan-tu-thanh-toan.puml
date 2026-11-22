@@ -1,0 +1,38 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+actor "Thu ngân" as P
+actor "Khách" as C
+boundary "POS React" as UI
+control "hoaDon routes / service" as API
+database SQLite as DB
+participant "Socket.IO" as IO
+P -> UI : Kiểm bill và chọn phương thức
+UI -> API : GET /api/hoa-don/tam-tinh/:banId
+API -> DB : Đọc món hợp lệ, thuế và chiết khấu
+API --> UI : Tạm tính
+UI -> API : POST /api/hoa-don/tao-hoa-don
+API -> DB : Tạo hoặc dùng lại hóa đơn hiện hành
+API --> UI : Hóa đơn
+alt [tiền mặt]
+  C -> P : Giao tiền
+else [VietQR]
+  C -> P : Chuyển khoản theo mã QR
+  P -> P : Kiểm tra tiền thực nhận bên ngoài POS
+end
+P -> UI : Xác nhận đã nhận tiền
+UI -> API : POST /api/hoa-don/:id/thanh-toan
+API -> DB : Giao dịch cập nhật có điều kiện và kiểm tra lại bill
+alt [phiên hoặc bill thay đổi, còn đơn/hủy chờ xử lý]
+  DB --> API : Rollback
+  API --> UI : Yêu cầu kiểm tra lại hóa đơn
+else [đủ điều kiện]
+  API -> DB : Chốt hóa đơn, đóng phiên, chuyển bàn cần dọn
+  opt [tổng tiền > 0]
+    API -> DB : Ghi giao dịch thanh toán
+  end
+  DB --> API : Commit
+  API -> IO : Phát thanh toán thành công và cập nhật bàn
+  API --> UI : Thanh toán thành công
+end
+@enduml

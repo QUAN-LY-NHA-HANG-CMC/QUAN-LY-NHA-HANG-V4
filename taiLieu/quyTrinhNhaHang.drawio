@@ -1,0 +1,160 @@
+<mxfile host="65bd71144e">
+    <diagram id="BPMN_Restaurant_Moc" name="Quy Trinh Nghiep Vu Nha Hang">
+        <mxGraphModel dx="741" dy="814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1400" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="pool_main" parent="1" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;startSize=30;horizontal=0;horizontalStack=0;fillColor=#1e293b;fontColor=#ffffff;strokeColor=#334155;fontStyle=1;fontSize=14;" value="HỆ THỐNG QUẢN LÝ NHÀ HÀNG &amp; GỌI MÓN QR (QUÁN MỘC POS &amp; E-MENU)" vertex="1">
+                    <mxGeometry height="1100" width="1600" x="40" y="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_customer" parent="pool_main" style="swimlane;html=1;startSize=30;horizontal=0;fillColor=#f8fafc;strokeColor=#cbd5e1;fontColor=#0f172a;fontStyle=1;" value="1. KHÁCH HÀNG&#xa;(Customer QR Web)" vertex="1">
+                    <mxGeometry height="220" width="1570" x="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_start" parent="lane_customer" style="ellipse;whiteSpace=wrap;html=1;fillColor=#10b981;fontColor=#ffffff;strokeColor=#059669;fontStyle=1;" value="Khách vào bàn" vertex="1">
+                    <mxGeometry height="60" width="80" x="40" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_scan" parent="lane_customer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e11d48;fontColor=#0f172a;" value="Quét mã QR tại bàn&#xa;(Vào Shared Session)" vertex="1">
+                    <mxGeometry height="60" width="120" x="160" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_order" parent="lane_customer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e11d48;fontColor=#0f172a;" value="Chọn món, Combo &amp;&#xa;Gửi yêu cầu gọi món" vertex="1">
+                    <mxGeometry height="60" width="130" x="320" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_track" parent="lane_customer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0ea5e9;fontColor=#0f172a;" value="Theo dõi tiến độ món&#xa;(Đang nấu / Đã xong)" vertex="1">
+                    <mxGeometry height="60" width="130" x="720" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_eat" parent="lane_customer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#10b981;fontColor=#0f172a;" value="Thưởng thức món ăn" vertex="1">
+                    <mxGeometry height="60" width="120" x="890" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_pay" parent="lane_customer" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#f59e0b;fontColor=#0f172a;" value="Chọn thanh toán:&#xa;VietQR bàn / Chia tiền / Quầy" vertex="1">
+                    <mxGeometry height="90" width="140" x="1050" y="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_rate" parent="lane_customer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e11d48;fontColor=#0f172a;" value="Đánh giá sao dịch vụ" vertex="1">
+                    <mxGeometry height="60" width="110" x="1380" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="c_end" parent="lane_customer" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ef4444;fontColor=#ffffff;strokeColor=#dc2626;fontStyle=1;" value="Rời quán" vertex="1">
+                    <mxGeometry height="50" width="50" x="1510" y="85" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_waiter" parent="pool_main" style="swimlane;html=1;startSize=30;horizontal=0;fillColor=#f1f5f9;strokeColor=#cbd5e1;fontColor=#0f172a;fontStyle=1;" value="2. NHÂN VIÊN PHỤC VỤ&#xa;(Waiter Mobile Web)" vertex="1">
+                    <mxGeometry height="220" width="1570" x="30" y="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="w_map" parent="lane_waiter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#64748b;fontColor=#0f172a;" value="Đăng nhập &amp; Theo dõi&#xa;Sơ đồ bàn đổi màu" vertex="1">
+                    <mxGeometry height="60" width="120" x="40" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="w_check" parent="lane_waiter" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#f59e0b;fontColor=#0f172a;" value="Bàn cần duyệt?" vertex="1">
+                    <mxGeometry height="80" width="110" x="330" y="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="w_approve" parent="lane_waiter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#22c55e;fontColor=#0f172a;" value="Kiểm tra &amp; Bấm Duyệt" vertex="1">
+                    <mxGeometry height="60" width="120" x="530" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="w_serve" parent="lane_waiter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0ea5e9;fontColor=#0f172a;" value="Nhận chuông Bếp xong&#xa;-&gt; Bưng món ra bàn" vertex="1">
+                    <mxGeometry height="60" width="120" x="890" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="w_cancel" parent="lane_waiter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#ef4444;fontColor=#0f172a;" value="Gửi yêu cầu hủy món&#xa;(kèm lý do lên Admin)" vertex="1">
+                    <mxGeometry height="60" width="130" x="1050" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="w_clean" parent="lane_waiter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#64748b;fontColor=#0f172a;" value="Dọn dẹp bàn &amp; Hoàn tất" vertex="1">
+                    <mxGeometry height="60" width="110" x="1380" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_kitchen" parent="pool_main" style="swimlane;html=1;startSize=30;horizontal=0;fillColor=#0f172a;strokeColor=#334155;fontColor=#ffffff;fontStyle=1;" value="3. BỘ PHẬN BẾP / BAR&#xa;(KDS Display)" vertex="1">
+                    <mxGeometry height="220" width="1570" x="30" y="440" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_rec" parent="lane_kitchen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#38bdf8;fontColor=#ffffff;" value="Nhận order real-time&#xa;(Phát âm thanh chuông)" vertex="1">
+                    <mxGeometry height="60" width="130" x="480" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_mode" parent="lane_kitchen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#f59e0b;fontColor=#ffffff;" value="Chế độ hiển thị:&#xa;Vé FIFO / Gom mẻ" vertex="1">
+                    <mxGeometry height="60" width="120" x="640" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_cook" parent="lane_kitchen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1e293b;strokeColor=#e11d48;fontColor=#ffffff;" value="Đầu bếp chế biến&#xa;(Đổi màu trễ: Xanh-Vàng-Đỏ)" vertex="1">
+                    <mxGeometry height="60" width="130" x="790" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="k_done" parent="lane_kitchen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#065f46;strokeColor=#10b981;fontColor=#ffffff;fontStyle=1;" value="Bấm Hoàn thành món&#xa;(Bắn socket sang Phục vụ)" vertex="1">
+                    <mxGeometry height="60" width="130" x="950" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_cashier" parent="pool_main" style="swimlane;html=1;startSize=30;horizontal=0;fillColor=#f8fafc;strokeColor=#cbd5e1;fontColor=#0f172a;fontStyle=1;" value="4. NHÂN VIÊN THU NGÂN&#xa;(Cashier POS)" vertex="1">
+                    <mxGeometry height="220" width="1570" x="30" y="660" as="geometry"/>
+                </mxCell>
+                <mxCell id="cs_pos" parent="lane_cashier" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#64748b;fontColor=#0f172a;" value="Màn hình POS chọn bàn&#xa;&amp; Kiểm tra chi tiết bill" vertex="1">
+                    <mxGeometry height="60" width="130" x="1050" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="cs_split" parent="lane_cashier" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#f59e0b;fontColor=#0f172a;" value="Tách bill / Chia tiền?" vertex="1">
+                    <mxGeometry height="80" width="110" x="1210" y="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="cs_pay" parent="lane_cashier" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontColor=#0f172a;" value="Thu tiền mặt / Quét VietQR&#xa;&amp; In hóa đơn nhiệt K80" vertex="1">
+                    <mxGeometry height="60" width="140" x="1350" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_admin" parent="pool_main" style="swimlane;html=1;startSize=30;horizontal=0;fillColor=#f1f5f9;strokeColor=#cbd5e1;fontColor=#0f172a;fontStyle=1;" value="5. QUẢN TRỊ VIÊN&#xa;(Admin Dashboard)" vertex="1">
+                    <mxGeometry height="220" width="1570" x="30" y="880" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_cfg" parent="lane_admin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6366f1;fontColor=#0f172a;" value="Cấu hình: Bàn, Duyệt món,&#xa;Menu, Nhân sự &amp; Ca kíp" vertex="1">
+                    <mxGeometry height="60" width="140" x="40" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_cancel" parent="lane_admin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;fontColor=#0f172a;" value="Duyệt yêu cầu hủy món&#xa;&amp; Ghi vết Audit Logs" vertex="1">
+                    <mxGeometry height="60" width="130" x="1050" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="a_rep" parent="lane_admin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#10b981;fontColor=#0f172a;" value="Xem báo cáo doanh thu,&#xa;Top món &amp; Lịch sử bill" vertex="1">
+                    <mxGeometry height="60" width="140" x="1350" y="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" edge="1" parent="pool_main" source="c_start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="c_scan">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" edge="1" parent="pool_main" source="c_scan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="c_order">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" edge="1" parent="pool_main" source="c_order" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="w_check">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" edge="1" parent="pool_main" source="w_check" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="w_approve" value="Có duyệt">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" edge="1" parent="pool_main" source="w_approve" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="k_rec" value="Duyệt / Tự động">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e6" edge="1" parent="pool_main" source="k_rec" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="k_mode">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e7" edge="1" parent="pool_main" source="k_mode" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="k_cook">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e8" edge="1" parent="pool_main" source="k_cook" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="c_track">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e9" edge="1" parent="pool_main" source="k_cook" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="k_done">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e10" edge="1" parent="pool_main" source="k_done" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="w_serve">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e11" edge="1" parent="pool_main" source="w_serve" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="c_eat">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e12" edge="1" parent="pool_main" source="c_eat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="c_pay">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e13" edge="1" parent="pool_main" source="c_pay" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="cs_pos" value="Tại quầy">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e14" edge="1" parent="pool_main" source="cs_pos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="cs_split">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e15" edge="1" parent="pool_main" source="cs_split" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="cs_pay">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e16" edge="1" parent="pool_main" source="cs_pay" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="c_rate">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e17" edge="1" parent="pool_main" source="cs_pay" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="w_clean">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e18" edge="1" parent="pool_main" source="cs_pay" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="a_rep">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e19" edge="1" parent="pool_main" source="c_rate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="c_end">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e20" edge="1" parent="pool_main" source="w_cancel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" target="a_cancel" value="Hủy món">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

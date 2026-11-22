@@ -1,0 +1,24 @@
+flowchart LR
+    %% PHÂN HỆ BẾP / BAR
+    Kitchen(["👨‍🍳 Đầu bếp / Bar\n(KDS)"])
+    Admin(["👔 Quản lý\n(Admin)"])
+
+    subgraph SYSTEM["Phân hệ Bếp / Bar (KDS Display)"]
+        UK01(["UK01: Nhận đơn real-time & Đo thời gian"])
+        UK02(["UK02: Chuyển đổi chế độ: Phiếu / Gom mẻ"])
+        UK_FIFO(["Xem theo phiếu bàn (FIFO)"])
+        UK_Batch(["Xem gom mẻ xào nấu chung"])
+        UK03(["UK03: Đổi trạng thái: Đang nấu -> Xong"])
+        UK04(["UK04: Báo hết món tức thì"])
+        UK05(["UK05: Tiếp nhận lệnh ưu tiên khẩn cấp"])
+    end
+
+    Kitchen --> UK01
+    Kitchen --> UK02
+    Kitchen --> UK03
+    Kitchen --> UK04
+    Kitchen --> UK05
+
+    UK02 -.->|"<<extend>>"| UK_FIFO
+    UK02 -.->|"<<extend>>"| UK_Batch
+    Admin -.->|"<<phát lệnh khẩn>>"| UK05

@@ -1,12 +1,12 @@
-/**
- * Điểm xuất công khai module taiKhoan (Rule 4.7)
- */
-const taiKhoanRoutes = require('./taiKhoan.routes');
+const router = require('./taiKhoan.routes');
 const taiKhoanService = require('./taiKhoan.service');
 const taiKhoanModel = require('./taiKhoan.model');
+const taiKhoanController = require('./taiKhoan.controller');
 
 module.exports = {
-    taiKhoanRoutes,
+    router,
+    taiKhoanRoutes: router,
     taiKhoanService,
-    taiKhoanModel
+    taiKhoanModel,
+    taiKhoanController
 };

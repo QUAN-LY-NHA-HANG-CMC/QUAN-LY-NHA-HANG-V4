@@ -1,0 +1,212 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1894.1139999999998 1424" width="1894.1139999999998" height="1424" style="--bg:#FFFFFF;--fg:#27272A;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="seq-arrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" />
+  </marker>
+  <marker id="seq-arrow-open" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+    <polyline points="0 0, 8 2.5, 0 5" fill="none" stroke="var(--_arrow)" stroke-width="1" />
+  </marker>
+</defs>
+<g class="block" data-type="alt" data-label="Bàn đang 'trong' (Lượt khách mới)">
+  <rect x="631.983" y="318" width="587.9109999999998" height="244" rx="0" ry="0" fill="none" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="631.983" y="318" width="209.05" height="18" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="637.983" y="327" font-size="11" font-weight="600" fill="var(--_text-sec)" dy="3.8499999999999996">alt [Bàn đang &#39;trong&#39; (Lượt khách mới)]</text>
+  <line x1="631.983" y1="466" x2="1219.8939999999998" y2="466" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+  <text x="639.983" y="480" font-size="11" text-anchor="start" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">[Bàn đã có khách đang ngồi (Gọi thêm món)]</text>
+</g>
+<g class="block" data-type="alt" data-label="Có món đã hết hàng (con_mon = 0)">
+  <rect x="30" y="730" width="1834.1139999999998" height="644" rx="0" ry="0" fill="none" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="30" y="730" width="210.37000000000003" height="18" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="36" y="739" font-size="11" font-weight="600" fill="var(--_text-sec)" dy="3.8499999999999996">alt [Có món đã hết hàng (con_mon = 0)]</text>
+  <line x1="30" y1="886" x2="1864.1139999999998" y2="886" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+  <text x="38" y="900" font-size="11" text-anchor="start" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">[Tất cả món hợp lệ (con_mon = 1)]</text>
+</g>
+<line class="lifeline" data-actor="C" x1="100.694" y1="70" x2="100.694" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="UI" x1="288.3875" y1="70" x2="288.3875" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Ctrl" x1="508.68499999999995" y1="70" x2="508.68499999999995" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="SvcP" x1="720.0904999999999" y1="70" x2="720.0904999999999" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="SvcD" x1="921.8629999999998" y1="70" x2="921.8629999999998" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="DB" x1="1127.7109999999998" y1="70" x2="1127.7109999999998" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Sock" x1="1329.1129999999998" y1="70" x2="1329.1129999999998" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="KDS" x1="1544.9644999999998" y1="70" x2="1544.9644999999998" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="W" x1="1767.8555" y1="70" x2="1767.8555" y2="1394" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<g class="message" data-from="C" data-to="UI" data-label="Chọn món ăn, số lượng &amp; ghi chú" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="100.694" y1="90" x2="288.3875" y2="90" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="194.54075" y="80" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Chọn món ăn, số lượng &amp; ghi chú</text>
+</g>
+<g class="message" data-from="C" data-to="UI" data-label="Nhấn nút &quot;Gửi đơn gọi món&quot;" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="100.694" y1="130" x2="288.3875" y2="130" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="194.54075" y="120" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Nhấn nút &quot;Gửi đơn gọi món&quot;</text>
+</g>
+<g class="message" data-from="UI" data-to="Ctrl" data-label="POST /api/don-goi-mon (ma_qr_token, ds_mon_an)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="288.3875" y1="170" x2="508.68499999999995" y2="170" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="398.53625" y="160" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">POST /api/don-goi-mon (ma_qr_token, ds_mon_an)</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="SvcP" data-label="layHoacTaoPhienBan(ma_qr_token)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="508.68499999999995" y1="210" x2="720.0904999999999" y2="210" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="614.3877499999999" y="200" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">layHoacTaoPhienBan(ma_qr_token)</text>
+</g>
+<g class="message" data-from="SvcP" data-to="DB" data-label="SELECT id, trang_thai FROM ban_an WHERE ma_qr_token = ? AND kich_hoat = 1" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="720.0904999999999" y1="250" x2="1127.7109999999998" y2="250" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="923.9007499999998" y="240" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">SELECT id, trang_thai FROM ban_an WHERE ma_qr_token = ? AND kich_hoat = 1</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcP" data-label="{ id: 4, trang_thai: 'trong' }" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1127.7109999999998" y1="290" x2="720.0904999999999" y2="290" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="923.9007499999998" y="280" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">{ id: 4, trang_thai: &#39;trong&#39; }</text>
+</g>
+<g class="message" data-from="SvcP" data-to="DB" data-label="INSERT INTO phien_ban (ban_an_id, ma_phien, trang_thai='dang_hoat_dong')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="720.0904999999999" y1="358" x2="1127.7109999999998" y2="358" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="923.9007499999998" y="348" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">INSERT INTO phien_ban (ban_an_id, ma_phien, trang_thai=&#39;dang_hoat_dong&#39;)</text>
+</g>
+<g class="message" data-from="SvcP" data-to="DB" data-label="UPDATE ban_an SET trang_thai = 'co_khach' WHERE id = 4" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="720.0904999999999" y1="398" x2="1127.7109999999998" y2="398" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="923.9007499999998" y="388" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">UPDATE ban_an SET trang_thai = &#39;co_khach&#39; WHERE id = 4</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcP" data-label="phien_ban_id = 12" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1127.7109999999998" y1="438" x2="720.0904999999999" y2="438" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="923.9007499999998" y="428" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phien_ban_id = 12</text>
+</g>
+<g class="message" data-from="SvcP" data-to="DB" data-label="SELECT id FROM phien_ban WHERE ban_an_id = 4 AND trang_thai = 'dang_hoat_dong'" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="720.0904999999999" y1="502" x2="1127.7109999999998" y2="502" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="923.9007499999998" y="492" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">SELECT id FROM phien_ban WHERE ban_an_id = 4 AND trang_thai = &#39;dang_hoat_dong&#39;</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcP" data-label="phien_ban_id = 12" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1127.7109999999998" y1="542" x2="720.0904999999999" y2="542" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="923.9007499999998" y="532" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phien_ban_id = 12</text>
+</g>
+<g class="message" data-from="SvcP" data-to="Ctrl" data-label="phien_ban_id = 12" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="720.0904999999999" y1="582" x2="508.68499999999995" y2="582" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="614.3877499999999" y="572" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phien_ban_id = 12</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="SvcD" data-label="taoDonGoiMon(phien_ban_id=12, ds_mon_an)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="508.68499999999995" y1="622" x2="921.8629999999998" y2="622" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="715.2739999999999" y="612" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">taoDonGoiMon(phien_ban_id=12, ds_mon_an)</text>
+</g>
+<g class="message" data-from="SvcD" data-to="DB" data-label="SELECT id, ten_mon, don_gia, con_mon FROM mon_an WHERE id IN (...)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="921.8629999999998" y1="662" x2="1127.7109999999998" y2="662" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1024.7869999999998" y="652" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">SELECT id, ten_mon, don_gia, con_mon FROM mon_an WHERE id IN (...)</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcD" data-label="Danh sách món ăn kèm trạng thái còn món (con_mon)" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1127.7109999999998" y1="702" x2="921.8629999999998" y2="702" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1024.7869999999998" y="692" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Danh sách món ăn kèm trạng thái còn món (con_mon)</text>
+</g>
+<g class="message" data-from="SvcD" data-to="Ctrl" data-label="Lỗi: &quot;Món ăn tạm hết hàng&quot;" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="921.8629999999998" y1="770" x2="508.68499999999995" y2="770" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="715.2739999999999" y="760" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Lỗi: &quot;Món ăn tạm hết hàng&quot;</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="UI" data-label="HTTP 400 Bad Request { ok: false, msg: &quot;Món ăn tạm hết&quot; }" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="508.68499999999995" y1="810" x2="288.3875" y2="810" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="398.53625" y="800" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">HTTP 400 Bad Request { ok: false, msg: &quot;Món ăn tạm hết&quot; }</text>
+</g>
+<g class="message" data-from="UI" data-to="C" data-label="Thông báo cảnh báo món hết trên giao diện" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="288.3875" y1="850" x2="100.694" y2="850" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="194.54075" y="840" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Thông báo cảnh báo món hết trên giao diện</text>
+</g>
+<g class="message" data-from="SvcD" data-to="DB" data-label="BEGIN IMMEDIATE TRANSACTION" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="921.8629999999998" y1="914" x2="1127.7109999999998" y2="914" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1024.7869999999998" y="904" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">BEGIN IMMEDIATE TRANSACTION</text>
+</g>
+<g class="message" data-from="SvcD" data-to="DB" data-label="INSERT INTO don_goi_mon (phien_ban_id, ma_don, nguon_tao='khach_qr', trang_thai='cho_duyet')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="921.8629999999998" y1="954" x2="1127.7109999999998" y2="954" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1024.7869999999998" y="944" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">INSERT INTO don_goi_mon (phien_ban_id, ma_don, nguon_tao=&#39;khach_qr&#39;, trang_thai=&#39;cho_duyet&#39;)</text>
+</g>
+<g class="message" data-from="SvcD" data-to="DB" data-label="INSERT INTO chi_tiet_don_mon (don_goi_mon_id, mon_an_id, so_luong, don_gia, ghi_chu, trang_thai_mon='cho_duyet')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="921.8629999999998" y1="994" x2="1127.7109999999998" y2="994" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1024.7869999999998" y="984" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">INSERT INTO chi_tiet_don_mon (don_goi_mon_id, mon_an_id, so_luong, don_gia, ghi_chu, trang_thai_mon=&#39;cho_duyet&#39;)</text>
+</g>
+<g class="message" data-from="SvcD" data-to="DB" data-label="UPDATE ban_an SET trang_thai = 'cho_mon' WHERE id = 4" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="921.8629999999998" y1="1034" x2="1127.7109999999998" y2="1034" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1024.7869999999998" y="1024" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">UPDATE ban_an SET trang_thai = &#39;cho_mon&#39; WHERE id = 4</text>
+</g>
+<g class="message" data-from="SvcD" data-to="DB" data-label="COMMIT TRANSACTION" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="921.8629999999998" y1="1074" x2="1127.7109999999998" y2="1074" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1024.7869999999998" y="1064" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">COMMIT TRANSACTION</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcD" data-label="Giao dịch thành công (don_goi_mon_id=25)" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1127.7109999999998" y1="1114" x2="921.8629999999998" y2="1114" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1024.7869999999998" y="1104" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Giao dịch thành công (don_goi_mon_id=25)</text>
+</g>
+<g class="message" data-from="SvcD" data-to="Ctrl" data-label="Dữ liệu đơn đặt món mới" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="921.8629999999998" y1="1154" x2="508.68499999999995" y2="1154" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="715.2739999999999" y="1144" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Dữ liệu đơn đặt món mới</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Sock" data-label="broadcastEvent('DON_HANG_MOI', { don_id: 25, ban_id: 4, phien_id: 12 })" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="508.68499999999995" y1="1194" x2="1329.1129999999998" y2="1194" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="918.8989999999999" y="1184" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">broadcastEvent(&#39;DON_HANG_MOI&#39;, { don_id: 25, ban_id: 4, phien_id: 12 })</text>
+</g>
+<g class="message" data-from="Sock" data-to="KDS" data-label="Emit: 'bep:co_don_moi' (Phát chuông báo KDS &amp; hiển thị thẻ)" data-line-style="solid" data-arrow-head="open" data-self="false">
+  <line x1="1329.1129999999998" y1="1234" x2="1544.9644999999998" y2="1234" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow-open)" />
+  <text x="1437.0387499999997" y="1224" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Emit: &#39;bep:co_don_moi&#39; (Phát chuông báo KDS &amp; hiển thị thẻ)</text>
+</g>
+<g class="message" data-from="Sock" data-to="W" data-label="Emit: 'phuc_vu:don_dat_ban' (Rung chuông điện thoại phục vụ)" data-line-style="solid" data-arrow-head="open" data-self="false">
+  <line x1="1329.1129999999998" y1="1274" x2="1767.8555" y2="1274" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow-open)" />
+  <text x="1548.48425" y="1264" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Emit: &#39;phuc_vu:don_dat_ban&#39; (Rung chuông điện thoại phục vụ)</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="UI" data-label="HTTP 201 Created { ok: true, data: { don_id: 25, phien_ban_id: 12 }, msg: &quot;Đặt món thành công&quot; }" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="508.68499999999995" y1="1314" x2="288.3875" y2="1314" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="398.53625" y="1304" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">HTTP 201 Created { ok: true, data: { don_id: 25, phien_ban_id: 12 }, msg: &quot;Đặt món thành công&quot; }</text>
+</g>
+<g class="message" data-from="UI" data-to="C" data-label="Hiển thị: &quot;Đã gửi đơn vào bếp - Đang chờ duyệt/chế biến&quot;" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="288.3875" y1="1354" x2="100.694" y2="1354" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="194.54075" y="1344" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Hiển thị: &quot;Đã gửi đơn vào bếp - Đang chờ duyệt/chế biến&quot;</text>
+</g>
+<g class="actor" data-id="C" data-label="👤 Khách hàng" data-type="actor">
+  <g transform="translate(82.694,32) scale(1.5)">
+    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M5.62842 18.3563C7.08963 17.0398 9.39997 16 12 16C14.6 16 16.9104 17.0398 18.3716 18.3563" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+  </g>
+  <text x="100.694" y="84" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">👤 Khách hàng</text>
+</g>
+<g class="actor" data-id="UI" data-label="📱 Mobile Web (E-Menu)" data-type="participant">
+  <rect x="201.388" y="30" width="173.99899999999997" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="288.3875" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">📱 Mobile Web (E-Menu)</text>
+</g>
+<g class="actor" data-id="Ctrl" data-label="⚙️ donGoiMon.controller" data-type="participant">
+  <rect x="415.38699999999994" y="30" width="186.59599999999995" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="508.68499999999995" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">⚙️ donGoiMon.controller</text>
+</g>
+<g class="actor" data-id="SvcP" data-label="🚪 phienBan.service" data-type="participant">
+  <rect x="641.983" y="30" width="156.21499999999997" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="720.0904999999999" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🚪 phienBan.service</text>
+</g>
+<g class="actor" data-id="SvcD" data-label="🧠 donGoiMon.service" data-type="participant">
+  <rect x="838.1979999999999" y="30" width="167.32999999999998" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="921.8629999999998" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🧠 donGoiMon.service</text>
+</g>
+<g class="actor" data-id="DB" data-label="🗄️ SQLite3 Database" data-type="participant">
+  <rect x="1045.5279999999998" y="30" width="164.36599999999999" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1127.7109999999998" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🗄️ SQLite3 Database</text>
+</g>
+<g class="actor" data-id="Sock" data-label="⚡ Socket.io Gateway" data-type="participant">
+  <rect x="1249.8939999999998" y="30" width="158.438" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1329.1129999999998" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">⚡ Socket.io Gateway</text>
+</g>
+<g class="actor" data-id="KDS" data-label="👨‍🍳 Màn hình Bếp (KDS)" data-type="participant">
+  <rect x="1448.3319999999999" y="30" width="193.265" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1544.9644999999998" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">👨‍🍳 Màn hình Bếp (KDS)</text>
+</g>
+<g class="actor" data-id="W" data-label="🤵 Phục vụ (Waiter App)" data-type="participant">
+  <rect x="1681.597" y="30" width="172.517" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1767.8555" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🤵 Phục vụ (Waiter App)</text>
+</g>
+</svg>

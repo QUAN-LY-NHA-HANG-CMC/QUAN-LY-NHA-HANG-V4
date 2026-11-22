@@ -1,0 +1,31 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+actor Khach
+boundary "React E-Menu" as UI
+control "donGoiMon.routes / controller" as API
+control "donGoiMon.service" as S
+database SQLite as DB
+participant "Socket.IO" as IO
+Khach -> UI : Chọn món, gửi giỏ hàng
+UI -> API : POST /api/don-goi-mon
+API -> S : Tạo đơn với ngữ cảnh bàn và khóa gửi
+S -> DB : Giao dịch kiểm tra phiên, giỏ và số suất
+alt [khóa gửi đã có]
+  DB --> S : Đơn đã ghi
+else [bàn và món hợp lệ]
+  S -> DB : Tạo hoặc dùng lại phiên, ghi đơn và chi tiết
+  S -> DB : Cập nhật số suất và trạng thái bàn
+  DB --> S : Commit
+else [bàn, giỏ hoặc món không hợp lệ]
+  DB --> S : Từ chối hoặc rollback
+end
+alt [thành công]
+  S -> IO : Phát sự kiện cập nhật đơn/bàn
+  S --> API : Kết quả
+  API --> UI : Phản hồi đơn
+else [lỗi]
+  S --> API : Lỗi nghiệp vụ
+  API --> UI : Phản hồi lỗi
+end
+@enduml

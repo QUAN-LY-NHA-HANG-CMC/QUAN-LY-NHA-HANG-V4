@@ -1,0 +1,46 @@
+flowchart LR
+    %% PHÂN HỆ THU NGÂN VÀ QUẢN TRỊ
+    Cashier(["💳 Nhân viên Thu ngân\n(Cashier)"])
+    Admin(["👔 Quản trị viên\n(Admin / Manager)"])
+    VietQR(["🏦 Cổng VietQR"])
+
+    subgraph SYSTEM_CS["Phân hệ Thu ngân (Cashier POS)"]
+        UCS01(["UCS01: Kiểm tra bill & Áp chiết khấu"])
+        UCS02(["UCS02: Thanh toán Tiền mặt (tính tiền thối)"])
+        UCS03(["UCS03: Xuất mã VietQR động tại quầy"])
+        UCS04(["UCS04: Tách hóa đơn (Split Bill)"])
+        UCS05(["UCS05: In hóa đơn nhiệt K80"])
+        UCS06(["UCS06: Chốt bill & Giải phóng bàn"])
+    end
+
+    subgraph SYSTEM_AD["Phân hệ Quản trị (Admin Dashboard)"]
+        UA01(["UA01: Quản lý nhân viên & Phân quyền"])
+        UA02(["UA02: Quản lý ca kíp & Duyệt đổi ca"])
+        UA03(["UA03: Cấu hình quán & STK VietQR"])
+        UA04(["UA04: Quản lý sơ đồ bàn & In mã QR"])
+        UA05(["UA05: Quản lý thực đơn & Combo"])
+        UA06(["UA06: Phê duyệt yêu cầu hủy món"])
+        UA07(["UA07: Phát lệnh ưu tiên khẩn cấp"])
+        UA08(["UA08: Báo cáo doanh thu & Top món"])
+        UA09(["UA09: Tra cứu nhật ký Audit Logs"])
+    end
+
+    Cashier --> UCS01
+    Cashier --> UCS02
+    Cashier --> UCS03
+    Cashier --> UCS05
+    Cashier --> UCS06
+
+    Admin --> UA01
+    Admin --> UA02
+    Admin --> UA03
+    Admin --> UA04
+    Admin --> UA05
+    Admin --> UA06
+    Admin --> UA07
+    Admin --> UA08
+    Admin --> UA09
+
+    UCS01 -.->|"<<extend>>"| UCS04
+    UCS03 -.->|"<<tương tác>>"| VietQR
+    UA06 -.->|"<<ghi vết>>"| UA09

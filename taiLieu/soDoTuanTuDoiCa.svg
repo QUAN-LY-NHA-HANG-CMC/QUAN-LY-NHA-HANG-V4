@@ -1,0 +1,234 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1657.892 1655" width="1657.892" height="1655" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="seq-arrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" />
+  </marker>
+  <marker id="seq-arrow-open" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+    <polyline points="0 0, 8 2.5, 0 5" fill="none" stroke="var(--_arrow)" stroke-width="1" />
+  </marker>
+</defs>
+<line class="lifeline" data-actor="W" x1="108.47800000000001" y1="70" x2="108.47800000000001" y2="1625" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="UI" x1="305.434" y1="70" x2="305.434" y2="1625" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Ctrl" x1="516.8395" y1="70" x2="516.8395" y2="1625" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Svc" x1="733.0615" y1="70" x2="733.0615" y2="1625" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="DB" x1="938.539" y1="70" x2="938.539" y2="1625" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Sock" x1="1139.941" y1="70" x2="1139.941" y2="1625" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="A_UI" x1="1353.5695" y1="70" x2="1353.5695" y2="1625" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="A" x1="1557.9355" y1="70" x2="1557.9355" y2="1625" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<g class="message" data-from="W" data-to="UI" data-label="Mở màn hình &quot;Ca làm và yêu cầu nghỉ&quot;" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="108.47800000000001" y1="90" x2="305.434" y2="90" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="206.95600000000002" y="80" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Mở màn hình &quot;Ca làm và yêu cầu nghỉ&quot;</text>
+</g>
+<g class="message" data-from="UI" data-to="Ctrl" data-label="GET /api/ca-lam-viec/lich-tuan (nhan_vien_id=3)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="305.434" y1="130" x2="516.8395" y2="130" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="411.13675" y="120" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">GET /api/ca-lam-viec/lich-tuan (nhan_vien_id=3)</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Svc" data-label="layLichTuanTheoNhanVien(nhanVienId=3)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="516.8395" y1="170" x2="733.0615" y2="170" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="624.9505" y="160" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">layLichTuanTheoNhanVien(nhanVienId=3)</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="SELECT * FROM ca_lam_viec WHERE nhan_vien_id = 3 AND ngay_lam &gt;= DATE('now')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="210" x2="938.539" y2="210" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="200" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">SELECT * FROM ca_lam_viec WHERE nhan_vien_id = 3 AND ngay_lam &gt;= DATE(&#39;now&#39;)</text>
+</g>
+<g class="message" data-from="DB" data-to="Svc" data-label="Dữ liệu ca hôm nay &amp; lịch trực 7 ngày tới" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="938.539" y1="250" x2="733.0615" y2="250" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="240" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Dữ liệu ca hôm nay &amp; lịch trực 7 ngày tới</text>
+</g>
+<g class="message" data-from="Svc" data-to="Ctrl" data-label="Danh sách ca trực &amp; đồng nghiệp trong ca" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="290" x2="516.8395" y2="290" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="624.9505" y="280" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Danh sách ca trực &amp; đồng nghiệp trong ca</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="UI" data-label="HTTP 200 OK (lich_truc, ds_dong_nghiep)" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="516.8395" y1="330" x2="305.434" y2="330" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="411.13675" y="320" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">HTTP 200 OK (lich_truc, ds_dong_nghiep)</text>
+</g>
+<g class="message" data-from="UI" data-to="W" data-label="Hiển thị ca hiện tại &amp; form gửi yêu cầu" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="305.434" y1="370" x2="108.47800000000001" y2="370" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="206.95600000000002" y="360" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Hiển thị ca hiện tại &amp; form gửi yêu cầu</text>
+</g>
+<g class="message" data-from="W" data-to="UI" data-label="Chọn &quot;Đổi ca&quot;, chọn ca cần đổi, chọn đồng nghiệp &amp; nhập lý do" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="108.47800000000001" y1="410" x2="305.434" y2="410" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="206.95600000000002" y="400" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Chọn &quot;Đổi ca&quot;, chọn ca cần đổi, chọn đồng nghiệp &amp; nhập lý do</text>
+</g>
+<g class="message" data-from="W" data-to="UI" data-label="Bấm nút &quot;Gửi yêu cầu đổi ca&quot;" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="108.47800000000001" y1="450" x2="305.434" y2="450" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="206.95600000000002" y="440" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Bấm nút &quot;Gửi yêu cầu đổi ca&quot;</text>
+</g>
+<g class="message" data-from="UI" data-to="Ctrl" data-label="POST /api/ca-lam-viec/yeu-cau-doi-ca (payload)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="305.434" y1="490" x2="516.8395" y2="490" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="411.13675" y="480" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">POST /api/ca-lam-viec/yeu-cau-doi-ca (payload)</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Svc" data-label="taoYeuCauDoiCa(nhanVienYeuCauId=3, caId=8, nguoiDoiId=5, lyDo)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="516.8395" y1="530" x2="733.0615" y2="530" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="624.9505" y="520" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">taoYeuCauDoiCa(nhanVienYeuCauId=3, caId=8, nguoiDoiId=5, lyDo)</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="BEGIN IMMEDIATE TRANSACTION" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="570" x2="938.539" y2="570" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="560" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">BEGIN IMMEDIATE TRANSACTION</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="INSERT INTO yeu_cau_doi_ca (nhan_vien_yeu_cau_id, ca_lam_viec_id, loai_yeu_cau, nhan_vien_nhan_ca_id, ly_do, trang_thai) VALUES (3, 8, 'doi_ca', 5, '...', 'cho_duyet')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="610" x2="938.539" y2="610" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="600" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">INSERT INTO yeu_cau_doi_ca (nhan_vien_yeu_cau_id, ca_lam_viec_id, loai_yeu_cau, nhan_vien_nhan_ca_id, ly_do, trang_thai) VALUES (3, 8, &#39;doi_ca&#39;, 5, &#39;...&#39;, &#39;cho_duyet&#39;)</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="INSERT INTO nhat_ky_kiem_toan (hanh_dong, nguoi_thuc_hien_id, chi_tiet) VALUES ('TAO_YEU_CAU_DOI_CA', 3, '...')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="650" x2="938.539" y2="650" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="640" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">INSERT INTO nhat_ky_kiem_toan (hanh_dong, nguoi_thuc_hien_id, chi_tiet) VALUES (&#39;TAO_YEU_CAU_DOI_CA&#39;, 3, &#39;...&#39;)</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="COMMIT TRANSACTION" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="690" x2="938.539" y2="690" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="680" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">COMMIT TRANSACTION</text>
+</g>
+<g class="message" data-from="DB" data-to="Svc" data-label="yeu_cau_doi_ca_id = 15" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="938.539" y1="730" x2="733.0615" y2="730" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="720" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">yeu_cau_doi_ca_id = 15</text>
+</g>
+<g class="message" data-from="Svc" data-to="Ctrl" data-label="Bản ghi yêu cầu mới (trang_thai='cho_duyet')" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="770" x2="516.8395" y2="770" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="624.9505" y="760" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Bản ghi yêu cầu mới (trang_thai=&#39;cho_duyet&#39;)</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Sock" data-label="broadcastEvent('ADMIN_NEW_SHIFT_REQUEST', { yeu_cau_id: 15, nhan_vien: 'Minh' })" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="516.8395" y1="810" x2="1139.941" y2="810" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="828.39025" y="800" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">broadcastEvent(&#39;ADMIN_NEW_SHIFT_REQUEST&#39;, { yeu_cau_id: 15, nhan_vien: &#39;Minh&#39; })</text>
+</g>
+<g class="message" data-from="Sock" data-to="A_UI" data-label="Emit: 'nhan_su:co_yeu_cau_moi' (Rung chuông &amp; badge đỏ A07)" data-line-style="solid" data-arrow-head="open" data-self="false">
+  <line x1="1139.941" y1="850" x2="1353.5695" y2="850" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow-open)" />
+  <text x="1246.7552500000002" y="840" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Emit: &#39;nhan_su:co_yeu_cau_moi&#39; (Rung chuông &amp; badge đỏ A07)</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="UI" data-label="HTTP 201 Created { ok: true, msg: &quot;Đã gửi yêu cầu, chờ quản lý duyệt&quot; }" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="516.8395" y1="890" x2="305.434" y2="890" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="411.13675" y="880" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">HTTP 201 Created { ok: true, msg: &quot;Đã gửi yêu cầu, chờ quản lý duyệt&quot; }</text>
+</g>
+<g class="message" data-from="UI" data-to="W" data-label="Hiển thị banner: &quot;Chờ quản lý duyệt · Lịch cũ vẫn có hiệu lực&quot;" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="305.434" y1="930" x2="108.47800000000001" y2="930" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="206.95600000000002" y="920" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Hiển thị banner: &quot;Chờ quản lý duyệt · Lịch cũ vẫn có hiệu lực&quot;</text>
+</g>
+<g class="message" data-from="A" data-to="A_UI" data-label="Xem chi tiết lý do &amp; bấm &quot;Chấp thuận&quot;" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="1557.9355" y1="985" x2="1353.5695" y2="985" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1455.7525" y="975" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Xem chi tiết lý do &amp; bấm &quot;Chấp thuận&quot;</text>
+</g>
+<g class="message" data-from="A_UI" data-to="Ctrl" data-label="PUT /api/ca-lam-viec/yeu-cau-doi-ca/15/duyet { quyet_dinh: 'chap_thuan', quan_ly_id: 1 }" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="1353.5695" y1="1025" x2="516.8395" y2="1025" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="935.2045" y="1015" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">PUT /api/ca-lam-viec/yeu-cau-doi-ca/15/duyet { quyet_dinh: &#39;chap_thuan&#39;, quan_ly_id: 1 }</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Svc" data-label="pheDuyetYeuCauDoiCa(yeuCauId=15, quanLyId=1, 'da_duyet')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="516.8395" y1="1065" x2="733.0615" y2="1065" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="624.9505" y="1055" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">pheDuyetYeuCauDoiCa(yeuCauId=15, quanLyId=1, &#39;da_duyet&#39;)</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="BEGIN IMMEDIATE TRANSACTION" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="1105" x2="938.539" y2="1105" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="1095" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">BEGIN IMMEDIATE TRANSACTION</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="UPDATE yeu_cau_doi_ca SET trang_thai = 'da_duyet', quan_ly_duyet_id = 1, ngay_duyet = CURRENT_TIMESTAMP WHERE id = 15" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="1145" x2="938.539" y2="1145" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="1135" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">UPDATE yeu_cau_doi_ca SET trang_thai = &#39;da_duyet&#39;, quan_ly_duyet_id = 1, ngay_duyet = CURRENT_TIMESTAMP WHERE id = 15</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="UPDATE ca_lam_viec SET nhan_vien_id = 5 WHERE id = 8" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="1185" x2="938.539" y2="1185" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="1175" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">UPDATE ca_lam_viec SET nhan_vien_id = 5 WHERE id = 8</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="INSERT INTO nhat_ky_kiem_toan (hanh_dong, nguoi_thuc_hien_id, chi_tiet) VALUES ('DUYET_DOI_CA', 1, 'Duyệt đổi ca #8 sang nhân viên #5')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="1225" x2="938.539" y2="1225" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="1215" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">INSERT INTO nhat_ky_kiem_toan (hanh_dong, nguoi_thuc_hien_id, chi_tiet) VALUES (&#39;DUYET_DOI_CA&#39;, 1, &#39;Duyệt đổi ca #8 sang nhân viên #5&#39;)</text>
+</g>
+<g class="message" data-from="Svc" data-to="DB" data-label="COMMIT TRANSACTION" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="1265" x2="938.539" y2="1265" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="1255" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">COMMIT TRANSACTION</text>
+</g>
+<g class="message" data-from="DB" data-to="Svc" data-label="Hoán đổi ca thành công" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="938.539" y1="1305" x2="733.0615" y2="1305" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="835.80025" y="1295" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Hoán đổi ca thành công</text>
+</g>
+<g class="message" data-from="Svc" data-to="Ctrl" data-label="Kết quả phê duyệt &amp; lịch làm cập nhật" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="733.0615" y1="1345" x2="516.8395" y2="1345" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="624.9505" y="1335" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Kết quả phê duyệt &amp; lịch làm cập nhật</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Sock" data-label="broadcastEvent('SHIFT_UPDATED', { yeu_cau_id: 15, trang_thai: 'da_duyet', nhan_vien_ids: [3, 5] })" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="516.8395" y1="1385" x2="1139.941" y2="1385" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="828.39025" y="1375" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">broadcastEvent(&#39;SHIFT_UPDATED&#39;, { yeu_cau_id: 15, trang_thai: &#39;da_duyet&#39;, nhan_vien_ids: [3, 5] })</text>
+</g>
+<g class="message" data-from="Sock" data-to="UI" data-label="Emit: 'nhan_su:ket_qua_duyet' (Cập nhật lịch mới cho nhân viên)" data-line-style="solid" data-arrow-head="open" data-self="false">
+  <line x1="1139.941" y1="1425" x2="305.434" y2="1425" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow-open)" />
+  <text x="722.6875" y="1415" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Emit: &#39;nhan_su:ket_qua_duyet&#39; (Cập nhật lịch mới cho nhân viên)</text>
+</g>
+<g class="message" data-from="Sock" data-to="A_UI" data-label="Emit: 'nhan_su:danh_sach_cap_nhat' (Xóa thẻ khỏi hàng đợi chờ duyệt)" data-line-style="solid" data-arrow-head="open" data-self="false">
+  <line x1="1139.941" y1="1465" x2="1353.5695" y2="1465" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow-open)" />
+  <text x="1246.7552500000002" y="1455" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Emit: &#39;nhan_su:danh_sach_cap_nhat&#39; (Xóa thẻ khỏi hàng đợi chờ duyệt)</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="A_UI" data-label="HTTP 200 OK { ok: true, msg: &quot;Phê duyệt thành công&quot; }" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="516.8395" y1="1505" x2="1353.5695" y2="1505" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="935.2045" y="1495" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">HTTP 200 OK { ok: true, msg: &quot;Phê duyệt thành công&quot; }</text>
+</g>
+<g class="message" data-from="A_UI" data-to="A" data-label="Thông báo cập nhật lịch trực tuần thành công" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1353.5695" y1="1545" x2="1557.9355" y2="1545" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1455.7525" y="1535" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Thông báo cập nhật lịch trực tuần thành công</text>
+</g>
+<g class="message" data-from="UI" data-to="W" data-label="Cập nhật giao diện: Badge &quot;Đã duyệt&quot; &amp; Lịch trực tuần đổi sang ca mới" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="305.434" y1="1585" x2="108.47800000000001" y2="1585" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="206.95600000000002" y="1575" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Cập nhật giao diện: Badge &quot;Đã duyệt&quot; &amp; Lịch trực tuần đổi sang ca mới</text>
+</g>
+<g class="note" data-position="over" data-actors="A,A_UI">
+  <polygon points="1321.1575,938 1584.3475,938 1590.3475,944 1590.3475,961 1321.1575,961" fill="var(--bg)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <polygon points="1584.3475,938 1590.3475,944 1584.3475,944" fill="var(--_inner-stroke)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1455.7525" y="949.5" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Quản lý tiếp nhận đơn trên màn hình A07 (Figma A07)</text>
+</g>
+<g class="actor" data-id="W" data-label="🤵 Nhân viên (Waiter)" data-type="actor">
+  <g transform="translate(90.47800000000001,32) scale(1.5)">
+    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M5.62842 18.3563C7.08963 17.0398 9.39997 16 12 16C14.6 16 16.9104 17.0398 18.3716 18.3563" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+  </g>
+  <text x="108.47800000000001" y="84" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🤵 Nhân viên (Waiter)</text>
+</g>
+<g class="actor" data-id="UI" data-label="📱 Waiter Mobile (W11)" data-type="participant">
+  <rect x="226.95600000000002" y="30" width="156.95600000000002" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="305.434" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">📱 Waiter Mobile (W11)</text>
+</g>
+<g class="actor" data-id="Ctrl" data-label="⚙️ caLamViec.controller" data-type="participant">
+  <rect x="423.9120000000001" y="30" width="185.85499999999993" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="516.8395" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">⚙️ caLamViec.controller</text>
+</g>
+<g class="actor" data-id="Svc" data-label="🧠 caLamViec.service" data-type="participant">
+  <rect x="649.767" y="30" width="166.589" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="733.0615" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🧠 caLamViec.service</text>
+</g>
+<g class="actor" data-id="DB" data-label="🗄️ SQLite3 Database" data-type="participant">
+  <rect x="856.356" y="30" width="164.36599999999999" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="938.539" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🗄️ SQLite3 Database</text>
+</g>
+<g class="actor" data-id="Sock" data-label="⚡ Socket.io Gateway" data-type="participant">
+  <rect x="1060.722" y="30" width="158.438" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1139.941" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">⚡ Socket.io Gateway</text>
+</g>
+<g class="actor" data-id="A_UI" data-label="💻 Admin Dashboard (A07)" data-type="participant">
+  <rect x="1259.16" y="30" width="188.81899999999996" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1353.5695" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">💻 Admin Dashboard (A07)</text>
+</g>
+<g class="actor" data-id="A" data-label="👔 Quản lý (Admin)" data-type="actor">
+  <g transform="translate(1539.9355,32) scale(1.5)">
+    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M5.62842 18.3563C7.08963 17.0398 9.39997 16 12 16C14.6 16 16.9104 17.0398 18.3716 18.3563" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+  </g>
+  <text x="1557.9355" y="84" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">👔 Quản lý (Admin)</text>
+</g>
+</svg>

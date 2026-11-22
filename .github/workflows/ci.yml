@@ -1,0 +1,40 @@
+name: Quán Mộc POS CI / CD Automation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout mã nguồn
+      uses: actions/checkout@v4
+
+    - name: Cài đặt Node.js 22 LTS
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'npm'
+
+    - name: Cài đặt Dependencies Backend
+      run: npm ci
+
+    - name: Cài đặt Dependencies Frontend
+      working-directory: ./frontend
+      run: npm ci
+
+    - name: Khởi tạo & Kiểm thử Toàn vẹn CSDL
+      run: |
+        node database/sinhDuLieuMau.js
+        node database/kiemTraDuLieu.js
+
+    - name: Chạy Bộ Kiểm thử Tích hợp Backend API (23 Tests)
+      run: node backend/kiemThuBackend.js
+
+    - name: Biên dịch Frontend Production
+      working-directory: ./frontend
+      run: npm run build

@@ -1,0 +1,29 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+actor "Người dùng" as User
+component "React SPA" as SPA
+package "Máy chủ Node.js" {
+  component "Express / định tuyến" as HTTP
+  component "Xác thực JWT, token bàn, phân quyền và vào ca" as Auth
+  component "banAn / donGoiMon / dieuPhoiBep" as Ops
+  component "hoaDon / baoCao" as Pay
+  component "taiKhoan / caLamViec / thucDon / heThong" as Admin
+  component "Kết nối CSDL (node:sqlite)" as SQL
+  component "Socket.IO" as IO
+}
+database "SQLite" as DB
+User -- SPA
+SPA ..> HTTP : HTTP / JSON
+SPA -- IO : Socket.IO
+HTTP ..> Auth
+HTTP ..> Ops
+HTTP ..> Pay
+HTTP ..> Admin
+Ops ..> SQL
+Pay ..> SQL
+Admin ..> SQL
+Ops ..> IO
+Pay ..> IO
+SQL ..> DB
+@enduml

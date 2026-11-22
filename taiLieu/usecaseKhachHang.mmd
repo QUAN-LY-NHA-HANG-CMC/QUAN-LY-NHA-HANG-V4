@@ -1,0 +1,31 @@
+flowchart LR
+    %% PHÂN HỆ KHÁCH HÀNG
+    Customer(["👤 Khách hàng\n(Customer)"])
+    VietQR(["🏦 Cổng VietQR"])
+
+    subgraph SYSTEM["Phân hệ Khách hàng (QR Order)"]
+        UC01(["UC01: Quét QR vào bàn chung session"])
+        UC02(["UC02: Duyệt menu & combo gợi ý"])
+        UC03(["UC03: Thêm giỏ hàng & ghi chú món"])
+        UC04(["UC04: Gửi yêu cầu đặt món"])
+        UC_Check(["Kiểm tra món còn/hết"])
+        UC05(["UC05: Theo dõi tiến độ món ăn"])
+        UC06(["UC06: Gọi phục vụ / Gọi tính tiền"])
+        UC07(["UC07: Thanh toán VietQR tại bàn"])
+        UC09(["UC09: Cưa tiền nhóm (Chia đều tiền)"])
+        UC08(["UC08: Đánh giá món & Dịch vụ"])
+    end
+
+    Customer --> UC01
+    Customer --> UC02
+    Customer --> UC03
+    Customer --> UC04
+    Customer --> UC05
+    Customer --> UC06
+    Customer --> UC07
+    Customer --> UC08
+
+    UC04 -.->|"<<include>>"| UC_Check
+    UC07 -.->|"<<extend>>"| UC09
+    UC07 -.->|"<<tương tác>>"| VietQR
+    UC09 -.->|"<<tương tác>>"| VietQR

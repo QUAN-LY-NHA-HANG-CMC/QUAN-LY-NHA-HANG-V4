@@ -1,0 +1,30 @@
+stateDiagram-v2
+    title BIỂU ĐỒ TRẠNG THÁI VÒNG ĐỜI HÓA ĐƠN (INVOICE LIFECYCLE)
+
+    [*] --> ChuaThanhToan : Thu ngân bấm "Lập hóa đơn" cho phiên bàn
+
+    state ChuaThanhToan {
+        [*] --> LapBillTamTinh
+        LapBillTamTinh : Tổng hợp món đã dùng, tính VAT 8% và trừ chiết khấu
+        LapBillTamTinh --> ChoTienMat : Chọn hình thức Tiền mặt (tính tiền thối)
+        LapBillTamTinh --> ChoQuetVietQR : Xuất mã VietQR NAPAS 247 động
+    }
+
+    ChuaThanhToan --> DaThanhToan : Nhận đủ tiền mặt / Webhook ngân hàng báo có tiền
+    
+    state DaThanhToan {
+        [*] --> InHoaDonNhiet
+        InHoaDonNhiet : In hóa đơn K80, cập nhật doanh thu và giải phóng bàn
+    }
+
+    DaThanhToan --> [*]
+
+    %% Nhánh hủy hóa đơn (Split Bill / Đổi bàn)
+    ChuaThanhToan --> DaHuy : Tách hóa đơn (Split Bill) / Lập nhầm bàn (Admin duyệt)
+    
+    state DaHuy {
+        [*] --> GhiNhanAuditHuy
+        GhiNhanAuditHuy : Lưu lịch sử hủy bill trong nhat_ky_kiem_toan
+    }
+
+    DaHuy --> [*]

@@ -1,0 +1,43 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+left to right direction
+actor "Khách tại bàn" as C
+actor "Phục vụ" as W
+actor "Bếp" as K
+actor "Thu ngân" as P
+actor "Quản lý" as A
+rectangle "Quán Mộc POS & E-Menu" {
+usecase "UC01 – Xem thực đơn và gửi đơn QR" as U1
+usecase "Kiểm tra món và số suất" as Stock
+usecase "UC02 – Theo dõi món và gọi hỗ trợ" as U2
+usecase "UC03 – Duyệt hoặc từ chối đơn QR" as U3
+usecase "UC04 – Mở, chuyển, gộp bàn và đặt hộ" as U4
+usecase "UC05 – Chế biến và xác nhận phục vụ" as U5
+usecase "UC06 – Yêu cầu và xử lý hủy món" as U6
+usecase "UC07 – Lập hóa đơn và xác nhận thu tiền" as U7
+usecase "UC08 – Chia đều số tiền hóa đơn" as U8
+usecase "UC09 – Xem hóa đơn và gửi đánh giá" as U9
+usecase "UC10 – Gửi và xử lý yêu cầu đổi/nghỉ ca" as U10
+usecase "UC11 – Quản lý dữ liệu và báo cáo" as U11
+}
+C -- U1
+C -- U2
+C -- U9
+W -- U3
+P -- U3
+W -- U4
+P -- U4
+K -- U5
+W -- U5
+W -- U6
+A -- U6
+P -- U7
+A -- U7
+P -- U8
+W -- U10
+A -- U10
+A -- U11
+U1 ..> Stock : <<include>>
+U8 ..> U7 : <<extend>>
+@enduml

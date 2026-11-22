@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1252.4919999999997 603.1999999999999" width="1252.4919999999997" height="603.1999999999999" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="SYSTEM" data-label="Phân hệ Khách hàng (QR Order)">
+  <rect x="235.388" y="40" width="683.1679999999999" height="523.1999999999999" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="235.388" y="40" width="683.1679999999999" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="247.388" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Phân hệ Khách hàng (QR Order)</text>
+</g>
+<polyline class="edge" data-from="Customer" data-to="UC01" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.388,315.5999999999999 218.63162499999999,315.5999999999999 218.63162499999999,102.45 267.87525,102.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Customer" data-to="UC02" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.388,315.5999999999999 218.63162499999999,315.5999999999999 218.63162499999999,163.34999999999997 267.87525,163.34999999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Customer" data-to="UC03" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.388,315.5999999999999 218.63162499999999,315.5999999999999 218.63162499999999,224.25 267.87525,224.25" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Customer" data-to="UC04" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.388,315.5999999999999 218.63162499999999,315.5999999999999 218.63162499999999,285.15 267.87525,285.15" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Customer" data-to="UC05" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.388,315.5999999999999 218.63162499999999,315.5999999999999 218.63162499999999,346.04999999999995 267.87525,346.04999999999995" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Customer" data-to="UC06" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.388,315.5999999999999 218.63162499999999,315.5999999999999 218.63162499999999,406.95 267.87525,406.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Customer" data-to="UC07" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.388,315.5999999999999 218.63162499999999,315.5999999999999 218.63162499999999,467.84999999999997 267.87525,467.84999999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Customer" data-to="UC08" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="169.388,315.5999999999999 218.63162499999999,315.5999999999999 218.63162499999999,528.75 267.87525,528.75" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UC07" data-to="VietQR" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;tương tác&gt;&gt;" points="495.81624999999997,461.7 523.192,461.7 523.192,453.125 952.5559999999999,453.125 952.5559999999999,451.19999999999993 1068.1399999999999,451.19999999999993 1068.1399999999999,461.7 1080.1399999999999,461.7" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UC09" data-to="VietQR" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;tương tác&gt;&gt;" points="902.5559999999999,482.575 952.5559999999999,482.57499999999993 952.5559999999999,484.5 1068.1399999999999,484.5 1068.1399999999999,474 1080.1399999999999,474" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UC04" data-to="UC_Check" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;include&gt;&gt;" points="461.73024999999996,285.15 659.054,285.15" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UC07" data-to="UC09" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;extend&gt;&gt;" points="495.81625,474 523.192,474 523.192,482.57499999999993 659.054,482.575" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="UC07" data-to="VietQR" data-label="&lt;&lt;tương tác&gt;&gt;">
+  <rect x="960.5559999999999" y="435.19999999999993" width="83.58400000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1002.348" y="450.3499999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;tương tác&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UC09" data-to="VietQR" data-label="&lt;&lt;tương tác&gt;&gt;">
+  <rect x="960.5559999999999" y="468.5" width="83.58400000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1002.348" y="483.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;tương tác&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UC04" data-to="UC_Check" data-label="&lt;&lt;include&gt;&gt;">
+  <rect x="547.1919999999999" y="269.15" width="75.86200000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="585.1229999999999" y="284.29999999999995" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;include&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UC07" data-to="UC09" data-label="&lt;&lt;extend&gt;&gt;">
+  <rect x="548.3799999999999" y="466.57499999999993" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="585.1229999999999" y="481.7249999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;extend&gt;&gt;</text>
+</g>
+<g class="node" data-id="Customer" data-label="👤 Khách hàng
+(Customer)" data-shape="stadium">
+  <rect x="40" y="288.69999999999993" width="129.388" height="53.800000000000004" rx="26.900000000000002" ry="26.900000000000002" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="104.694" y="315.5999999999999" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="104.694" dy="-3.9000000000000012">👤 Khách hàng</tspan><tspan x="104.694" dy="16.900000000000002">(Customer)</tspan></text>
+</g>
+<g class="node" data-id="VietQR" data-label="🏦 Cổng VietQR" data-shape="stadium">
+  <rect x="1080.1399999999999" y="449.4" width="132.35199999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1146.3159999999998" y="467.84999999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">🏦 Cổng VietQR</text>
+</g>
+<g class="node" data-id="UC01" data-label="UC01: Quét QR vào bàn chung session" data-shape="stadium">
+  <rect x="267.87525" y="84" width="259.804" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="397.77725" y="102.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC01: Quét QR vào bàn chung session</text>
+</g>
+<g class="node" data-id="UC02" data-label="UC02: Duyệt menu &amp; combo gợi ý" data-shape="stadium">
+  <rect x="267.87525" y="144.89999999999998" width="227.20000000000002" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="381.47525" y="163.34999999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC02: Duyệt menu &amp; combo gợi ý</text>
+</g>
+<g class="node" data-id="UC03" data-label="UC03: Thêm giỏ hàng &amp; ghi chú món" data-shape="stadium">
+  <rect x="267.87525" y="205.79999999999998" width="244.243" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="389.99675" y="224.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC03: Thêm giỏ hàng &amp; ghi chú món</text>
+</g>
+<g class="node" data-id="UC04" data-label="UC04: Gửi yêu cầu đặt món" data-shape="stadium">
+  <rect x="267.87525" y="266.7" width="193.855" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="364.80275" y="285.15" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC04: Gửi yêu cầu đặt món</text>
+</g>
+<g class="node" data-id="UC_Check" data-label="Kiểm tra món còn/hết" data-shape="stadium">
+  <rect x="659.054" y="266.7" width="160.51" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="739.309" y="285.15" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Kiểm tra món còn/hết</text>
+</g>
+<g class="node" data-id="UC05" data-label="UC05: Theo dõi tiến độ món ăn" data-shape="stadium">
+  <rect x="267.87525" y="327.59999999999997" width="213.86200000000002" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="374.80625" y="346.04999999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC05: Theo dõi tiến độ món ăn</text>
+</g>
+<g class="node" data-id="UC06" data-label="UC06: Gọi phục vụ / Gọi tính tiền" data-shape="stadium">
+  <rect x="267.87525" y="388.5" width="225.718" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="380.73425" y="406.95" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC06: Gọi phục vụ / Gọi tính tiền</text>
+</g>
+<g class="node" data-id="UC07" data-label="UC07: Thanh toán VietQR tại bàn" data-shape="stadium">
+  <rect x="267.87525" y="449.4" width="227.94099999999995" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="381.84574999999995" y="467.84999999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC07: Thanh toán VietQR tại bàn</text>
+</g>
+<g class="node" data-id="UC09" data-label="UC09: Cưa tiền nhóm (Chia đều tiền)" data-shape="stadium">
+  <rect x="659.054" y="464.125" width="243.50199999999995" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="780.805" y="482.575" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC09: Cưa tiền nhóm (Chia đều tiền)</text>
+</g>
+<g class="node" data-id="UC08" data-label="UC08: Đánh giá món &amp; Dịch vụ" data-shape="stadium">
+  <rect x="267.87525" y="510.29999999999995" width="215.344" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="375.54724999999996" y="528.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UC08: Đánh giá món &amp; Dịch vụ</text>
+</g>
+</svg>

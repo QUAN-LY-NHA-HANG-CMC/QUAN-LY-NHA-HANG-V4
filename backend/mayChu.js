@@ -1,48 +1,62 @@
-/**
- * Điểm khởi chạy máy chủ HTTP (mayChu.js)
- * Khởi tạo CSDL, nạp dữ liệu mẫu và lắng nghe kết nối
- */
-require('dotenv').config();
-const http = require('http');
-const app = require('./ungDung');
-const cauHinhChung = require('./cauHinh/cauHinhChung');
-const { khoiTaoCoSoDuLieu } = require('./cauHinh/ketNoiCoSoDuLieu');
+// ============================================================================
+// DỰ ÁN: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR TẠI BÀN (QUÁN MỘC POS & E-MENU)
+// MÁY CHỦ CHÍNH (ENTRY POINT) - KHỞI CHẠY HTTP VÀ SOCKET.IO GATEWAY
+// ============================================================================
 
-// 1. Tự động khởi tạo cấu trúc CSDL và dữ liệu mẫu nếu chưa có
-try {
-    khoiTaoCoSoDuLieu();
-    console.log('[CSDL] Đã kiểm tra và nạp cấu trúc cơ sở dữ liệu & dữ liệu mẫu thành công.');
-} catch (loi) {
-    console.error('[CSDL] Lỗi khi khởi tạo cơ sở dữ liệu:', loi.message);
+const http = require('http');
+const ungDung = require('./ungDung');
+const { khoiTaoSocket } = require('./cauHinh/cauHinhSocket');
+const cauHinh = require('./cauHinh/cauHinhChung');
+
+// Tạo HTTP Server từ ứng dụng Express
+const mayChuHttp = http.createServer(ungDung);
+
+// Gắn kết Socket.io Server thời gian thực
+const io = khoiTaoSocket(mayChuHttp);
+
+const PORT = cauHinh.congBackend;
+
+if (require.main === module) {
+    mayChuHttp.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+            console.error('\n❌ [LỖI KHỞI ĐỘNG]: Cổng 3001 (PORT 3001) đang bị một tiến trình khác chiếm dụng!');
+            console.error('💡 CÁCH KHẮC PHỤC NHANH:');
+            console.error('   1. Chạy lệnh: npm run kill-port');
+            console.error('   2. Hoặc nhấp đúp chuột vào file: dong-localhost.bat ở thư mục gốc');
+            console.error('   3. Hoặc trong PowerShell: Stop-Process -Id (Get-NetTCPConnection -LocalPort 3001).OwningProcess -Force\n');
+            process.exit(1);
+        } else {
+            console.error('❌ Lỗi máy chủ:', err.message);
+            process.exit(1);
+        }
+    });
+
+    mayChuHttp.listen(PORT, () => {
+        console.log('================================================================');
+        console.log('🚀 MÁY CHỦ QUÁN MỘC POS & E-MENU ĐÃ KHỞI CHẠY THÀNH CÔNG!');
+        console.log(`📡 Địa chỉ HTTP API:    http://localhost:${PORT}`);
+        console.log(`🔌 Cổng Socket.io:      ws://localhost:${PORT}`);
+        console.log(`🏥 Kiểm tra sức khỏe:   http://localhost:${PORT}/api/kiem-tra-suc-khoe`);
+        console.log(`🗄️ CSDL SQLite:        ${cauHinh.duongDanCsdl}`);
+        console.log(`🕒 Thời gian khởi động: ${new Date().toLocaleString('vi-VN')}`);
+        console.log('================================================================');
+    });
+
+    // Lắng nghe tín hiệu dừng chương trình an toàn
+    const dongMayChuAnToan = () => {
+        console.log('\n🛑 Đang đóng máy chủ Quán Mộc POS...');
+        io.close(() => {
+            console.log('✅ Đã đóng toàn bộ kết nối mạng.');
+            process.exit(0);
+        });
+    };
+
+    process.on('SIGINT', dongMayChuAnToan);
+    process.on('SIGTERM', dongMayChuAnToan);
 }
 
-// 2. Tạo máy chủ HTTP
-const server = http.createServer(app);
-const PORT = cauHinhChung.congBackend;
-
-server.listen(PORT, () => {
-    console.log('================================================================');
-    console.log(` MÁY CHỦ BACKEND NHÀ HÀNG QUÁN MỘC ĐÃ KHỞI CHẠY THÀNH CÔNG `);
-    console.log(` Cổng lắng nghe    : http://localhost:${PORT}`);
-    console.log(` Kiểm tra sức khỏe : http://localhost:${PORT}/api/kiem-tra-suc-khoe`);
-    console.log(` Tài liệu Swagger  : http://localhost:${PORT}/api-docs`);
-    console.log(` Swagger JSON      : http://localhost:${PORT}/api-docs.json`);
-    console.log(` Môi trường        : ${cauHinhChung.moiTruong}`);
-    console.log('================================================================');
-});
-
-// 3. Xử lý tắt máy chủ an toàn (Graceful Shutdown)
-process.on('SIGINT', () => {
-    console.log('\n[MÁY CHỦ] Đang đóng kết nối và tắt máy chủ an toàn...');
-    server.close(() => {
-        console.log('[MÁY CHỦ] Đã dừng toàn bộ tiến trình.');
-        process.exit(0);
-    });
-});
-
-process.on('SIGTERM', () => {
-    console.log('\n[MÁY CHỦ] Đang nhận tín hiệu SIGTERM để kết thúc...');
-    server.close(() => {
-        process.exit(0);
-    });
-});
+module.exports = {
+    mayChuHttp,
+    ungDung,
+    io
+};

@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1919.1650000000002 1820" width="1919.1650000000002" height="1820" style="--bg:#FFFFFF;--fg:#27272A;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="seq-arrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" />
+  </marker>
+  <marker id="seq-arrow-open" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+    <polyline points="0 0, 8 2.5, 0 5" fill="none" stroke="var(--_arrow)" stroke-width="1" />
+  </marker>
+</defs>
+<line class="lifeline" data-actor="C" x1="90.694" y1="70" x2="90.694" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="TN" x1="244.67200000000003" y1="70" x2="244.67200000000003" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="POS" x1="409.3945" y1="70" x2="409.3945" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Ctrl" x1="603.3865000000001" y1="70" x2="603.3865000000001" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="SvcP" x1="804.0475000000001" y1="70" x2="804.0475000000001" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="SvcH" x1="995.0755000000001" y1="70" x2="995.0755000000001" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Bank" x1="1205.7400000000002" y1="70" x2="1205.7400000000002" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="DB" x1="1425.6670000000001" y1="70" x2="1425.6670000000001" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Sock" x1="1627.0690000000002" y1="70" x2="1627.0690000000002" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<line class="lifeline" data-actor="Printer" x1="1817.7265000000002" y1="70" x2="1817.7265000000002" y2="1790" stroke="var(--_line)" stroke-width="0.75" stroke-dasharray="6 4" />
+<g class="message" data-from="C" data-to="POS" data-label="Bấm &quot;Yêu cầu tính tiền&quot; trên E-Menu (hoặc báo nhân viên)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="90.694" y1="90" x2="409.3945" y2="90" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="250.04425" y="80" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Bấm &quot;Yêu cầu tính tiền&quot; trên E-Menu (hoặc báo nhân viên)</text>
+</g>
+<g class="message" data-from="POS" data-to="Ctrl" data-label="POST /api/ban-an/4/yeu-cau-thanh-toan" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="409.3945" y1="130" x2="603.3865000000001" y2="130" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="506.39050000000003" y="120" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">POST /api/ban-an/4/yeu-cau-thanh-toan</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="DB" data-label="UPDATE ban_an SET trang_thai = 'yeu_cau_thanh_toan' WHERE id = 4" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="170" x2="1425.6670000000001" y2="170" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1014.5267500000001" y="160" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">UPDATE ban_an SET trang_thai = &#39;yeu_cau_thanh_toan&#39; WHERE id = 4</text>
+</g>
+<g class="message" data-from="DB" data-to="Ctrl" data-label="OK" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1425.6670000000001" y1="210" x2="603.3865000000001" y2="210" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1014.5267500000001" y="200" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">OK</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="POS" data-label="Đổi màu bàn B04 sang đỏ (Yêu cầu thanh toán)" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="250" x2="409.3945" y2="250" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="506.39050000000003" y="240" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Đổi màu bàn B04 sang đỏ (Yêu cầu thanh toán)</text>
+</g>
+<g class="message" data-from="TN" data-to="POS" data-label="Chọn Bàn B04, nhấn &quot;Lập hóa đơn thanh toán&quot;" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="244.67200000000003" y1="290" x2="409.3945" y2="290" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="327.03325" y="280" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Chọn Bàn B04, nhấn &quot;Lập hóa đơn thanh toán&quot;</text>
+</g>
+<g class="message" data-from="POS" data-to="Ctrl" data-label="POST /api/hoa-don/lap-hoa-don { ban_id: 4, ma_voucher: null, phuong_thuc: 'vietqr' }" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="409.3945" y1="330" x2="603.3865000000001" y2="330" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="506.39050000000003" y="320" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">POST /api/hoa-don/lap-hoa-don { ban_id: 4, ma_voucher: null, phuong_thuc: &#39;vietqr&#39; }</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="SvcP" data-label="layPhienDangHoatDong(ban_id=4)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="370" x2="804.0475000000001" y2="370" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="703.7170000000001" y="360" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">layPhienDangHoatDong(ban_id=4)</text>
+</g>
+<g class="message" data-from="SvcP" data-to="DB" data-label="SELECT id FROM phien_ban WHERE ban_an_id = 4 AND trang_thai = 'dang_hoat_dong'" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="804.0475000000001" y1="410" x2="1425.6670000000001" y2="410" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1114.85725" y="400" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">SELECT id FROM phien_ban WHERE ban_an_id = 4 AND trang_thai = &#39;dang_hoat_dong&#39;</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcP" data-label="phien_ban_id = 12" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1425.6670000000001" y1="450" x2="804.0475000000001" y2="450" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1114.85725" y="440" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phien_ban_id = 12</text>
+</g>
+<g class="message" data-from="SvcP" data-to="Ctrl" data-label="phien_ban_id = 12" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="804.0475000000001" y1="490" x2="603.3865000000001" y2="490" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="703.7170000000001" y="480" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phien_ban_id = 12</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="SvcH" data-label="taoHoaDonTamTinh(phien_ban_id=12, thu_ngan_id=2)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="530" x2="995.0755000000001" y2="530" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="799.2310000000001" y="520" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">taoHoaDonTamTinh(phien_ban_id=12, thu_ngan_id=2)</text>
+</g>
+<g class="message" data-from="SvcH" data-to="DB" data-label="SELECT c.so_luong, c.don_gia FROM chi_tiet_don_mon c JOIN don_goi_mon d ON c.don_goi_mon_id = d.id WHERE d.phien_ban_id = 12 AND c.trang_thai_mon NOT IN ('huy_mon', 'da_huy')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="570" x2="1425.6670000000001" y2="570" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="560" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">SELECT c.so_luong, c.don_gia FROM chi_tiet_don_mon c JOIN don_goi_mon d ON c.don_goi_mon_id = d.id WHERE d.phien_ban_id = 12 AND c.trang_thai_mon NOT IN (&#39;huy_mon&#39;, &#39;da_huy&#39;)</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcH" data-label="Danh sách món ăn hợp lệ" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1425.6670000000001" y1="610" x2="995.0755000000001" y2="610" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="600" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Danh sách món ăn hợp lệ</text>
+</g>
+<g class="message" data-from="SvcH" data-to="SvcH" data-label="Tính: tong_tien_mon=781,000đ; VAT 8%=62,480đ; tong_tien_thanh_toan=843,480đ" data-line-style="solid" data-arrow-head="filled" data-self="true">
+  <polyline points="995.0755000000001,650 1025.0755000000001,650 1025.0755000000001,670 995.0755000000001,670" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1033.0755000000001" y="660" font-size="11" text-anchor="start" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Tính: tong_tien_mon=781,000đ; VAT 8%=62,480đ; tong_tien_thanh_toan=843,480đ</text>
+</g>
+<g class="message" data-from="SvcH" data-to="DB" data-label="INSERT INTO hoa_don (phien_ban_id, ma_hoa_don, thu_ngan_id, tong_tien_mon, phan_tram_vat, tien_vat, tong_tien_thanh_toan, phuong_thuc_thanh_toan, trang_thai='chua_thanh_toan')" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="720" x2="1425.6670000000001" y2="720" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="710" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">INSERT INTO hoa_don (phien_ban_id, ma_hoa_don, thu_ngan_id, tong_tien_mon, phan_tram_vat, tien_vat, tong_tien_thanh_toan, phuong_thuc_thanh_toan, trang_thai=&#39;chua_thanh_toan&#39;)</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcH" data-label="hoa_don_id = 105" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1425.6670000000001" y1="760" x2="995.0755000000001" y2="760" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="750" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">hoa_don_id = 105</text>
+</g>
+<g class="message" data-from="SvcH" data-to="Ctrl" data-label="Dữ liệu hóa đơn #105" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="800" x2="603.3865000000001" y2="800" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="799.2310000000001" y="790" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Dữ liệu hóa đơn #105</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="POS" data-label="Trả về thông tin hóa đơn #105" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="840" x2="409.3945" y2="840" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="506.39050000000003" y="830" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Trả về thông tin hóa đơn #105</text>
+</g>
+<g class="message" data-from="POS" data-to="TN" data-label="Hiển thị giao diện thanh toán số tiền: 843,480 VNĐ" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="409.3945" y1="880" x2="244.67200000000003" y2="880" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="327.03325" y="870" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Hiển thị giao diện thanh toán số tiền: 843,480 VNĐ</text>
+</g>
+<g class="message" data-from="TN" data-to="POS" data-label="Bấm &quot;Tạo mã VietQR&quot;" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="244.67200000000003" y1="935" x2="409.3945" y2="935" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="327.03325" y="925" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Bấm &quot;Tạo mã VietQR&quot;</text>
+</g>
+<g class="message" data-from="POS" data-to="Ctrl" data-label="POST /api/hoa-don/105/tao-ma-vietqr" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="409.3945" y1="975" x2="603.3865000000001" y2="975" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="506.39050000000003" y="965" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">POST /api/hoa-don/105/tao-ma-vietqr</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Bank" data-label="API VietQR (STK, BankCode, SoTien=843480, NoiDung=&quot;QM BAN04 HD105&quot;)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="1015" x2="1205.7400000000002" y2="1015" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="904.5632500000002" y="1005" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">API VietQR (STK, BankCode, SoTien=843480, NoiDung=&quot;QM BAN04 HD105&quot;)</text>
+</g>
+<g class="message" data-from="Bank" data-to="Ctrl" data-label="Trả về Chuỗi EMVCo &amp; URL ảnh QR động" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1205.7400000000002" y1="1055" x2="603.3865000000001" y2="1055" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="904.5632500000002" y="1045" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Trả về Chuỗi EMVCo &amp; URL ảnh QR động</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="POS" data-label="Hiển thị mã QR động lên màn hình phụ hướng về khách" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="1095" x2="409.3945" y2="1095" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="506.39050000000003" y="1085" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Hiển thị mã QR động lên màn hình phụ hướng về khách</text>
+</g>
+<g class="message" data-from="C" data-to="Bank" data-label="Chuyển khoản thành công qua hệ thống NAPAS 247" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="90.694" y1="1150" x2="1205.7400000000002" y2="1150" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="648.2170000000001" y="1140" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Chuyển khoản thành công qua hệ thống NAPAS 247</text>
+</g>
+<g class="message" data-from="Bank" data-to="Ctrl" data-label="Webhook / SePAY IPN: Báo có 843,480đ với nội dung &quot;QM BAN04 HD105&quot;" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="1205.7400000000002" y1="1190" x2="603.3865000000001" y2="1190" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="904.5632500000002" y="1180" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Webhook / SePAY IPN: Báo có 843,480đ với nội dung &quot;QM BAN04 HD105&quot;</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="SvcH" data-label="xuLyThanhToanThanhCong(hoa_don_id=105, ma_giao_dich_vietqr)" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="1230" x2="995.0755000000001" y2="1230" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="799.2310000000001" y="1220" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">xuLyThanhToanThanhCong(hoa_don_id=105, ma_giao_dich_vietqr)</text>
+</g>
+<g class="message" data-from="SvcH" data-to="DB" data-label="BEGIN IMMEDIATE TRANSACTION" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="1270" x2="1425.6670000000001" y2="1270" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="1260" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">BEGIN IMMEDIATE TRANSACTION</text>
+</g>
+<g class="message" data-from="SvcH" data-to="DB" data-label="UPDATE hoa_don SET trang_thai = 'da_thanh_toan', thoi_gian_thanh_toan = datetime('now','localtime'), ma_giao_dich_vietqr = ? WHERE id = 105" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="1310" x2="1425.6670000000001" y2="1310" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="1300" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">UPDATE hoa_don SET trang_thai = &#39;da_thanh_toan&#39;, thoi_gian_thanh_toan = datetime(&#39;now&#39;,&#39;localtime&#39;), ma_giao_dich_vietqr = ? WHERE id = 105</text>
+</g>
+<g class="message" data-from="SvcH" data-to="DB" data-label="UPDATE phien_ban SET trang_thai = 'da_thanh_toan', thoi_gian_ket_thuc = datetime('now','localtime') WHERE id = 12" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="1350" x2="1425.6670000000001" y2="1350" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="1340" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">UPDATE phien_ban SET trang_thai = &#39;da_thanh_toan&#39;, thoi_gian_ket_thuc = datetime(&#39;now&#39;,&#39;localtime&#39;) WHERE id = 12</text>
+</g>
+<g class="message" data-from="SvcH" data-to="DB" data-label="UPDATE ban_an SET trang_thai = 'can_don_dep' WHERE id = 4" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="1390" x2="1425.6670000000001" y2="1390" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="1380" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">UPDATE ban_an SET trang_thai = &#39;can_don_dep&#39; WHERE id = 4</text>
+</g>
+<g class="message" data-from="SvcH" data-to="DB" data-label="COMMIT TRANSACTION" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="1430" x2="1425.6670000000001" y2="1430" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="1420" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">COMMIT TRANSACTION</text>
+</g>
+<g class="message" data-from="DB" data-to="SvcH" data-label="Cập nhật CSDL hoàn tất" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1425.6670000000001" y1="1470" x2="995.0755000000001" y2="1470" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1210.3712500000001" y="1460" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Cập nhật CSDL hoàn tất</text>
+</g>
+<g class="message" data-from="SvcH" data-to="Ctrl" data-label="Giao dịch thành công" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="995.0755000000001" y1="1510" x2="603.3865000000001" y2="1510" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="799.2310000000001" y="1500" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Giao dịch thành công</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Sock" data-label="broadcastEvent('THANH_TOAN_THANH_CONG', { hoa_don_id: 105, ban_id: 4, phien_id: 12 })" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="1550" x2="1627.0690000000002" y2="1550" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1115.22775" y="1540" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">broadcastEvent(&#39;THANH_TOAN_THANH_CONG&#39;, { hoa_don_id: 105, ban_id: 4, phien_id: 12 })</text>
+</g>
+<g class="message" data-from="Sock" data-to="POS" data-label="Đổi màu bàn B04 sang xám ('can_don_dep'), phát âm thanh chốt bill" data-line-style="solid" data-arrow-head="open" data-self="false">
+  <line x1="1627.0690000000002" y1="1590" x2="409.3945" y2="1590" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow-open)" />
+  <text x="1018.2317500000001" y="1580" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Đổi màu bàn B04 sang xám (&#39;can_don_dep&#39;), phát âm thanh chốt bill</text>
+</g>
+<g class="message" data-from="Sock" data-to="C" data-label="Thông báo: &quot;Thanh toán thành công. Cảm ơn Quý khách!&quot;" data-line-style="solid" data-arrow-head="open" data-self="false">
+  <line x1="1627.0690000000002" y1="1630" x2="90.694" y2="1630" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow-open)" />
+  <text x="858.8815000000001" y="1620" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Thông báo: &quot;Thanh toán thành công. Cảm ơn Quý khách!&quot;</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Printer" data-label="Lệnh in hóa đơn nhiệt K80" data-line-style="solid" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="1670" x2="1817.7265000000002" y2="1670" stroke="var(--_line)" stroke-width="1" marker-end="url(#seq-arrow)" />
+  <text x="1210.5565000000001" y="1660" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Lệnh in hóa đơn nhiệt K80</text>
+</g>
+<g class="message" data-from="Printer" data-to="TN" data-label="Xuất phiếu thanh toán K80 giao khách" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="1817.7265000000002" y1="1710" x2="244.67200000000003" y2="1710" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="1031.1992500000001" y="1700" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Xuất phiếu thanh toán K80 giao khách</text>
+</g>
+<g class="message" data-from="Ctrl" data-to="Bank" data-label="HTTP 200 OK (Xác nhận Webhook)" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+  <line x1="603.3865000000001" y1="1750" x2="1205.7400000000002" y2="1750" stroke="var(--_line)" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+  <text x="904.5632500000002" y="1740" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">HTTP 200 OK (Xác nhận Webhook)</text>
+</g>
+<g class="note" data-position="over" data-actors="TN,Bank">
+  <polygon points="571.306,888 873.1060000000001,888 879.1060000000001,894 879.1060000000001,911 571.306,911" fill="var(--bg)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <polygon points="873.1060000000001,888 879.1060000000001,894 873.1060000000001,894" fill="var(--_inner-stroke)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="725.2060000000001" y="899.5" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Khách lựa chọn thanh toán chuyển khoản VietQR NAPAS 247</text>
+</g>
+<g class="note" data-position="over" data-actors="C,Bank">
+  <polygon points="472.63600000000014,1103 817.798,1103 823.798,1109 823.798,1126 472.63600000000014,1126" fill="var(--bg)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <polygon points="817.798,1103 823.798,1109 817.798,1109" fill="var(--_inner-stroke)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="648.2170000000001" y="1114.5" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">Khách dùng App Ngân hàng quét QR và xác nhận chuyển 843,480 VNĐ</text>
+</g>
+<g class="actor" data-id="C" data-label="👤 Khách hàng" data-type="actor">
+  <g transform="translate(72.694,32) scale(1.5)">
+    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M5.62842 18.3563C7.08963 17.0398 9.39997 16 12 16C14.6 16 16.9104 17.0398 18.3716 18.3563" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+  </g>
+  <text x="90.694" y="84" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">👤 Khách hàng</text>
+</g>
+<g class="actor" data-id="TN" data-label="💳 Thu ngân" data-type="actor">
+  <g transform="translate(226.67200000000003,32) scale(1.5)">
+    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10Z" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+    <path d="M5.62842 18.3563C7.08963 17.0398 9.39997 16 12 16C14.6 16 16.9104 17.0398 18.3716 18.3563" fill="none" stroke="var(--_line)" stroke-width="0.6666666666666666" />
+  </g>
+  <text x="244.67200000000003" y="84" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">💳 Thu ngân</text>
+</g>
+<g class="actor" data-id="POS" data-label="🖥️ POS Thu ngân" data-type="participant">
+  <rect x="337.956" y="30" width="142.877" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="409.3945" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🖥️ POS Thu ngân</text>
+</g>
+<g class="actor" data-id="Ctrl" data-label="⚙️ hoaDon.controller" data-type="participant">
+  <rect x="520.8330000000001" y="30" width="165.107" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="603.3865000000001" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">⚙️ hoaDon.controller</text>
+</g>
+<g class="actor" data-id="SvcP" data-label="🚪 phienBan.service" data-type="participant">
+  <rect x="725.9400000000002" y="30" width="156.21499999999997" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="804.0475000000001" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🚪 phienBan.service</text>
+</g>
+<g class="actor" data-id="SvcH" data-label="🧠 hoaDon.service" data-type="participant">
+  <rect x="922.1550000000002" y="30" width="145.841" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="995.0755000000001" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🧠 hoaDon.service</text>
+</g>
+<g class="actor" data-id="Bank" data-label="🏦 VietQR / Cổng Ngân hàng" data-type="participant">
+  <rect x="1107.9960000000003" y="30" width="195.488" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1205.7400000000002" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🏦 VietQR / Cổng Ngân hàng</text>
+</g>
+<g class="actor" data-id="DB" data-label="🗄️ SQLite3 Database" data-type="participant">
+  <rect x="1343.4840000000002" y="30" width="164.36599999999999" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1425.6670000000001" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🗄️ SQLite3 Database</text>
+</g>
+<g class="actor" data-id="Sock" data-label="⚡ Socket.io Gateway" data-type="participant">
+  <rect x="1547.8500000000001" y="30" width="158.438" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1627.0690000000002" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">⚡ Socket.io Gateway</text>
+</g>
+<g class="actor" data-id="Printer" data-label="🖨️ Máy in Bill K80" data-type="participant">
+  <rect x="1746.2880000000002" y="30" width="142.877" height="40" rx="4" ry="4" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1817.7265000000002" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="var(--_text)" dy="4.55">🖨️ Máy in Bill K80</text>
+</g>
+</svg>

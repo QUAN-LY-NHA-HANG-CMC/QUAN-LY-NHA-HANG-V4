@@ -1,0 +1,26 @@
+stateDiagram-v2
+    title BIỂU ĐỒ TRẠNG THÁI VÒNG ĐỜI PHIÊN BÀN (TABLE SESSION LIFECYCLE)
+
+    [*] --> DangHoatDong : Khách quét QR mở bàn / Phục vụ tạo phiên mới
+
+    state DangHoatDong {
+        [*] --> ChiaSePhien
+        ChiaSePhien : Cho phép nhiều điện thoại cùng tham gia đặt món (Shared Session)
+    }
+
+    DangHoatDong --> DaThanhToan : Thu ngân hoàn tất thanh toán (Hóa đơn khớp số tiền)
+    
+    state DaThanhToan {
+        [*] --> KhoaThemMon
+        KhoaThemMon : Khóa quyền gọi thêm món, chuẩn bị đóng phiên
+    }
+
+    DaThanhToan --> DaDong : Khách rời quán & Phục vụ xác nhận giải phóng bàn
+    DangHoatDong --> DaDong : Hủy phiên do khách đổi bàn / hủy bàn trắng
+
+    state DaDong {
+        [*] --> LuuLichSu
+        LuuLichSu : Lưu vết lịch sử phục vụ, vô hiệu hóa token phiên cũ
+    }
+
+    DaDong --> [*]

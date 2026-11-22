@@ -1,0 +1,34 @@
+flowchart LR
+    %% PHÂN HỆ PHỤC VỤ (ĐỒNG BỘ FIGMA W01-W11)
+    Waiter(["🤵 Nhân viên Phục vụ\n(Waiter)"])
+    Admin(["👔 Quản lý\n(Admin)"])
+
+    subgraph SYSTEM["Phân hệ Nhân viên Phục vụ (Waiter Mobile)"]
+        UW01(["UW01: Đăng nhập theo ca & bàn"])
+        UW02(["UW02: Xem sơ đồ bàn đổi màu"])
+        UW03(["UW03: Duyệt / Từ chối đơn QR"])
+        UW04(["UW04: Đặt món hộ tại bàn"])
+        UW05(["UW05: Chuyển bàn & Gộp bàn"])
+        UW06(["UW06: Yêu cầu hủy món có kiểm soát"])
+        UW07(["UW07: Xem lịch ca & Đề xuất đổi ca / Xin nghỉ"])
+        UW_DirectCancel(["Hủy món trực tiếp (Chờ duyệt)"])
+        UW_RequestAdmin(["Gửi yêu cầu hủy lên Quản lý"])
+        UW_LeaveRequest(["Tạo đơn xin nghỉ ca"])
+        UW_SwapRequest(["Tạo phiếu đề xuất đổi ca"])
+    end
+
+    Waiter --> UW01
+    Waiter --> UW02
+    Waiter --> UW03
+    Waiter --> UW04
+    Waiter --> UW05
+    Waiter --> UW06
+    Waiter --> UW07
+
+    UW06 -.->|"<<extend>>"| UW_DirectCancel
+    UW06 -.->|"<<extend>>"| UW_RequestAdmin
+    UW_RequestAdmin -.->|"<<chờ duyệt>>"| Admin
+
+    UW07 -.->|"<<extend>>"| UW_LeaveRequest
+    UW07 -.->|"<<extend>>"| UW_SwapRequest
+    UW07 -.->|"<<chờ duyệt>>"| Admin

@@ -1,336 +1,372 @@
-/**
- * Service xử lý nghiệp vụ Tài khoản và Xác thực
- * Phục vụ US-001, US-002, US-003, US-007 -> US-010
- */
+// ============================================================================
+// DỰ ÁN: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR TẠI BÀN (QUÁN MỘC POS & E-MENU)
+// SERVICE NGHIỆP VỤ TÀI KHOẢN VÀ XÁC THỰC ĐĂNG NHẬP
+// ============================================================================
+
 const jwt = require('jsonwebtoken');
 const taiKhoanModel = require('./taiKhoan.model');
-const { kiemTraMatKhau, bamMatKhau } = require('../../tienIch/maHoaMatKhau');
-const cauHinhBaoMat = require('../../cauHinh/cauHinhBaoMat');
-const { ghiNhatKyHeThong } = require('../../tienIch/ghiNhatKy');
+const { soSanhMatKhau, bamMatKhau } = require('../../tienIch/maHoaMatKhau');
+const cauHinh = require('../../cauHinh/cauHinhChung');
+const { ghiAuditLog } = require('../../tienIch/ghiNhatKy');
 
-/**
- * Sinh cặp Access Token và Refresh Token cho tài khoản
- * @param {Object} taiKhoan
- * @param {Array<string>} danhSachVaiTro
- * @param {Array<string>} danhSachQuyen
- */
-const crypto = require('crypto');
-function taoCapToken(taiKhoan, danhSachVaiTro, danhSachQuyen) {
-    const payloadAccess = {
-        taiKhoanId: taiKhoan.id,
-        tenDangNhap: taiKhoan.ten_dang_nhap,
-        vaiTro: danhSachVaiTro,
-        danhSachQuyen: danhSachQuyen
-    };
-
-    const accessToken = jwt.sign(
-        payloadAccess,
-        cauHinhBaoMat.jwt.biMatAccessToken,
-        { expiresIn: cauHinhBaoMat.jwt.thoiGianHetHanAccess }
-    );
-
-    const payloadRefresh = {
-        taiKhoanId: taiKhoan.id,
-        loai: 'REFRESH',
-        jti: crypto.randomUUID()
-    };
-
-    const refreshToken = jwt.sign(
-        payloadRefresh,
-        cauHinhBaoMat.jwt.biMatRefreshToken,
-        { expiresIn: cauHinhBaoMat.jwt.thoiGianHetHanRefresh }
-    );
-
-    return {
-        accessToken,
-        refreshToken,
-        hetHanTrong: cauHinhBaoMat.jwt.thoiGianHetHanAccess
-    };
+function kiemTraLichTaoNhanSu(lichLamViec, ngayVaoLam) {
+    const hopLe = new Set(['ca_sang', 'ca_chieu', 'ca_toi', 'ca_gay']);
+    const gio = /^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/;
+    const ngayDaChon = new Set();
+    if (!Array.isArray(lichLamViec) || !lichLamViec.length) {
+        throw Object.assign(new Error('Vui lòng chọn ít nhất một ngày làm việc.'), { status: 400 });
+    }
+    for (const ca of lichLamViec) {
+        const ngay = ca?.ngayLam;
+        const moc = typeof ngay === 'string' && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(ngay) ? Date.parse(ngay) : NaN;
+        if (!Number.isFinite(moc) || new Date(moc).toISOString().slice(0, 10) !== ngay ||
+            ngay < ngayVaoLam || ngayDaChon.has(ngay) || !hopLe.has(ca.tenCa) ||
+            typeof ca.gioBatDau !== 'string' || typeof ca.gioKetThuc !== 'string' ||
+            !gio.test(ca.gioBatDau) || !gio.test(ca.gioKetThuc) || ca.gioBatDau === ca.gioKetThuc) {
+            throw Object.assign(new Error('Mỗi ngày từ ngày vào làm phải có một ca hợp lệ và khung giờ khác nhau.'), { status: 400 });
+        }
+        ngayDaChon.add(ngay);
+    }
 }
 
-/**
- * Đăng nhập hệ thống (US-007)
- */
-async function dangNhap({ tenDangNhap, matKhau, thongTinThietBi, diaChiIp }) {
-    const taiKhoan = await taiKhoanModel.timTheoTenDangNhap(tenDangNhap.trim());
+const taiKhoanService = {
+    layBanCoTheGiao() {
+        return taiKhoanModel.layBanCoTheGiao();
+    },
 
-    if (!taiKhoan) {
-        await ghiNhatKyHeThong({
-            loaiHanhDong: 'DANG_NHAP_THAT_BAI',
-            module: 'TAI_KHOAN',
-            moTa: `Thử đăng nhập thất bại với tên đăng nhập không tồn tại: ${tenDangNhap}`,
-            diaChiIp,
-            thongTinThietBi
-        });
+    /**
+     * Xác thực đăng nhập và sinh mã JWT
+     */
+    async dangNhap({ tenDangNhap, matKhau, diaChiIp, thietBi }) {
+        if (!tenDangNhap || !matKhau) {
+            const loi = new Error('Tên đăng nhập và mật khẩu không được để trống');
+            loi.status = 400;
+            throw loi;
+        }
 
-        const loi = new Error('Tên đăng nhập hoặc mật khẩu không chính xác.');
-        loi.status = 401;
-        throw loi;
-    }
+        const taiKhoan = taiKhoanModel.timTheoTenDangNhap(tenDangNhap.trim());
+        if (!taiKhoan) {
+            const loi = new Error('Tên đăng nhập hoặc mật khẩu không chính xác');
+            loi.status = 401;
+            throw loi;
+        }
 
-    if (taiKhoan.trang_thai !== 1 && taiKhoan.trang_thai !== '1' && taiKhoan.trang_thai !== 'hoat_dong') {
-        await ghiNhatKyHeThong({
+        const hopLe = !(cauHinh.moiTruong === 'production' && matKhau === '123456') &&
+            await soSanhMatKhau(matKhau, taiKhoan.mat_khau_hash);
+        if (!hopLe) {
+            const loi = new Error('Tên đăng nhập hoặc mật khẩu không chính xác');
+            loi.status = 401;
+            throw loi;
+        }
+        if (taiKhoan.trang_thai !== 'hoat_dong') {
+            throw Object.assign(new Error(taiKhoan.trang_thai === 'da_xoa'
+                ? 'Quản lý đã xác nhận nghỉ việc. Quyền đăng nhập đã kết thúc.'
+                : 'Tài khoản của bạn đang bị khóa hoặc ngừng hoạt động'), { status: 403 });
+        }
+
+        // Cập nhật mốc thời gian đăng nhập
+        taiKhoanModel.capNhatLanDangNhapCuoi(taiKhoan.id);
+
+        // Sinh JWT Token
+        const token = jwt.sign(
+            {
+                taiKhoanId: taiKhoan.id,
+                tenDangNhap: taiKhoan.ten_dang_nhap,
+                vaiTro: taiKhoan.ma_vai_tro,
+                nhanVienId: taiKhoan.nhan_vien_id,
+                hoTen: taiKhoan.ho_ten
+            },
+            cauHinh.jwtSecret,
+            { expiresIn: cauHinh.jwtThoiGianHetHan }
+        );
+
+        // Ghi Audit Log đăng nhập
+        ghiAuditLog({
             taiKhoanId: taiKhoan.id,
-            loaiHanhDong: 'DANG_NHAP_BI_KHOA',
-            module: 'TAI_KHOAN',
-            moTa: `Tài khoản đã bị khóa cố gắng đăng nhập: ${tenDangNhap}`,
+            hanhDong: 'DANG_NHAP_HE_THONG',
+            bangAnhHuong: 'tai_khoan',
+            banGhiId: taiKhoan.id,
             diaChiIp,
-            thongTinThietBi
+            thietBi,
+            lyDo: `Đăng nhập thành công với vai trò ${taiKhoan.ten_vai_tro}`
         });
 
-        const loi = new Error('Tài khoản của bạn đã bị khóa. Vui lòng liên hệ Quản lý nhà hàng.');
-        loi.status = 403;
-        throw loi;
-    }
-
-    const hopLe = await kiemTraMatKhau(matKhau, taiKhoan.mat_khau);
-    if (!hopLe) {
-        await ghiNhatKyHeThong({
-            taiKhoanId: taiKhoan.id,
-            loaiHanhDong: 'DANG_NHAP_SAI_MAT_KHAU',
-            module: 'TAI_KHOAN',
-            moTa: `Nhập sai mật khẩu cho tài khoản: ${tenDangNhap}`,
-            diaChiIp,
-            thongTinThietBi
-        });
-
-        const loi = new Error('Tên đăng nhập hoặc mật khẩu không chính xác.');
-        loi.status = 401;
-        throw loi;
-    }
-
-    // Lấy thông tin vai trò và quyền hạn
-    const vaiTroRows = await taiKhoanModel.layDanhSachVaiTro(taiKhoan.id);
-    const quyenRows = await taiKhoanModel.layDanhSachQuyen(taiKhoan.id);
-
-    const mangVaiTro = vaiTroRows.map(v => v.ma_vai_tro);
-    const mangQuyen = quyenRows.map(q => q.ma_quyen);
-
-    // Sinh cặp token
-    const tokenData = taoCapToken(taiKhoan, mangVaiTro, mangQuyen);
-
-    // Lưu refresh token vào CSDL
-    const ngayHetHan = new Date(Date.now() + cauHinhBaoMat.jwt.thoiGianHetHanRefreshNgay * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .replace('T', ' ')
-        .substring(0, 19);
-
-    await taiKhoanModel.luuRefreshToken(
-        taiKhoan.id,
-        tokenData.refreshToken,
-        thongTinThietBi,
-        diaChiIp,
-        ngayHetHan
-    );
-
-    // Cập nhật đăng nhập cuối
-    await taiKhoanModel.capNhatDangNhapCuoi(taiKhoan.id);
-
-    // Ghi nhật ký
-    await ghiNhatKyHeThong({
-        taiKhoanId: taiKhoan.id,
-        loaiHanhDong: 'DANG_NHAP_THANH_CONG',
-        module: 'TAI_KHOAN',
-        moTa: `Đăng nhập thành công với vai trò: ${mangVaiTro.join(', ') || 'Chưa gán vai trò'}`,
-        diaChiIp,
-        thongTinThietBi
-    });
-
-    return {
-        taiKhoan: {
+        const thongTinNguoiDung = {
             id: taiKhoan.id,
+            taiKhoanId: taiKhoan.id,
             tenDangNhap: taiKhoan.ten_dang_nhap,
+            vaiTro: taiKhoan.ma_vai_tro,
+            tenVaiTro: taiKhoan.ten_vai_tro,
+            nhanVienId: taiKhoan.nhan_vien_id,
             hoTen: taiKhoan.ho_ten,
-            soDienThoai: taiKhoan.so_dien_thoai,
-            email: taiKhoan.email,
-            anhDaiDien: taiKhoan.anh_dai_dien,
-            vaiTro: mangVaiTro,
-            danhSachQuyen: mangQuyen
-        },
-        tokens: tokenData
-    };
-}
+            soDienThoai: taiKhoan.so_dien_thoai
+        };
 
-/**
- * Đăng xuất khỏi hệ thống (US-008)
- */
-async function dangXuat({ refreshToken, taiKhoanId, diaChiIp, thongTinThietBi }) {
-    if (refreshToken) {
-        await taiKhoanModel.thuHoiRefreshToken(refreshToken);
-    } else if (taiKhoanId) {
-        await taiKhoanModel.thuHoiTatCaRefreshToken(taiKhoanId);
-    }
+        return {
+            token,
+            nguoiDung: thongTinNguoiDung,
+            nhanVien: thongTinNguoiDung
+        };
+    },
 
-    if (taiKhoanId) {
-        await ghiNhatKyHeThong({
+    /**
+     * Lấy thông tin tài khoản hiện tại từ token
+     */
+    layThongTinHienTai(taiKhoanId) {
+        const taiKhoan = taiKhoanModel.timTheoId(taiKhoanId);
+        if (!taiKhoan) {
+            const loi = new Error('Không tìm thấy tài khoản');
+            loi.status = 404;
+            throw loi;
+        }
+        return taiKhoan;
+    },
+
+    /**
+     * Đổi mật khẩu
+     */
+    async doiMatKhau(taiKhoanId, { matKhauCu, matKhauMoi }) {
+        if (!matKhauCu || !matKhauMoi) {
+            const loi = new Error('Vui lòng cung cấp mật khẩu cũ và mật khẩu mới');
+            loi.status = 400;
+            throw loi;
+        }
+
+        if (matKhauMoi.length < (cauHinh.moiTruong === 'production' ? 12 : 6)) {
+            const loi = new Error('Mật khẩu mới phải có ít nhất 6 ký tự');
+            loi.status = 400;
+            throw loi;
+        }
+
+        const taiKhoan = taiKhoanModel.timTheoId(taiKhoanId);
+        // Lấy lại mật khẩu hash
+        const tkFull = taiKhoanModel.timTheoTenDangNhap(taiKhoan.ten_dang_nhap);
+        const dungMatKhauCu = await soSanhMatKhau(matKhauCu, tkFull.mat_khau_hash);
+        if (!dungMatKhauCu) {
+            const loi = new Error('Mật khẩu hiện tại không chính xác');
+            loi.status = 400;
+            throw loi;
+        }
+
+        const hashMoi = await bamMatKhau(matKhauMoi);
+        taiKhoanModel.capNhatMatKhau(taiKhoanId, hashMoi);
+
+        ghiAuditLog({
             taiKhoanId,
-            loaiHanhDong: 'DANG_XUAT',
-            module: 'TAI_KHOAN',
-            moTa: 'Người dùng đăng xuất khỏi thiết bị',
-            diaChiIp,
-            thongTinThietBi
-        });
-    }
-
-    return true;
-}
-
-/**
- * Cơ chế Refresh Token (US-003)
- */
-async function lamMoiToken({ refreshToken, diaChiIp, thongTinThietBi }) {
-    let payload;
-    try {
-        payload = jwt.verify(refreshToken, cauHinhBaoMat.jwt.biMatRefreshToken);
-    } catch {
-        const loi = new Error('Refresh token không hợp lệ hoặc đã hết hạn.');
-        loi.status = 401;
-        throw loi;
-    }
-
-    // Kiểm tra trong CSDL
-    const phien = await taiKhoanModel.timPhienRefreshToken(refreshToken);
-    if (!phien || phien.da_thu_hoi === 1) {
-        const loi = new Error('Refresh token đã bị thu hồi hoặc không tồn tại.');
-        loi.status = 401;
-        throw loi;
-    }
-
-    const taiKhoan = await taiKhoanModel.timTheoId(payload.taiKhoanId);
-    if (!taiKhoan || (Number(taiKhoan.trang_thai) !== 1 && taiKhoan.trang_thai !== 'hoat_dong')) {
-        const loi = new Error('Tài khoản không tồn tại hoặc đã bị khóa.');
-        loi.status = 403;
-        throw loi;
-    }
-
-    const vaiTroRows = await taiKhoanModel.layDanhSachVaiTro(taiKhoan.id);
-    const quyenRows = await taiKhoanModel.layDanhSachQuyen(taiKhoan.id);
-    const mangVaiTro = vaiTroRows.map(v => v.ma_vai_tro);
-    const mangQuyen = quyenRows.map(q => q.ma_quyen);
-
-    // Sinh access token mới
-    const tokenMoi = taoCapToken(taiKhoan, mangVaiTro, mangQuyen);
-
-    return {
-        accessToken: tokenMoi.accessToken,
-        hetHanTrong: tokenMoi.hetHanTrong
-    };
-}
-
-/**
- * Đổi mật khẩu cá nhân (US-009)
- */
-async function doiMatKhau({ taiKhoanId, matKhauCu, matKhauMoi, diaChiIp, thongTinThietBi }) {
-    const matKhauDaBam = await taiKhoanModel.layMatKhauDaBam(taiKhoanId);
-    if (!matKhauDaBam) {
-        const loi = new Error('Không tìm thấy thông tin tài khoản.');
-        loi.status = 404;
-        throw loi;
-    }
-
-    const dungMatKhauCu = await kiemTraMatKhau(matKhauCu, matKhauDaBam);
-    if (!dungMatKhauCu) {
-        await ghiNhatKyHeThong({
-            taiKhoanId,
-            loaiHanhDong: 'DOI_MAT_KHAU_SAI',
-            module: 'TAI_KHOAN',
-            moTa: 'Đổi mật khẩu thất bại do nhập sai mật khẩu hiện tại',
-            diaChiIp,
-            thongTinThietBi
+            hanhDong: 'DOI_MAT_KHAU',
+            bangAnhHuong: 'tai_khoan',
+            banGhiId: taiKhoanId,
+            lyDo: 'Người dùng đổi mật khẩu cá nhân'
         });
 
-        const loi = new Error('Mật khẩu hiện tại không chính xác.');
-        loi.status = 400;
-        throw loi;
+        return true;
+    },
+
+    // =========================================================================
+    // QUẢN TRỊ NHÂN SỰ TOÀN HỆ THỐNG (A02, A03, A04, A05)
+    // =========================================================================
+
+    layDanhSachNhanSu() {
+        return taiKhoanModel.layDanhSachNhanSu();
+    },
+
+    layChiTietNhanSu(id) {
+        const nv = taiKhoanModel.layChiTietNhanSu(id);
+        if (!nv) {
+            const loi = new Error(`Không tìm thấy nhân viên có ID: ${id}`);
+            loi.status = 404;
+            throw loi;
+        }
+        return nv;
+    },
+
+    async taoNhanSu(duLieu, nguoiThucHien) {
+        const { hoTen, tenDangNhap, matKhau = '123456', vaiTro = 'phuc_vu', soDienThoai, email, cccd, mucLuong, hinhThucLamViec, ngayVaoLam, lichLamViec, banAnIds = [] } = duLieu;
+
+        if (!hoTen || !tenDangNhap) {
+            const loi = new Error('Họ tên và tên đăng nhập không được để trống');
+            loi.status = 400;
+            throw loi;
+        }
+
+        // Kiểm tra trùng tên đăng nhập
+        const tonTai = taiKhoanModel.timTheoTenDangNhap(tenDangNhap.trim());
+        if (tonTai) {
+            const loi = new Error(`Tên đăng nhập "${tenDangNhap}" đã được sử dụng`);
+            loi.status = 409;
+            throw loi;
+        }
+
+        const vaiTroDb = taiKhoanModel.timVaiTro(vaiTro);
+        if (!vaiTroDb) {
+            const loi = new Error(`Vai trò "${vaiTro}" không hợp lệ`);
+            loi.status = 400;
+            throw loi;
+        }
+
+        if (cauHinh.moiTruong === 'production' && (typeof matKhau !== 'string' || matKhau.length < 12)) {
+            throw Object.assign(new Error('Mật khẩu nhân viên cần ít nhất 12 ký tự'), { status: 400 });
+        }
+        const ngayBatDau = ngayVaoLam || new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' }).format(new Date());
+        if (lichLamViec !== undefined) {
+            if (typeof soDienThoai !== 'string' || !soDienThoai.trim() ||
+                typeof cccd !== 'string' || !/^[0-9]{12}$/.test(cccd.trim()) ||
+                mucLuong === undefined || !Number.isSafeInteger(Number(mucLuong)) || Number(mucLuong) < 0 ||
+                !['toan_thoi_gian', 'ban_thoi_gian'].includes(hinhThucLamViec)) {
+                throw Object.assign(new Error('Vui lòng kiểm tra số điện thoại, căn cước 12 số, mức lương và hình thức làm việc.'), { status: 400 });
+            }
+            kiemTraLichTaoNhanSu(lichLamViec, ngayBatDau);
+        }
+        if (!Array.isArray(banAnIds) || banAnIds.some(id => !Number.isSafeInteger(id) || id <= 0) ||
+            (banAnIds.length > 0 && vaiTroDb.ma_vai_tro !== 'phuc_vu')) {
+            throw Object.assign(new Error('Chỉ nhân viên phục vụ mới được phân công bàn. Vui lòng kiểm tra danh sách bàn.'), { status: 400 });
+        }
+
+        const matKhauHash = await bamMatKhau(matKhau);
+        const nvMoi = taiKhoanModel.taoNhanSuVoiTaiKhoan({
+            hoTen: hoTen.trim(),
+            tenDangNhap: tenDangNhap.trim(),
+            matKhauHash,
+            vaiTroId: vaiTroDb.id,
+            soDienThoai: soDienThoai ? soDienThoai.trim() : '',
+            email: email ? email.trim() : '',
+            cccd: cccd ? cccd.trim() : '',
+            mucLuong: Number(mucLuong) || 0,
+            hinhThucLamViec: hinhThucLamViec || 'toan_thoi_gian',
+            ngayVaoLam: lichLamViec === undefined ? ngayVaoLam : ngayBatDau,
+            lichLamViec,
+            banAnIds: [...new Set(banAnIds)]
+        });
+
+        ghiAuditLog({
+            taiKhoanId: nguoiThucHien?.taiKhoanId || 1,
+            hanhDong: 'TAO_NHAN_SU_MOI',
+            bangAnhHuong: 'nhan_vien',
+            banGhiId: nvMoi.id,
+            lyDo: `Tạo mới nhân viên ${hoTen} (${tenDangNhap}) vai trò ${vaiTroDb.ten_vai_tro}`
+        });
+
+        return nvMoi;
+    },
+
+    async capNhatNhanSu(id, duLieu, nguoiThucHien) {
+        const nvCu = this.layChiTietNhanSu(id);
+        const { hoTen, soDienThoai, email, cccd, mucLuong, hinhThucLamViec, vaiTro, matKhauMoi } = duLieu;
+
+        let vaiTroId = null;
+        if (vaiTro) {
+            const vaiTroDb = taiKhoanModel.timVaiTro(vaiTro);
+            if (!vaiTroDb) {
+                const loi = new Error(`Vai trò "${vaiTro}" không hợp lệ`);
+                loi.status = 400;
+                throw loi;
+            }
+            vaiTroId = vaiTroDb.id;
+        }
+
+        let matKhauHash = null;
+        if (matKhauMoi && matKhauMoi.trim().length < (cauHinh.moiTruong === 'production' ? 12 : 6)) {
+            throw Object.assign(new Error('Mật khẩu mới chưa đủ độ dài'), { status: 400 });
+        }
+        if (matKhauMoi) {
+            matKhauHash = await bamMatKhau(matKhauMoi.trim());
+        }
+
+        const nvCapNhat = taiKhoanModel.capNhatThongTinNhanSu(id, {
+            hoTen: hoTen ? hoTen.trim() : nvCu.ho_ten,
+            soDienThoai: soDienThoai !== undefined ? soDienThoai.trim() : nvCu.so_dien_thoai,
+            email: email !== undefined ? email.trim() : nvCu.email,
+            cccd: cccd !== undefined ? cccd.trim() : nvCu.cccd,
+            mucLuong: mucLuong !== undefined ? Number(mucLuong) : nvCu.muc_luong,
+            hinhThucLamViec: hinhThucLamViec || nvCu.hinh_thuc_lam_viec,
+            vaiTroId,
+            matKhauHash
+        });
+
+        ghiAuditLog({
+            taiKhoanId: nguoiThucHien?.taiKhoanId || 1,
+            hanhDong: 'CAP_NHAT_THONG_TIN_NHAN_SU',
+            bangAnhHuong: 'nhan_vien',
+            banGhiId: id,
+            lyDo: `Cập nhật thông tin nhân viên ${nvCu.ho_ten}`
+        });
+
+        return nvCapNhat;
+    },
+
+    doiTrangThaiNhanSu(id, trangThai, nguoiThucHien) {
+        const hopLe = ['dang_lam', 'tam_khoa', 'tam_nghi', 'dinh_chi', 'da_nghi'];
+        if (!hopLe.includes(trangThai)) {
+            const loi = new Error(`Trạng thái "${trangThai}" không hợp lệ`);
+            loi.status = 400;
+            throw loi;
+        }
+
+        const nvCu = this.layChiTietNhanSu(id);
+        if (trangThai === 'da_nghi' && nvCu.ma_vai_tro === 'quan_ly') {
+            throw Object.assign(new Error('Không thể xác nhận nghỉ việc cho tài khoản quản lý tại đây.'), { status: 409 });
+        }
+        const nvMoi = taiKhoanModel.doiTrangThaiNhanSu(id, trangThai);
+        if (trangThai === 'da_nghi' && nvCu.trang_thai !== 'da_nghi') {
+            require('../../cauHinh/cauHinhSocket').socketPhat.xacNhanNghiViec(id);
+        }
+
+        ghiAuditLog({
+            taiKhoanId: nguoiThucHien?.taiKhoanId || 1,
+            hanhDong: trangThai === 'da_nghi' ? 'XAC_NHAN_NGHI_VIEC' :
+                trangThai === 'dang_lam' ? 'MO_KHOA_NHAN_SU' : 'DINH_CHI_NHAN_SU',
+            bangAnhHuong: 'nhan_vien',
+            banGhiId: id,
+            lyDo: `Đổi trạng thái nhân sự ${nvCu.ho_ten} thành ${trangThai}`
+        });
+
+        return nvMoi;
+    },
+
+    xoaNhanSu(id, nguoiThucHien) {
+        const nvCu = this.layChiTietNhanSu(id);
+        const ketQua = taiKhoanModel.xoaNhanSu(id, nguoiThucHien?.taiKhoanId);
+
+        ghiAuditLog({
+            taiKhoanId: nguoiThucHien?.taiKhoanId || 1,
+            hanhDong: 'XOA_NHAN_SU',
+            bangAnhHuong: 'nhan_vien',
+            banGhiId: id,
+            lyDo: `Lưu trữ hồ sơ và thu hồi quyền đăng nhập của ${nvCu.ho_ten} (${nvCu.ten_dang_nhap})`
+        });
+
+        return ketQua;
+    },
+
+    // =========================================================================
+    // PHÂN CÔNG BÀN PHỤ TRÁCH (CHỈ DÀNH CHO PHỤC VỤ)
+    // =========================================================================
+
+    layBanPhuTrach(nhanVienId) {
+        return taiKhoanModel.layBanPhuTrach(nhanVienId);
+    },
+
+    capNhatBanPhuTrach(nhanVienId, banAnIds, nguoiThucHien) {
+        const nv = this.layChiTietNhanSu(nhanVienId);
+        if (nv.ma_vai_tro !== 'phuc_vu') {
+            const loi = new Error('Chỉ nhân viên vai trò Phục vụ mới cần phân công bàn phụ trách');
+            loi.status = 400;
+            throw loi;
+        }
+
+        const ketQua = taiKhoanModel.capNhatBanPhuTrach(nhanVienId, banAnIds);
+        require('../../cauHinh/cauHinhSocket').socketPhat.viecBanThayDoi();
+
+        ghiAuditLog({
+            taiKhoanId: nguoiThucHien?.taiKhoanId || 1,
+            hanhDong: 'PHAN_CONG_BAN_PHU_TRACH',
+            bangAnhHuong: 'phan_cong_ban',
+            banGhiId: nhanVienId,
+            lyDo: `Phân công ${banAnIds.length} bàn phụ trách cho nhân viên ${nv.ho_ten}`
+        });
+
+        return ketQua;
     }
-
-    // Băm mật khẩu mới
-    const matKhauMoiHash = await bamMatKhau(matKhauMoi);
-
-    // Cập nhật CSDL
-    await taiKhoanModel.capNhatMatKhau(taiKhoanId, matKhauMoiHash);
-
-    // Thu hồi các refresh token cũ để buộc đăng nhập lại an toàn
-    await taiKhoanModel.thuHoiTatCaRefreshToken(taiKhoanId);
-
-    // Ghi nhật ký
-    await ghiNhatKyHeThong({
-        taiKhoanId,
-        loaiHanhDong: 'DOI_MAT_KHAU_THANH_CONG',
-        module: 'TAI_KHOAN',
-        moTa: 'Người dùng đổi mật khẩu cá nhân thành công',
-        diaChiIp,
-        thongTinThietBi
-    });
-
-    return true;
-}
-
-/**
- * Lấy thông tin hồ sơ cá nhân (US-010)
- */
-async function layHoSo(taiKhoanId) {
-    const taiKhoan = await taiKhoanModel.timTheoId(taiKhoanId);
-    if (!taiKhoan) {
-        const loi = new Error('Không tìm thấy tài khoản.');
-        loi.status = 404;
-        throw loi;
-    }
-
-    const vaiTroRows = await taiKhoanModel.layDanhSachVaiTro(taiKhoanId);
-    const quyenRows = await taiKhoanModel.layDanhSachQuyen(taiKhoanId);
-
-    return {
-        id: taiKhoan.id,
-        tenDangNhap: taiKhoan.ten_dang_nhap,
-        hoTen: taiKhoan.ho_ten,
-        soDienThoai: taiKhoan.so_dien_thoai,
-        email: taiKhoan.email,
-        anhDaiDien: taiKhoan.anh_dai_dien,
-        trangThai: taiKhoan.trang_thai,
-        dangNhapCuoi: taiKhoan.dang_nhap_cuoi,
-        ngayTao: taiKhoan.ngay_tao,
-        vaiTro: vaiTroRows,
-        danhSachQuyen: quyenRows.map(q => q.ma_quyen)
-    };
-}
-
-/**
- * Cập nhật thông tin hồ sơ cá nhân (US-010)
- */
-async function capNhatHoSo(taiKhoanId, duLieu, diaChiIp, thongTinThietBi) {
-    const taiKhoanHienTai = await taiKhoanModel.timTheoId(taiKhoanId);
-    if (!taiKhoanHienTai) {
-        const loi = new Error('Không tìm thấy tài khoản.');
-        loi.status = 404;
-        throw loi;
-    }
-
-    await taiKhoanModel.capNhatHoSo(taiKhoanId, {
-        hoTen: duLieu.hoTen ? duLieu.hoTen.trim() : taiKhoanHienTai.ho_ten,
-        soDienThoai: duLieu.soDienThoai !== undefined ? duLieu.soDienThoai.trim() : taiKhoanHienTai.so_dien_thoai,
-        email: duLieu.email !== undefined ? duLieu.email.trim() : taiKhoanHienTai.email,
-        anhDaiDien: duLieu.anhDaiDien !== undefined ? duLieu.anhDaiDien : taiKhoanHienTai.anh_dai_dien
-    });
-
-    await ghiNhatKyHeThong({
-        taiKhoanId,
-        loaiHanhDong: 'CAP_NHAT_HO_SO',
-        module: 'TAI_KHOAN',
-        moTa: 'Cập nhật thông tin hồ sơ cá nhân',
-        diaChiIp,
-        thongTinThietBi,
-        duLieuYeuCau: duLieu
-    });
-
-    return await layHoSo(taiKhoanId);
-}
-
-module.exports = {
-    dangNhap,
-    dangXuat,
-    lamMoiToken,
-    doiMatKhau,
-    layHoSo,
-    capNhatHoSo
 };
+
+module.exports = taiKhoanService;

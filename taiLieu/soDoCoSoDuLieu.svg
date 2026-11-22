@@ -1,0 +1,986 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3063.8740000000003 2205.6000000000004" width="3063.8740000000003" height="2205.6000000000004" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', ui-monospace, monospace; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+</defs>
+<polyline class="er-relationship" data-entity1="vai_tro" data-entity2="tai_khoan" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="phan_quyen" points="459.2,1098.2424242424242 730.822,1098.2424242424242" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="tai_khoan" data-entity2="nhan_vien" data-cardinality1="one" data-cardinality2="zero-one" data-identifying="true" data-label="so_huu_ho_so" points="943.622,1066.909090909091 1251.0040000000001,1066.909090909091" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="ca_lam_viec" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="dang_ky_truc" points="1450.604,1078.4545454545455 1501.804,1078.4545454545455 1501.804,1841.3 1815.698,1841.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="yeu_cau_doi_ca" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="gui_yeu_cau" points="1450.604,1101.5454545454545 1491.804,1101.5454545454545 1491.804,2005.3 2296.688,2005.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="yeu_cau_doi_ca" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="nhan_ca_doi" points="1450.604,1124.6363636363635 1481.804,1124.6363636363635 1481.804,2039.6 2216.688,2039.6 2216.688,2047.3 2296.688,2047.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="yeu_cau_doi_ca" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="quan_ly_duyet" points="1450.604,1147.7272727272727 1471.804,1147.7272727272727 1471.804,2073.8999999999996 2216.688,2073.8999999999996 2216.688,2089.3 2296.688,2089.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="ca_lam_viec" data-entity2="yeu_cau_doi_ca" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="thuoc_ve_ca" points="1982.298,1841.3 2216.688,1841.3 2216.688,1963.3 2296.688,1963.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="tai_khoan" data-entity2="nhat_ky_kiem_toan" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="thuc_hien_hanh_dong" points="943.622,1129.5757575757575 953.6220000000001,1129.5757575757575 953.6220000000001,1379.909090909091 1239.0040000000001,1379.909090909091" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="khu_vuc" data-entity2="ban_an" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="dinh_vi_khu_vuc" points="459.2,549.4 748.422,549.4" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="phan_cong_ban" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="nhan_vien_phu_trach" points="1450.604,1032.2727272727273 1521.804,1032.2727272727273 1521.804,1641.3 1705.998,1641.3 1705.998,1678.3 1785.998,1678.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="ban_an" data-entity2="phan_cong_ban" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="ban_duoc_giao" points="934.822,584.4 953.6220000000001,584.4 953.6220000000001,678.4 1541.804,678.4 1541.804,1630.3 1785.998,1630.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="danh_muc_mon" data-entity2="mon_an" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="phan_loai_danh_muc" points="1451.804,167 1833.518,167" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="mon_an" data-entity2="combo_chi_tiet" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="mon_combo_chua" points="2000.118,141.6 2216.688,141.6 2216.688,131.46666666666667 2296.688,131.46666666666667" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="mon_an" data-entity2="combo_chi_tiet" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="mon_le_thanh_phan" points="2000.118,90.8 2296.688,90.8" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="ban_an" data-entity2="phien_ban" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="mo_phien_phuc_vu" points="934.822,514.4 1239.0040000000001,514.4" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="phien_ban" data-entity2="don_goi_mon" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="tao_dot_order" points="1451.804,533.2 1561.804,533.2 1561.804,739.3 1705.998,739.3 1705.998,910.5 1797.548,910.5" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="don_goi_mon" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="phuc_vu_tao_ho" points="1450.604,986.090909090909 1705.998,986.090909090909 1705.998,1015.5 1797.548,1015.5" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="don_goi_mon" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="phuc_vu_xac_nhan" points="1450.604,963 1797.548,963" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="don_goi_mon" data-entity2="chi_tiet_don_mon" data-cardinality1="one" data-cardinality2="many" data-identifying="true" data-label="bao_gom_mon" points="1977.348,963 2216.688,963 2216.688,411.4666666666667 2296.688,411.4666666666667" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="mon_an" data-entity2="chi_tiet_don_mon" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="duoc_dat_mon" points="2000.118,192.39999999999998 2031.998,192.39999999999998 2031.998,326.8 2296.688,326.8" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="chi_tiet_don_mon" data-entity2="yeu_cau_huy_mon" data-cardinality1="one" data-cardinality2="zero-one" data-identifying="true" data-label="gui_yeu_cau_huy" points="2529.288,369.1333333333333 2724.474,369.1333333333333 2724.474,1689.3 2804.474,1689.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="yeu_cau_huy_mon" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="phuc_vu_yeu_cau" points="1450.604,1170.8181818181818 1461.804,1170.8181818181818 1461.804,2141.3 2724.474,2141.3 2724.474,1783.3 2804.474,1783.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="yeu_cau_huy_mon" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="quan_ly_phe_duyet" points="1450.604,1055.3636363636365 1511.804,1055.3636363636365 1511.804,1736.3 2804.474,1736.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="phien_ban" data-entity2="yeu_cau_ho_tro" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="khach_goi_chuong" points="1451.804,495.59999999999997 1571.804,495.59999999999997 1571.804,705 1785.998,705" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="phien_ban" data-entity2="hoa_don" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="lap_hoa_don" points="1451.804,570.8 1551.804,570.8 1551.804,1284.3 1785.998,1284.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="nhan_vien" data-entity2="hoa_don" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="thu_ngan_thu_tien" points="1450.604,1009.1818181818181 1531.804,1009.1818181818181 1531.804,1318.6 1705.998,1318.6 1705.998,1398.3 1785.998,1398.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="hoa_don" data-entity2="hoa_don" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="tach_hoa_don_con" points="1861.3313333333333,1170.3 1861.3313333333333,1160.3 1936.6646666666668,1160.3 1936.6646666666668,1170.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="hoa_don" data-entity2="chi_tiet_hoa_don" data-cardinality1="one" data-cardinality2="many" data-identifying="true" data-label="chua_dong_tien" points="2011.998,1284.3 2216.688,1284.3 2216.688,1052.6333333333332 2296.688,1052.6333333333332" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="mon_an" data-entity2="chi_tiet_hoa_don" data-cardinality1="one" data-cardinality2="zero-many" data-identifying="true" data-label="xuat_dong_mon" points="2000.118,243.2 2021.998,243.2 2021.998,997.3 2296.688,997.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="hoa_don" data-entity2="chia_tien_nhom" data-cardinality1="one" data-cardinality2="zero-one" data-identifying="true" data-label="cua_tien_nhom" points="2011.998,1398.3 2296.688,1398.3" fill="none" stroke="var(--_line)" stroke-width="1" />
+<polyline class="er-relationship" data-entity1="phien_ban" data-entity2="danh_gia" data-cardinality1="one" data-cardinality2="zero-one" data-identifying="true" data-label="khach_danh_gia" points="1451.804,458 1785.998,458" fill="none" stroke="var(--_line)" stroke-width="1" />
+<g class="entity" data-id="vai_tro" data-label="vai_tro">
+  <rect x="305.8" y="1026.2424242424242" width="153.39999999999998" height="144" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="305.8" y="1026.2424242424242" width="153.39999999999998" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="382.5" y="1043.2424242424242" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">vai_tro</text>
+  <line x1="305.8" y1="1060.2424242424242" x2="459.2" y2="1060.2424242424242" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="311.8" y="1064.2424242424242" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="322.955" y="1071.2424242424242" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="342.11" y="1071.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="451.2" y="1071.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="313.8" y="1093.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="451.2" y="1093.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_vai_tro</tspan></text>
+  </g>
+  <text x="313.8" y="1115.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="451.2" y="1115.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_vai_tro</tspan></text>
+  <text x="313.8" y="1137.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="451.2" y="1137.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">mo_ta</tspan></text>
+  <text x="313.8" y="1159.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="451.2" y="1159.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_tao</tspan></text>
+</g>
+<g class="entity" data-id="tai_khoan" data-label="tai_khoan">
+  <rect x="730.822" y="1004.2424242424242" width="212.79999999999998" height="188" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="730.822" y="1004.2424242424242" width="212.79999999999998" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="837.222" y="1021.2424242424242" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">tai_khoan</text>
+  <line x1="730.822" y1="1038.2424242424242" x2="943.622" y2="1038.2424242424242" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="736.822" y="1042.2424242424242" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="747.977" y="1049.2424242424242" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="767.132" y="1049.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="935.622" y="1049.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="738.822" y="1071.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="935.622" y="1071.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_dang_nhap</tspan></text>
+  </g>
+  <text x="738.822" y="1093.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="935.622" y="1093.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">mat_khau_hash</tspan></text>
+  <rect x="736.822" y="1108.2424242424242" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="747.977" y="1115.2424242424242" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="767.132" y="1115.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="935.622" y="1115.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">vai_tro_id</tspan></text>
+  <g><title>hoat_dong | tam_khoa | da_xoa</title>
+  <text x="738.822" y="1137.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="935.622" y="1137.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+  <text x="738.822" y="1159.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="935.622" y="1159.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">lan_dang_nhap_cuoi</tspan></text>
+  <text x="738.822" y="1181.2424242424242" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="935.622" y="1181.2424242424242" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_tao</tspan></text>
+</g>
+<g class="entity" data-id="nhan_vien" data-label="nhan_vien">
+  <rect x="1251.0040000000001" y="939.9090909090909" width="199.6" height="254" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1251.0040000000001" y="939.9090909090909" width="199.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1350.804" y="956.9090909090909" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">nhan_vien</text>
+  <line x1="1251.0040000000001" y1="973.9090909090909" x2="1450.604" y2="973.9090909090909" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1257.0040000000001" y="977.9090909090909" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1268.159" y="984.9090909090909" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1287.314" y="984.9090909090909" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1442.604" y="984.9090909090909" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <g><title>UNIQUE</title>
+  <rect x="1257.0040000000001" y="999.9090909090909" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1268.159" y="1006.9090909090909" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1287.314" y="1006.9090909090909" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1442.604" y="1006.9090909090909" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">tai_khoan_id</tspan></text>
+  </g>
+  <text x="1259.0040000000001" y="1028.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1442.604" y="1028.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ho_ten</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="1259.0040000000001" y="1050.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1442.604" y="1050.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_dien_thoai</tspan></text>
+  </g>
+  <g><title>UNIQUE</title>
+  <text x="1259.0040000000001" y="1072.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1442.604" y="1072.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">email</tspan></text>
+  </g>
+  <g><title>UNIQUE</title>
+  <text x="1259.0040000000001" y="1094.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1442.604" y="1094.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">cccd</tspan></text>
+  </g>
+  <g><title>toan_thoi_gian | ban_thoi_gian</title>
+  <text x="1259.0040000000001" y="1116.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1442.604" y="1116.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">hinh_thuc_lam_viec</tspan></text>
+  </g>
+  <text x="1259.0040000000001" y="1138.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1442.604" y="1138.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">muc_luong</tspan></text>
+  <text x="1259.0040000000001" y="1160.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">date</tspan></text>
+  <text x="1442.604" y="1160.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_vao_lam</tspan></text>
+  <g><title>dang_lam | tam_nghi | da_nghi</title>
+  <text x="1259.0040000000001" y="1182.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1442.604" y="1182.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="ca_lam_viec" data-label="ca_lam_viec">
+  <rect x="1815.698" y="1747.3" width="166.6" height="188" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1815.698" y="1747.3" width="166.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1898.998" y="1764.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">ca_lam_viec</text>
+  <line x1="1815.698" y1="1781.3" x2="1982.298" y2="1781.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1821.698" y="1785.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1832.853" y="1792.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1852.008" y="1792.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1974.298" y="1792.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="1821.698" y="1807.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1832.853" y="1814.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1852.008" y="1814.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1974.298" y="1814.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">nhan_vien_id</tspan></text>
+  <text x="1823.698" y="1836.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">date</tspan></text>
+  <text x="1974.298" y="1836.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_lam</tspan></text>
+  <g><title>ca_sang | ca_chieu | ca_toi | ca_gay</title>
+  <text x="1823.698" y="1858.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1974.298" y="1858.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_ca</tspan></text>
+  </g>
+  <text x="1823.698" y="1880.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">time</tspan></text>
+  <text x="1974.298" y="1880.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">gio_bat_dau</tspan></text>
+  <text x="1823.698" y="1902.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">time</tspan></text>
+  <text x="1974.298" y="1902.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">gio_ket_thuc</tspan></text>
+  <g><title>ke_hoach | da_checkin | da_hoan_thanh</title>
+  <text x="1823.698" y="1924.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1974.298" y="1924.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="yeu_cau_doi_ca" data-label="yeu_cau_doi_ca">
+  <rect x="2296.688" y="1921.3" width="219.4" height="210" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="2296.688" y="1921.3" width="219.4" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="2406.388" y="1938.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">yeu_cau_doi_ca</text>
+  <line x1="2296.688" y1="1955.3" x2="2516.088" y2="1955.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="2302.688" y="1959.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="1966.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="2332.998" y="1966.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2508.088" y="1966.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="2302.688" y="1981.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="1988.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="1988.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2508.088" y="1988.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">nhan_vien_yeu_cau_id</tspan></text>
+  <rect x="2302.688" y="2003.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="2010.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="2010.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2508.088" y="2010.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ca_lam_viec_id</tspan></text>
+  <g><title>nghi_ca | doi_ca</title>
+  <text x="2304.688" y="2032.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2508.088" y="2032.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">loai_yeu_cau</tspan></text>
+  </g>
+  <rect x="2302.688" y="2047.3000000000002" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="2054.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="2054.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2508.088" y="2054.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">nhan_vien_nhan_ca_id</tspan></text>
+  <text x="2304.688" y="2076.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2508.088" y="2076.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ly_do</tspan></text>
+  <g><title>cho_duyet | da_duyet | tu_choi</title>
+  <text x="2304.688" y="2098.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2508.088" y="2098.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+  <rect x="2302.688" y="2113.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="2120.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="2120.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2508.088" y="2120.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">quan_ly_duyet_id</tspan></text>
+</g>
+<g class="entity" data-id="nhat_ky_kiem_toan" data-label="nhat_ky_kiem_toan">
+  <rect x="1239.0040000000001" y="1263.909090909091" width="166.6" height="232" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1239.0040000000001" y="1263.909090909091" width="166.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1322.304" y="1280.909090909091" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">nhat_ky_kiem_toan</text>
+  <line x1="1239.0040000000001" y1="1297.909090909091" x2="1405.604" y2="1297.909090909091" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1245.0040000000001" y="1301.909090909091" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1256.159" y="1308.909090909091" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1275.314" y="1308.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1397.604" y="1308.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="1245.0040000000001" y="1323.909090909091" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1256.159" y="1330.909090909091" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1275.314" y="1330.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1397.604" y="1330.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">tai_khoan_id</tspan></text>
+  <text x="1247.0040000000001" y="1352.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1397.604" y="1352.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">hanh_dong</tspan></text>
+  <text x="1247.0040000000001" y="1374.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1397.604" y="1374.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">bang_tac_dong</tspan></text>
+  <text x="1247.0040000000001" y="1396.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1397.604" y="1396.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ban_ghi_id</tspan></text>
+  <text x="1247.0040000000001" y="1418.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1397.604" y="1418.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">du_lieu_cu</tspan></text>
+  <text x="1247.0040000000001" y="1440.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1397.604" y="1440.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">du_lieu_moi</tspan></text>
+  <text x="1247.0040000000001" y="1462.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1397.604" y="1462.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ly_do</tspan></text>
+  <text x="1247.0040000000001" y="1484.909090909091" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="1397.604" y="1484.909090909091" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_tao</tspan></text>
+</g>
+<g class="entity" data-id="khu_vuc" data-label="khu_vuc">
+  <rect x="299.2" y="477.4" width="160" height="144" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="299.2" y="477.4" width="160" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="379.2" y="494.4" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">khu_vuc</text>
+  <line x1="299.2" y1="511.4" x2="459.2" y2="511.4" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="305.2" y="515.4" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="316.35499999999996" y="522.4" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="335.51" y="522.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="451.2" y="522.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="307.2" y="544.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="451.2" y="544.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_khu_vuc</tspan></text>
+  </g>
+  <text x="307.2" y="566.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="451.2" y="566.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_khu_vuc</tspan></text>
+  <text x="307.2" y="588.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="451.2" y="588.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">thu_tu_hien_thi</tspan></text>
+  <g><title>hoat_dong | ngung</title>
+  <text x="307.2" y="610.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="451.2" y="610.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="ban_an" data-label="ban_an">
+  <rect x="748.422" y="444.4" width="186.4" height="210" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="748.422" y="444.4" width="186.4" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="841.6220000000001" y="461.4" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">ban_an</text>
+  <line x1="748.422" y1="478.4" x2="934.822" y2="478.4" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="754.422" y="482.4" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="765.577" y="489.4" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="784.732" y="489.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="926.822" y="489.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="754.422" y="504.4" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="765.577" y="511.4" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="784.732" y="511.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="926.822" y="511.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">khu_vuc_id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="756.422" y="533.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="926.822" y="533.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_ban</tspan></text>
+  </g>
+  <text x="756.422" y="555.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="926.822" y="555.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_ban</tspan></text>
+  <text x="756.422" y="577.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="926.822" y="577.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">suc_chua</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="756.422" y="599.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="926.822" y="599.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_qr_token</tspan></text>
+  </g>
+  <g><title>tu_dong | can_duyet</title>
+  <text x="756.422" y="621.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="926.822" y="621.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">che_do_duyet_mon</tspan></text>
+  </g>
+  <g><title>trong | co_khach | cho_thanh_toan | can_don</title>
+  <text x="756.422" y="643.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="926.822" y="643.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="phan_cong_ban" data-label="phan_cong_ban">
+  <rect x="1785.998" y="1582.3" width="166.6" height="144" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1785.998" y="1582.3" width="166.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1869.298" y="1599.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">phan_cong_ban</text>
+  <line x1="1785.998" y1="1616.3" x2="1952.598" y2="1616.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1791.998" y="1620.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="1627.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1822.308" y="1627.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1944.598" y="1627.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="1791.998" y="1642.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="1649.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1822.308" y="1649.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1944.598" y="1649.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">nhan_vien_id</tspan></text>
+  <rect x="1791.998" y="1664.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="1671.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1822.308" y="1671.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1944.598" y="1671.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ban_an_id</tspan></text>
+  <text x="1793.998" y="1693.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">date</tspan></text>
+  <text x="1944.598" y="1693.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_phan_cong</tspan></text>
+  <g><title>ca_sang | ca_chieu | ca_toi</title>
+  <text x="1793.998" y="1715.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1944.598" y="1715.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ca_truc</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="danh_muc_mon" data-label="danh_muc_mon">
+  <rect x="1291.804" y="84" width="160" height="166" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1291.804" y="84" width="160" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1371.804" y="101" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">danh_muc_mon</text>
+  <line x1="1291.804" y1="118" x2="1451.804" y2="118" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1297.804" y="122" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1308.959" y="129" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1328.114" y="129" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1443.804" y="129" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="1299.804" y="151" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1443.804" y="151" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_danh_muc</tspan></text>
+  </g>
+  <text x="1299.804" y="173" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1443.804" y="173" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_danh_muc</tspan></text>
+  <text x="1299.804" y="195" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1443.804" y="195" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">hinh_anh</tspan></text>
+  <text x="1299.804" y="217" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1443.804" y="217" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">thu_tu_hien_thi</tspan></text>
+  <g><title>hoat_dong | ngung</title>
+  <text x="1299.804" y="239" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1443.804" y="239" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="mon_an" data-label="mon_an">
+  <rect x="1833.518" y="40" width="166.6" height="254" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1833.518" y="40" width="166.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1916.818" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">mon_an</text>
+  <line x1="1833.518" y1="74" x2="2000.118" y2="74" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1839.518" y="78" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1850.673" y="85" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1869.828" y="85" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1992.118" y="85" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="1839.518" y="100" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1850.673" y="107" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1869.828" y="107" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1992.118" y="107" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">danh_muc_id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="1841.518" y="129" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1992.118" y="129" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_mon</tspan></text>
+  </g>
+  <text x="1841.518" y="151" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1992.118" y="151" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_mon</tspan></text>
+  <g><title>CHECK &gt; 0</title>
+  <text x="1841.518" y="173" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1992.118" y="173" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">don_gia</tspan></text>
+  </g>
+  <text x="1841.518" y="195" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1992.118" y="195" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">hinh_anh</tspan></text>
+  <text x="1841.518" y="217" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1992.118" y="217" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">don_vi_tinh</tspan></text>
+  <text x="1841.518" y="239" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">boolean</tspan></text>
+  <text x="1992.118" y="239" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">la_combo</tspan></text>
+  <text x="1841.518" y="261" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">boolean</tspan></text>
+  <text x="1992.118" y="261" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">la_mon_goi_y</tspan></text>
+  <g><title>con_mon | het_mon | ngung_ban</title>
+  <text x="1841.518" y="283" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1992.118" y="283" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="combo_chi_tiet" data-label="combo_chi_tiet">
+  <rect x="2296.688" y="50.133333333333326" width="166.6" height="122" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="2296.688" y="50.133333333333326" width="166.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="2379.9880000000003" y="67.13333333333333" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">combo_chi_tiet</text>
+  <line x1="2296.688" y1="84.13333333333333" x2="2463.288" y2="84.13333333333333" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="2302.688" y="88.13333333333333" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="95.13333333333333" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="2332.998" y="95.13333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2455.288" y="95.13333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="2302.688" y="110.13333333333333" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="117.13333333333333" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="117.13333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2455.288" y="117.13333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">combo_id</tspan></text>
+  <rect x="2302.688" y="132.13333333333333" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="139.13333333333333" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="139.13333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2455.288" y="139.13333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">mon_an_le_id</tspan></text>
+  <g><title>CHECK &gt; 0</title>
+  <text x="2304.688" y="161.13333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2455.288" y="161.13333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_luong</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="phien_ban" data-label="phien_ban">
+  <rect x="1239.0040000000001" y="420.4" width="212.79999999999998" height="188" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1239.0040000000001" y="420.4" width="212.79999999999998" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1345.4040000000002" y="437.4" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">phien_ban</text>
+  <line x1="1239.0040000000001" y1="454.4" x2="1451.804" y2="454.4" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1245.0040000000001" y="458.4" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1256.159" y="465.4" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1275.314" y="465.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1443.804" y="465.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="1245.0040000000001" y="480.4" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1256.159" y="487.4" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1275.314" y="487.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1443.804" y="487.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ban_an_id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="1247.0040000000001" y="509.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1443.804" y="509.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_phien</tspan></text>
+  </g>
+  <text x="1247.0040000000001" y="531.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1443.804" y="531.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_khach</tspan></text>
+  <text x="1247.0040000000001" y="553.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="1443.804" y="553.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">thoi_gian_bat_dau</tspan></text>
+  <text x="1247.0040000000001" y="575.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="1443.804" y="575.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">thoi_gian_ket_thuc</tspan></text>
+  <g><title>dang_phuc_vu | cho_thanh_toan | da_dong | da_huy</title>
+  <text x="1247.0040000000001" y="597.4" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1443.804" y="597.4" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="don_goi_mon" data-label="don_goi_mon">
+  <rect x="1797.548" y="858" width="179.79999999999998" height="210" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1797.548" y="858" width="179.79999999999998" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1887.448" y="875" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">don_goi_mon</text>
+  <line x1="1797.548" y1="892" x2="1977.348" y2="892" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1803.548" y="896" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1814.703" y="903" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1833.858" y="903" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1969.348" y="903" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="1803.548" y="918" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1814.703" y="925" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1833.858" y="925" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1969.348" y="925" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phien_ban_id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="1805.548" y="947" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1969.348" y="947" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_don</tspan></text>
+  </g>
+  <text x="1805.548" y="969" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1969.348" y="969" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">dot_goi</tspan></text>
+  <g><title>khach_qr | phuc_vu</title>
+  <text x="1805.548" y="991" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1969.348" y="991" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">nguon_don</tspan></text>
+  </g>
+  <rect x="1803.548" y="1006" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1814.703" y="1013" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1833.858" y="1013" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1969.348" y="1013" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phuc_vu_tao_id</tspan></text>
+  <g><title>cho_xac_nhan | da_xac_nhan | dang_nau | hoan_thanh | da_huy</title>
+  <text x="1805.548" y="1035" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1969.348" y="1035" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+  <text x="1805.548" y="1057" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="1969.348" y="1057" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_tao</tspan></text>
+</g>
+<g class="entity" data-id="chi_tiet_don_mon" data-label="chi_tiet_don_mon">
+  <rect x="2296.688" y="242.13333333333333" width="232.6" height="254" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="2296.688" y="242.13333333333333" width="232.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="2412.9880000000003" y="259.1333333333333" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">chi_tiet_don_mon</text>
+  <line x1="2296.688" y1="276.1333333333333" x2="2529.288" y2="276.1333333333333" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="2302.688" y="280.1333333333333" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="287.1333333333333" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="2332.998" y="287.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2521.288" y="287.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="2302.688" y="302.1333333333333" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="309.1333333333333" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="309.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2521.288" y="309.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">don_goi_mon_id</tspan></text>
+  <rect x="2302.688" y="324.1333333333333" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="331.1333333333333" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="331.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2521.288" y="331.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">mon_an_id</tspan></text>
+  <g><title>CHECK &gt; 0</title>
+  <text x="2304.688" y="353.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2521.288" y="353.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_luong</tspan></text>
+  </g>
+  <g><title>CHECK &gt; 0</title>
+  <text x="2304.688" y="375.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2521.288" y="375.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">don_gia</tspan></text>
+  </g>
+  <text x="2304.688" y="397.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2521.288" y="397.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ghi_chu</tspan></text>
+  <g><title>cho_duyet | dang_nau | hoan_thanh | da_phuc_vu | huy_mon</title>
+  <text x="2304.688" y="419.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2521.288" y="419.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai_mon</tspan></text>
+  </g>
+  <text x="2304.688" y="441.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">boolean</tspan></text>
+  <text x="2521.288" y="441.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">la_uu_tien</tspan></text>
+  <text x="2304.688" y="463.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="2521.288" y="463.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">thoi_gian_bat_dau_nau</tspan></text>
+  <text x="2304.688" y="485.1333333333333" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="2521.288" y="485.1333333333333" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">thoi_gian_hoan_thanh</tspan></text>
+</g>
+<g class="entity" data-id="yeu_cau_huy_mon" data-label="yeu_cau_huy_mon">
+  <rect x="2804.474" y="1642.3" width="219.4" height="188" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="2804.474" y="1642.3" width="219.4" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="2914.174" y="1659.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">yeu_cau_huy_mon</text>
+  <line x1="2804.474" y1="1676.3" x2="3023.8740000000003" y2="1676.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="2810.474" y="1680.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2821.6290000000004" y="1687.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="2840.784" y="1687.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="3015.8740000000003" y="1687.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <g><title>UNIQUE</title>
+  <rect x="2810.474" y="1702.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2821.6290000000004" y="1709.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2840.784" y="1709.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="3015.8740000000003" y="1709.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">chi_tiet_don_mon_id</tspan></text>
+  </g>
+  <rect x="2810.474" y="1724.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2821.6290000000004" y="1731.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2840.784" y="1731.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="3015.8740000000003" y="1731.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">nhan_vien_yeu_cau_id</tspan></text>
+  <text x="2812.474" y="1753.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="3015.8740000000003" y="1753.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ly_do_huy</tspan></text>
+  <g><title>cho_duyet | da_chap_thuan | tu_choi</title>
+  <text x="2812.474" y="1775.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="3015.8740000000003" y="1775.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+  <rect x="2810.474" y="1790.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2821.6290000000004" y="1797.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2840.784" y="1797.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="3015.8740000000003" y="1797.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">quan_ly_duyet_id</tspan></text>
+  <text x="2812.474" y="1819.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="3015.8740000000003" y="1819.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ghi_chu_quan_ly</tspan></text>
+</g>
+<g class="entity" data-id="yeu_cau_ho_tro" data-label="yeu_cau_ho_tro">
+  <rect x="1785.998" y="622" width="166.6" height="166" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1785.998" y="622" width="166.6" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1869.298" y="639" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">yeu_cau_ho_tro</text>
+  <line x1="1785.998" y1="656" x2="1952.598" y2="656" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1791.998" y="660" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="667" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1822.308" y="667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1944.598" y="667" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="1791.998" y="682" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="689" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1822.308" y="689" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1944.598" y="689" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phien_ban_id</tspan></text>
+  <g><title>goi_phuc_vu | goi_thanh_toan | goi_nuoc | khac</title>
+  <text x="1793.998" y="711" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1944.598" y="711" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">loai_yeu_cau</tspan></text>
+  </g>
+  <text x="1793.998" y="733" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1944.598" y="733" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">noi_dung</tspan></text>
+  <g><title>cho_xu_ly | dang_xu_ly | da_xu_ly</title>
+  <text x="1793.998" y="755" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1944.598" y="755" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+  <text x="1793.998" y="777" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="1944.598" y="777" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_tao</tspan></text>
+</g>
+<g class="entity" data-id="hoa_don" data-label="hoa_don">
+  <rect x="1785.998" y="1170.3" width="226" height="342" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1785.998" y="1170.3" width="226" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1898.998" y="1187.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">hoa_don</text>
+  <line x1="1785.998" y1="1204.3" x2="2011.998" y2="1204.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1791.998" y="1208.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="1215.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1822.308" y="1215.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1215.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="1791.998" y="1230.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="1237.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1822.308" y="1237.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1237.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phien_ban_id</tspan></text>
+  <g><title>UNIQUE</title>
+  <text x="1793.998" y="1259.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2003.998" y="1259.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_hoa_don</tspan></text>
+  </g>
+  <g><title>Split Bill</title>
+  <rect x="1791.998" y="1274.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="1281.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1822.308" y="1281.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1281.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">hoa_don_cha_id</tspan></text>
+  </g>
+  <rect x="1791.998" y="1296.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="1303.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1822.308" y="1303.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1303.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">thu_ngan_id</tspan></text>
+  <g><title>CHECK &gt;= 0</title>
+  <text x="1793.998" y="1325.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1325.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">tong_tien_mon</tspan></text>
+  </g>
+  <g><title>0 - 100%</title>
+  <text x="1793.998" y="1347.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1347.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phan_tram_giam_gia</tspan></text>
+  </g>
+  <g><title>CHECK &gt;= 0</title>
+  <text x="1793.998" y="1369.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1369.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_tien_giam</tspan></text>
+  </g>
+  <g><title>0 - 100%</title>
+  <text x="1793.998" y="1391.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1391.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phan_tram_vat</tspan></text>
+  </g>
+  <g><title>CHECK &gt;= 0</title>
+  <text x="1793.998" y="1413.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1413.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">tien_vat</tspan></text>
+  </g>
+  <g><title>CHECK &gt;= 0</title>
+  <text x="1793.998" y="1435.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2003.998" y="1435.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">tong_tien_thanh_toan</tspan></text>
+  </g>
+  <g><title>tien_mat | vietqr | the_ngan_hang</title>
+  <text x="1793.998" y="1457.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2003.998" y="1457.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phuong_thuc_thanh_toan</tspan></text>
+  </g>
+  <g><title>cho_thanh_toan | da_thanh_toan | da_huy</title>
+  <text x="1793.998" y="1479.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2003.998" y="1479.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+  <text x="1793.998" y="1501.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="2003.998" y="1501.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_thanh_toan</tspan></text>
+</g>
+<g class="entity" data-id="chi_tiet_hoa_don" data-label="chi_tiet_hoa_don">
+  <rect x="2296.688" y="941.9666666666666" width="153.39999999999998" height="166" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="2296.688" y="941.9666666666666" width="153.39999999999998" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="2373.388" y="958.9666666666666" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">chi_tiet_hoa_don</text>
+  <line x1="2296.688" y1="975.9666666666666" x2="2450.088" y2="975.9666666666666" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="2302.688" y="979.9666666666666" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="986.9666666666666" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="2332.998" y="986.9666666666666" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2442.088" y="986.9666666666666" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <rect x="2302.688" y="1001.9666666666666" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="1008.9666666666666" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="1008.9666666666666" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2442.088" y="1008.9666666666666" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">hoa_don_id</tspan></text>
+  <rect x="2302.688" y="1023.9666666666667" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="1030.9666666666667" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="1030.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2442.088" y="1030.9666666666667" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">mon_an_id</tspan></text>
+  <g><title>CHECK &gt; 0</title>
+  <text x="2304.688" y="1052.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2442.088" y="1052.9666666666667" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_luong</tspan></text>
+  </g>
+  <g><title>CHECK &gt; 0</title>
+  <text x="2304.688" y="1074.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2442.088" y="1074.9666666666667" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">don_gia</tspan></text>
+  </g>
+  <g><title>CHECK = so_luong * don_gia</title>
+  <text x="2304.688" y="1096.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2442.088" y="1096.9666666666667" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">thanh_tien</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="chia_tien_nhom" data-label="chia_tien_nhom">
+  <rect x="2296.688" y="1304.3" width="173.2" height="188" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="2296.688" y="1304.3" width="173.2" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="2383.288" y="1321.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">chia_tien_nhom</text>
+  <line x1="2296.688" y1="1338.3" x2="2469.888" y2="1338.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="2302.688" y="1342.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="1349.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="2332.998" y="1349.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2461.888" y="1349.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <g><title>UNIQUE</title>
+  <rect x="2302.688" y="1364.3" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="2313.8430000000003" y="1371.3" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="2332.998" y="1371.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2461.888" y="1371.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">hoa_don_id</tspan></text>
+  </g>
+  <g><title>CHECK &gt;= 2</title>
+  <text x="2304.688" y="1393.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2461.888" y="1393.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_nguoi_chia</tspan></text>
+  </g>
+  <g><title>CHECK &gt; 0</title>
+  <text x="2304.688" y="1415.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2461.888" y="1415.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_tien_moi_nguoi</tspan></text>
+  </g>
+  <text x="2304.688" y="1437.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="2461.888" y="1437.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_nguoi_da_tra</tspan></text>
+  <text x="2304.688" y="1459.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2461.888" y="1459.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ma_vietqr_dong</tspan></text>
+  <g><title>dang_thu | hoan_tat</title>
+  <text x="2304.688" y="1481.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="2461.888" y="1481.3" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">trang_thai</tspan></text>
+  </g>
+</g>
+<g class="entity" data-id="danh_gia" data-label="danh_gia">
+  <rect x="1785.998" y="364" width="193" height="188" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1785.998" y="364" width="193" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1882.498" y="381" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">danh_gia</text>
+  <line x1="1785.998" y1="398" x2="1978.998" y2="398" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <rect x="1791.998" y="402" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="409" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="1822.308" y="409" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1970.998" y="409" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  <g><title>UNIQUE</title>
+  <rect x="1791.998" y="424" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="1803.153" y="431" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">FK</text>
+  <text x="1822.308" y="431" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1970.998" y="431" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phien_ban_id</tspan></text>
+  </g>
+  <g><title>1 - 5 sao</title>
+  <text x="1793.998" y="453" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1970.998" y="453" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_sao_mon_an</tspan></text>
+  </g>
+  <g><title>1 - 5 sao</title>
+  <text x="1793.998" y="475" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1970.998" y="475" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_sao_phuc_vu</tspan></text>
+  </g>
+  <g><title>1 - 5 sao</title>
+  <text x="1793.998" y="497" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1970.998" y="497" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_sao_khong_gian</tspan></text>
+  </g>
+  <text x="1793.998" y="519" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1970.998" y="519" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">noi_dung_nhan_xet</tspan></text>
+  <text x="1793.998" y="541" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="1970.998" y="541" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngay_tao</tspan></text>
+</g>
+<g class="entity" data-id="cau_hinh_nha_hang" data-label="cau_hinh_nha_hang">
+  <rect x="40" y="40" width="239.2" height="232" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="40" y="40" width="239.2" height="34" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="159.6" y="57" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">cau_hinh_nha_hang</text>
+  <line x1="40" y1="74" x2="279.2" y2="74" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <g><title>CHECK id = 1</title>
+  <rect x="46" y="78" width="22.31" height="14" rx="2" ry="2" fill="var(--_key-badge)" />
+  <text x="57.155" y="85" text-anchor="middle" dy="0.35em" font-size="9" font-weight="600" fill="var(--_text-sec)">PK</text>
+  <text x="76.31" y="85" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="271.2" y="85" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">id</tspan></text>
+  </g>
+  <text x="48" y="107" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="271.2" y="107" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_nha_hang</tspan></text>
+  <text x="48" y="129" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="271.2" y="129" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">dia_chi</tspan></text>
+  <text x="48" y="151" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="271.2" y="151" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_dien_thoai</tspan></text>
+  <text x="48" y="173" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="271.2" y="173" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">email</tspan></text>
+  <g><title>0 - 100%</title>
+  <text x="48" y="195" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="271.2" y="195" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">phan_tram_vat</tspan></text>
+  </g>
+  <text x="48" y="217" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="271.2" y="217" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ngan_hang_vietqr</tspan></text>
+  <text x="48" y="239" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="271.2" y="239" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">so_tai_khoan_vietqr</tspan></text>
+  <text x="48" y="261" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="271.2" y="261" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">ten_chu_tai_khoan_vietqr</tspan></text>
+</g>
+<line x1="463.2" y1="1092.2424242424242" x2="463.2" y2="1104.2424242424242" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="467.2" y1="1092.2424242424242" x2="467.2" y2="1104.2424242424242" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="726.822" y1="1105.2424242424242" x2="714.822" y2="1098.2424242424242" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="726.822" y1="1098.2424242424242" x2="714.822" y2="1098.2424242424242" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="726.822" y1="1091.2424242424242" x2="714.822" y2="1098.2424242424242" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="710.822" cy="1098.2424242424242" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="947.622" y1="1060.909090909091" x2="947.622" y2="1072.909090909091" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="951.622" y1="1060.909090909091" x2="951.622" y2="1072.909090909091" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1247.0040000000001" y1="1072.909090909091" x2="1247.0040000000001" y2="1060.909090909091" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1243.0040000000001" y1="1072.909090909091" x2="1243.0040000000001" y2="1060.909090909091" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1239.0040000000001" cy="1066.909090909091" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="1072.4545454545455" x2="1454.604" y2="1084.4545454545455" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="1072.4545454545455" x2="1458.604" y2="1084.4545454545455" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1811.698" y1="1848.3" x2="1799.698" y2="1841.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1811.698" y1="1841.3" x2="1799.698" y2="1841.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1811.698" y1="1834.3" x2="1799.698" y2="1841.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1795.698" cy="1841.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="1095.5454545454545" x2="1454.604" y2="1107.5454545454545" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="1095.5454545454545" x2="1458.604" y2="1107.5454545454545" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="2012.3" x2="2280.688" y2="2005.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="2005.3" x2="2280.688" y2="2005.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1998.3" x2="2280.688" y2="2005.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2276.688" cy="2005.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="1118.6363636363635" x2="1454.604" y2="1130.6363636363635" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="1118.6363636363635" x2="1458.604" y2="1130.6363636363635" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="2054.3" x2="2280.688" y2="2047.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="2047.3" x2="2280.688" y2="2047.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="2040.3" x2="2280.688" y2="2047.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2276.688" cy="2047.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="1141.7272727272727" x2="1454.604" y2="1153.7272727272727" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="1141.7272727272727" x2="1458.604" y2="1153.7272727272727" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="2096.3" x2="2280.688" y2="2089.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="2089.3" x2="2280.688" y2="2089.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="2082.3" x2="2280.688" y2="2089.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2276.688" cy="2089.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1986.298" y1="1835.3" x2="1986.298" y2="1847.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1990.298" y1="1835.3" x2="1990.298" y2="1847.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1970.3" x2="2280.688" y2="1963.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1963.3" x2="2280.688" y2="1963.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1956.3" x2="2280.688" y2="1963.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2276.688" cy="1963.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="947.622" y1="1123.5757575757575" x2="947.622" y2="1135.5757575757575" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="951.622" y1="1123.5757575757575" x2="951.622" y2="1135.5757575757575" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1235.0040000000001" y1="1386.909090909091" x2="1223.0040000000001" y2="1379.909090909091" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1235.0040000000001" y1="1379.909090909091" x2="1223.0040000000001" y2="1379.909090909091" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1235.0040000000001" y1="1372.909090909091" x2="1223.0040000000001" y2="1379.909090909091" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1219.0040000000001" cy="1379.909090909091" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="463.2" y1="543.4" x2="463.2" y2="555.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="467.2" y1="543.4" x2="467.2" y2="555.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="744.422" y1="556.4" x2="732.422" y2="549.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="744.422" y1="549.4" x2="732.422" y2="549.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="744.422" y1="542.4" x2="732.422" y2="549.4" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="728.422" cy="549.4" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="1026.2727272727273" x2="1454.604" y2="1038.2727272727273" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="1026.2727272727273" x2="1458.604" y2="1038.2727272727273" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1685.3" x2="1769.998" y2="1678.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1678.3" x2="1769.998" y2="1678.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1671.3" x2="1769.998" y2="1678.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1765.998" cy="1678.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="938.822" y1="578.4" x2="938.822" y2="590.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="942.822" y1="578.4" x2="942.822" y2="590.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1637.3" x2="1769.998" y2="1630.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1630.3" x2="1769.998" y2="1630.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1623.3" x2="1769.998" y2="1630.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1765.998" cy="1630.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1455.804" y1="161" x2="1455.804" y2="173" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1459.804" y1="161" x2="1459.804" y2="173" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1829.518" y1="174" x2="1817.518" y2="167" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1829.518" y1="167" x2="1817.518" y2="167" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1829.518" y1="160" x2="1817.518" y2="167" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1813.518" cy="167" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2004.118" y1="135.6" x2="2004.118" y2="147.6" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2008.118" y1="135.6" x2="2008.118" y2="147.6" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="138.46666666666667" x2="2280.688" y2="131.46666666666667" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="131.46666666666667" x2="2280.688" y2="131.46666666666667" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="124.46666666666667" x2="2280.688" y2="131.46666666666667" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2276.688" cy="131.46666666666667" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2004.118" y1="84.8" x2="2004.118" y2="96.8" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2008.118" y1="84.8" x2="2008.118" y2="96.8" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="97.8" x2="2280.688" y2="90.8" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="90.8" x2="2280.688" y2="90.8" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="83.8" x2="2280.688" y2="90.8" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2276.688" cy="90.8" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="938.822" y1="508.4" x2="938.822" y2="520.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="942.822" y1="508.4" x2="942.822" y2="520.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1235.0040000000001" y1="521.4" x2="1223.0040000000001" y2="514.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1235.0040000000001" y1="514.4" x2="1223.0040000000001" y2="514.4" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1235.0040000000001" y1="507.4" x2="1223.0040000000001" y2="514.4" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1219.0040000000001" cy="514.4" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1455.804" y1="527.2" x2="1455.804" y2="539.2" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1459.804" y1="527.2" x2="1459.804" y2="539.2" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="917.5" x2="1781.548" y2="910.5" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="910.5" x2="1781.548" y2="910.5" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="903.5" x2="1781.548" y2="910.5" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1777.548" cy="910.5" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="980.090909090909" x2="1454.604" y2="992.090909090909" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="980.090909090909" x2="1458.604" y2="992.090909090909" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="1022.5" x2="1781.548" y2="1015.5" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="1015.5" x2="1781.548" y2="1015.5" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="1008.5" x2="1781.548" y2="1015.5" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1777.548" cy="1015.5" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="957" x2="1454.604" y2="969" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="957" x2="1458.604" y2="969" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="970" x2="1781.548" y2="963" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="963" x2="1781.548" y2="963" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1793.548" y1="956" x2="1781.548" y2="963" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1777.548" cy="963" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1981.348" y1="957" x2="1981.348" y2="969" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1985.348" y1="957" x2="1985.348" y2="969" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="418.4666666666667" x2="2280.688" y2="411.4666666666667" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="411.4666666666667" x2="2280.688" y2="411.4666666666667" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="404.4666666666667" x2="2280.688" y2="411.4666666666667" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2004.118" y1="186.39999999999998" x2="2004.118" y2="198.39999999999998" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2008.118" y1="186.39999999999998" x2="2008.118" y2="198.39999999999998" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="333.8" x2="2280.688" y2="326.8" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="326.8" x2="2280.688" y2="326.8" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="319.8" x2="2280.688" y2="326.8" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2276.688" cy="326.8" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2533.288" y1="363.1333333333333" x2="2533.288" y2="375.1333333333333" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2537.288" y1="363.1333333333333" x2="2537.288" y2="375.1333333333333" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2800.474" y1="1695.3" x2="2800.474" y2="1683.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2796.474" y1="1695.3" x2="2796.474" y2="1683.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2792.474" cy="1689.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="1164.8181818181818" x2="1454.604" y2="1176.8181818181818" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="1164.8181818181818" x2="1458.604" y2="1176.8181818181818" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2800.474" y1="1790.3" x2="2788.474" y2="1783.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2800.474" y1="1783.3" x2="2788.474" y2="1783.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2800.474" y1="1776.3" x2="2788.474" y2="1783.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2784.474" cy="1783.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="1049.3636363636365" x2="1454.604" y2="1061.3636363636365" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="1049.3636363636365" x2="1458.604" y2="1061.3636363636365" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2800.474" y1="1743.3" x2="2788.474" y2="1736.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2800.474" y1="1736.3" x2="2788.474" y2="1736.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2800.474" y1="1729.3" x2="2788.474" y2="1736.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2784.474" cy="1736.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1455.804" y1="489.59999999999997" x2="1455.804" y2="501.59999999999997" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1459.804" y1="489.59999999999997" x2="1459.804" y2="501.59999999999997" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="712" x2="1769.998" y2="705" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="705" x2="1769.998" y2="705" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="698" x2="1769.998" y2="705" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1765.998" cy="705" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1455.804" y1="564.8" x2="1455.804" y2="576.8" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1459.804" y1="564.8" x2="1459.804" y2="576.8" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1291.3" x2="1769.998" y2="1284.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1284.3" x2="1769.998" y2="1284.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1277.3" x2="1769.998" y2="1284.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1765.998" cy="1284.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1454.604" y1="1003.1818181818181" x2="1454.604" y2="1015.1818181818181" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1458.604" y1="1003.1818181818181" x2="1458.604" y2="1015.1818181818181" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1405.3" x2="1769.998" y2="1398.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1398.3" x2="1769.998" y2="1398.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="1391.3" x2="1769.998" y2="1398.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1765.998" cy="1398.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1855.3313333333333" y1="1166.3" x2="1867.3313333333333" y2="1166.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1855.3313333333333" y1="1162.3" x2="1867.3313333333333" y2="1162.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1929.6646666666668" y1="1166.3" x2="1936.6646666666668" y2="1154.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1936.6646666666668" y1="1166.3" x2="1936.6646666666668" y2="1154.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1943.6646666666668" y1="1166.3" x2="1936.6646666666668" y2="1154.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1936.6646666666668" cy="1150.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2015.998" y1="1278.3" x2="2015.998" y2="1290.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2019.998" y1="1278.3" x2="2019.998" y2="1290.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1059.6333333333332" x2="2280.688" y2="1052.6333333333332" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1052.6333333333332" x2="2280.688" y2="1052.6333333333332" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1045.6333333333332" x2="2280.688" y2="1052.6333333333332" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2004.118" y1="237.2" x2="2004.118" y2="249.2" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2008.118" y1="237.2" x2="2008.118" y2="249.2" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1004.3" x2="2280.688" y2="997.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="997.3" x2="2280.688" y2="997.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="990.3" x2="2280.688" y2="997.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2276.688" cy="997.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2015.998" y1="1392.3" x2="2015.998" y2="1404.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2019.998" y1="1392.3" x2="2019.998" y2="1404.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2292.688" y1="1404.3" x2="2292.688" y2="1392.3" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="2288.688" y1="1404.3" x2="2288.688" y2="1392.3" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="2284.688" cy="1398.3" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1455.804" y1="452" x2="1455.804" y2="464" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1459.804" y1="452" x2="1459.804" y2="464" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1781.998" y1="464" x2="1781.998" y2="452" stroke="var(--_line)" stroke-width="1.25" />
+<line x1="1777.998" y1="464" x2="1777.998" y2="452" stroke="var(--_line)" stroke-width="1.25" />
+<circle cx="1773.998" cy="458" r="4" fill="var(--bg)" stroke="var(--_line)" stroke-width="1.25" />
+<rect x="560.486" y="1088.0924242424242" width="69.05000000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="595.011" y="1098.2424242424242" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phan_quyen</text>
+<rect x="1056.8480000000002" y="1056.759090909091" width="80.93" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1097.313" y="1066.909090909091" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">so_huu_ho_so</text>
+<rect x="1463.7150000000001" y="1581.0742727272727" width="76.17800000000003" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1501.804" y="1591.2242727272728" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">dang_ky_truc</text>
+<rect x="1456.0910000000001" y="1925.1147272727271" width="71.42600000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1491.804" y="1935.2647272727272" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">gui_yeu_cau</text>
+<rect x="1446.0910000000001" y="1967.6601818181816" width="71.42600000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1481.804" y="1977.8101818181817" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">nhan_ca_doi</text>
+<rect x="1431.933" y="2010.2056363636364" width="79.74200000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1471.804" y="2020.3556363636364" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">quan_ly_duyet</text>
+<rect x="2164.7799999999997" y="1831.1499999999999" width="71.42600000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2200.493" y="1841.3" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">thuoc_ve_ca</text>
+<rect x="908.4553333333333" y="1369.759090909091" width="115.38200000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="966.1463333333334" y="1379.909090909091" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">thuc_hien_hanh_dong</text>
+<rect x="558" y="539.25" width="91.62200000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="603.811" y="549.4" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">dinh_vi_khu_vuc</text>
+<rect x="1464.707" y="1441.6333636363634" width="114.19400000000003" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1521.804" y="1451.7833636363634" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">nhan_vien_phu_trach</text>
+<rect x="1500.151" y="915.8059999999999" width="83.30600000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1541.804" y="925.9559999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">ban_duoc_giao</text>
+<rect x="1587.346" y="156.85" width="110.63000000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1642.661" y="167" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phan_loai_danh_muc</text>
+<rect x="2105.876666666667" y="131.45" width="95.18600000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2153.469666666667" y="141.6" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">mon_combo_chua</text>
+<rect x="2096.0580000000004" y="80.64999999999999" width="104.69000000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2148.4030000000002" y="90.8" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">mon_le_thanh_phan</text>
+<rect x="1035.756" y="504.25" width="102.31400000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1086.913" y="514.4" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">mo_phien_phuc_vu</text>
+<rect x="1568.5430000000001" y="729.15" width="77.36600000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1607.226" y="739.3" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">tao_dot_order</text>
+<rect x="1594.1575454545455" y="975.940909090909" width="89.24600000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1638.7805454545455" y="986.090909090909" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phuc_vu_tao_ho</text>
+<rect x="1571.731" y="952.85" width="104.69000000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1624.076" y="963" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phuc_vu_xac_nhan</text>
+<rect x="2178.005" y="756.7533333333334" width="77.366" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2216.688" y="766.9033333333334" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">bao_gom_mon</text>
+<rect x="2041.926" y="316.65000000000003" width="78.554" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2081.203" y="326.8" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">duoc_dat_mon</text>
+<rect x="2676.8810000000003" y="961.4736666666665" width="95.18600000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2724.474" y="971.6236666666665" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">gui_yeu_cau_huy</text>
+<rect x="1771.9230909090911" y="2131.15" width="98.75000000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1821.2980909090911" y="2141.3" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">phuc_vu_yeu_cau</text>
+<rect x="1735.3198181818184" y="1726.1499999999999" width="103.50200000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1787.0708181818184" y="1736.3" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">quan_ly_phe_duyet</text>
+<rect x="1521.241" y="637.247" width="101.12600000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1571.804" y="647.3969999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">khach_goi_chuong</text>
+<rect x="1516.0910000000001" y="984.497" width="71.42600000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1551.804" y="994.6469999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">lap_hoa_don</text>
+<rect x="1483.6170000000002" y="1280.0879090909089" width="96.37400000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1531.804" y="1290.237909090909" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">thu_ngan_thu_tien</text>
+<rect x="1848.435" y="1150.1499999999999" width="101.12600000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1898.998" y="1160.3" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">tach_hoa_don_con</text>
+<rect x="2173.847" y="1220.6616666666664" width="85.68200000000002" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2216.688" y="1230.8116666666665" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">chua_dong_tien</text>
+<rect x="1979.751" y="736.505" width="84.49400000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2021.998" y="746.655" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">xuat_dong_mon</text>
+<rect x="2113.8779999999997" y="1388.1499999999999" width="80.93" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="2154.343" y="1398.3" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">cua_tien_nhom</text>
+<rect x="1574.278" y="447.85" width="89.24600000000001" height="20.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="0.5" />
+<text x="1618.901" y="458" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">khach_danh_gia</text>
+</svg>

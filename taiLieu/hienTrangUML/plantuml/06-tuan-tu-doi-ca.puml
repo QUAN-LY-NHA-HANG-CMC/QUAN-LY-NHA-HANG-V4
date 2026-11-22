@@ -1,0 +1,21 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+actor "Nhân viên" as E
+actor "Quản lý" as M
+boundary "React" as UI
+control "caLamViec routes / service" as API
+database SQLite as DB
+E -> UI : Chọn ca và gửi yêu cầu đổi/nghỉ
+UI -> API : POST /api/ca-lam-viec/yeu-cau-doi-ca
+API -> DB : Ghi yêu cầu chờ duyệt
+API --> UI : Kết quả gửi
+M -> UI : Xem danh sách yêu cầu
+UI -> API : GET /api/ca-lam-viec/yeu-cau-doi-ca
+API -> DB : Đọc yêu cầu
+API --> UI : Danh sách
+M -> UI : Chọn duyệt hoặc từ chối
+UI -> API : PUT /api/ca-lam-viec/yeu-cau-doi-ca/:id/phe-duyet
+API -> DB : Kiểm tra yêu cầu còn chờ và xử lý
+API --> UI : Kết quả
+@enduml

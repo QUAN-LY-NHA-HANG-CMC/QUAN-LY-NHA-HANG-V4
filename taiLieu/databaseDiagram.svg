@@ -1,0 +1,334 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1544.6652499999996 2877.4000000000005" width="1544.6652499999996" height="2877.4000000000005" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="CLUSTER1" data-label="🔐 PHÂN HỆ QUẢN TRỊ, NHÂN SỰ &amp; CA KÍP">
+  <rect x="40" y="40" width="710.8460357142856" height="899.2" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="40" y="40" width="710.8460357142856" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="52" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">🔐 PHÂN HỆ QUẢN TRỊ, NHÂN SỰ &amp; CA KÍP</text>
+</g>
+<g class="subgraph" data-id="CLUSTER2" data-label="🪑 PHÂN HỆ KHÔNG GIAN BÀN ĂN &amp; PHÂN CÔNG">
+  <rect x="482.6502499999999" y="1059.5" width="413.17483333333337" height="506.50000000000006" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="482.6502499999999" y="1059.5" width="413.17483333333337" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="494.6502499999999" y="1073.5" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">🪑 PHÂN HỆ KHÔNG GIAN BÀN ĂN &amp; PHÂN CÔNG</text>
+</g>
+<g class="subgraph" data-id="CLUSTER3" data-label="🍲 PHÂN HỆ THỰC ĐƠN, MÓN ĂN &amp; COMBO">
+  <rect x="1160.2077499999996" y="1059.5" width="309.58799999999997" height="506.50000000000006" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1160.2077499999996" y="1059.5" width="309.58799999999997" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1172.2077499999996" y="1073.5" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">🍲 PHÂN HỆ THỰC ĐƠN, MÓN ĂN &amp; COMBO</text>
+</g>
+<g class="subgraph" data-id="CLUSTER4" data-label="📱 PHÂN HỆ PHIÊN BÀN &amp; ĐIỀU PHỐI GỌI MÓN (KDS)">
+  <rect x="159.80898809523808" y="1678.3" width="1032.9131666666663" height="711.3000000000001" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="159.80898809523808" y="1678.3" width="1032.9131666666663" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="171.80898809523808" y="1692.3" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">📱 PHÂN HỆ PHIÊN BÀN &amp; ĐIỀU PHỐI GỌI MÓN (KDS)</text>
+</g>
+<g class="subgraph" data-id="CLUSTER5" data-label="💳 PHÂN HỆ THU NGÂN, HÓA ĐƠN &amp; CHIA TIỀN">
+  <rect x="929.5209583333329" y="2501.9000000000005" width="568.9965833333333" height="335.5" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="929.5209583333329" y="2501.9000000000005" width="568.9965833333333" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="941.5209583333329" y="2515.9000000000005" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">💳 PHÂN HỆ THU NGÂN, HÓA ĐƠN &amp; CHIA TIỀN</text>
+</g>
+<polyline class="edge" data-from="nhan_vien" data-to="phan_cong_ban" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="468.39609523809514,547.4000000000001 468.39609523809514,559.4000000000001 479.29707142857137,559.4000000000001 479.2970714285714,981.2 564.5610833333333,981.2 564.5610833333333,1434.4 580.0645833333333,1434.4 580.0645833333333,1462.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ban_an" data-to="phien_ban" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="778.40375,1362.1 778.40375,1660.3 799.1034880952378,1660.3 799.1034880952377,1722.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="mon_an" data-to="chi_tiet_don_mon" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="1251.3474999999996,1362.1 1251.3474999999996,1374.1 1184.1032499999997,1374.1 1184.1032499999997,1588 1134.2960714285712,1588 1134.2960714285712,1660.3 1112.3999880952379,1660.3 1112.3999880952376,2070.1 776.5664047619044,2070.1 776.5664047619044,2098.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="phien_ban" data-to="hoa_don" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="882.8244880952377,1809.8999999999999 882.8244880952377,1821.8999999999999 1175.7221547619044,1821.8999999999999 1175.7221547619042,2483.9000000000005 1133.1672916666662,2483.9000000000005 1133.167291666666,2545.9000000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="mon_an" data-to="chi_tiet_hoa_don" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="1378.6559999999995,1362.1 1378.6559999999995,1374.1 1444.9002499999997,1374.1 1444.9002499999995,2483.9000000000005 1404.067208333333,2483.9000000000005 1404.067208333333,2733.8000000000006" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="nhan_vien" data-to="don_goi_mon" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Duyệt order" points="496.0896666666666,547.4000000000001 496.0896666666666,559.4000000000001 506.9906428571428,559.4000000000001 506.99064285714286,969.2 416.97582142857124,969.2 416.97582142857124,1660.3 387.1816547619048,1660.3 387.1816547619049,1910.2" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="nhan_vien" data-to="yeu_cau_huy_mon" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Duyệt hủy" points="440.7025238095237,547.4000000000001 440.7025238095237,559.4000000000001 451.60349999999994,559.4000000000001 451.6035,957.2 274.5014880952379,957.2 274.5014880952379,1660.3 175.80898809523813,1660.3 175.80898809523825,2258 560.443238095238,2258 560.443238095238,2286" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="nhan_vien" data-to="hoa_don" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Thu tiền" points="523.783238095238,547.4000000000001 523.783238095238,559.4000000000001 534.6842142857142,559.4000000000001 534.6842142857142,969.2 1048.1357499999997,969.2 1048.1357499999997,1600 1211.816583333333,1600 1211.816583333333,2483.9000000000005 1245.7036249999994,2483.9000000000005 1245.7036249999996,2545.9000000000005" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="vai_tro" data-to="tai_khoan" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="344.48153571428566,163.15000000000003 344.48153571428566,271.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="tai_khoan" data-to="nhan_vien" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:1" points="383.2127023809523,359.5 383.2127023809523,371.5 454.5493095238094,371.5 454.5493095238094,459.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="nhan_vien" data-to="ca_lam_viec" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="385.3153809523809,547.4000000000001 385.3153809523809,559.4000000000001 185.902,559.4000000000001 185.902,647.7" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="nhan_vien" data-to="yeu_cau_doi_ca" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="413.00895238095234,547.4000000000001 413.00895238095234,571.4000000000001 350.804,571.4000000000001 350.804,807.6 326.10316666666665,807.6 326.10316666666665,835.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ca_lam_viec" data-to="yeu_cau_doi_ca" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="185.902,735.3000000000001 185.902,807.6 210.6028333333333,807.6 210.6028333333333,835.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="tai_khoan" data-to="nhat_ky_kiem_toan" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="305.75036904761896,359.5 305.75036904761896,371.5 212.61180952380948,371.5 212.61180952380948,459.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="khu_vuc" data-to="ban_an" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="727.6930833333332,1174.2 727.6930833333332,1274.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ban_an" data-to="phan_cong_ban" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="676.9824166666666,1362.1 676.9824166666666,1434.4 661.4789166666666,1434.4 661.4789166666666,1462.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="danh_muc_mon" data-to="mon_an" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="1315.0017499999994,1174.2 1315.0017499999994,1274.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="mon_an" data-to="combo_chi_tiet" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="1315.0017499999994,1362.1 1315.0017499999994,1462.4" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="phien_ban" data-to="don_goi_mon" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="715.3824880952378,1809.9 715.3824880952378,1821.9 326.8234880952381,1821.9 326.8234880952381,1882.2 286.9953214285714,1882.2 286.9953214285714,1910.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="phien_ban" data-to="yeu_cau_ho_tro" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="827.0104880952379,1809.9 827.0104880952379,1833.9 952.8614880952379,1833.9 952.8614880952379,1910.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="phien_ban" data-to="danh_gia" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:1" points="771.1964880952379,1809.9 771.1964880952379,1833.9 645.3454880952379,1833.9 645.3454880952379,1910.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="don_goi_mon" data-to="chi_tiet_don_mon" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="337.08848809523806,1997.8 337.08848809523806,2070.1 672.9220714285713,2070.1 672.9220714285713,2098.1" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="chi_tiet_don_mon" data-to="yeu_cau_huy_mon" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:1" points="724.744238095238,2185.7 724.7442380952378,2258 675.9435714285712,2258 675.9435714285712,2286" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="hoa_don" data-to="hoa_don" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Tách bill 1:N" points="1020.630958333333,2575.1000000000004 1010.630958333333,2575.1000000000004 1010.630958333333,2604.3000000000006 1020.630958333333,2604.3000000000006" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="hoa_don" data-to="chi_tiet_hoa_don" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:N" points="1245.7036249999996,2633.5000000000005 1245.7036249999996,2645.5000000000005 1303.5738749999996,2645.5000000000005 1303.5738749999996,2705.8000000000006 1325.6168749999997,2705.8000000000006 1325.6168749999997,2733.8000000000006" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="hoa_don" data-to="chia_tien_nhom" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="1:1" points="1133.1672916666662,2633.5000000000005 1133.1672916666662,2645.5000000000005 1097.3400416666664,2645.5000000000005 1097.3400416666664,2733.8000000000006" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="nhan_vien" data-to="phan_cong_ban" data-label="1:N">
+  <rect x="549.5610833333333" y="988.2" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="564.3260833333333" y="1003.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="ban_an" data-to="phien_ban" data-label="1:N">
+  <rect x="763.40375" y="1607" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="778.1687499999999" y="1622.15" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="mon_an" data-to="chi_tiet_don_mon" data-label="1:N">
+  <rect x="1119.2960714285712" y="1607" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1134.0610714285713" y="1622.15" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="phien_ban" data-to="hoa_don" data-label="1:N">
+  <rect x="1160.7221547619042" y="2430.6000000000004" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1175.4871547619043" y="2445.7500000000005" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="mon_an" data-to="chi_tiet_hoa_don" data-label="1:N">
+  <rect x="1429.9002499999995" y="2430.6000000000004" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1444.6652499999996" y="2445.7500000000005" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="nhan_vien" data-to="don_goi_mon" data-label="Duyệt order">
+  <rect x="379.47582142857124" y="1607" width="74.08000000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="416.51582142857126" y="1622.15" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Duyệt order</text>
+</g>
+<g class="edge-label" data-from="nhan_vien" data-to="yeu_cau_huy_mon" data-label="Duyệt hủy">
+  <rect x="242.0014880952379" y="1607" width="64.57600000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="274.2894880952379" y="1622.15" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Duyệt hủy</text>
+</g>
+<g class="edge-label" data-from="nhan_vien" data-to="hoa_don" data-label="Thu tiền">
+  <rect x="1183.816583333333" y="1607" width="55.072" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1211.352583333333" y="1622.15" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Thu tiền</text>
+</g>
+<g class="edge-label" data-from="vai_tro" data-to="tai_khoan" data-label="1:N">
+  <rect x="329.48153571428566" y="206.60000000000002" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="344.24653571428564" y="221.75000000000003" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="tai_khoan" data-to="nhan_vien" data-label="1:1">
+  <rect x="442.0493095238094" y="394.5" width="24.778000000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="454.43830952380944" y="409.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:1</text>
+</g>
+<g class="edge-label" data-from="nhan_vien" data-to="ca_lam_viec" data-label="1:N">
+  <rect x="170.902" y="582.4000000000001" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="185.66699999999997" y="597.5500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="nhan_vien" data-to="yeu_cau_doi_ca" data-label="1:N">
+  <rect x="335.804" y="676.35" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="350.56899999999996" y="691.5" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="ca_lam_viec" data-to="yeu_cau_doi_ca" data-label="1:N">
+  <rect x="170.902" y="770.3000000000001" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="185.66699999999997" y="785.45" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="tai_khoan" data-to="nhat_ky_kiem_toan" data-label="1:N">
+  <rect x="197.61180952380948" y="394.5" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="212.37680952380947" y="409.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="khu_vuc" data-to="ban_an" data-label="1:N">
+  <rect x="712.6930833333332" y="1209.1999999999998" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="727.4580833333332" y="1224.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="ban_an" data-to="phan_cong_ban" data-label="1:N">
+  <rect x="661.9824166666666" y="1397.1" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="676.7474166666666" y="1412.25" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="danh_muc_mon" data-to="mon_an" data-label="1:N">
+  <rect x="1300.0017499999994" y="1209.1999999999998" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1314.7667499999995" y="1224.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="mon_an" data-to="combo_chi_tiet" data-label="1:N">
+  <rect x="1300.0017499999994" y="1397.1" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1314.7667499999995" y="1412.25" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="phien_ban" data-to="don_goi_mon" data-label="1:N">
+  <rect x="311.8234880952381" y="1844.8999999999999" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="326.58848809523806" y="1860.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="phien_ban" data-to="yeu_cau_ho_tro" data-label="1:N">
+  <rect x="937.8614880952379" y="1844.8999999999999" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="952.6264880952378" y="1860.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="phien_ban" data-to="danh_gia" data-label="1:1">
+  <rect x="632.8454880952379" y="1844.8999999999999" width="24.778000000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="645.2344880952379" y="1860.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:1</text>
+</g>
+<g class="edge-label" data-from="don_goi_mon" data-to="chi_tiet_don_mon" data-label="1:N">
+  <rect x="322.08848809523806" y="2032.7999999999997" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="336.85348809523805" y="2047.9499999999998" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="chi_tiet_don_mon" data-to="yeu_cau_huy_mon" data-label="1:1">
+  <rect x="712.2442380952378" y="2220.7" width="24.778000000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="724.6332380952379" y="2235.85" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:1</text>
+</g>
+<g class="edge-label" data-from="hoa_don" data-to="hoa_don" data-label="Tách bill 1:N">
+  <rect x="941.5209583333328" y="2574.5500000000006" width="71.11000000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="977.0759583333329" y="2589.7000000000007" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Tách bill 1:N</text>
+</g>
+<g class="edge-label" data-from="hoa_don" data-to="chi_tiet_hoa_don" data-label="1:N">
+  <rect x="1288.5738749999994" y="2668.5000000000005" width="29.53" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1303.3388749999995" y="2683.6500000000005" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:N</text>
+</g>
+<g class="edge-label" data-from="hoa_don" data-to="chia_tien_nhom" data-label="1:1">
+  <rect x="1084.8400416666664" y="2668.5000000000005" width="24.778000000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1097.2290416666663" y="2683.6500000000005" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">1:1</text>
+</g>
+<g class="node" data-id="vai_tro" data-label="&lt;b&gt;vai_tro&lt;/b&gt;
+id (PK)
+ma_vai_tro, ten_vai_tro" data-shape="rectangle">
+  <rect x="254.96403571428564" y="92.45" width="179.035" height="70.7" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="344.48153571428566" y="127.80000000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="344.48153571428566" dy="-12.350000000000001"><tspan font-weight="bold">vai_tro</tspan></tspan><tspan x="344.48153571428566" dy="16.900000000000002">id (PK)</tspan><tspan x="344.48153571428566" dy="16.900000000000002">ma_vai_tro, ten_vai_tro</tspan></text>
+</g>
+<g class="node" data-id="tai_khoan" data-label="&lt;b&gt;tai_khoan&lt;/b&gt;
+id (PK)
+ten_dang_nhap, mat_khau_hash
+vai_tro_id (FK), trang_thai" data-shape="rectangle">
+  <rect x="228.28803571428566" y="271.9" width="232.38699999999997" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="344.48153571428566" y="315.7" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="344.48153571428566" dy="-20.8"><tspan font-weight="bold">tai_khoan</tspan></tspan><tspan x="344.48153571428566" dy="16.900000000000002">id (PK)</tspan><tspan x="344.48153571428566" dy="16.900000000000002">ten_dang_nhap, mat_khau_hash</tspan><tspan x="344.48153571428566" dy="16.900000000000002">vai_tro_id (FK), trang_thai</tspan></text>
+</g>
+<g class="node" data-id="nhan_vien" data-label="&lt;b&gt;nhan_vien&lt;/b&gt;
+id (PK)
+tai_khoan_id (FK), ho_ten
+so_dien_thoai, muc_luong" data-shape="rectangle">
+  <rect x="357.6218095238095" y="459.8" width="193.855" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="454.5493095238095" y="503.6" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="454.5493095238095" dy="-20.8"><tspan font-weight="bold">nhan_vien</tspan></tspan><tspan x="454.5493095238095" dy="16.900000000000002">id (PK)</tspan><tspan x="454.5493095238095" dy="16.900000000000002">tai_khoan_id (FK), ho_ten</tspan><tspan x="454.5493095238095" dy="16.900000000000002">so_dien_thoai, muc_luong</tspan></text>
+</g>
+<g class="node" data-id="ca_lam_viec" data-label="&lt;b&gt;ca_lam_viec&lt;/b&gt;
+id (PK)
+nhan_vien_id (FK), ngay_lam, ten_ca
+gio_bat_dau, gio_ket_thuc, trang_thai" data-shape="rectangle">
+  <rect x="56" y="647.7" width="259.804" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="185.902" y="691.5" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="185.902" dy="-20.8"><tspan font-weight="bold">ca_lam_viec</tspan></tspan><tspan x="185.902" dy="16.900000000000002">id (PK)</tspan><tspan x="185.902" dy="16.900000000000002">nhan_vien_id (FK), ngay_lam, ten_ca</tspan><tspan x="185.902" dy="16.900000000000002">gio_bat_dau, gio_ket_thuc, trang_thai</tspan></text>
+</g>
+<g class="node" data-id="yeu_cau_doi_ca" data-label="&lt;b&gt;yeu_cau_doi_ca&lt;/b&gt;
+id (PK)
+nhan_vien_yeu_cau_id (FK), ca_lam_viec_id (FK)
+nhan_vien_nhan_ca_id (FK), quan_ly_duyet_id (FK)" data-shape="rectangle">
+  <rect x="95.10250000000002" y="835.6" width="346.5009999999999" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="268.35299999999995" y="879.4" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="268.35299999999995" dy="-20.8"><tspan font-weight="bold">yeu_cau_doi_ca</tspan></tspan><tspan x="268.35299999999995" dy="16.900000000000002">id (PK)</tspan><tspan x="268.35299999999995" dy="16.900000000000002">nhan_vien_yeu_cau_id (FK), ca_lam_viec_id (FK)</tspan><tspan x="268.35299999999995" dy="16.900000000000002">nhan_vien_nhan_ca_id (FK), quan_ly_duyet_id (FK)</tspan></text>
+</g>
+<g class="node" data-id="cau_hinh_nha_hang" data-label="&lt;b&gt;cau_hinh_nha_hang&lt;/b&gt;
+id=1 (PK)
+ten_nha_hang, phan_tram_vat
+ngan_hang_vietqr, so_tai_khoan_vietqr" data-shape="rectangle">
+  <rect x="457.99903571428564" y="92.45" width="276.847" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="596.4225357142857" y="136.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="596.4225357142857" dy="-20.8"><tspan font-weight="bold">cau_hinh_nha_hang</tspan></tspan><tspan x="596.4225357142857" dy="16.900000000000002">id=1 (PK)</tspan><tspan x="596.4225357142857" dy="16.900000000000002">ten_nha_hang, phan_tram_vat</tspan><tspan x="596.4225357142857" dy="16.900000000000002">ngan_hang_vietqr, so_tai_khoan_vietqr</tspan></text>
+</g>
+<g class="node" data-id="nhat_ky_kiem_toan" data-label="&lt;b&gt;nhat_ky_kiem_toan&lt;/b&gt;
+id (PK)
+tai_khoan_id (FK), hanh_dong
+bang_tac_dong, ban_ghi_id, ly_do" data-shape="rectangle">
+  <rect x="91.60180952380952" y="459.8" width="242.01999999999992" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="212.61180952380948" y="503.6" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="212.61180952380948" dy="-20.8"><tspan font-weight="bold">nhat_ky_kiem_toan</tspan></tspan><tspan x="212.61180952380948" dy="16.900000000000002">id (PK)</tspan><tspan x="212.61180952380948" dy="16.900000000000002">tai_khoan_id (FK), hanh_dong</tspan><tspan x="212.61180952380948" dy="16.900000000000002">bang_tac_dong, ban_ghi_id, ly_do</tspan></text>
+</g>
+<g class="node" data-id="khu_vuc" data-label="&lt;b&gt;khu_vuc&lt;/b&gt;
+id (PK)
+ma_khu_vuc, ten_khu_vuc, thu_tu" data-shape="rectangle">
+  <rect x="607.4240833333333" y="1103.5" width="240.53799999999995" height="70.7" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="727.6930833333333" y="1138.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="727.6930833333333" dy="-12.350000000000001"><tspan font-weight="bold">khu_vuc</tspan></tspan><tspan x="727.6930833333333" dy="16.900000000000002">id (PK)</tspan><tspan x="727.6930833333333" dy="16.900000000000002">ma_khu_vuc, ten_khu_vuc, thu_tu</tspan></text>
+</g>
+<g class="node" data-id="ban_an" data-label="&lt;b&gt;ban_an&lt;/b&gt;
+id (PK)
+khu_vuc_id (FK), ma_ban, ten_ban
+suc_chua, ma_qr_token, che_do_duyet_mon" data-shape="rectangle">
+  <rect x="575.5610833333333" y="1274.5" width="304.264" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="727.6930833333333" y="1318.3" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="727.6930833333333" dy="-20.8"><tspan font-weight="bold">ban_an</tspan></tspan><tspan x="727.6930833333333" dy="16.900000000000002">id (PK)</tspan><tspan x="727.6930833333333" dy="16.900000000000002">khu_vuc_id (FK), ma_ban, ten_ban</tspan><tspan x="727.6930833333333" dy="16.900000000000002">suc_chua, ma_qr_token, che_do_duyet_mon</tspan></text>
+</g>
+<g class="node" data-id="phan_cong_ban" data-label="&lt;b&gt;phan_cong_ban&lt;/b&gt;
+id (PK)
+nhan_vien_id (FK), ban_an_id (FK)
+ngay_phan_cong, ca_truc" data-shape="rectangle">
+  <rect x="498.6502499999999" y="1462.4" width="244.243" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="620.7717499999999" y="1506.2" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="620.7717499999999" dy="-20.8"><tspan font-weight="bold">phan_cong_ban</tspan></tspan><tspan x="620.7717499999999" dy="16.900000000000002">id (PK)</tspan><tspan x="620.7717499999999" dy="16.900000000000002">nhan_vien_id (FK), ban_an_id (FK)</tspan><tspan x="620.7717499999999" dy="16.900000000000002">ngay_phan_cong, ca_truc</tspan></text>
+</g>
+<g class="node" data-id="danh_muc_mon" data-label="&lt;b&gt;danh_muc_mon&lt;/b&gt;
+id (PK)
+ma_danh_muc, ten_danh_muc, hinh_anh" data-shape="rectangle">
+  <rect x="1176.2077499999996" y="1103.5" width="277.58799999999997" height="70.7" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1315.0017499999994" y="1138.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="1315.0017499999994" dy="-12.350000000000001"><tspan font-weight="bold">danh_muc_mon</tspan></tspan><tspan x="1315.0017499999994" dy="16.900000000000002">id (PK)</tspan><tspan x="1315.0017499999994" dy="16.900000000000002">ma_danh_muc, ten_danh_muc, hinh_anh</tspan></text>
+</g>
+<g class="node" data-id="mon_an" data-label="&lt;b&gt;mon_an&lt;/b&gt;
+id (PK)
+danh_muc_id (FK), ma_mon, ten_mon
+don_gia (&gt;0), la_combo, trang_thai" data-shape="rectangle">
+  <rect x="1187.6932499999996" y="1274.5" width="254.61699999999996" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1315.0017499999994" y="1318.3" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="1315.0017499999994" dy="-20.8"><tspan font-weight="bold">mon_an</tspan></tspan><tspan x="1315.0017499999994" dy="16.900000000000002">id (PK)</tspan><tspan x="1315.0017499999994" dy="16.900000000000002">danh_muc_id (FK), ma_mon, ten_mon</tspan><tspan x="1315.0017499999994" dy="16.900000000000002">don_gia (&gt;0), la_combo, trang_thai</tspan></text>
+</g>
+<g class="node" data-id="combo_chi_tiet" data-label="&lt;b&gt;combo_chi_tiet&lt;/b&gt;
+id (PK)
+combo_id (FK), mon_an_le_id (FK)
+so_luong (&gt;0)" data-shape="rectangle">
+  <rect x="1195.1032499999997" y="1462.4" width="239.79699999999994" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1315.0017499999997" y="1506.2" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="1315.0017499999997" dy="-20.8"><tspan font-weight="bold">combo_chi_tiet</tspan></tspan><tspan x="1315.0017499999997" dy="16.900000000000002">id (PK)</tspan><tspan x="1315.0017499999997" dy="16.900000000000002">combo_id (FK), mon_an_le_id (FK)</tspan><tspan x="1315.0017499999997" dy="16.900000000000002">so_luong (&gt;0)</tspan></text>
+</g>
+<g class="node" data-id="phien_ban" data-label="&lt;b&gt;phien_ban&lt;/b&gt;
+id (PK)
+ban_an_id (FK), ma_phien
+so_khach, thoi_gian_bat_dau, trang_thai" data-shape="rectangle">
+  <rect x="659.5684880952379" y="1722.3" width="279.06999999999994" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="799.1034880952378" y="1766.1" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="799.1034880952378" dy="-20.8"><tspan font-weight="bold">phien_ban</tspan></tspan><tspan x="799.1034880952378" dy="16.900000000000002">id (PK)</tspan><tspan x="799.1034880952378" dy="16.900000000000002">ban_an_id (FK), ma_phien</tspan><tspan x="799.1034880952378" dy="16.900000000000002">so_khach, thoi_gian_bat_dau, trang_thai</tspan></text>
+</g>
+<g class="node" data-id="don_goi_mon" data-label="&lt;b&gt;don_goi_mon&lt;/b&gt;
+id (PK)
+phien_ban_id (FK), ma_don, dot_goi
+nguon_don, phuc_vu_tao_id (FK), trang_thai" data-shape="rectangle">
+  <rect x="186.80898809523808" y="1910.2" width="300.5589999999999" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="337.08848809523806" y="1954" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="337.08848809523806" dy="-20.8"><tspan font-weight="bold">don_goi_mon</tspan></tspan><tspan x="337.08848809523806" dy="16.900000000000002">id (PK)</tspan><tspan x="337.08848809523806" dy="16.900000000000002">phien_ban_id (FK), ma_don, dot_goi</tspan><tspan x="337.08848809523806" dy="16.900000000000002">nguon_don, phuc_vu_tao_id (FK), trang_thai</tspan></text>
+</g>
+<g class="node" data-id="chi_tiet_don_mon" data-label="&lt;b&gt;chi_tiet_don_mon&lt;/b&gt;
+id (PK)
+don_goi_mon_id (FK), mon_an_id (FK)
+so_luong, don_gia, trang_thai_mon, la_uu_tien" data-shape="rectangle">
+  <rect x="569.277738095238" y="2098.1" width="310.93299999999994" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="724.744238095238" y="2141.9" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="724.744238095238" dy="-20.8"><tspan font-weight="bold">chi_tiet_don_mon</tspan></tspan><tspan x="724.744238095238" dy="16.900000000000002">id (PK)</tspan><tspan x="724.744238095238" dy="16.900000000000002">don_goi_mon_id (FK), mon_an_id (FK)</tspan><tspan x="724.744238095238" dy="16.900000000000002">so_luong, don_gia, trang_thai_mon, la_uu_tien</tspan></text>
+</g>
+<g class="node" data-id="yeu_cau_huy_mon" data-label="&lt;b&gt;yeu_cau_huy_mon&lt;/b&gt;
+id (PK)
+chi_tiet_don_mon_id (FK), ly_do_huy
+nhan_vien_yeu_cau_id (FK), quan_ly_duyet_id (FK)" data-shape="rectangle">
+  <rect x="444.94290476190463" y="2286" width="346.5009999999999" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="618.1934047619046" y="2329.8" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="618.1934047619046" dy="-20.8"><tspan font-weight="bold">yeu_cau_huy_mon</tspan></tspan><tspan x="618.1934047619046" dy="16.900000000000002">id (PK)</tspan><tspan x="618.1934047619046" dy="16.900000000000002">chi_tiet_don_mon_id (FK), ly_do_huy</tspan><tspan x="618.1934047619046" dy="16.900000000000002">nhan_vien_yeu_cau_id (FK), quan_ly_duyet_id (FK)</tspan></text>
+</g>
+<g class="node" data-id="yeu_cau_ho_tro" data-label="&lt;b&gt;yeu_cau_ho_tro&lt;/b&gt;
+id (PK)
+phien_ban_id (FK), loai_yeu_cau, trang_thai" data-shape="rectangle">
+  <rect x="803.3229880952379" y="1910.2" width="299.07699999999994" height="70.7" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="952.8614880952379" y="1945.55" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="952.8614880952379" dy="-12.350000000000001"><tspan font-weight="bold">yeu_cau_ho_tro</tspan></tspan><tspan x="952.8614880952379" dy="16.900000000000002">id (PK)</tspan><tspan x="952.8614880952379" dy="16.900000000000002">phien_ban_id (FK), loai_yeu_cau, trang_thai</tspan></text>
+</g>
+<g class="node" data-id="danh_gia" data-label="&lt;b&gt;danh_gia&lt;/b&gt;
+id (PK)
+phien_ban_id (FK), so_sao_mon_an
+so_sao_phuc_vu, noi_dung_nhan_xet" data-shape="rectangle">
+  <rect x="511.36798809523793" y="1910.2" width="267.9549999999999" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="645.3454880952379" y="1954" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="645.3454880952379" dy="-20.8"><tspan font-weight="bold">danh_gia</tspan></tspan><tspan x="645.3454880952379" dy="16.900000000000002">id (PK)</tspan><tspan x="645.3454880952379" dy="16.900000000000002">phien_ban_id (FK), so_sao_mon_an</tspan><tspan x="645.3454880952379" dy="16.900000000000002">so_sao_phuc_vu, noi_dung_nhan_xet</tspan></text>
+</g>
+<g class="node" data-id="hoa_don" data-label="&lt;b&gt;hoa_don&lt;/b&gt;
+id (PK)
+phien_ban_id (FK), hoa_don_cha_id (FK)
+thu_ngan_id (FK), tong_tien_thanh_toan, trang_thai" data-shape="rectangle">
+  <rect x="1020.630958333333" y="2545.9000000000005" width="337.6089999999999" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1189.435458333333" y="2589.7000000000007" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="1189.435458333333" dy="-20.8"><tspan font-weight="bold">hoa_don</tspan></tspan><tspan x="1189.435458333333" dy="16.900000000000002">id (PK)</tspan><tspan x="1189.435458333333" dy="16.900000000000002">phien_ban_id (FK), hoa_don_cha_id (FK)</tspan><tspan x="1189.435458333333" dy="16.900000000000002">thu_ngan_id (FK), tong_tien_thanh_toan, trang_thai</tspan></text>
+</g>
+<g class="node" data-id="chi_tiet_hoa_don" data-label="&lt;b&gt;chi_tiet_hoa_don&lt;/b&gt;
+id (PK)
+hoa_don_id (FK), mon_an_id (FK)
+so_luong, don_gia, thanh_tien" data-shape="rectangle">
+  <rect x="1247.1665416666663" y="2733.8000000000006" width="235.35099999999994" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1364.8420416666663" y="2777.600000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="1364.8420416666663" dy="-20.8"><tspan font-weight="bold">chi_tiet_hoa_don</tspan></tspan><tspan x="1364.8420416666663" dy="16.900000000000002">id (PK)</tspan><tspan x="1364.8420416666663" dy="16.900000000000002">hoa_don_id (FK), mon_an_id (FK)</tspan><tspan x="1364.8420416666663" dy="16.900000000000002">so_luong, don_gia, thanh_tien</tspan></text>
+</g>
+<g class="node" data-id="chia_tien_nhom" data-label="&lt;b&gt;chia_tien_nhom&lt;/b&gt;
+id (PK)
+hoa_don_id (FK), so_nguoi_chia
+so_tien_moi_nguoi, ma_vietqr_dong" data-shape="rectangle">
+  <rect x="971.5135416666662" y="2733.8000000000006" width="251.653" height="87.60000000000001" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1097.3400416666661" y="2777.600000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="1097.3400416666661" dy="-20.8"><tspan font-weight="bold">chia_tien_nhom</tspan></tspan><tspan x="1097.3400416666661" dy="16.900000000000002">id (PK)</tspan><tspan x="1097.3400416666661" dy="16.900000000000002">hoa_don_id (FK), so_nguoi_chia</tspan><tspan x="1097.3400416666661" dy="16.900000000000002">so_tien_moi_nguoi, ma_vietqr_dong</tspan></text>
+</g>
+</svg>

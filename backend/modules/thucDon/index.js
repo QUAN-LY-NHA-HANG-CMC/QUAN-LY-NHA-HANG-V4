@@ -1,10 +1,12 @@
-const thucDonRoutes = require('./thucDon.routes');
+const router = require('./thucDon.routes');
 const thucDonService = require('./thucDon.service');
 const thucDonModel = require('./thucDon.model');
+const thucDonController = require('./thucDon.controller');
 
 module.exports = {
-    thucDonRoutes,
+    router,
+    thucDonRoutes: router,
     thucDonService,
     thucDonModel,
-    router: thucDonRoutes
+    thucDonController
 };

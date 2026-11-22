@@ -1,0 +1,31 @@
+# ============================================================================
+# DỰ ÁN: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR TẠI BÀN (QUÁN MỘC POS & E-MENU)
+# DOCKER COMPOSE: KHỞI CHẠY MÔI TRƯỜNG ẢO CHỈ VỚI 1 LỆNH DUY NHẤT
+# ============================================================================
+
+services:
+  quan-moc-pos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quan-moc-pos-server
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3001:3001"
+    environment:
+      - NODE_ENV=production
+      - CONG_BACKEND=3001
+      - JWT_SECRET=${JWT_SECRET:?Set JWT_SECRET}
+      - JWT_EXPIRES_IN=24h
+      - FRONTEND_ORIGINS=${FRONTEND_ORIGINS:-}
+      - DB_PATH=/app/data/coSoDuLieu.sqlite
+    volumes:
+      # Mount volume để lưu trữ CSDL SQLite vĩnh viễn trên máy chủ vật lý
+      - ${MOC_DATA_DIR:-./data-production}:/app/data
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3001/api/kiem-tra-suc-khoe').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

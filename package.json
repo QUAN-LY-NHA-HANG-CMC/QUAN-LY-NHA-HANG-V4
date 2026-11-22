@@ -1,33 +1,49 @@
 {
   "name": "quan-ly-nha-hang",
   "version": "1.0.0",
-  "description": "Hệ thống Quản lý Nhà hàng và Gọi món QR (Quán Mộc)",
+  "description": "Hệ thống Quản lý Nhà hàng & Gọi món QR tại bàn (Quán Mộc POS & E-Menu)",
   "main": "backend/mayChu.js",
   "scripts": {
     "start": "node backend/mayChu.js",
-    "dev": "node --watch backend/mayChu.js",
-    "test": "node kiemThu/chayKiemThu.js"
+    "kill-port": "node scripts/giaiPhongCong.js",
+    "dev:backend": "node --watch backend/mayChu.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "init-db": "node database/sinhDuLieuMau.js",
+    "seed-db": "node database/sinhDuLieuMau.js",
+    "clean-db": "node database/lamSachDuLieu.js",
+    "backup-db": "node database/saoLuuCsdl.js",
+    "init-admin": "node scripts/khoiTaoQuanLy.js",
+    "setup:prod": "npm run build:frontend",
+    "test-db": "node database/kiemTraDuLieu.js",
+    "test-migration": "node database/kiemThuMigration.js",
+    "test-backend": "node backend/kiemThuBackend.js",
+    "test": "node database/kiemTraDuLieu.js && npm run test-migration && node backend/kiemThuBackend.js && cd frontend && npm run build",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
   },
   "keywords": [
-    "restaurant-management",
-    "qr-ordering",
-    "nodejs",
+    "pos",
+    "restaurant",
+    "vietqr",
+    "kds",
+    "qr-menu",
     "express",
-    "rbac"
+    "socketio",
+    "react",
+    "tailwindcss"
   ],
-  "author": "Nhat (Team Lead / PM, Backend)",
+  "author": "Google Deepmind Antigravity Agent",
   "license": "ISC",
+  "type": "commonjs",
   "dependencies": {
     "bcryptjs": "^3.0.3",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.3.1",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.3.1",
-    "helmet": "^8.1.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
     "jsonwebtoken": "^9.0.3",
-    "multer": "^2.5.0",
-    "qrcode": "^1.5.4",
-    "swagger-ui-express": "^5.0.1"
+    "socket.io": "^4.8.4"
   }
 }
