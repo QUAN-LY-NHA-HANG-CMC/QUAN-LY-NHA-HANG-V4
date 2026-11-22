@@ -1,0 +1,6 @@
+﻿{
+  "name": "Quán Mộc POS",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "postCreateCommand": "npm ci && npm ci --prefix frontend && npm run build:frontend",
+  "forwardPorts": [3001]
+}
