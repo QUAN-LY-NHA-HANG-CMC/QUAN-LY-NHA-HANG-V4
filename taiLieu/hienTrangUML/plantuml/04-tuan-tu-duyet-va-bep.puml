@@ -1,0 +1,32 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+actor "Phục vụ" as W
+actor Bep as K
+boundary "Web tác nghiệp" as UI
+control "API Đơn / Điều phối bếp" as API
+database SQLite as DB
+participant "Socket.IO" as IO
+W -> UI : Xem việc bàn và chọn duyệt hoặc từ chối
+UI -> API : PUT /api/don-goi-mon/:id/{duyet|tu-choi}
+API -> DB : Kiểm tra điều kiện và cập nhật đơn
+alt [duyệt]
+  API -> IO : Phát cập nhật đơn
+  K -> UI : Mở hàng đợi KDS
+  UI -> API : GET /api/dieu-phoi-bep/hang-doi
+  API -> DB : Đọc món thuộc đơn đã duyệt
+  API --> UI : Hàng đợi
+  loop [mỗi bước hợp lệ từ chờ nấu tới hoàn thành]
+    K -> UI : Cập nhật tiến độ
+    UI -> API : PUT /api/dieu-phoi-bep/chi-tiet/:id/trang-thai
+    API -> DB : Kiểm tra bước kế tiếp và ghi trạng thái
+    API -> IO : Phát tiến độ món
+  end
+  W -> UI : Xác nhận đã bưng món
+  UI -> API : PUT trạng thái da_phuc_vu
+  API -> DB : Ghi trạng thái
+else [từ chối]
+  API -> DB : Hủy chi tiết và hoàn suất
+  API -> IO : Phát cập nhật đơn
+end
+@enduml

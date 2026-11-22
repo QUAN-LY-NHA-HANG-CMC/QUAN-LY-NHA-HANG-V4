@@ -1,0 +1,76 @@
+graph TB
+    %% =========================================================================
+    %% DATABASE DIAGRAM: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR (QUÁN MỘC)
+    %% CSDL VẬT LÝ SQLITE3 PHÂN RÃ THEO 5 CỤM CHỨC NĂNG NGHIỆP VỤ
+    %% =========================================================================
+
+    subgraph CLUSTER1["🔐 PHÂN HỆ QUẢN TRỊ, NHÂN SỰ & CA KÍP"]
+        vai_tro["<b>vai_tro</b><br/>id (PK)<br/>ma_vai_tro, ten_vai_tro"]
+        tai_khoan["<b>tai_khoan</b><br/>id (PK)<br/>ten_dang_nhap, mat_khau_hash<br/>vai_tro_id (FK), trang_thai"]
+        nhan_vien["<b>nhan_vien</b><br/>id (PK)<br/>tai_khoan_id (FK), ho_ten<br/>so_dien_thoai, muc_luong"]
+        ca_lam_viec["<b>ca_lam_viec</b><br/>id (PK)<br/>nhan_vien_id (FK), ngay_lam, ten_ca<br/>gio_bat_dau, gio_ket_thuc, trang_thai"]
+        yeu_cau_doi_ca["<b>yeu_cau_doi_ca</b><br/>id (PK)<br/>nhan_vien_yeu_cau_id (FK), ca_lam_viec_id (FK)<br/>nhan_vien_nhan_ca_id (FK), quan_ly_duyet_id (FK)"]
+        cau_hinh_nha_hang["<b>cau_hinh_nha_hang</b><br/>id=1 (PK)<br/>ten_nha_hang, phan_tram_vat<br/>ngan_hang_vietqr, so_tai_khoan_vietqr"]
+        nhat_ky_kiem_toan["<b>nhat_ky_kiem_toan</b><br/>id (PK)<br/>tai_khoan_id (FK), hanh_dong<br/>bang_tac_dong, ban_ghi_id, ly_do"]
+    end
+
+    subgraph CLUSTER2["🪑 PHÂN HỆ KHÔNG GIAN BÀN ĂN & PHÂN CÔNG"]
+        khu_vuc["<b>khu_vuc</b><br/>id (PK)<br/>ma_khu_vuc, ten_khu_vuc, thu_tu"]
+        ban_an["<b>ban_an</b><br/>id (PK)<br/>khu_vuc_id (FK), ma_ban, ten_ban<br/>suc_chua, ma_qr_token, che_do_duyet_mon"]
+        phan_cong_ban["<b>phan_cong_ban</b><br/>id (PK)<br/>nhan_vien_id (FK), ban_an_id (FK)<br/>ngay_phan_cong, ca_truc"]
+    end
+
+    subgraph CLUSTER3["🍲 PHÂN HỆ THỰC ĐƠN, MÓN ĂN & COMBO"]
+        danh_muc_mon["<b>danh_muc_mon</b><br/>id (PK)<br/>ma_danh_muc, ten_danh_muc, hinh_anh"]
+        mon_an["<b>mon_an</b><br/>id (PK)<br/>danh_muc_id (FK), ma_mon, ten_mon<br/>don_gia (>0), la_combo, trang_thai"]
+        combo_chi_tiet["<b>combo_chi_tiet</b><br/>id (PK)<br/>combo_id (FK), mon_an_le_id (FK)<br/>so_luong (>0)"]
+    end
+
+    subgraph CLUSTER4["📱 PHÂN HỆ PHIÊN BÀN & ĐIỀU PHỐI GỌI MÓN (KDS)"]
+        phien_ban["<b>phien_ban</b><br/>id (PK)<br/>ban_an_id (FK), ma_phien<br/>so_khach, thoi_gian_bat_dau, trang_thai"]
+        don_goi_mon["<b>don_goi_mon</b><br/>id (PK)<br/>phien_ban_id (FK), ma_don, dot_goi<br/>nguon_don, phuc_vu_tao_id (FK), trang_thai"]
+        chi_tiet_don_mon["<b>chi_tiet_don_mon</b><br/>id (PK)<br/>don_goi_mon_id (FK), mon_an_id (FK)<br/>so_luong, don_gia, trang_thai_mon, la_uu_tien"]
+        yeu_cau_huy_mon["<b>yeu_cau_huy_mon</b><br/>id (PK)<br/>chi_tiet_don_mon_id (FK), ly_do_huy<br/>nhan_vien_yeu_cau_id (FK), quan_ly_duyet_id (FK)"]
+        yeu_cau_ho_tro["<b>yeu_cau_ho_tro</b><br/>id (PK)<br/>phien_ban_id (FK), loai_yeu_cau, trang_thai"]
+        danh_gia["<b>danh_gia</b><br/>id (PK)<br/>phien_ban_id (FK), so_sao_mon_an<br/>so_sao_phuc_vu, noi_dung_nhan_xet"]
+    end
+
+    subgraph CLUSTER5["💳 PHÂN HỆ THU NGÂN, HÓA ĐƠN & CHIA TIỀN"]
+        hoa_don["<b>hoa_don</b><br/>id (PK)<br/>phien_ban_id (FK), hoa_don_cha_id (FK)<br/>thu_ngan_id (FK), tong_tien_thanh_toan, trang_thai"]
+        chi_tiet_hoa_don["<b>chi_tiet_hoa_don</b><br/>id (PK)<br/>hoa_don_id (FK), mon_an_id (FK)<br/>so_luong, don_gia, thanh_tien"]
+        chia_tien_nhom["<b>chia_tien_nhom</b><br/>id (PK)<br/>hoa_don_id (FK), so_nguoi_chia<br/>so_tien_moi_nguoi, ma_vietqr_dong"]
+    end
+
+    %% LIÊN KẾT GIỮA CÁC CỤM PHÂN HỆ
+    vai_tro -->|1:N| tai_khoan
+    tai_khoan -->|1:1| nhan_vien
+    nhan_vien -->|1:N| ca_lam_viec
+    nhan_vien -->|1:N| yeu_cau_doi_ca
+    ca_lam_viec -->|1:N| yeu_cau_doi_ca
+    tai_khoan -->|1:N| nhat_ky_kiem_toan
+
+    nhan_vien -->|1:N| phan_cong_ban
+    khu_vuc -->|1:N| ban_an
+    ban_an -->|1:N| phan_cong_ban
+
+    ban_an -->|1:N| phien_ban
+    phien_ban -->|1:N| don_goi_mon
+    phien_ban -->|1:N| yeu_cau_ho_tro
+    phien_ban -->|1:1| danh_gia
+
+    danh_muc_mon -->|1:N| mon_an
+    mon_an -->|1:N| combo_chi_tiet
+
+    don_goi_mon -->|1:N| chi_tiet_don_mon
+    mon_an -->|1:N| chi_tiet_don_mon
+    chi_tiet_don_mon -->|1:1| yeu_cau_huy_mon
+
+    phien_ban -->|1:N| hoa_don
+    hoa_don -->|Tách bill 1:N| hoa_don
+    hoa_don -->|1:N| chi_tiet_hoa_don
+    mon_an -->|1:N| chi_tiet_hoa_don
+    hoa_don -->|1:1| chia_tien_nhom
+
+    nhan_vien -.->|Duyệt order| don_goi_mon
+    nhan_vien -.->|Duyệt hủy| yeu_cau_huy_mon
+    nhan_vien -.->|Thu tiền| hoa_don

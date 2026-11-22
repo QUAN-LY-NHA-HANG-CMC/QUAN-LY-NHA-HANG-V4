@@ -1,0 +1,52 @@
+stateDiagram-v2
+    title BIỂU ĐỒ TRẠNG THÁI VÒNG ĐỜI MÓN ĂN TRONG ĐƠN (ORDER ITEM LIFECYCLE)
+
+    [*] --> ChoDuyet : Khách xác nhận gửi giỏ hàng E-Menu
+
+    state ChoDuyet {
+        [*] --> HangDoiKDS
+        HangDoiKDS : Hiển thị trên KDS (hoặc chờ Phục vụ duyệt nếu tắt auto)
+    }
+
+    ChoDuyet --> DangNau : Đầu bếp nhấn "Bắt đầu nấu" trên KDS
+    
+    state DangNau {
+        [*] --> CheBienMon
+        CheBienMon : Đếm ngược thời gian nấu theo mục tiêu (VD: 15 phút)
+    }
+
+    DangNau --> HoanThanh : Đầu bếp nhấn "Hoàn thành món"
+    
+    state HoanThanh {
+        [*] --> ChoBungMon
+        ChoBungMon : KDS đổi màu xanh lá, chuông rung báo Phục vụ lấy món
+    }
+
+    HoanThanh --> DaPhucVu : Nhân viên phục vụ bưng lên bàn & bấm xác nhận
+    
+    state DaPhucVu {
+        [*] --> HoanTatMonAn
+        HoanTatMonAn : Món ăn được tính vào hóa đơn thanh toán
+    }
+
+    DaPhucVu --> [*]
+
+    %% Nhánh yêu cầu hủy món có kiểm soát
+    ChoDuyet --> DaHuy : Phục vụ từ chối duyệt đơn / Khách hủy trước duyệt
+    DangNau --> YeuCauHuy : Khách xin hủy khi đang nấu / Đợi quá lâu
+    
+    state YeuCauHuy {
+        [*] --> ChoAdminPheDuyet
+        ChoAdminPheDuyet : Gửi thông báo khẩn cấp lên Quản trị viên (Admin)
+    }
+
+    YeuCauHuy --> HuyMon : Admin phê duyệt chấp thuận hủy món
+    YeuCauHuy --> DangNau : Admin từ chối (Tiếp tục nấu phục vụ)
+    
+    state HuyMon {
+        [*] --> GhiNhanAuditLog
+        GhiNhanAuditLog : Ghi nhật ký kiểm toán (Lý do, Người duyệt, Giảm bill)
+    }
+
+    HuyMon --> [*]
+    DaHuy --> [*]

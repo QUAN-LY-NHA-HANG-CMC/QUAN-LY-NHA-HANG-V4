@@ -1,0 +1,36 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+hide circle
+class "donGoiMon.service" as Don <<module>> {
+  +taoDonGoiMon(duLieu)
+  +duyetDonQR(donId, nhanVienDuyetId)
+  +tuChoiDonQR(donId, nhanVienDuyetId, lyDoTuChoi)
+  +yeuCauHuyMon(duLieu)
+}
+class "dieuPhoiBep.service" as Bep <<module>> {
+  +layHangDoi(cheDo)
+  +chuyenTrangThai(chiTietId, trangThaiMoi, dauBepId, taiKhoanHienTai)
+}
+class "hoaDon.service" as Bill <<module>> {
+  +layTamTinhTheoBan(banId, chietKhau)
+  +taoHoaDonTuPhienBan(banId, thuNganId, tuyChon)
+  +xacNhanThanhToan(hoaDonId, duLieu, taiKhoanHienTai)
+  +taoChiaTienNhom(hoaDonId, soNguoiChia)
+}
+class "donGoiMon.model" as DonModel <<module>>
+class "dieuPhoiBep.model" as BepModel <<module>>
+class "hoaDon.model" as BillModel <<module>>
+class "banAn.model" as BanModel <<module>>
+class "ketNoiCoSoDuLieu" as SQL <<module>>
+Don ..> DonModel
+Don ..> SQL
+Bep ..> BepModel
+Bill ..> BillModel
+Bill ..> BanModel
+Bill ..> SQL
+DonModel ..> SQL
+BepModel ..> SQL
+BillModel ..> SQL
+BanModel ..> SQL
+@enduml

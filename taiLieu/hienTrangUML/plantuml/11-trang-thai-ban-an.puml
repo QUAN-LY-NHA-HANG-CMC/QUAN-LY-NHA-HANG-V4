@@ -1,0 +1,22 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+state "trong" as Trong
+state "co_khach" as Khach
+state "cho_mon" as Mon
+state "yeu_cau_thanh_toan" as Tien
+state "can_don_dep" as Don
+[*] --> Trong
+Trong --> Khach : moBan
+Khach --> Mon : guiDon
+Mon --> Mon : guiThemDon
+Khach --> Tien : baoThanhToan
+Mon --> Tien : baoThanhToan
+Tien --> Don : xacNhanThuTien
+Mon --> Don : xacNhanThuTien
+Don --> Trong : xacNhanDaDon [không có phiên hoạt động]
+note bottom of Trong
+Các chuyển tiếp chính của luồng phục vụ.
+Chuyển/gộp bàn có cập nhật riêng theo bàn nguồn và bàn đích.
+end note
+@enduml

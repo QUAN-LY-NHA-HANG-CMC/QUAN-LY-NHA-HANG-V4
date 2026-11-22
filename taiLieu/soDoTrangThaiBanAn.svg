@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 863.5580000000002 1289.7" width="863.5580000000002" height="1289.7" style="--bg:#FFFFFF;--fg:#27272A;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="Trong" data-label="Trong">
+  <rect x="296.9770000000001" y="1084.8" width="128.784" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="296.9770000000001" y="1084.8" width="128.784" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="308.9770000000001" y="1098.8" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Trong</text>
+</g>
+<g class="subgraph" data-id="CoKhach" data-label="CoKhach">
+  <rect x="378.33450000000005" y="40" width="159.906" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="378.33450000000005" y="40" width="159.906" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="390.33450000000005" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">CoKhach</text>
+</g>
+<g class="subgraph" data-id="ChoMon" data-label="ChoMon">
+  <rect x="371.039" y="305.20000000000005" width="148.05" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="371.039" y="305.20000000000005" width="148.05" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="383.039" y="319.20000000000005" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">ChoMon</text>
+</g>
+<g class="subgraph" data-id="YeuCauThanhToan" data-label="YeuCauThanhToan">
+  <rect x="512.2650000000001" y="570.4000000000001" width="140.64" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="512.2650000000001" y="570.4000000000001" width="140.64" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="524.2650000000001" y="584.4000000000001" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">YeuCauThanhToan</text>
+</g>
+<g class="subgraph" data-id="CanDonDep" data-label="CanDonDep">
+  <rect x="492.9990000000001" y="835.6" width="179.172" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="492.9990000000001" y="835.6" width="179.172" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="504.9990000000001" y="849.6" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">CanDonDep</text>
+</g>
+<polyline class="edge" data-from="_start" data-to="Trong" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Bàn sạch sẵn sàng đón khách" points="361.369,980.05 361.3690000000001,1084.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Trong" data-to="CoKhach" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Khách quét mã QR / Phục vụ mở bàn" points="329.1730000000001,1084.8 329.1730000000001,1072.8 127,1072.8 127,220.9 404.98550000000006,220.9 404.98550000000006,204.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CoKhach" data-to="ChoMon" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Khách gửi đơn đặt món vào Bếp KDS" points="431.63650000000007,204.9 431.63650000000007,232.9 226.5,232.9 226.5,293.20000000000005 408.0515,293.20000000000005 408.0515,305.20000000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ChoMon" data-to="CoKhach" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Toàn bộ món đã được bưng lên bàn (da_phuc_vu)" points="445.06399999999996,305.20000000000005 445.064,232.9 458.2875,232.9 458.2875,204.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CoKhach" data-to="ChoMon" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Khách tiếp tục gọi thêm món" points="484.93850000000003,204.9 484.93850000000003,232.9 642.6220000000001,232.9 642.6220000000001,293.20000000000005 482.0765,293.20000000000005 482.0765,305.20000000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CoKhach" data-to="YeuCauThanhToan" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Khách bấm &quot;Yêu cầu tính tiền&quot; trên E-Menu" points="511.58950000000004,204.9 511.58950000000004,220.9 720.1060000000002,220.9 720.1060000000002,558.4000000000001 606.0250000000001,558.4000000000001 606.0250000000001,570.4000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ChoMon" data-to="YeuCauThanhToan" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Khách muốn thanh toán sớm" points="445.06399999999996,470.1 445.064,558.4000000000001 559.1450000000001,558.4000000000001 559.1450000000001,570.4000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="YeuCauThanhToan" data-to="CanDonDep" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Xác nhận thanh toán (Tiền mặt / VietQR)" points="582.585,735.3000000000001 582.585,835.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CanDonDep" data-to="Trong" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Phục vụ bấm &quot;Đã dọn sạch&quot; trên điện thoại" points="582.585,1000.5 582.585,1072.8 393.56500000000005,1072.8 393.56500000000005,1084.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start2" data-to="SanSang" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="361.3690000000001,1156.8 361.3690000000001,1196.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start3" data-to="KhachVaoBan" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="458.2875,112 458.2875,152" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start4" data-to="ChoCheBien" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="445.06399999999996,377.20000000000005 445.06399999999996,417.20000000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start5" data-to="KhoaOrder" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="582.585,642.4000000000001 582.585,682.4000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start6" data-to="ChoNhanVienDon" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="582.585,907.6 582.585,952.05" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="_start" data-to="Trong" data-label="Bàn sạch sẵn sàng đón khách">
+  <rect x="281.869" y="1019.5000000000001" width="158.42800000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="361.083" y="1034.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Bàn sạch sẵn sàng đón khách</text>
+</g>
+<g class="edge-label" data-from="Trong" data-to="CoKhach" data-label="Khách quét mã QR / Phục vụ mở bàn">
+  <rect x="36" y="1035.5" width="181.00000000000006" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="126.50000000000003" y="1050.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khách quét mã QR / Phục vụ mở bàn</text>
+</g>
+<g class="edge-label" data-from="CoKhach" data-to="ChoMon" data-label="Khách gửi đơn đặt món vào Bếp KDS">
+  <rect x="134" y="255.89999999999995" width="184.56400000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="226.282" y="271.04999999999995" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khách gửi đơn đặt món vào Bếp KDS</text>
+</g>
+<g class="edge-label" data-from="ChoMon" data-to="CoKhach" data-label="Toàn bộ món đã được bưng lên bàn (da_phuc_vu)">
+  <rect x="322.5640000000001" y="239.9" width="244.55800000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="444.8430000000001" y="255.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Toàn bộ món đã được bưng lên bàn (da_phuc_vu)</text>
+</g>
+<g class="edge-label" data-from="CoKhach" data-to="ChoMon" data-label="Khách tiếp tục gọi thêm món">
+  <rect x="571.1220000000001" y="255.89999999999995" width="142.98400000000004" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="642.614" y="271.04999999999995" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khách tiếp tục gọi thêm món</text>
+</g>
+<g class="edge-label" data-from="CoKhach" data-to="YeuCauThanhToan" data-label="Khách bấm &quot;Yêu cầu tính tiền&quot; trên E-Menu">
+  <rect x="612.1060000000002" y="505.1" width="215.452" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="719.8320000000002" y="520.25" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khách bấm &quot;Yêu cầu tính tiền&quot; trên E-Menu</text>
+</g>
+<g class="edge-label" data-from="ChoMon" data-to="YeuCauThanhToan" data-label="Khách muốn thanh toán sớm">
+  <rect x="372.064" y="505.1" width="145.95400000000004" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="445.04100000000005" y="520.25" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khách muốn thanh toán sớm</text>
+</g>
+<g class="edge-label" data-from="YeuCauThanhToan" data-to="CanDonDep" data-label="Xác nhận thanh toán (Tiền mặt / VietQR)">
+  <rect x="483.58500000000004" y="770.3000000000001" width="197.03799999999998" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="582.104" y="785.45" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Xác nhận thanh toán (Tiền mặt / VietQR)</text>
+</g>
+<g class="edge-label" data-from="CanDonDep" data-to="Trong" data-label="Phục vụ bấm &quot;Đã dọn sạch&quot; trên điện thoại">
+  <rect x="478.0850000000001" y="1035.5" width="208.91800000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="582.5440000000001" y="1050.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Phục vụ bấm &quot;Đã dọn sạch&quot; trên điện thoại</text>
+</g>
+<g class="node" data-id="_start" data-label="" data-shape="state-start">
+  <circle cx="361.369" cy="966.05" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="_start2" data-label="" data-shape="state-start">
+  <circle cx="361.3690000000001" cy="1142.8" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="SanSang" data-label="SanSang" data-shape="rounded">
+  <rect x="312.9770000000001" y="1196.8" width="96.78399999999999" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="361.3690000000001" y="1215.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">SanSang</text>
+</g>
+<g class="node" data-id="_start3" data-label="" data-shape="state-start">
+  <circle cx="458.2875" cy="98" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="KhachVaoBan" data-label="KhachVaoBan" data-shape="rounded">
+  <rect x="394.33450000000005" y="152" width="127.90599999999999" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="458.2875" y="170.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">KhachVaoBan</text>
+</g>
+<g class="node" data-id="_start4" data-label="" data-shape="state-start">
+  <circle cx="445.06399999999996" cy="363.20000000000005" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="ChoCheBien" data-label="ChoCheBien" data-shape="rounded">
+  <rect x="387.039" y="417.20000000000005" width="116.05" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="445.06399999999996" y="435.65000000000003" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ChoCheBien</text>
+</g>
+<g class="node" data-id="_start5" data-label="" data-shape="state-start">
+  <circle cx="582.5850000000002" cy="628.4000000000001" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="KhoaOrder" data-label="KhoaOrder" data-shape="rounded">
+  <rect x="528.2650000000001" y="682.4000000000001" width="108.64" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="582.5850000000002" y="700.8500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">KhoaOrder</text>
+</g>
+<g class="node" data-id="_start6" data-label="" data-shape="state-start">
+  <circle cx="582.585" cy="893.6" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="ChoNhanVienDon" data-label="ChoNhanVienDon" data-shape="rounded">
+  <rect x="508.9990000000001" y="952.05" width="147.172" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="582.585" y="970.5" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ChoNhanVienDon</text>
+</g>
+</svg>

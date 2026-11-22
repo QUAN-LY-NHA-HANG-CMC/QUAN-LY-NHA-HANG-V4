@@ -1,0 +1,286 @@
+erDiagram
+    %% =========================================================================
+    %% 1. PHÂN HỆ QUẢN TRỊ, PHÂN QUYỀN & NHÂN SỰ
+    %% =========================================================================
+    vai_tro ||--o{ tai_khoan : "phan_quyen"
+    tai_khoan ||--o| nhan_vien : "so_huu_ho_so"
+    nhan_vien ||--o{ ca_lam_viec : "dang_ky_truc"
+    nhan_vien ||--o{ yeu_cau_doi_ca : "gui_yeu_cau"
+    nhan_vien ||--o{ yeu_cau_doi_ca : "nhan_ca_doi"
+    nhan_vien ||--o{ yeu_cau_doi_ca : "quan_ly_duyet"
+    ca_lam_viec ||--o{ yeu_cau_doi_ca : "thuoc_ve_ca"
+    tai_khoan ||--o{ nhat_ky_kiem_toan : "thuc_hien_hanh_dong"
+
+    %% =========================================================================
+    %% 2. PHÂN HỆ KHÔNG GIAN BÀN ĂN & PHÂN CÔNG
+    %% =========================================================================
+    khu_vuc ||--o{ ban_an : "dinh_vi_khu_vuc"
+    nhan_vien ||--o{ phan_cong_ban : "nhan_vien_phu_trach"
+    ban_an ||--o{ phan_cong_ban : "ban_duoc_giao"
+
+    %% =========================================================================
+    %% 3. PHÂN HỆ THỰC ĐƠN, MÓN ĂN & COMBO
+    %% =========================================================================
+    danh_muc_mon ||--o{ mon_an : "phan_loai_danh_muc"
+    mon_an ||--o{ combo_chi_tiet : "mon_combo_chua"
+    mon_an ||--o{ combo_chi_tiet : "mon_le_thanh_phan"
+
+    %% =========================================================================
+    %% 4. PHÂN HỆ PHIÊN BÀN, GỌI MÓN (QR & KDS)
+    %% =========================================================================
+    ban_an ||--o{ phien_ban : "mo_phien_phuc_vu"
+    phien_ban ||--o{ don_goi_mon : "tao_dot_order"
+    nhan_vien ||--o{ don_goi_mon : "phuc_vu_tao_ho"
+    nhan_vien ||--o{ don_goi_mon : "phuc_vu_xac_nhan"
+    don_goi_mon ||--|{ chi_tiet_don_mon : "bao_gom_mon"
+    mon_an ||--o{ chi_tiet_don_mon : "duoc_dat_mon"
+    chi_tiet_don_mon ||--o| yeu_cau_huy_mon : "gui_yeu_cau_huy"
+    nhan_vien ||--o{ yeu_cau_huy_mon : "phuc_vu_yeu_cau"
+    nhan_vien ||--o{ yeu_cau_huy_mon : "quan_ly_phe_duyet"
+    phien_ban ||--o{ yeu_cau_ho_tro : "khach_goi_chuong"
+
+    %% =========================================================================
+    %% 5. PHÂN HỆ THU NGÂN, HÓA ĐƠN & THANH TOÁN
+    %% =========================================================================
+    phien_ban ||--o{ hoa_don : "lap_hoa_don"
+    nhan_vien ||--o{ hoa_don : "thu_ngan_thu_tien"
+    hoa_don ||--o{ hoa_don : "tach_hoa_don_con"
+    hoa_don ||--|{ chi_tiet_hoa_don : "chua_dong_tien"
+    mon_an ||--o{ chi_tiet_hoa_don : "xuat_dong_mon"
+    hoa_don ||--o| chia_tien_nhom : "cua_tien_nhom"
+    phien_ban ||--o| danh_gia : "khach_danh_gia"
+
+    %% =========================================================================
+    %% THUỘC TÍNH CHI TIẾT CỦA 22 THỰC THỂ
+    %% =========================================================================
+
+    vai_tro {
+        int id PK
+        string ma_vai_tro "UNIQUE"
+        string ten_vai_tro
+        string mo_ta
+        datetime ngay_tao
+    }
+
+    tai_khoan {
+        int id PK
+        string ten_dang_nhap "UNIQUE"
+        string mat_khau_hash
+        int vai_tro_id FK
+        string trang_thai "hoat_dong | tam_khoa | da_xoa"
+        datetime lan_dang_nhap_cuoi
+        datetime ngay_tao
+    }
+
+    nhan_vien {
+        int id PK
+        int tai_khoan_id FK "UNIQUE"
+        string ho_ten
+        string so_dien_thoai "UNIQUE"
+        string email "UNIQUE"
+        string cccd "UNIQUE"
+        string hinh_thuc_lam_viec "toan_thoi_gian | ban_thoi_gian"
+        int muc_luong
+        date ngay_vao_lam
+        string trang_thai "dang_lam | tam_nghi | da_nghi"
+    }
+
+    ca_lam_viec {
+        int id PK
+        int nhan_vien_id FK
+        date ngay_lam
+        string ten_ca "ca_sang | ca_chieu | ca_toi | ca_gay"
+        time gio_bat_dau
+        time gio_ket_thuc
+        string trang_thai "ke_hoach | da_checkin | da_hoan_thanh"
+    }
+
+    yeu_cau_doi_ca {
+        int id PK
+        int nhan_vien_yeu_cau_id FK
+        int ca_lam_viec_id FK
+        string loai_yeu_cau "nghi_ca | doi_ca"
+        int nhan_vien_nhan_ca_id FK
+        string ly_do
+        string trang_thai "cho_duyet | da_duyet | tu_choi"
+        int quan_ly_duyet_id FK
+    }
+
+    cau_hinh_nha_hang {
+        int id PK "CHECK id = 1"
+        string ten_nha_hang
+        string dia_chi
+        string so_dien_thoai
+        string email
+        int phan_tram_vat "0 - 100%"
+        string ngan_hang_vietqr
+        string so_tai_khoan_vietqr
+        string ten_chu_tai_khoan_vietqr
+    }
+
+    khu_vuc {
+        int id PK
+        string ma_khu_vuc "UNIQUE"
+        string ten_khu_vuc
+        int thu_tu_hien_thi
+        string trang_thai "hoat_dong | ngung"
+    }
+
+    ban_an {
+        int id PK
+        int khu_vuc_id FK
+        string ma_ban "UNIQUE"
+        string ten_ban
+        int suc_chua
+        string ma_qr_token "UNIQUE"
+        string che_do_duyet_mon "tu_dong | can_duyet"
+        string trang_thai "trong | co_khach | cho_thanh_toan | can_don"
+    }
+
+    phan_cong_ban {
+        int id PK
+        int nhan_vien_id FK
+        int ban_an_id FK
+        date ngay_phan_cong
+        string ca_truc "ca_sang | ca_chieu | ca_toi"
+    }
+
+    danh_muc_mon {
+        int id PK
+        string ma_danh_muc "UNIQUE"
+        string ten_danh_muc
+        string hinh_anh
+        int thu_tu_hien_thi
+        string trang_thai "hoat_dong | ngung"
+    }
+
+    mon_an {
+        int id PK
+        int danh_muc_id FK
+        string ma_mon "UNIQUE"
+        string ten_mon
+        int don_gia "CHECK > 0"
+        string hinh_anh
+        string don_vi_tinh
+        boolean la_combo
+        boolean la_mon_goi_y
+        string trang_thai "con_mon | het_mon | ngung_ban"
+    }
+
+    combo_chi_tiet {
+        int id PK
+        int combo_id FK
+        int mon_an_le_id FK
+        int so_luong "CHECK > 0"
+    }
+
+    phien_ban {
+        int id PK
+        int ban_an_id FK
+        string ma_phien "UNIQUE"
+        int so_khach
+        datetime thoi_gian_bat_dau
+        datetime thoi_gian_ket_thuc
+        string trang_thai "dang_phuc_vu | cho_thanh_toan | da_dong | da_huy"
+    }
+
+    don_goi_mon {
+        int id PK
+        int phien_ban_id FK
+        string ma_don "UNIQUE"
+        int dot_goi
+        string nguon_don "khach_qr | phuc_vu"
+        int phuc_vu_tao_id FK
+        string trang_thai "cho_xac_nhan | da_xac_nhan | dang_nau | hoan_thanh | da_huy"
+        datetime ngay_tao
+    }
+
+    chi_tiet_don_mon {
+        int id PK
+        int don_goi_mon_id FK
+        int mon_an_id FK
+        int so_luong "CHECK > 0"
+        int don_gia "CHECK > 0"
+        string ghi_chu
+        string trang_thai_mon "cho_duyet | dang_nau | hoan_thanh | da_phuc_vu | huy_mon"
+        boolean la_uu_tien
+        datetime thoi_gian_bat_dau_nau
+        datetime thoi_gian_hoan_thanh
+    }
+
+    yeu_cau_huy_mon {
+        int id PK
+        int chi_tiet_don_mon_id FK "UNIQUE"
+        int nhan_vien_yeu_cau_id FK
+        string ly_do_huy
+        string trang_thai "cho_duyet | da_chap_thuan | tu_choi"
+        int quan_ly_duyet_id FK
+        string ghi_chu_quan_ly
+    }
+
+    yeu_cau_ho_tro {
+        int id PK
+        int phien_ban_id FK
+        string loai_yeu_cau "goi_phuc_vu | goi_thanh_toan | goi_nuoc | khac"
+        string noi_dung
+        string trang_thai "cho_xu_ly | dang_xu_ly | da_xu_ly"
+        datetime ngay_tao
+    }
+
+    hoa_don {
+        int id PK
+        int phien_ban_id FK
+        string ma_hoa_don "UNIQUE"
+        int hoa_don_cha_id FK "Split Bill"
+        int thu_ngan_id FK
+        int tong_tien_mon "CHECK >= 0"
+        int phan_tram_giam_gia "0 - 100%"
+        int so_tien_giam "CHECK >= 0"
+        int phan_tram_vat "0 - 100%"
+        int tien_vat "CHECK >= 0"
+        int tong_tien_thanh_toan "CHECK >= 0"
+        string phuong_thuc_thanh_toan "tien_mat | vietqr | the_ngan_hang"
+        string trang_thai "cho_thanh_toan | da_thanh_toan | da_huy"
+        datetime ngay_thanh_toan
+    }
+
+    chi_tiet_hoa_don {
+        int id PK
+        int hoa_don_id FK
+        int mon_an_id FK
+        int so_luong "CHECK > 0"
+        int don_gia "CHECK > 0"
+        int thanh_tien "CHECK = so_luong * don_gia"
+    }
+
+    chia_tien_nhom {
+        int id PK
+        int hoa_don_id FK "UNIQUE"
+        int so_nguoi_chia "CHECK >= 2"
+        int so_tien_moi_nguoi "CHECK > 0"
+        int so_nguoi_da_tra
+        string ma_vietqr_dong
+        string trang_thai "dang_thu | hoan_tat"
+    }
+
+    danh_gia {
+        int id PK
+        int phien_ban_id FK "UNIQUE"
+        int so_sao_mon_an "1 - 5 sao"
+        int so_sao_phuc_vu "1 - 5 sao"
+        int so_sao_khong_gian "1 - 5 sao"
+        string noi_dung_nhan_xet
+        datetime ngay_tao
+    }
+
+    nhat_ky_kiem_toan {
+        int id PK
+        int tai_khoan_id FK
+        string hanh_dong
+        string bang_tac_dong
+        int ban_ghi_id
+        string du_lieu_cu
+        string du_lieu_moi
+        string ly_do
+        datetime ngay_tao
+    }

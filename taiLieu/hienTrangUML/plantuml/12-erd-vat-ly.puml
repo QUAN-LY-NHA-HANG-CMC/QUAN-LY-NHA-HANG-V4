@@ -1,0 +1,367 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+hide circle
+hide methods
+title ERD v?t l? t? database/taoBang.sql
+entity "ban_an" as ban_an {
+  * id : INTEGER <<PK>>
+  * khu_vuc_id : INTEGER <<FK>>
+  * ma_ban : TEXT <<UQ>>
+  * ten_ban : TEXT
+  * suc_chua : INTEGER
+  * trang_thai : TEXT
+  * ma_qr_token : TEXT <<UQ>>
+  * tu_dong_duyet_mon : INTEGER
+  * kich_hoat : INTEGER
+    ngay_tao : DATETIME
+    ngay_cap_nhat : DATETIME
+}
+entity "ca_lam_viec" as ca_lam_viec {
+    thoi_gian_checkin : TEXT
+    thoi_gian_checkout : TEXT
+  * id : INTEGER <<PK>>
+  * nhan_vien_id : INTEGER <<FK>>
+  * ngay_lam : DATE
+  * ten_ca : TEXT
+  * gio_bat_dau : TIME
+  * gio_ket_thuc : TIME
+  * trang_thai : TEXT
+    ghi_chu : TEXT
+    ngay_tao : DATETIME
+}
+entity "cau_hinh_nha_hang" as cau_hinh_nha_hang {
+  * id : INTEGER <<PK>>
+  * ten_nha_hang : TEXT
+  * dia_chi : TEXT
+  * so_dien_thoai : TEXT
+    email : TEXT
+    anh_logo : TEXT
+  * phan_tram_vat : INTEGER
+  * ngan_hang_vietqr : TEXT
+  * so_tai_khoan_vietqr : TEXT
+  * ten_chu_tai_khoan_vietqr : TEXT
+    ngay_cap_nhat : DATETIME
+}
+entity "chi_tiet_don_mon" as chi_tiet_don_mon {
+    thoi_gian_phuc_vu : TEXT
+  * id : INTEGER <<PK>>
+  * don_goi_mon_id : INTEGER <<FK>>
+  * mon_an_id : INTEGER <<FK>>
+  * so_luong : INTEGER
+  * don_gia : INTEGER
+    ghi_chu : TEXT
+  * trang_thai_mon : TEXT
+  * la_uu_tien : INTEGER
+    thoi_gian_bat_dau_nau : DATETIME
+    thoi_gian_hoan_thanh_nau : DATETIME
+    dau_bep_id : INTEGER <<FK>>
+    ngay_tao : DATETIME
+    ngay_cap_nhat : DATETIME
+}
+entity "chi_tiet_hoa_don" as chi_tiet_hoa_don {
+  * id : INTEGER <<PK>>
+  * hoa_don_id : INTEGER <<FK>>
+    chi_tiet_don_mon_id : INTEGER <<FK>>
+  * mon_an_id : INTEGER <<FK>>
+  * ten_mon : TEXT
+  * don_gia : INTEGER
+  * so_luong : INTEGER
+  * thanh_tien : INTEGER
+}
+entity "chia_tien_nhom" as chia_tien_nhom {
+  * id : INTEGER <<PK>>
+  * hoa_don_id : INTEGER <<FK>>
+  * so_nguoi_chia : INTEGER
+  * so_tien_moi_nguoi : INTEGER
+    ma_tham_chieu_qr : TEXT
+  * trang_thai : TEXT
+    ngay_tao : DATETIME
+}
+entity "combo_chi_tiet" as combo_chi_tiet {
+  * id : INTEGER <<PK>>
+  * combo_id : INTEGER <<FK>>
+  * mon_an_le_id : INTEGER <<FK>>
+  * so_luong : INTEGER
+}
+entity "danh_gia" as danh_gia {
+  * id : INTEGER <<PK>>
+  * phien_ban_id : INTEGER <<FK>>
+  * so_sao : INTEGER
+    nhan_xet : TEXT
+    ten_khach_hang : TEXT
+    so_dien_thoai : TEXT
+    ngay_tao : DATETIME
+}
+entity "danh_muc_mon" as danh_muc_mon {
+  * id : INTEGER <<PK>>
+  * ma_danh_muc : TEXT <<UQ>>
+  * ten_danh_muc : TEXT
+  * thu_tu_hien_thi : INTEGER
+  * kich_hoat : INTEGER
+    ngay_tao : DATETIME
+}
+entity "don_goi_mon" as don_goi_mon {
+    khoa_gui : TEXT
+  * id : INTEGER <<PK>>
+  * phien_ban_id : INTEGER <<FK>>
+  * ma_don : TEXT <<UQ>>
+  * nguon_tao : TEXT
+    nhan_vien_tao_id : INTEGER <<FK>>
+  * trang_thai : TEXT
+    ly_do_tu_choi : TEXT
+    nhan_vien_duyet_id : INTEGER <<FK>>
+  * thoi_gian_gui : DATETIME
+    thoi_gian_duyet : DATETIME
+    ngay_tao : DATETIME
+}
+entity "giao_dich_thanh_toan" as giao_dich_thanh_toan {
+  * id : INTEGER <<PK>>
+  * hoa_don_id : INTEGER <<FK>>
+    ca_lam_viec_id : INTEGER <<FK>>
+  * so_tien : INTEGER
+  * phuong_thuc : TEXT
+    ma_giao_dich_ngan_hang : TEXT <<UQ>>
+    noi_dung_chuyen_khoan : TEXT
+  * trang_thai : TEXT
+    thoi_gian_tao : DATETIME
+}
+entity "gio_mon_ban" as gio_mon_ban {
+  * ban_an_id : INTEGER <<PK,FK>>
+    phien_ban_id : INTEGER <<FK>>
+  * phien_ban_sua : INTEGER
+  * mon : TEXT
+  * ngay_cap_nhat : DATETIME
+}
+entity "hoa_don" as hoa_don {
+  * id : INTEGER <<PK>>
+  * phien_ban_id : INTEGER <<FK>>
+    hoa_don_cha_id : INTEGER <<FK>>
+  * ma_hoa_don : TEXT <<UQ>>
+    thu_ngan_id : INTEGER <<FK>>
+  * tong_tien_mon : INTEGER
+  * phan_tram_chiet_khau : INTEGER
+  * tien_chiet_khau : INTEGER
+  * phan_tram_vat : INTEGER
+  * tien_vat : INTEGER
+  * tong_tien_thanh_toan : INTEGER
+  * phuong_thuc_thanh_toan : TEXT
+    tien_khach_dua : INTEGER
+    tien_thoi_lai : INTEGER
+    ma_giao_dich_vietqr : TEXT
+  * trang_thai : TEXT
+    thoi_gian_thanh_toan : DATETIME
+    ghi_chu : TEXT
+    ngay_tao : DATETIME
+}
+entity "khu_vuc" as khu_vuc {
+  * id : INTEGER <<PK>>
+  * ma_khu_vuc : TEXT <<UQ>>
+  * ten_khu_vuc : TEXT
+    mo_ta : TEXT
+  * thu_tu_hien_thi : INTEGER
+  * kich_hoat : INTEGER
+    ngay_tao : DATETIME
+}
+entity "lenh_dieu_phoi" as lenh_dieu_phoi {
+  * id : INTEGER <<PK>>
+  * bo_phan : TEXT
+    ban_id : INTEGER
+    ma_ban : TEXT
+    ten_ban : TEXT
+    mon_an_id : INTEGER
+    ten_mon : TEXT
+    so_luong_mon : INTEGER
+  * muc_do : TEXT
+    tieu_de : TEXT
+  * noi_dung : TEXT
+    nguoi_gui_id : INTEGER
+    ten_nguoi_gui : TEXT
+  * trang_thai : TEXT
+    nguoi_tiep_nhan_id : INTEGER
+    ten_nguoi_tiep_nhan : TEXT
+    thoi_gian_tiep_nhan : DATETIME
+    thoi_gian_tao : DATETIME
+}
+entity "mon_an" as mon_an {
+    so_suat_con_lai : INTEGER
+  * id : INTEGER <<PK>>
+  * danh_muc_id : INTEGER <<FK>>
+  * ma_mon : TEXT <<UQ>>
+  * ten_mon : TEXT
+  * don_gia : INTEGER
+  * don_vi_tinh : TEXT
+    anh_mon_an : TEXT
+    mo_ta : TEXT
+  * con_mon : INTEGER
+  * la_combo : INTEGER
+  * la_ban_chay : INTEGER
+  * la_goi_y : INTEGER
+  * kich_hoat : INTEGER
+    ngay_tao : DATETIME
+    ngay_cap_nhat : DATETIME
+}
+entity "nhan_vien" as nhan_vien {
+  * id : INTEGER <<PK>>
+    tai_khoan_id : INTEGER <<FK,UQ>>
+  * ho_ten : TEXT
+  * so_dien_thoai : TEXT <<UQ>>
+    email : TEXT <<UQ>>
+    cccd : TEXT <<UQ>>
+  * hinh_thuc_lam_viec : TEXT
+  * muc_luong : INTEGER
+  * ngay_vao_lam : DATE
+  * trang_thai : TEXT
+    ngay_luu_tru : DATETIME
+    ngay_tao : DATETIME
+    ngay_cap_nhat : DATETIME
+}
+entity "nhat_ky_kiem_toan" as nhat_ky_kiem_toan {
+  * id : INTEGER <<PK>>
+    tai_khoan_id : INTEGER <<FK>>
+  * hanh_dong : TEXT
+  * bang_anh_huong : TEXT
+    ban_ghi_id : INTEGER
+    du_lieu_cu : TEXT
+    du_lieu_moi : TEXT
+    dia_chi_ip : TEXT
+    thiet_bi : TEXT
+    ly_do : TEXT
+    thoi_gian_tao : DATETIME
+}
+entity "phan_cong_ban" as phan_cong_ban {
+  * id : INTEGER <<PK>>
+  * nhan_vien_id : INTEGER <<FK>>
+  * ban_an_id : INTEGER <<FK>>
+  * ngay_phan_cong : DATE
+  * ten_ca : TEXT
+    ngay_tao : DATETIME
+}
+entity "phien_ban" as phien_ban {
+  * id : INTEGER <<PK>>
+  * ban_an_id : INTEGER <<FK>>
+  * ma_phien : TEXT <<UQ>>
+  * thoi_gian_bat_dau : DATETIME
+    thoi_gian_ket_thuc : DATETIME
+  * trang_thai : TEXT
+  * so_luong_khach : INTEGER
+    ghi_chu : TEXT
+    ngay_tao : DATETIME
+}
+entity "phieu_thu_chi_noi_bo" as phieu_thu_chi_noi_bo {
+  * id : INTEGER <<PK>>
+    ca_lam_viec_id : INTEGER <<FK>>
+  * loai : TEXT
+  * so_tien : INTEGER
+  * ly_do : TEXT
+  * nguoi_tao_id : INTEGER <<FK>>
+    thoi_gian_tao : DATETIME
+}
+entity "tai_khoan" as tai_khoan {
+  * id : INTEGER <<PK>>
+  * ten_dang_nhap : TEXT <<UQ>>
+  * mat_khau_hash : TEXT
+  * vai_tro_id : INTEGER <<FK>>
+  * trang_thai : TEXT
+    lan_dang_nhap_cuoi : DATETIME
+    ngay_tao : DATETIME
+    ngay_cap_nhat : DATETIME
+}
+entity "tiep_nhan_dieu_phoi" as tiep_nhan_dieu_phoi {
+  * lenh_id : INTEGER <<PK,FK>>
+  * bo_phan : TEXT <<PK>>
+    nhan_vien_id : INTEGER <<FK>>
+  * thoi_gian_tiep_nhan : TEXT
+}
+entity "tiep_nhan_viec_ban" as tiep_nhan_viec_ban {
+  * loai : TEXT <<PK>>
+  * doi_tuong_id : INTEGER <<PK>>
+  * nhan_vien_id : INTEGER <<FK>>
+  * thoi_gian : TEXT
+}
+entity "vai_tro" as vai_tro {
+  * id : INTEGER <<PK>>
+  * ma_vai_tro : TEXT <<UQ>>
+  * ten_vai_tro : TEXT
+    mo_ta : TEXT
+    ngay_tao : DATETIME
+}
+entity "yeu_cau_doi_ca" as yeu_cau_doi_ca {
+  * id : INTEGER <<PK>>
+  * nhan_vien_yeu_cau_id : INTEGER <<FK>>
+  * ca_lam_viec_id : INTEGER <<FK>>
+  * loai_yeu_cau : TEXT
+    nhan_vien_nhan_ca_id : INTEGER <<FK>>
+  * ly_do : TEXT
+  * trang_thai : TEXT
+    quan_ly_duyet_id : INTEGER <<FK>>
+    ghi_chu_duyet : TEXT
+    ngay_tao : DATETIME
+    ngay_duyet : DATETIME
+}
+entity "yeu_cau_ho_tro" as yeu_cau_ho_tro {
+  * id : INTEGER <<PK>>
+  * phien_ban_id : INTEGER <<FK>>
+  * loai_yeu_cau : TEXT
+    noi_dung : TEXT
+  * trang_thai : TEXT
+    nhan_vien_tiep_nhan_id : INTEGER <<FK>>
+  * thoi_gian_gui : DATETIME
+    thoi_gian_hoan_thanh : DATETIME
+}
+entity "yeu_cau_huy_mon" as yeu_cau_huy_mon {
+  * id : INTEGER <<PK>>
+  * chi_tiet_don_mon_id : INTEGER <<FK>>
+  * nhan_vien_yeu_cau_id : INTEGER <<FK>>
+  * ly_do_huy : TEXT
+  * trang_thai_yeu_cau : TEXT
+    admin_duyet_id : INTEGER <<FK>>
+    phan_hoi_admin : TEXT
+    trang_thai_mon_cu : TEXT
+  * thoi_gian_yeu_cau : DATETIME
+    thoi_gian_duyet : DATETIME
+}
+khu_vuc ||--o{ ban_an : khu_vuc_id
+nhan_vien ||--o{ ca_lam_viec : nhan_vien_id
+don_goi_mon ||--o{ chi_tiet_don_mon : don_goi_mon_id
+mon_an ||--o{ chi_tiet_don_mon : mon_an_id
+nhan_vien |o--o{ chi_tiet_don_mon : dau_bep_id
+hoa_don ||--o{ chi_tiet_hoa_don : hoa_don_id
+chi_tiet_don_mon |o--o{ chi_tiet_hoa_don : chi_tiet_don_mon_id
+mon_an ||--o{ chi_tiet_hoa_don : mon_an_id
+hoa_don ||--o{ chia_tien_nhom : hoa_don_id
+mon_an ||--o{ combo_chi_tiet : combo_id
+mon_an ||--o{ combo_chi_tiet : mon_an_le_id
+phien_ban ||--o{ danh_gia : phien_ban_id
+phien_ban ||--o{ don_goi_mon : phien_ban_id
+nhan_vien |o--o{ don_goi_mon : nhan_vien_tao_id
+nhan_vien |o--o{ don_goi_mon : nhan_vien_duyet_id
+hoa_don ||--o{ giao_dich_thanh_toan : hoa_don_id
+ca_lam_viec |o--o{ giao_dich_thanh_toan : ca_lam_viec_id
+ban_an |o--o| gio_mon_ban : ban_an_id
+phien_ban |o--o{ gio_mon_ban : phien_ban_id
+phien_ban ||--o{ hoa_don : phien_ban_id
+hoa_don |o--o{ hoa_don : hoa_don_cha_id
+nhan_vien |o--o{ hoa_don : thu_ngan_id
+danh_muc_mon ||--o{ mon_an : danh_muc_id
+tai_khoan |o--o| nhan_vien : tai_khoan_id
+tai_khoan |o--o{ nhat_ky_kiem_toan : tai_khoan_id
+nhan_vien ||--o{ phan_cong_ban : nhan_vien_id
+ban_an ||--o{ phan_cong_ban : ban_an_id
+ban_an ||--o{ phien_ban : ban_an_id
+ca_lam_viec |o--o{ phieu_thu_chi_noi_bo : ca_lam_viec_id
+nhan_vien ||--o{ phieu_thu_chi_noi_bo : nguoi_tao_id
+vai_tro ||--o{ tai_khoan : vai_tro_id
+lenh_dieu_phoi ||--o{ tiep_nhan_dieu_phoi : lenh_id
+nhan_vien |o--o{ tiep_nhan_dieu_phoi : nhan_vien_id
+nhan_vien ||--o{ tiep_nhan_viec_ban : nhan_vien_id
+nhan_vien ||--o{ yeu_cau_doi_ca : nhan_vien_yeu_cau_id
+ca_lam_viec ||--o{ yeu_cau_doi_ca : ca_lam_viec_id
+nhan_vien |o--o{ yeu_cau_doi_ca : nhan_vien_nhan_ca_id
+nhan_vien |o--o{ yeu_cau_doi_ca : quan_ly_duyet_id
+phien_ban ||--o{ yeu_cau_ho_tro : phien_ban_id
+nhan_vien |o--o{ yeu_cau_ho_tro : nhan_vien_tiep_nhan_id
+chi_tiet_don_mon ||--o{ yeu_cau_huy_mon : chi_tiet_don_mon_id
+nhan_vien ||--o{ yeu_cau_huy_mon : nhan_vien_yeu_cau_id
+nhan_vien |o--o{ yeu_cau_huy_mon : admin_duyet_id
+@enduml

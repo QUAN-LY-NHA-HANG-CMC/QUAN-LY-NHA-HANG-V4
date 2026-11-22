@@ -1,0 +1,31 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+actor "Khách tại bàn" as C
+boundary "React E-Menu" as UI
+participant "img.vietqr.io" as IMG
+control "API hoa-don" as API
+database SQLite as DB
+C -> UI : Mở màn hình hóa đơn hoặc VietQR
+loop [định kỳ khi đang ở màn hình liên quan]
+  UI -> API : GET /api/hoa-don/ban/:banId/hoa-don
+  API -> DB : Tra hóa đơn theo phiên hoặc bill token
+  alt [đã có hóa đơn]
+    API --> UI : Trạng thái bill, bill token, dữ liệu QR nếu chưa thu
+  else [chưa có hóa đơn]
+    API --> UI : null
+    UI -> API : GET /api/hoa-don/tam-tinh/:banId
+    API --> UI : Tạm tính
+  end
+  opt [có URL ảnh QR]
+    UI -> IMG : Tải ảnh VietQR
+    IMG --> UI : Ảnh mã QR
+  end
+end
+opt [hóa đơn đã được xác nhận thanh toán]
+  C -> UI : Gửi đánh giá
+  UI -> API : POST /api/hoa-don/ban/:banId/danh-gia
+  API -> DB : Thêm đánh giá nếu phiên chưa có
+  API --> UI : ID đánh giá
+end
+@enduml

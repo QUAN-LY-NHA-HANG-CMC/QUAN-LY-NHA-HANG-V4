@@ -1,0 +1,123 @@
+flowchart LR
+    %% =========================================================================
+    %% SƠ ĐỒ CA SỬ DỤNG TỔNG QUAN (USE CASE DIAGRAM)
+    %% HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR (QUÁN MỘC POS & E-MENU)
+    %% =========================================================================
+
+    %% --- ACTORS ---
+    subgraph ACTORS_LEFT["👤 CÁC TÁC NHÂN NGHIỆP VỤ"]
+        Customer(["👤 Khách hàng\n(Customer)"])
+        Waiter(["🤵 Nhân viên Phục vụ\n(Waiter)"])
+        Kitchen(["👨‍🍳 Đầu bếp / Bar\n(KDS)"])
+        Cashier(["💳 Nhân viên Thu ngân\n(Cashier)"])
+    end
+
+    subgraph ACTORS_RIGHT["👔 QUẢN TRỊ & HỆ THỐNG NGOÀI"]
+        Admin(["👔 Quản trị viên\n(Admin / Manager)"])
+        VietQR_Sys(["🏦 Cổng Ngân hàng\n(VietQR NAPAS 247)"])
+    end
+
+    %% --- SYSTEM BOUNDARY ---
+    subgraph SYSTEM_BOUNDARY["🏛️ HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR (QUÁN MỘC)"]
+        
+        subgraph PKG_CUSTOMER["1. Phân hệ Khách hàng (QR Order)"]
+            UC01(["UC01: Quét QR vào bàn chung session"])
+            UC02(["UC02: Duyệt menu & combo gợi ý"])
+            UC03(["UC03: Thêm giỏ hàng & ghi chú món"])
+            UC04(["UC04: Gửi yêu cầu đặt món"])
+            UC05(["UC05: Theo dõi tiến độ món ăn"])
+            UC06(["UC06: Gọi phục vụ / Gọi tính tiền"])
+            UC07(["UC07: Thanh toán VietQR tại bàn"])
+            UC08(["UC08: Đánh giá món & Dịch vụ"])
+            UC09(["UC09: Cưa tiền nhóm (Chia đều tiền)"])
+        end
+
+        subgraph PKG_WAITER["2. Phân hệ Phục vụ (Waiter Mobile)"]
+            UW01(["UW01: Đăng nhập theo ca & bàn"])
+            UW02(["UW02: Xem sơ đồ bàn đổi màu"])
+            UW03(["UW03: Duyệt / Từ chối đơn QR"])
+            UW04(["UW04: Đặt món hộ tại bàn"])
+            UW05(["UW05: Chuyển bàn & Gộp bàn"])
+            UW06(["UW06: Yêu cầu hủy món có kiểm soát"])
+            UW07(["UW07: Đề xuất đổi ca / Xin nghỉ"])
+        end
+
+        subgraph PKG_KITCHEN["3. Phân hệ Bếp / Bar (KDS)"]
+            UK01(["UK01: Nhận đơn real-time & Đo thời gian"])
+            UK02(["UK02: Chuyển đổi chế độ: Phiếu / Gom mẻ"])
+            UK03(["UK03: Đổi trạng thái: Đang nấu -> Xong"])
+            UK04(["UK04: Báo hết món tức thì"])
+            UK05(["UK05: Tiếp nhận lệnh ưu tiên khẩn cấp"])
+        end
+
+        subgraph PKG_CASHIER["4. Phân hệ Thu ngân (Cashier POS)"]
+            UCS01(["UCS01: Kiểm tra bill & Áp chiết khấu"])
+            UCS02(["UCS02: Thanh toán Tiền mặt (tính tiền thối)"])
+            UCS03(["UCS03: Xuất mã VietQR động tại quầy"])
+            UCS04(["UCS04: Tách hóa đơn (Split Bill)"])
+            UCS05(["UCS05: In hóa đơn nhiệt K80"])
+            UCS06(["UCS06: Chốt bill & Giải phóng bàn"])
+        end
+
+        subgraph PKG_ADMIN["5. Phân hệ Quản trị (Admin Dashboard)"]
+            UA01(["UA01: Quản lý nhân viên & Phân quyền"])
+            UA02(["UA02: Quản lý ca kíp & Duyệt đổi ca"])
+            UA03(["UA03: Cấu hình quán & STK VietQR"])
+            UA04(["UA04: Quản lý sơ đồ bàn & In mã QR"])
+            UA05(["UA05: Quản lý thực đơn & Combo"])
+            UA06(["UA06: Phê duyệt yêu cầu hủy món"])
+            UA07(["UA07: Phát lệnh ưu tiên khẩn cấp"])
+            UA08(["UA08: Xem báo cáo doanh thu & Top món"])
+            UA09(["UA09: Tra cứu nhật ký Audit Logs"])
+        end
+
+    end
+
+    %% --- LIÊN KẾT TÁC NHÂN VỚI CA SỬ DỤNG ---
+    Customer --- UC01
+    Customer --- UC02
+    Customer --- UC03
+    Customer --- UC04
+    Customer --- UC05
+    Customer --- UC06
+    Customer --- UC07
+    Customer --- UC08
+
+    Waiter --- UW01
+    Waiter --- UW02
+    Waiter --- UW03
+    Waiter --- UW04
+    Waiter --- UW05
+    Waiter --- UW06
+    Waiter --- UW07
+
+    Kitchen --- UK01
+    Kitchen --- UK02
+    Kitchen --- UK03
+    Kitchen --- UK04
+    Kitchen --- UK05
+
+    Cashier --- UCS01
+    Cashier --- UCS02
+    Cashier --- UCS03
+    Cashier --- UCS05
+    Cashier --- UCS06
+
+    Admin --- UA01
+    Admin --- UA02
+    Admin --- UA03
+    Admin --- UA04
+    Admin --- UA05
+    Admin --- UA06
+    Admin --- UA07
+    Admin --- UA08
+    Admin --- UA09
+
+    %% --- QUAN HỆ INCLUDE & EXTEND ---
+    UC07 -.->|"<<extend>>"| UC09
+    UCS01 -.->|"<<extend>>"| UCS04
+    UW06 -.->|"<<yêu cầu duyệt>>"| UA06
+    UW07 -.->|"<<yêu cầu duyệt>>"| UA02
+    UA07 -.->|"<<lệnh cưỡng chế>>"| UK05
+    UC07 -.->|"<<tương tác>>"| VietQR_Sys
+    UCS03 -.->|"<<tương tác>>"| VietQR_Sys

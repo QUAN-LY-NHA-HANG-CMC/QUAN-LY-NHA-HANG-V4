@@ -1,0 +1,40 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+|Khách|
+start
+:Quét QR, chọn món và gửi đơn;
+|Hệ thống|
+:Kiểm tra bàn, món và số suất;
+if (Đơn hợp lệ?) then (Có)
+  :Lưu đơn và chi tiết;
+else (Không)
+  :Trả lỗi để khách sửa đơn;
+  stop
+endif
+if (Cấu hình tự duyệt?) then (Có)
+  :Đơn đã duyệt;
+else (Không)
+  |Phục vụ hoặc thu ngân|
+  :Xem đơn chờ và quyết định;
+  if (Duyệt?) then (Có)
+    |Hệ thống|
+    :Chuyển đơn sang đã duyệt;
+  else (Không)
+    |Hệ thống|
+    :Từ chối đơn và hoàn suất;
+    stop
+  endif
+endif
+|Bếp|
+:Bắt đầu nấu và báo hoàn thành;
+|Phục vụ|
+:Bưng món và xác nhận;
+|Thu ngân|
+:Lập hóa đơn và xác nhận đã nhận tiền;
+|Hệ thống|
+:Đóng phiên và chuyển bàn sang cần dọn;
+|Phục vụ|
+:Dọn bàn và xác nhận bàn trống;
+stop
+@enduml

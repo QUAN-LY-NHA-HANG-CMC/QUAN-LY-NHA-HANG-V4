@@ -1,0 +1,79 @@
+sequenceDiagram
+    autonumber
+    actor C as 👤 Khách hàng
+    participant UI as 📱 Mobile Web (E-Menu)
+    participant Ctrl as ⚙️ donGoiMon.controller
+    participant SvcP as 🚪 phienBan.service
+    participant SvcD as 🧠 donGoiMon.service
+    participant DB as 🗄️ SQLite3 Database
+    participant Sock as ⚡ Socket.io Gateway
+    participant KDS as 👨‍🍳 Màn hình Bếp (KDS)
+    participant W as 🤵 Phục vụ (Waiter App)
+
+    Note over C,UI: Khách quét mã QR tại bàn (VD: Bàn B04, ma_qr_token)
+    C->>UI: Chọn món ăn, số lượng & ghi chú
+    C->>UI: Nhấn nút "Gửi đơn gọi món"
+    activate UI
+    UI->>Ctrl: POST /api/don-goi-mon (ma_qr_token, ds_mon_an)
+    activate Ctrl
+
+    %% Bước 1: Quản lý Phiên bàn
+    Ctrl->>SvcP: layHoacTaoPhienBan(ma_qr_token)
+    activate SvcP
+    SvcP->>DB: SELECT id, trang_thai FROM ban_an WHERE ma_qr_token = ? AND kich_hoat = 1
+    activate DB
+    DB-->>SvcP: { id: 4, trang_thai: 'trong' }
+    deactivate DB
+
+    alt Bàn đang 'trong' (Lượt khách mới)
+        SvcP->>DB: INSERT INTO phien_ban (ban_an_id, ma_phien, trang_thai='dang_hoat_dong')
+        activate DB
+        SvcP->>DB: UPDATE ban_an SET trang_thai = 'co_khach' WHERE id = 4
+        DB-->>SvcP: phien_ban_id = 12
+        deactivate DB
+    else Bàn đã có khách đang ngồi (Gọi thêm món)
+        SvcP->>DB: SELECT id FROM phien_ban WHERE ban_an_id = 4 AND trang_thai = 'dang_hoat_dong'
+        activate DB
+        DB-->>SvcP: phien_ban_id = 12
+        deactivate DB
+    end
+    SvcP-->>Ctrl: phien_ban_id = 12
+    deactivate SvcP
+
+    %% Bước 2: Kiểm tra trạng thái phục vụ món
+    Ctrl->>SvcD: taoDonGoiMon(phien_ban_id=12, ds_mon_an)
+    activate SvcD
+    SvcD->>DB: SELECT id, ten_mon, don_gia, con_mon FROM mon_an WHERE id IN (...)
+    activate DB
+    DB-->>SvcD: Danh sách món ăn kèm trạng thái còn món (con_mon)
+    deactivate DB
+
+    alt Có món đã hết hàng (con_mon = 0)
+        SvcD-->>Ctrl: Lỗi: "Món ăn tạm hết hàng"
+        Ctrl-->>UI: HTTP 400 Bad Request { ok: false, msg: "Món ăn tạm hết" }
+        UI-->>C: Thông báo cảnh báo món hết trên giao diện
+    else Tất cả món hợp lệ (con_mon = 1)
+        SvcD->>DB: BEGIN IMMEDIATE TRANSACTION
+        activate DB
+        SvcD->>DB: INSERT INTO don_goi_mon (phien_ban_id, ma_don, nguon_tao='khach_qr', trang_thai='cho_duyet')
+        SvcD->>DB: INSERT INTO chi_tiet_don_mon (don_goi_mon_id, mon_an_id, so_luong, don_gia, ghi_chu, trang_thai_mon='cho_duyet')
+        SvcD->>DB: UPDATE ban_an SET trang_thai = 'cho_mon' WHERE id = 4
+        SvcD->>DB: COMMIT TRANSACTION
+        DB-->>SvcD: Giao dịch thành công (don_goi_mon_id=25)
+        deactivate DB
+
+        SvcD-->>Ctrl: Dữ liệu đơn đặt món mới
+        deactivate SvcD
+
+        %% Bước 3: Phát tín hiệu Real-time
+        Ctrl->>Sock: broadcastEvent('DON_HANG_MOI', { don_id: 25, ban_id: 4, phien_id: 12 })
+        activate Sock
+        Sock-)KDS: Emit: 'bep:co_don_moi' (Phát chuông báo KDS & hiển thị thẻ)
+        Sock-)W: Emit: 'phuc_vu:don_dat_ban' (Rung chuông điện thoại phục vụ)
+        deactivate Sock
+
+        Ctrl-->>UI: HTTP 201 Created { ok: true, data: { don_id: 25, phien_ban_id: 12 }, msg: "Đặt món thành công" }
+        deactivate Ctrl
+        UI-->>C: Hiển thị: "Đã gửi đơn vào bếp - Đang chờ duyệt/chế biến"
+    end
+    deactivate UI

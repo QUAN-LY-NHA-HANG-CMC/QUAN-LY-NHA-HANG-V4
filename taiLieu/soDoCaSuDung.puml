@@ -1,0 +1,145 @@
+@startuml Sơ đồ Ca sử dụng Tổng thể
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam usecase {
+    BackgroundColor #F8FAFC
+    BorderColor #0EA5E9
+    ArrowColor #0F172A
+}
+skinparam actor {
+    BackgroundColor #E11D48
+    BorderColor #9F1239
+}
+
+left to right direction
+
+actor :Khách hàng: as Customer <<Human>>
+actor :Nhân viên Phục vụ: as Waiter <<Human>>
+actor :Đầu bếp / Bar: as Kitchen <<Human>>
+actor :Nhân viên Thu ngân: as Cashier <<Human>>
+actor :Quản trị viên: as Admin <<Human>>
+actor :Hệ thống VietQR: as VietQR <<System>>
+
+rectangle "Hệ Thống Quản Lý Nhà Hàng & Gọi Món QR (Quán Mộc POS & E-Menu)" {
+    
+    ' --- Phân hệ Khách hàng ---
+    package "1. Phân hệ Khách hàng (QR Order)" {
+        usecase "UC01: Quét mã QR vào bàn" as UC01
+        usecase "UC02: Duyệt E-Menu & Xem gợi ý" as UC02
+        usecase "UC03: Thêm món & Ghi chú" as UC03
+        usecase "UC04: Gửi yêu cầu đặt món" as UC04
+        usecase "UC05: Theo dõi tiến độ món ăn" as UC05
+        usecase "UC06: Gọi phục vụ / Gọi tính tiền" as UC06
+        usecase "UC07: Thanh toán VietQR tại bàn" as UC07
+        usecase "UC08: Đánh giá món & Dịch vụ" as UC08
+        usecase "UC09: Cưa tiền nhóm (Chia đều tiền)" as UC09
+        usecase "Kiểm tra tình trạng còn/hết món" as UC_CheckAvail
+    }
+
+    ' --- Phân hệ Phục vụ ---
+    package "2. Phân hệ Phục vụ (Waiter Mobile)" {
+        usecase "UW01: Đăng nhập theo ca & bàn" as UW01
+        usecase "UW02: Xem sơ đồ bàn đổi màu" as UW02
+        usecase "UW03: Duyệt / Từ chối đơn QR" as UW03
+        usecase "UW04: Đặt món hộ tại bàn" as UW04
+        usecase "UW05: Chuyển bàn & Gộp bàn" as UW05
+        usecase "UW06: Yêu cầu hủy món có kiểm soát" as UW06
+        usecase "UW07: Đề xuất đổi ca / Xin nghỉ" as UW07
+    }
+
+    ' --- Phân hệ Bếp / Bar ---
+    package "3. Phân hệ Bếp / Bar (KDS)" {
+        usecase "UK01: Nhận đơn real-time & Đo thời gian" as UK01
+        usecase "UK02: Chuyển đổi chế độ: Phiếu / Gom mẻ" as UK02
+        usecase "UK03: Đổi trạng thái: Đang nấu -> Xong" as UK03
+        usecase "UK04: Báo hết món tức thì" as UK04
+        usecase "UK05: Tiếp nhận lệnh ưu tiên khẩn cấp" as UK05
+    }
+
+    ' --- Phân hệ Thu ngân ---
+    package "4. Phân hệ Thu ngân (Cashier POS)" {
+        usecase "UCS01: Kiểm tra bill & Áp chiết khấu" as UCS01
+        usecase "UCS02: Thanh toán Tiền mặt (tính tiền thối)" as UCS02
+        usecase "UCS03: Xuất mã VietQR động tại quầy" as UCS03
+        usecase "UCS04: Tách hóa đơn (Split Bill)" as UCS04
+        usecase "UCS05: In hóa đơn nhiệt K80" as UCS05
+        usecase "UCS06: Chốt bill & Giải phóng bàn" as UCS06
+        usecase "Tính tiền & Thuế VAT" as UC_CalcMoney
+    }
+
+    ' --- Phân hệ Quản trị ---
+    package "5. Phân hệ Quản trị (Admin Dashboard)" {
+        usecase "UA01: Quản lý nhân viên & Phân quyền" as UA01
+        usecase "UA02: Quản lý ca kíp & Duyệt đổi ca" as UA02
+        usecase "UA03: Cấu hình thông tin quán & STK VietQR" as UA03
+        usecase "UA04: Quản lý sơ đồ bàn & In mã QR" as UA04
+        usecase "UA05: Quản lý thực đơn & Combo" as UA05
+        usecase "UA06: Phê duyệt yêu cầu hủy món" as UA06
+        usecase "UA07: Phát lệnh ưu tiên khẩn cấp" as UA07
+        usecase "UA08: Xem báo cáo doanh thu & Top món" as UA08
+        usecase "UA09: Tra cứu nhật ký kiểm toán (Audit Logs)" as UA09
+        usecase "Ghi nhận Audit Log" as UC_AuditRecord
+    }
+}
+
+' --- Mối quan hệ Khách hàng ---
+Customer --> UC01
+Customer --> UC02
+Customer --> UC03
+Customer --> UC04
+Customer --> UC05
+Customer --> UC06
+Customer --> UC07
+Customer --> UC08
+
+' --- Mối quan hệ Phục vụ ---
+Waiter --> UW01
+Waiter --> UW02
+Waiter --> UW03
+Waiter --> UW04
+Waiter --> UW05
+Waiter --> UW06
+Waiter --> UW07
+
+' --- Mối quan hệ Bếp ---
+Kitchen --> UK01
+Kitchen --> UK02
+Kitchen --> UK03
+Kitchen --> UK04
+Kitchen --> UK05
+
+' --- Mối quan hệ Thu ngân ---
+Cashier --> UCS01
+Cashier --> UCS02
+Cashier --> UCS03
+Cashier --> UCS05
+Cashier --> UCS06
+
+' --- Mối quan hệ Quản trị ---
+Admin --> UA01
+Admin --> UA02
+Admin --> UA03
+Admin --> UA04
+Admin --> UA05
+Admin --> UA06
+Admin --> UA07
+Admin --> UA08
+Admin --> UA09
+
+' --- Tác nhân Hệ thống VietQR ---
+UC07 ..> VietQR : <<interact>>
+UCS03 ..> VietQR : <<interact>>
+
+' --- Quan hệ include / extend ---
+UC04 .> UC_CheckAvail : <<include>>
+UC07 .> UC09 : <<extend>>
+UCS01 .> UCS04 : <<extend>>
+UCS01 .> UC_CalcMoney : <<include>>
+UCS06 .> UC_CalcMoney : <<include>>
+
+UW06 ..> UA06 : <<gửi yêu cầu duyệt>>
+UW07 ..> UA02 : <<gửi yêu cầu duyệt>>
+UA06 .> UC_AuditRecord : <<include>>
+UA07 ..> UK05 : <<lệnh cưỡng chế>>
+
+@enduml

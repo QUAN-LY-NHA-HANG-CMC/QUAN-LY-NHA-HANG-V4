@@ -1,0 +1,18 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+node "Máy chủ Docker" as Host <<device>> {
+  node "Trình duyệt trên máy chủ" as Browser <<executionEnvironment>>
+  node "Container quan-moc-pos" as Container <<executionEnvironment>> {
+    node "Node.js 22" as Runtime <<executionEnvironment>> {
+      artifact "backend/mayChu.js" as Server
+      artifact "frontend/dist" as UI
+    }
+  }
+  artifact "coSoDuLieu.sqlite" as DB
+}
+Browser -- Runtime : HTTP / Socket.IO\n127.0.0.1:3001
+Container -- DB : volume /app/data
+Server ..> UI : phục vụ SPA
+Server ..> DB : node:sqlite
+@enduml

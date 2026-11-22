@@ -1,0 +1,202 @@
+flowchart TD
+    %% =========================================================================
+    %% SƠ ĐỒ QUY TRÌNH NGHIỆP VỤ (BPMN / SWIMLANE FLOWCHART)
+    %% HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR (QUÁN MỘC POS & E-MENU)
+    %% =========================================================================
+
+    %% -------------------------------------------------------------------------
+    %% SWIMLANE 1: KHÁCH HÀNG (CUSTOMER WEB QR)
+    %% -------------------------------------------------------------------------
+    subgraph LANE_CUSTOMER["👤 1. KHÁCH HÀNG (CUSTOMER WEB QR)"]
+        C_Start(["Khách đến nhà hàng & ngồi vào bàn"]) --> C_Scan["Quét mã QR tại bàn bằng điện thoại"]
+        C_Scan --> C_Session["Tự động gia nhập Shared Table Session"]
+        C_Session --> C_Menu["Duyệt E-Menu, xem combo & món gợi ý"]
+        C_Menu --> C_Cart["Thêm món vào giỏ hàng chung & ghi chú"]
+        C_Cart --> C_SendOrder["Bấm nút Gửi yêu cầu đặt món"]
+        
+        C_ReceiveOut["Nhận chuông & thông báo Bếp hết món"] --> C_ChangeItem["Chọn món thay thế hoặc hủy món đó"]
+        C_ChangeItem --> C_SendOrder
+
+        C_Track["Theo dõi tiến độ món ăn theo thời gian thực"]
+        C_Enjoy["Thực khách thưởng thức món ăn tại bàn"]
+        C_CallSupport{"Khách cần hỗ trợ?"}
+        C_BtnCall["Bấm nút Gọi phục vụ"]
+        C_Enjoy --> C_CallSupport
+        C_CallSupport -- "Cần phục vụ" --> C_BtnCall
+        C_CallSupport -- "Không / Muốn tính tiền" --> C_BillChoice{"Chọn hình thức thanh toán"}
+
+        C_BillChoice -- "Quét VietQR tại bàn" --> C_GroupSplit{"Có cưa tiền nhóm?"}
+        C_GroupSplit -- "Chia đều tiền" --> C_SplitCalc["Nhập số người N -> Hệ thống chia đều tiền"]
+        C_SplitCalc --> C_PayQR["Từng người quét mã VietQR động đã chia"]
+        C_GroupSplit -- "Trả trọn gói cả bàn" --> C_PayQRWhole["Quét mã VietQR động tổng bàn"]
+        
+        C_BillChoice -- "Thanh toán tại quầy" --> C_ReqBill["Bấm nút Yêu cầu tính tiền tại quầy"]
+        C_DonePayment["Nhận thông báo thanh toán thành công"] --> C_Review["Chấm sao đánh giá món ăn & dịch vụ"]
+        C_Review --> C_End(["Khách hàng rời nhà hàng"])
+    end
+
+    %% -------------------------------------------------------------------------
+    %% SWIMLANE 2: NHÂN VIÊN PHỤC VỤ (WAITER MOBILE WEB)
+    %% -------------------------------------------------------------------------
+    subgraph LANE_WAITER["🤵 2. NHÂN VIÊN PHỤC VỤ (WAITER MOBILE)"]
+        W_Login["Đăng nhập ca làm việc & nhận bàn phụ trách"]
+        W_Floor["Theo dõi Sơ đồ bàn đổi màu theo thời gian thực"]
+        W_TakeOrder["Mở bàn & Đặt món hộ cho khách (nếu khách không dùng QR)"]
+        W_TakeOrder --> W_Send["Gửi order vào hệ thống"]
+        
+        W_ReceiveOrder["Nhận thông báo đơn món mới từ QR"]
+        W_CheckApproval{"Bàn cấu hình Cần duyệt?"}
+        W_ApproveOrder["Kiểm tra order & Bấm xác nhận chuyển bếp"]
+        W_RejectOrder["Từ chối đơn kèm lý do liên hệ khách"]
+        
+        W_ReceiveReady["Nhận chuông & rung thông báo Bếp đã xong món"]
+        W_ServeDish["Nhân viên bưng món ăn ra bàn cho khách"]
+        
+        W_ReceiveCall["Nhận chuông thông báo Khách gọi phục vụ"]
+        W_ComeTable["Đến bàn hỗ trợ yêu cầu của thực khách"]
+        
+        W_ChangeTable["Xử lý yêu cầu Chuyển bàn hoặc Gộp bàn"]
+        
+        W_CancelReq["Khách yêu cầu hủy/đổi món"]
+        W_CheckCooking{"Món đã nấu chưa?"}
+        W_DirectCancel["Hủy trực tiếp (Món chờ duyệt)"]
+        W_SendAdminCancel["Gửi yêu cầu hủy món lên Quản lý kèm lý do"]
+        
+        W_CleanTable["Dọn dẹp bàn & Bấm hoàn tất giải phóng bàn"]
+    end
+
+    %% -------------------------------------------------------------------------
+    %% SWIMLANE 3: BỘ PHẬN BẾP / BAR (KDS DISPLAY)
+    %% -------------------------------------------------------------------------
+    subgraph LANE_KITCHEN["👨‍🍳 3. BỘ PHẬN BẾP / BAR (KDS DISPLAY)"]
+        K_Receive["KDS nhận order mới tức thì qua Socket.io kèm chuông"]
+        K_ColorTimer["Đồng hồ đo thời gian chờ: Xanh < 10m -> Vàng < 20m -> Đỏ > 20m"]
+        K_ViewChoice{"Chọn chế độ hiển thị KDS"}
+        K_TicketMode["Chế độ Phiếu bàn FIFO (Làm theo thứ tự đơn)"]
+        K_BatchMode["Chế độ Gom mẻ (Gom cùng loại món xào nấu chung mẻ)"]
+        K_ViewChoice -- "Theo phiếu" --> K_TicketMode
+        K_ViewChoice -- "Gom mẻ" --> K_BatchMode
+
+        K_CheckStock{"Còn nguyên liệu nấu?"}
+        K_OutBtn["Bếp bấm nút Báo hết món"]
+        K_Cook["Đầu bếp bấm Đang nấu & tiến hành chế biến"]
+        K_CookDone["Đầu bếp bấm Hoàn thành món ăn"]
+        
+        K_ReceiveRush["Nhận lệnh ưu tiên khẩn cấp từ Quản lý / Thu ngân"]
+        K_RushCook["Đưa món lên đầu hàng đợi và ưu tiên nấu ngay"]
+    end
+
+    %% -------------------------------------------------------------------------
+    %% SWIMLANE 4: NHÂN VIÊN THU NGÂN (CASHIER / POS)
+    %% -------------------------------------------------------------------------
+    subgraph LANE_CASHIER["💳 4. NHÂN VIÊN THU NGÂN (CASHIER POS)"]
+        CS_Desk["Màn hình POS hiển thị sơ đồ bàn & danh sách hóa đơn"]
+        CS_CheckBill["Chọn bàn, kiểm tra danh sách món, số lượng, đơn giá"]
+        CS_Discount["Nhập mã giảm giá / chiết khấu khuyến mãi"]
+        
+        CS_SplitChoice{"Khách yêu cầu tách bill?"}
+        CS_SplitSubBill["Chọn các món khách về trước -> Tách tạo Sub-invoice"]
+        CS_MainBill["Giữ lại các món còn lại trên hóa đơn chính"]
+        
+        CS_PaymentMethod{"Phương thức thanh toán tại quầy"}
+        CS_PayCash["Tiền mặt: Nhập tiền khách đưa -> Máy tính tiền thối"]
+        CS_PayVietQR["VietQR quầy: Hiển thị mã QR động trên màn hình phụ"]
+        
+        CS_PrintBill["In phiếu tạm tính / In hóa đơn nhiệt K80"]
+        CS_CloseBill["Chốt thanh toán thành công -> Đóng phiên bàn"]
+        CS_SendTableClean["Chuyển trạng thái bàn sang Cần dọn dẹp"]
+    end
+
+    %% -------------------------------------------------------------------------
+    %% SWIMLANE 5: QUẢN TRỊ VIÊN / QUẢN LÝ (ADMIN DASHBOARD)
+    %% -------------------------------------------------------------------------
+    subgraph LANE_ADMIN["👔 5. QUẢN TRỊ VIÊN / QUẢN LÝ (ADMIN DASHBOARD)"]
+        A_Config["Cấu hình thông tin quán, VAT, STK ngân hàng VietQR"]
+        A_TableConfig["Cấu hình chế độ duyệt món tự động / cần duyệt theo từng bàn"]
+        A_StaffConfig["Quản lý ca kíp, xếp lịch & gán bàn phụ trách cho nhân viên"]
+        
+        A_ReceiveCancel["Nhận thông báo duyệt yêu cầu hủy món từ phục vụ"]
+        A_ReviewCancel{"Quản lý phê duyệt hủy?"}
+        A_ApproveCancel["Chấp thuận hủy: Gạch món trên KDS & trừ tiền hóa đơn"]
+        A_RejectCancel["Từ chối hủy món: Yêu cầu tiếp tục phục vụ"]
+        
+        A_EmergencyRush["Phát lệnh chỉ đạo khẩn cấp bắt buộc ưu tiên món xuống KDS"]
+        A_AuditLog["Hệ thống tự động ghi nhận mọi thay đổi nhạy cảm vào audit_logs"]
+        A_Report["Xem báo cáo doanh thu ngày/tháng, top món bán chạy (Chart.js)"]
+    end
+
+    %% -------------------------------------------------------------------------
+    %% TƯƠNG TÁC XUYÊN SUỐT GIỮA CÁC LÀN (INTER-LANE INTERACTIONS)
+    %% -------------------------------------------------------------------------
+    
+    %% Khách gửi đơn
+    C_SendOrder --> W_ReceiveOrder
+    W_ReceiveOrder --> W_CheckApproval
+    W_CheckApproval -- "Có (Bật duyệt)" --> W_ApproveOrder
+    W_CheckApproval -- "Không (Tự động)" --> K_Receive
+    W_ApproveOrder --> K_Receive
+    W_CheckApproval -- "Từ chối" --> W_RejectOrder
+    W_RejectOrder -.-> C_ReceiveOut
+
+    %% Bếp tiếp nhận & kiểm tra nguyên liệu
+    K_Receive --> K_ColorTimer
+    K_ColorTimer --> K_ViewChoice
+    K_TicketMode --> K_CheckStock
+    K_BatchMode --> K_CheckStock
+    K_CheckStock -- "Hết nguyên liệu" --> K_OutBtn
+    K_OutBtn -.->|"Khóa món tức thì"| C_ReceiveOut
+    K_CheckStock -- "Còn nguyên liệu" --> K_Cook
+    K_Cook -.->|"Cập nhật tiến độ"| C_Track
+    K_Cook --> K_CookDone
+    
+    %% Bếp nấu xong -> Phục vụ bưng món
+    K_CookDone -.->|"Socket chuông xong món"| W_ReceiveReady
+    W_ReceiveReady --> W_ServeDish
+    W_ServeDish --> C_Enjoy
+
+    %% Hỗ trợ tại bàn
+    C_BtnCall -.->|"Socket chuông gọi"| W_ReceiveCall
+    W_ReceiveCall --> W_ComeTable
+
+    %% Khách hủy món
+    C_Enjoy -.->|"Yêu cầu đổi/hủy"| W_CancelReq
+    W_CancelReq --> W_CheckCooking
+    W_CheckCooking -- "Chưa nấu" --> W_DirectCancel
+    W_DirectCancel -.-> K_Receive
+    W_CheckCooking -- "Đang nấu / Đã xong" --> W_SendAdminCancel
+    W_SendAdminCancel -.-> A_ReceiveCancel
+    A_ReceiveCancel --> A_ReviewCancel
+    A_ReviewCancel -- "Đồng ý" --> A_ApproveCancel
+    A_ApproveCancel -.->|"Gạch món"| K_Receive
+    A_ApproveCancel -.->|"Trừ bill"| CS_CheckBill
+    A_ApproveCancel --> A_AuditLog
+    A_ReviewCancel -- "Từ chối" --> A_RejectCancel
+
+    %% Quản lý chỉ đạo khẩn cấp
+    A_EmergencyRush -.->|"Lệnh bắt buộc ưu tiên"| K_ReceiveRush
+    K_ReceiveRush --> K_RushCook
+    K_RushCook --> K_CookDone
+
+    %% Thanh toán tại bàn qua VietQR
+    C_PayQR -.->|"Socket báo tiền về"| CS_CloseBill
+    C_PayQRWhole -.->|"Socket báo tiền về"| CS_CloseBill
+
+    %% Thanh toán tại quầy thu ngân
+    C_ReqBill -.->|"Khách gọi tính tiền"| CS_Desk
+    CS_Desk --> CS_CheckBill
+    CS_CheckBill --> CS_Discount
+    CS_Discount --> CS_SplitChoice
+    CS_SplitChoice -- "Tách món lẻ" --> CS_SplitSubBill
+    CS_SplitSubBill --> CS_PaymentMethod
+    CS_SplitChoice -- "Hóa đơn cả bàn" --> CS_MainBill
+    CS_MainBill --> CS_PaymentMethod
+    CS_PaymentMethod -- "Tiền mặt" --> CS_PayCash
+    CS_PaymentMethod -- "VietQR quầy" --> CS_PayVietQR
+    CS_PayCash --> CS_PrintBill
+    CS_PayVietQR --> CS_PrintBill
+    CS_PrintBill --> CS_CloseBill
+    CS_CloseBill -.->|"Đóng đơn"| C_DonePayment
+    CS_CloseBill --> CS_SendTableClean
+    CS_SendTableClean -.->|"Báo dọn bàn"| W_CleanTable
+    W_CleanTable -.->|"Bàn trống"| W_Floor
+    CS_CloseBill -.->|"Doanh thu"| A_Report

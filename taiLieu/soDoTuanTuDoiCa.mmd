@@ -1,0 +1,87 @@
+sequenceDiagram
+    autonumber
+    actor W as 🤵 Nhân viên (Waiter)
+    participant UI as 📱 Waiter Mobile (W11)
+    participant Ctrl as ⚙️ caLamViec.controller
+    participant Svc as 🧠 caLamViec.service
+    participant DB as 🗄️ SQLite3 Database
+    participant Sock as ⚡ Socket.io Gateway
+    participant A_UI as 💻 Admin Dashboard (A07)
+    actor A as 👔 Quản lý (Admin)
+
+    %% GIAI ĐOẠN 1: XEM LỊCH CA & TẠO PHIẾU YÊU CẦU
+    Note over W,UI: Nhân viên truy cập Tab "Ca của tôi" (Figma W11)
+    W->>UI: Mở màn hình "Ca làm và yêu cầu nghỉ"
+    activate UI
+    UI->>Ctrl: GET /api/ca-lam-viec/lich-tuan (nhan_vien_id=3)
+    activate Ctrl
+    Ctrl->>Svc: layLichTuanTheoNhanVien(nhanVienId=3)
+    activate Svc
+    Svc->>DB: SELECT * FROM ca_lam_viec WHERE nhan_vien_id = 3 AND ngay_lam >= DATE('now')
+    activate DB
+    DB-->>Svc: Dữ liệu ca hôm nay & lịch trực 7 ngày tới
+    deactivate DB
+    Svc-->>Ctrl: Danh sách ca trực & đồng nghiệp trong ca
+    deactivate Svc
+    Ctrl-->>UI: HTTP 200 OK (lich_truc, ds_dong_nghiep)
+    deactivate Ctrl
+    UI-->>W: Hiển thị ca hiện tại & form gửi yêu cầu
+
+    %% GIAI ĐOẠN 2: ĐIỀN FORM VÀ GỬI YÊU CẦU ĐỔI CA / NGHỈ CA
+    W->>UI: Chọn "Đổi ca", chọn ca cần đổi, chọn đồng nghiệp & nhập lý do
+    W->>UI: Bấm nút "Gửi yêu cầu đổi ca"
+    UI->>Ctrl: POST /api/ca-lam-viec/yeu-cau-doi-ca (payload)
+    activate Ctrl
+    Ctrl->>Svc: taoYeuCauDoiCa(nhanVienYeuCauId=3, caId=8, nguoiDoiId=5, lyDo)
+    activate Svc
+
+    Svc->>DB: BEGIN IMMEDIATE TRANSACTION
+    activate DB
+    Svc->>DB: INSERT INTO yeu_cau_doi_ca (nhan_vien_yeu_cau_id, ca_lam_viec_id, loai_yeu_cau, nhan_vien_nhan_ca_id, ly_do, trang_thai) VALUES (3, 8, 'doi_ca', 5, '...', 'cho_duyet')
+    Svc->>DB: INSERT INTO nhat_ky_kiem_toan (hanh_dong, nguoi_thuc_hien_id, chi_tiet) VALUES ('TAO_YEU_CAU_DOI_CA', 3, '...')
+    Svc->>DB: COMMIT TRANSACTION
+    DB-->>Svc: yeu_cau_doi_ca_id = 15
+    deactivate DB
+
+    Svc-->>Ctrl: Bản ghi yêu cầu mới (trang_thai='cho_duyet')
+    deactivate Svc
+    Ctrl->>Sock: broadcastEvent('ADMIN_NEW_SHIFT_REQUEST', { yeu_cau_id: 15, nhan_vien: 'Minh' })
+    activate Sock
+    Sock-)A_UI: Emit: 'nhan_su:co_yeu_cau_moi' (Rung chuông & badge đỏ A07)
+    deactivate Sock
+    Ctrl-->>UI: HTTP 201 Created { ok: true, msg: "Đã gửi yêu cầu, chờ quản lý duyệt" }
+    deactivate Ctrl
+    UI-->>W: Hiển thị banner: "Chờ quản lý duyệt · Lịch cũ vẫn có hiệu lực"
+
+    %% GIAI ĐOẠN 3: QUẢN LÝ PHÊ DUYỆT TRÊN ADMIN DASHBOARD
+    Note over A,A_UI: Quản lý tiếp nhận đơn trên màn hình A07 (Figma A07)
+    A->>A_UI: Xem chi tiết lý do & bấm "Chấp thuận"
+    activate A_UI
+    A_UI->>Ctrl: PUT /api/ca-lam-viec/yeu-cau-doi-ca/15/duyet { quyet_dinh: 'chap_thuan', quan_ly_id: 1 }
+    activate Ctrl
+    Ctrl->>Svc: pheDuyetYeuCauDoiCa(yeuCauId=15, quanLyId=1, 'da_duyet')
+    activate Svc
+
+    Svc->>DB: BEGIN IMMEDIATE TRANSACTION
+    activate DB
+    Svc->>DB: UPDATE yeu_cau_doi_ca SET trang_thai = 'da_duyet', quan_ly_duyet_id = 1, ngay_duyet = CURRENT_TIMESTAMP WHERE id = 15
+    Svc->>DB: UPDATE ca_lam_viec SET nhan_vien_id = 5 WHERE id = 8
+    Svc->>DB: INSERT INTO nhat_ky_kiem_toan (hanh_dong, nguoi_thuc_hien_id, chi_tiet) VALUES ('DUYET_DOI_CA', 1, 'Duyệt đổi ca #8 sang nhân viên #5')
+    Svc->>DB: COMMIT TRANSACTION
+    DB-->>Svc: Hoán đổi ca thành công
+    deactivate DB
+
+    Svc-->>Ctrl: Kết quả phê duyệt & lịch làm cập nhật
+    deactivate Svc
+    Ctrl->>Sock: broadcastEvent('SHIFT_UPDATED', { yeu_cau_id: 15, trang_thai: 'da_duyet', nhan_vien_ids: [3, 5] })
+    activate Sock
+    Sock-)UI: Emit: 'nhan_su:ket_qua_duyet' (Cập nhật lịch mới cho nhân viên)
+    Sock-)A_UI: Emit: 'nhan_su:danh_sach_cap_nhat' (Xóa thẻ khỏi hàng đợi chờ duyệt)
+    deactivate Sock
+    Ctrl-->>A_UI: HTTP 200 OK { ok: true, msg: "Phê duyệt thành công" }
+    deactivate Ctrl
+    A_UI-->>A: Thông báo cập nhật lịch trực tuần thành công
+    deactivate A_UI
+
+    UI-->>W: Cập nhật giao diện: Badge "Đã duyệt" & Lịch trực tuần đổi sang ca mới
+    deactivate UI

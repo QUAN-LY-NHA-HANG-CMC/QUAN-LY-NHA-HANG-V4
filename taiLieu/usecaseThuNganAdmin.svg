@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1281.9859999999999 978.7" width="1281.9859999999999" height="978.7" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="SYSTEM_CS" data-label="Phân hệ Thu ngân (Cashier POS)">
+  <rect x="261.33000000000015" y="40" width="686.7199999999998" height="340.5" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="261.33000000000015" y="40" width="686.7199999999998" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="273.33000000000015" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Phân hệ Thu ngân (Cashier POS)</text>
+</g>
+<g class="subgraph" data-id="SYSTEM_AD" data-label="Phân hệ Quản trị (Admin Dashboard)">
+  <rect x="265.172" y="404.5" width="672.3409999999999" height="534.2" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="265.172" y="404.5" width="672.3409999999999" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="277.172" y="418.5" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Phân hệ Quản trị (Admin Dashboard)</text>
+</g>
+<polyline class="edge" data-from="Cashier" data-to="UCS01" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="215.33000000000015,224.25000000000003 252.25800000000015,224.25000000000003 252.25800000000015,102.45 289.18600000000015,102.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Cashier" data-to="UCS02" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="215.33000000000015,224.25000000000003 252.25800000000015,224.25000000000003 252.25800000000015,163.35000000000002 289.18600000000015,163.35000000000002" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Cashier" data-to="UCS03" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="215.33000000000015,224.25000000000003 252.25800000000015,224.25000000000003 252.25800000000015,224.25 289.18600000000015,224.25" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Cashier" data-to="UCS05" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="215.33000000000015,224.25000000000003 252.25800000000015,224.25000000000003 252.25800000000015,285.15 289.18600000000015,285.15" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Cashier" data-to="UCS06" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="215.33000000000015,224.25000000000003 252.25800000000015,224.25000000000003 252.25800000000015,346.05 289.18600000000015,346.05" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA01" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,466.95 289.18600000000015,466.95" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA02" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,527.85 289.18600000000015,527.85" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA03" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,588.75 289.18600000000015,588.75" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA04" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,649.6500000000001 289.18600000000015,649.6500000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA05" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,710.5500000000001 289.18600000000015,710.5500000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA06" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,771.45 289.18600000000015,771.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA07" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,832.3500000000001 289.18600000000015,832.3500000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA08" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,893.25 289.18600000000015,893.25" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UA09" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="187.17200000000003,694.3249999999999 238.1790000000001,694.3249999999999 238.1790000000001,846.575 696.988,846.575" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UCS03" data-to="VietQR" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;tương tác&gt;&gt;" points="544.5440000000001,224.25 1109.634,224.25" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UCS01" data-to="UCS04" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;extend&gt;&gt;" points="527.5010000000001,102.45 696.988,102.45" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UA06" data-to="UA09" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;ghi vết&gt;&gt;" points="526.7600000000001,771.45 657.421,771.45 657.421,840.425 696.988,840.425" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="UCS03" data-to="VietQR" data-label="&lt;&lt;tương tác&gt;&gt;">
+  <rect x="990.0499999999998" y="208.25" width="83.58400000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1031.8419999999999" y="223.4" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;tương tác&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UCS01" data-to="UCS04" data-label="&lt;&lt;extend&gt;&gt;">
+  <rect x="599.0690000000001" y="86.44999999999999" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="635.8120000000001" y="101.6" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;extend&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UA06" data-to="UA09" data-label="&lt;&lt;ghi vết&gt;&gt;">
+  <rect x="577.717" y="755.4499999999999" width="71.70400000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="613.569" y="770.5999999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;ghi vết&gt;&gt;</text>
+</g>
+<g class="node" data-id="Cashier" data-label="💳 Nhân viên Thu ngân
+(Cashier)" data-shape="stadium">
+  <rect x="40.00000000000017" y="197.35000000000002" width="175.32999999999998" height="53.800000000000004" rx="26.900000000000002" ry="26.900000000000002" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="127.66500000000016" y="224.25000000000003" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="127.66500000000016" dy="-3.9000000000000012">💳 Nhân viên Thu ngân</tspan><tspan x="127.66500000000016" dy="16.900000000000002">(Cashier)</tspan></text>
+</g>
+<g class="node" data-id="Admin" data-label="👔 Quản trị viên
+(Admin / Manager)" data-shape="stadium">
+  <rect x="40" y="667.425" width="147.17200000000003" height="53.800000000000004" rx="26.900000000000002" ry="26.900000000000002" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="113.58600000000001" y="694.3249999999999" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="113.58600000000001" dy="-3.9000000000000012">👔 Quản trị viên</tspan><tspan x="113.58600000000001" dy="16.900000000000002">(Admin / Manager)</tspan></text>
+</g>
+<g class="node" data-id="VietQR" data-label="🏦 Cổng VietQR" data-shape="stadium">
+  <rect x="1109.634" y="205.8" width="132.35199999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1175.81" y="224.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">🏦 Cổng VietQR</text>
+</g>
+<g class="node" data-id="UCS01" data-label="UCS01: Kiểm tra bill &amp; Áp chiết khấu" data-shape="stadium">
+  <rect x="289.18600000000015" y="84" width="238.315" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="408.3435000000002" y="102.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UCS01: Kiểm tra bill &amp; Áp chiết khấu</text>
+</g>
+<g class="node" data-id="UCS02" data-label="UCS02: Thanh toán Tiền mặt (tính tiền thối)" data-shape="stadium">
+  <rect x="289.18600000000015" y="144.9" width="285.7389999999999" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="432.0555000000001" y="163.35000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UCS02: Thanh toán Tiền mặt (tính tiền thối)</text>
+</g>
+<g class="node" data-id="UCS03" data-label="UCS03: Xuất mã VietQR động tại quầy" data-shape="stadium">
+  <rect x="289.18600000000015" y="205.8" width="255.35799999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="416.8650000000001" y="224.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UCS03: Xuất mã VietQR động tại quầy</text>
+</g>
+<g class="node" data-id="UCS04" data-label="UCS04: Tách hóa đơn (Split Bill)" data-shape="stadium">
+  <rect x="696.988" y="84" width="223.49499999999992" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="808.7355" y="102.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UCS04: Tách hóa đơn (Split Bill)</text>
+</g>
+<g class="node" data-id="UCS05" data-label="UCS05: In hóa đơn nhiệt K80" data-shape="stadium">
+  <rect x="289.18600000000015" y="266.7" width="204.22899999999996" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="391.3005000000001" y="285.15" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UCS05: In hóa đơn nhiệt K80</text>
+</g>
+<g class="node" data-id="UCS06" data-label="UCS06: Chốt bill &amp; Giải phóng bàn" data-shape="stadium">
+  <rect x="289.18600000000015" y="327.6" width="231.646" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="405.0090000000001" y="346.05" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UCS06: Chốt bill &amp; Giải phóng bàn</text>
+</g>
+<g class="node" data-id="UA01" data-label="UA01: Quản lý nhân viên &amp; Phân quyền" data-shape="stadium">
+  <rect x="289.18600000000015" y="448.5" width="260.54499999999996" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="419.45850000000013" y="466.95" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA01: Quản lý nhân viên &amp; Phân quyền</text>
+</g>
+<g class="node" data-id="UA02" data-label="UA02: Quản lý ca kíp &amp; Duyệt đổi ca" data-shape="stadium">
+  <rect x="289.18600000000015" y="509.4" width="247.94799999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="413.16000000000014" y="527.85" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA02: Quản lý ca kíp &amp; Duyệt đổi ca</text>
+</g>
+<g class="node" data-id="UA03" data-label="UA03: Cấu hình quán &amp; STK VietQR" data-shape="stadium">
+  <rect x="289.18600000000015" y="570.3" width="247.94799999999995" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="413.16000000000014" y="588.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA03: Cấu hình quán &amp; STK VietQR</text>
+</g>
+<g class="node" data-id="UA04" data-label="UA04: Quản lý sơ đồ bàn &amp; In mã QR" data-shape="stadium">
+  <rect x="289.18600000000015" y="631.2" width="242.76100000000002" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="410.56650000000013" y="649.6500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA04: Quản lý sơ đồ bàn &amp; In mã QR</text>
+</g>
+<g class="node" data-id="UA05" data-label="UA05: Quản lý thực đơn &amp; Combo" data-shape="stadium">
+  <rect x="289.18600000000015" y="692.1" width="227.20000000000002" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="402.7860000000002" y="710.5500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA05: Quản lý thực đơn &amp; Combo</text>
+</g>
+<g class="node" data-id="UA06" data-label="UA06: Phê duyệt yêu cầu hủy món" data-shape="stadium">
+  <rect x="289.18600000000015" y="753" width="237.57399999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="407.9730000000001" y="771.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA06: Phê duyệt yêu cầu hủy món</text>
+</g>
+<g class="node" data-id="UA07" data-label="UA07: Phát lệnh ưu tiên khẩn cấp" data-shape="stadium">
+  <rect x="289.18600000000015" y="813.9000000000001" width="230.164" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="404.26800000000014" y="832.3500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA07: Phát lệnh ưu tiên khẩn cấp</text>
+</g>
+<g class="node" data-id="UA08" data-label="UA08: Báo cáo doanh thu &amp; Top món" data-shape="stadium">
+  <rect x="289.18600000000015" y="874.8" width="248.689" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="413.53050000000013" y="893.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA08: Báo cáo doanh thu &amp; Top món</text>
+</g>
+<g class="node" data-id="UA09" data-label="UA09: Tra cứu nhật ký Audit Logs" data-shape="stadium">
+  <rect x="696.988" y="828.125" width="236.09199999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="815.0340000000001" y="846.575" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UA09: Tra cứu nhật ký Audit Logs</text>
+</g>
+</svg>

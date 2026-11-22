@@ -1,100 +1,105 @@
-/**
- * Khởi tạo ứng dụng Express (ungDung.js)
- * Cấu hình bảo mật toàn diện: Helmet, CORS, Rate Limit, Cookie Parser, Swagger UI
- * Tuân thủ Quy chuẩn phát triển toàn dự án (QUY_TAC_LAM_DU_AN.txt)
- */
+// ============================================================================
+// DỰ ÁN: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR TẠI BÀN (QUÁN MỘC POS & E-MENU)
+// KHỞI TẠO ỨNG DỤNG EXPRESS VÀ GẮN KẾT CÁC PHÂN HỆ
+// ============================================================================
+
 const express = require('express');
 const cors = require('cors');
-const helmet = require('helmet');
-const cookieParser = require('cookie-parser');
-const swaggerUi = require('swagger-ui-express');
+const path = require('path');
+const fs = require('fs');
+const cauHinh = require('./cauHinh/cauHinhChung');
+const { phanHoiThanhCong } = require('./tienIch/dinhDangPhanHoi');
+const { xuLyKhongTimThay, xuLyLoiChung } = require('./middleware/xuLyLoi');
 
-const cauHinhChung = require('./cauHinh/cauHinhChung');
-const { gioiHanChung } = require('./middleware/gioiHanYeuCau');
-const { xuLyKhongTimThay, xuLyLoiToanCuc } = require('./middleware/xuLyLoi');
-
-// Nạp các Routes của các Module Sprint 1
+// Import các route phân hệ
 const { taiKhoanRoutes } = require('./modules/taiKhoan');
-const { vaiTroRoutes } = require('./modules/vaiTro');
-const { cauHinhNhaHangRoutes } = require('./modules/cauHinhNhaHang');
-const { nhanVienRoutes } = require('./modules/nhanVien');
-const { khuVucRoutes } = require('./modules/khuVuc');
 const { banAnRoutes } = require('./modules/banAn');
-const { danhMucMonRoutes } = require('./modules/danhMucMon');
 const { thucDonRoutes } = require('./modules/thucDon');
+const { donGoiMonRoutes } = require('./modules/donGoiMon');
+const { dieuPhoiBepRoutes } = require('./modules/dieuPhoiBep');
+const { hoaDonRoutes } = require('./modules/hoaDon');
+const { caLamViecRoutes } = require('./modules/caLamViec');
+const { heThongRoutes } = require('./modules/heThong');
+const { baoCaoRoutes } = require('./modules/baoCao');
 
-// Nạp tài liệu Swagger
-const taiLieuSwagger = require('../taiLieu/swagger.json');
+const ungDung = express();
+ungDung.disable('x-powered-by');
+ungDung.use((req, res, next) => {
+    res.setHeader('Referrer-Policy', 'same-origin');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    if (req.path.startsWith('/api/')) res.setHeader('Cache-Control', 'no-store');
+    next();
+});
 
-const app = express();
-
-// 1. Cấu hình tiêu đề bảo mật HTTP (Rule 10.2)
-app.use(helmet({
-    contentSecurityPolicy: false, // Để Swagger UI tải assets mượt mà
-    crossOriginResourcePolicy: { policy: 'cross-origin' }
-}));
-
-// 2. Cấu hình kiểm soát nguồn gốc CORS (Rule 10.1)
-app.use(cors({
+// 1. Cấu hình CORS
+ungDung.use(cors({
     origin: (origin, callback) => {
-        // Cho phép các yêu cầu cùng nguồn gốc, tools kiểm thử (Postman/cURL không có origin)
-        if (!origin || cauHinhChung.nguonGocChoPhep.includes(origin) || cauHinhChung.laMoiTruongPhatTrien) {
-            return callback(null, true);
+        // Cho phép các yêu cầu nội bộ hoặc không có origin (như Mobile App, Postman)
+        if (!origin || cauHinh.nguonFrontendChoPhep.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(null, cauHinh.moiTruong !== 'production');
         }
-        return callback(new Error('Nguồn gốc yêu cầu không được cấp phép bởi CORS'));
     },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
-// 3. Phân tích cú pháp Request Body & Cookie
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-app.use(cookieParser());
+// 2. Phân tích cú pháp request body
+ungDung.use(express.json({ limit: '10mb' }));
+ungDung.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// 4. Giới hạn tần suất yêu cầu toàn hệ thống chống spam (US-005 & Rule 10.7)
-app.use(gioiHanChung);
+// 3. Phục vụ static file (hình ảnh món ăn, uploads, tài liệu)
+ungDung.use('/public', express.static(path.join(__dirname, '../public')));
 
-// 5. Tài liệu API Swagger UI (Giao diện trực quan tại /api-docs)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(taiLieuSwagger, {
-    customSiteTitle: 'Tài liệu API Nhà Hàng Quán Mộc',
-    customCss: '.swagger-ui .topbar { display: none }'
-}));
-
-// Cung cấp file JSON thô cho Swagger / OpenAPI
-app.get('/api-docs.json', (req, res) => {
-    res.json(taiLieuSwagger);
+// 4. Endpoint kiểm tra sức khỏe hệ thống (Health Check)
+ungDung.get('/api/kiem-tra-suc-khoe', (req, res) => {
+    return phanHoiThanhCong(res, {
+        trangThai: 'hoat_dong_tot',
+        phienBan: '1.0.0',
+        thoiGianMayChu: new Date().toISOString(),
+        moiTruong: cauHinh.moiTruong
+    }, 'Hệ thống Quán Mộc POS sẵn sàng phục vụ');
 });
 
-// 6. Tuyến kiểm tra sức khỏe hệ thống (Health Check)
-app.get('/api/kiem-tra-suc-khoe', (req, res) => {
-    res.status(200).json({
-        ok: true,
-        data: {
-            tenDichVu: 'Backend Quản Lý Nhà Hàng & Gọi Món QR',
-            phienBan: '1.0.0',
-            trangThai: 'Hoạt động tốt',
-            thoiGian: new Date().toISOString()
-        },
-        msg: 'Hệ thống hoạt động bình thường'
+// 5. Gắn kết các Router phân hệ
+ungDung.use('/api/tai-khoan', taiKhoanRoutes);
+ungDung.use('/api/ban-an', banAnRoutes);
+ungDung.use('/api/thuc-don', thucDonRoutes);
+ungDung.use('/api/don-goi-mon', donGoiMonRoutes);
+ungDung.use('/api/dieu-phoi-bep', dieuPhoiBepRoutes);
+ungDung.use('/api/dieu-phoi', dieuPhoiBepRoutes);
+ungDung.use('/api/hoa-don', hoaDonRoutes);
+ungDung.use('/api/ca-lam-viec', caLamViecRoutes);
+ungDung.use('/api/he-thong', heThongRoutes);
+ungDung.use('/api/bao-cao', baoCaoRoutes);
+
+// 6. Phục vụ Frontend Single Page Application (SPA) khi đã build production
+const thuMucFrontendBuild = path.join(__dirname, '../frontend/dist');
+if (fs.existsSync(thuMucFrontendBuild)) {
+    ungDung.use(express.static(thuMucFrontendBuild));
+    ungDung.use((req, res, next) => {
+        if (req.method === 'GET' && !req.path.startsWith('/api') && !req.path.startsWith('/public')) {
+            return res.sendFile(path.join(thuMucFrontendBuild, 'index.html'));
+        }
+        next();
     });
-});
+} else {
+    ungDung.get('/', (req, res) => {
+        res.send(`
+            <div style="font-family:sans-serif;text-align:center;padding:50px;">
+                <h2 style="color:#b64d2d;">Quán Mộc POS & E-Menu</h2>
+                <p>Thư mục giao diện <b>frontend/dist</b> chưa được tạo trên máy chủ.</p>
+                <p>Vui lòng mở terminal và chạy lệnh: <code>cd frontend && npm install && npm run build</code></p>
+            </div>
+        `);
+    });
+}
 
-// 7. Gắn các Router API nghiệp vụ Sprint 1
-app.use('/api/tai-khoan', taiKhoanRoutes);
-app.use('/api/vai-tro', vaiTroRoutes);
-app.use('/api/cau-hinh-nha-hang', cauHinhNhaHangRoutes);
-app.use('/api/nhan-vien', nhanVienRoutes);
-app.use('/api/khu-vuc', khuVucRoutes);
-app.use('/api/ban-an', banAnRoutes);
-app.use('/api/danh-muc-mon', danhMucMonRoutes);
-app.use('/api/thuc-don', thucDonRoutes);
+// 7. Xử lý đường dẫn API không tồn tại (404)
+ungDung.use(xuLyKhongTimThay);
 
-// 8. Xử lý đường dẫn không tồn tại (404)
-app.use(xuLyKhongTimThay);
+// 8. Middleware xử lý lỗi toàn cục (500)
+ungDung.use(xuLyLoiChung);
 
-// 9. Xử lý lỗi toàn cục
-app.use(xuLyLoiToanCuc);
-
-module.exports = app;
+module.exports = ungDung;

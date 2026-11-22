@@ -1,0 +1,28 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+actor "Phục vụ" as W
+actor "Quản lý" as M
+boundary "Web tác nghiệp" as UI
+control "API don-goi-mon" as API
+database SQLite as DB
+participant "Socket.IO" as IO
+W -> UI : Chọn món và nhập lý do
+UI -> API : POST /api/don-goi-mon/huy-mon
+API -> DB : Kiểm tra phiên và trạng thái món
+alt [món đang chờ]
+  API -> DB : Hủy món và hoàn suất
+else [đang nấu, hoàn thành hoặc đã phục vụ]
+  API -> DB : Lưu phiếu và trạng thái trước khi yêu cầu
+  API -> IO : Thông báo quản lý
+  M -> UI : Duyệt hoặc từ chối phiếu
+  UI -> API : PUT /api/don-goi-mon/yeu-cau-huy-mon/:id/phe-duyet
+  alt [chấp thuận]
+    API -> DB : Chốt phiếu và chuyển món sang da_huy
+  else [từ chối]
+    API -> DB : Chốt phiếu và khôi phục trạng thái món cũ
+  end
+else [phiên/món không hợp lệ]
+  API --> UI : Báo lỗi
+end
+@enduml

@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1269.982 630.65" width="1269.982" height="630.65" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="SYSTEM" data-label="Phân hệ Nhân viên Phục vụ (Waiter Mobile)">
+  <rect x="273.91999999999996" y="40" width="688.202" height="550.65" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="273.91999999999996" y="40" width="688.202" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="285.91999999999996" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Phân hệ Nhân viên Phục vụ (Waiter Mobile)</text>
+</g>
+<polyline class="edge" data-from="Waiter" data-to="UW01" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="207.92,305.96874999999994 248.91999999999996,305.96874999999994 248.91999999999996,102.45 289.91999999999996,102.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Waiter" data-to="UW02" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="207.92,305.96874999999994 248.91999999999996,305.96874999999994 248.91999999999996,163.34999999999997 289.91999999999996,163.34999999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Waiter" data-to="UW03" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="207.92,305.96874999999994 248.91999999999996,305.96874999999994 248.91999999999996,224.24999999999994 289.91999999999996,224.24999999999994" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Waiter" data-to="UW04" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="207.92,305.96874999999994 248.91999999999996,305.96874999999994 248.91999999999996,285.1499999999999 289.91999999999996,285.1499999999999" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Waiter" data-to="UW05" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="207.92,305.96874999999994 248.91999999999996,305.96874999999994 248.91999999999996,346.04999999999995 289.91999999999996,346.04999999999995" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Waiter" data-to="UW06" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="207.92,305.96874999999994 248.91999999999996,305.96874999999994 248.91999999999996,406.94999999999993 322.03,406.94999999999993" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Waiter" data-to="UW07" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="207.92,305.96874999999994 248.91999999999996,305.96874999999994 248.91999999999996,509.48749999999995 289.91999999999996,509.48749999999995" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UW_RequestAdmin" data-to="Admin" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;chờ duyệt&gt;&gt;" points="940.0087499999998,437.4 996.122,437.4 996.122,434.97499999999997 1115.27,434.97499999999997 1115.27,442.6583333333333 1127.27,442.6583333333333" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UW07" data-to="Admin" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;chờ duyệt&gt;&gt;" points="591.961,500.2625 603.961,500.2625 603.961,465.84999999999997 996.122,465.84999999999997 996.122,468.275 1115.27,468.275 1115.27,460.59166666666664 1127.27,460.59166666666664" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UW06" data-to="UW_DirectCancel" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;extend&gt;&gt;" points="575.906,400.79999999999995 603.961,400.79999999999995 603.961,376.5 739.4847499999998,376.49999999999994" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UW06" data-to="UW_RequestAdmin" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;extend&gt;&gt;" points="575.906,413.09999999999997 603.961,413.09999999999997 603.961,437.4 739.4847499999998,437.4" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UW07" data-to="UW_LeaveRequest" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;extend&gt;&gt;" points="591.961,509.48749999999995 615.961,509.48749999999995 615.961,495.29999999999995 739.4847499999998,495.29999999999995" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UW07" data-to="UW_SwapRequest" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;extend&gt;&gt;" points="591.961,518.7125 603.961,518.7125 603.961,556.1999999999999 739.4847499999998,556.1999999999999" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="UW_RequestAdmin" data-to="Admin" data-label="&lt;&lt;chờ duyệt&gt;&gt;">
+  <rect x="1004.1219999999998" y="418.97499999999997" width="87.14800000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1047.696" y="434.12499999999994" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;chờ duyệt&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UW07" data-to="Admin" data-label="&lt;&lt;chờ duyệt&gt;&gt;">
+  <rect x="1004.1219999999998" y="452.275" width="87.14800000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1047.696" y="467.42499999999995" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;chờ duyệt&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UW06" data-to="UW_DirectCancel" data-label="&lt;&lt;extend&gt;&gt;">
+  <rect x="627.9609999999999" y="360.5" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="664.704" y="375.65" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;extend&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UW06" data-to="UW_RequestAdmin" data-label="&lt;&lt;extend&gt;&gt;">
+  <rect x="627.9609999999999" y="421.4" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="664.704" y="436.54999999999995" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;extend&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UW07" data-to="UW_LeaveRequest" data-label="&lt;&lt;extend&gt;&gt;">
+  <rect x="627.9609999999999" y="479.29999999999995" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="664.704" y="494.44999999999993" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;extend&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UW07" data-to="UW_SwapRequest" data-label="&lt;&lt;extend&gt;&gt;">
+  <rect x="627.9609999999999" y="540.1999999999999" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="664.704" y="555.3499999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;extend&gt;&gt;</text>
+</g>
+<g class="node" data-id="Waiter" data-label="🤵 Nhân viên Phục vụ
+(Waiter)" data-shape="stadium">
+  <rect x="40" y="279.06874999999997" width="167.92" height="53.800000000000004" rx="26.900000000000002" ry="26.900000000000002" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="123.96" y="305.96874999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="123.96" dy="-3.9000000000000012">🤵 Nhân viên Phục vụ</tspan><tspan x="123.96" dy="16.900000000000002">(Waiter)</tspan></text>
+</g>
+<g class="node" data-id="Admin" data-label="👔 Quản lý
+(Admin)" data-shape="stadium">
+  <rect x="1127.27" y="424.72499999999997" width="102.71199999999999" height="53.800000000000004" rx="26.900000000000002" ry="26.900000000000002" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1178.626" y="451.62499999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="1178.626" dy="-3.9000000000000012">👔 Quản lý</tspan><tspan x="1178.626" dy="16.900000000000002">(Admin)</tspan></text>
+</g>
+<g class="node" data-id="UW01" data-label="UW01: Đăng nhập theo ca &amp; bàn" data-shape="stadium">
+  <rect x="289.91999999999996" y="84" width="217.567" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="398.70349999999996" y="102.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UW01: Đăng nhập theo ca &amp; bàn</text>
+</g>
+<g class="node" data-id="UW02" data-label="UW02: Xem sơ đồ bàn đổi màu" data-shape="stadium">
+  <rect x="289.91999999999996" y="144.89999999999998" width="211.639" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="395.73949999999996" y="163.34999999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UW02: Xem sơ đồ bàn đổi màu</text>
+</g>
+<g class="node" data-id="UW03" data-label="UW03: Duyệt / Từ chối đơn QR" data-shape="stadium">
+  <rect x="289.91999999999996" y="205.79999999999995" width="212.37999999999997" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="396.10999999999996" y="224.24999999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UW03: Duyệt / Từ chối đơn QR</text>
+</g>
+<g class="node" data-id="UW04" data-label="UW04: Đặt món hộ tại bàn" data-shape="stadium">
+  <rect x="289.91999999999996" y="266.69999999999993" width="182.74" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="381.28999999999996" y="285.1499999999999" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UW04: Đặt món hộ tại bàn</text>
+</g>
+<g class="node" data-id="UW05" data-label="UW05: Chuyển bàn &amp; Gộp bàn" data-shape="stadium">
+  <rect x="289.91999999999996" y="327.59999999999997" width="212.38" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="396.10999999999996" y="346.04999999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UW05: Chuyển bàn &amp; Gộp bàn</text>
+</g>
+<g class="node" data-id="UW06" data-label="UW06: Yêu cầu hủy món có kiểm soát" data-shape="stadium">
+  <rect x="322.03" y="388.49999999999994" width="253.87599999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="448.96799999999996" y="406.94999999999993" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UW06: Yêu cầu hủy món có kiểm soát</text>
+</g>
+<g class="node" data-id="UW07" data-label="UW07: Xem lịch ca &amp; Đề xuất đổi ca / Xin nghỉ" data-shape="stadium">
+  <rect x="289.91999999999996" y="491.03749999999997" width="302.041" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="440.94049999999993" y="509.48749999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UW07: Xem lịch ca &amp; Đề xuất đổi ca / Xin nghỉ</text>
+</g>
+<g class="node" data-id="UW_DirectCancel" data-label="Hủy món trực tiếp (Chờ duyệt)" data-shape="stadium">
+  <rect x="739.4847499999998" y="358.04999999999995" width="208.675" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="843.8222499999998" y="376.49999999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Hủy món trực tiếp (Chờ duyệt)</text>
+</g>
+<g class="node" data-id="UW_RequestAdmin" data-label="Gửi yêu cầu hủy lên Quản lý" data-shape="stadium">
+  <rect x="739.4847499999998" y="418.94999999999993" width="200.524" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="839.7467499999998" y="437.3999999999999" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Gửi yêu cầu hủy lên Quản lý</text>
+</g>
+<g class="node" data-id="UW_LeaveRequest" data-label="Tạo đơn xin nghỉ ca" data-shape="stadium">
+  <rect x="739.4847499999998" y="476.84999999999997" width="159.028" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="818.9987499999999" y="495.29999999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Tạo đơn xin nghỉ ca</text>
+</g>
+<g class="node" data-id="UW_SwapRequest" data-label="Tạo phiếu đề xuất đổi ca" data-shape="stadium">
+  <rect x="739.4847499999998" y="537.75" width="181.999" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="830.4842499999999" y="556.2" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Tạo phiếu đề xuất đổi ca</text>
+</g>
+</svg>

@@ -1,0 +1,100 @@
+sequenceDiagram
+    autonumber
+    actor C as 👤 Khách hàng
+    actor TN as 💳 Thu ngân
+    participant POS as 🖥️ POS Thu ngân
+    participant Ctrl as ⚙️ hoaDon.controller
+    participant SvcP as 🚪 phienBan.service
+    participant SvcH as 🧠 hoaDon.service
+    participant Bank as 🏦 VietQR / Cổng Ngân hàng
+    participant DB as 🗄️ SQLite3 Database
+    participant Sock as ⚡ Socket.io Gateway
+    participant Printer as 🖨️ Máy in Bill K80
+
+    Note over C,TN: Khách yêu cầu thanh toán tại Bàn B04
+    C->>POS: Bấm "Yêu cầu tính tiền" trên E-Menu (hoặc báo nhân viên)
+    activate POS
+    POS->>Ctrl: POST /api/ban-an/4/yeu-cau-thanh-toan
+    activate Ctrl
+    Ctrl->>DB: UPDATE ban_an SET trang_thai = 'yeu_cau_thanh_toan' WHERE id = 4
+    activate DB
+    DB-->>Ctrl: OK
+    deactivate DB
+    Ctrl-->>POS: Đổi màu bàn B04 sang đỏ (Yêu cầu thanh toán)
+    deactivate Ctrl
+
+    TN->>POS: Chọn Bàn B04, nhấn "Lập hóa đơn thanh toán"
+    POS->>Ctrl: POST /api/hoa-don/lap-hoa-don { ban_id: 4, ma_voucher: null, phuong_thuc: 'vietqr' }
+    activate Ctrl
+
+    Ctrl->>SvcP: layPhienDangHoatDong(ban_id=4)
+    activate SvcP
+    SvcP->>DB: SELECT id FROM phien_ban WHERE ban_an_id = 4 AND trang_thai = 'dang_hoat_dong'
+    activate DB
+    DB-->>SvcP: phien_ban_id = 12
+    deactivate DB
+    SvcP-->>Ctrl: phien_ban_id = 12
+    deactivate SvcP
+
+    Ctrl->>SvcH: taoHoaDonTamTinh(phien_ban_id=12, thu_ngan_id=2)
+    activate SvcH
+    SvcH->>DB: SELECT c.so_luong, c.don_gia FROM chi_tiet_don_mon c JOIN don_goi_mon d ON c.don_goi_mon_id = d.id WHERE d.phien_ban_id = 12 AND c.trang_thai_mon NOT IN ('huy_mon', 'da_huy')
+    activate DB
+    DB-->>SvcH: Danh sách món ăn hợp lệ
+    deactivate DB
+
+    SvcH->>SvcH: Tính: tong_tien_mon=781,000đ; VAT 8%=62,480đ; tong_tien_thanh_toan=843,480đ
+    SvcH->>DB: INSERT INTO hoa_don (phien_ban_id, ma_hoa_don, thu_ngan_id, tong_tien_mon, phan_tram_vat, tien_vat, tong_tien_thanh_toan, phuong_thuc_thanh_toan, trang_thai='chua_thanh_toan')
+    activate DB
+    DB-->>SvcH: hoa_don_id = 105
+    deactivate DB
+    SvcH-->>Ctrl: Dữ liệu hóa đơn #105
+    deactivate SvcH
+    Ctrl-->>POS: Trả về thông tin hóa đơn #105
+    deactivate Ctrl
+    POS-->>TN: Hiển thị giao diện thanh toán số tiền: 843,480 VNĐ
+
+    Note over TN,Bank: Khách lựa chọn thanh toán chuyển khoản VietQR NAPAS 247
+    TN->>POS: Bấm "Tạo mã VietQR"
+    POS->>Ctrl: POST /api/hoa-don/105/tao-ma-vietqr
+    activate Ctrl
+    Ctrl->>Bank: API VietQR (STK, BankCode, SoTien=843480, NoiDung="QM BAN04 HD105")
+    activate Bank
+    Bank-->>Ctrl: Trả về Chuỗi EMVCo & URL ảnh QR động
+    deactivate Bank
+    Ctrl-->>POS: Hiển thị mã QR động lên màn hình phụ hướng về khách
+    deactivate Ctrl
+
+    Note over C,Bank: Khách dùng App Ngân hàng quét QR và xác nhận chuyển 843,480 VNĐ
+    C->>Bank: Chuyển khoản thành công qua hệ thống NAPAS 247
+    activate Bank
+    Bank->>Ctrl: Webhook / SePAY IPN: Báo có 843,480đ với nội dung "QM BAN04 HD105"
+    deactivate Bank
+    activate Ctrl
+
+    Ctrl->>SvcH: xuLyThanhToanThanhCong(hoa_don_id=105, ma_giao_dich_vietqr)
+    activate SvcH
+    SvcH->>DB: BEGIN IMMEDIATE TRANSACTION
+    activate DB
+    SvcH->>DB: UPDATE hoa_don SET trang_thai = 'da_thanh_toan', thoi_gian_thanh_toan = datetime('now','localtime'), ma_giao_dich_vietqr = ? WHERE id = 105
+    SvcH->>DB: UPDATE phien_ban SET trang_thai = 'da_thanh_toan', thoi_gian_ket_thuc = datetime('now','localtime') WHERE id = 12
+    SvcH->>DB: UPDATE ban_an SET trang_thai = 'can_don_dep' WHERE id = 4
+    SvcH->>DB: COMMIT TRANSACTION
+    DB-->>SvcH: Cập nhật CSDL hoàn tất
+    deactivate DB
+    SvcH-->>Ctrl: Giao dịch thành công
+    deactivate SvcH
+
+    Ctrl->>Sock: broadcastEvent('THANH_TOAN_THANH_CONG', { hoa_don_id: 105, ban_id: 4, phien_id: 12 })
+    activate Sock
+    Sock-)POS: Đổi màu bàn B04 sang xám ('can_don_dep'), phát âm thanh chốt bill
+    Sock-)C: Thông báo: "Thanh toán thành công. Cảm ơn Quý khách!"
+    deactivate Sock
+
+    Ctrl->>Printer: Lệnh in hóa đơn nhiệt K80
+    activate Printer
+    Printer-->>TN: Xuất phiếu thanh toán K80 giao khách
+    deactivate Printer
+    Ctrl-->>Bank: HTTP 200 OK (Xác nhận Webhook)
+    deactivate Ctrl
+    deactivate POS

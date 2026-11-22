@@ -1,0 +1,391 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1693.5153333333333 1896.6" width="1693.5153333333333" height="1896.6" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', ui-monospace, monospace; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="cls-inherit" markerWidth="12" markerHeight="10" refX="12" refY="5" orient="auto-start-reverse">
+    <polygon points="0 0, 12 5, 0 10" fill="var(--bg)" stroke="var(--_arrow)" stroke-width="1.5" />
+  </marker>
+  <marker id="cls-composition" markerWidth="12" markerHeight="10" refX="0" refY="5" orient="auto-start-reverse">
+    <polygon points="6 0, 12 5, 6 10, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="1" />
+  </marker>
+  <marker id="cls-aggregation" markerWidth="12" markerHeight="10" refX="0" refY="5" orient="auto-start-reverse">
+    <polygon points="6 0, 12 5, 6 10, 0 5" fill="var(--bg)" stroke="var(--_arrow)" stroke-width="1.5" />
+  </marker>
+  <marker id="cls-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto-start-reverse">
+    <polyline points="0 0, 8 3, 0 6" fill="none" stroke="var(--_arrow)" stroke-width="1.5" />
+  </marker>
+</defs>
+<polyline class="class-relationship" data-from="BanAnController" data-to="BanAnService" data-type="association" data-marker-at="to" points="1020.7333333333332,168 1020.7333333333332,228" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="PhienBanController" data-to="PhienBanService" data-type="association" data-marker-at="to" points="219.2,168 219.2,228" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="DonGoiMonController" data-to="DonGoiMonService" data-type="association" data-marker-at="to" points="773.6333333333333,972.3 773.6333333333333,1032.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="BepKDSController" data-to="BepKDSService" data-type="association" data-marker-at="to" points="503.1333333333333,972.3 503.1333333333333,1032.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="HoaDonController" data-to="HoaDonService" data-type="association" data-marker-at="to" points="516.1,168 516.1,228" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="CaLamViecController" data-to="CaLamViecService" data-type="association" data-marker-at="to" points="1219.5,972.3 1219.5,1032.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="BanAnService" data-to="BanAnModel" data-type="association" data-marker-at="to" points="982.8666666666666,336 982.8666666666666,366 351.73333333333335,366 351.73333333333335,396" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="BanAnService" data-to="SocketGateway" data-type="association" data-marker-at="to" points="1058.6,336 1058.6,1200.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="PhienBanService" data-to="PhienBanModel" data-type="association" data-marker-at="to" points="180.23333333333335,336 180.23333333333335,764.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="PhienBanService" data-to="BanAnModel" data-type="association" data-marker-at="to" points="258.16666666666663,336 258.16666666666663,356 244.73333333333335,356 244.73333333333335,396" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="DonGoiMonService" data-to="DonGoiMonModel" data-type="association" data-marker-at="to" points="703.4933333333333,1140.3 703.4933333333333,1160.3 408.8666666666667,1160.3 408.8666666666667,1220.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="DonGoiMonService" data-to="ChiTietDonMonModel" data-type="association" data-marker-at="to" points="797.0133333333333,1140.3 797.0133333333333,1150.3 834.2533333333333,1150.3 834.2533333333333,1578.6 404,1578.6 404,1608.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="DonGoiMonService" data-to="MonAnModel" data-type="association" data-marker-at="to" points="750.2533333333333,1140.3 750.2533333333333,1230.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="DonGoiMonService" data-to="SocketGateway" data-type="association" data-marker-at="to" points="843.7733333333333,1140.3 843.7733333333333,1150.3 985.0666666666666,1150.3 985.0666666666666,1200.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="BepKDSService" data-to="ChiTietDonMonModel" data-type="association" data-marker-at="to" points="465.26666666666665,1140.3 465.26666666666665,1150.3 277.2,1150.3 277.2,1608.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="BepKDSService" data-to="SocketGateway" data-type="association" data-marker-at="to" points="541,1140.3 541,1170.3 948.3,1170.3 948.3,1200.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="HoaDonService" data-to="HoaDonModel" data-type="association" data-marker-at="to" points="422.7666666666667,336 422.7666666666667,346 115.73333333333333,346 115.73333333333333,1200.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="HoaDonService" data-to="ChiTietDonMonModel" data-type="association" data-marker-at="to" points="562.7666666666667,336 562.7666666666667,376 900.5333333333333,376 900.5333333333333,1588.6 446.26666666666665,1588.6 446.26666666666665,1608.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="HoaDonService" data-to="PhienBanModel" data-type="association" data-marker-at="to" points="516.1,336 516.1,724.3 287.23333333333335,724.3 287.23333333333335,764.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="HoaDonService" data-to="BanAnModel" data-type="association" data-marker-at="to" points="469.43333333333334,336 469.43333333333334,356 298.23333333333335,356 298.23333333333335,396" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="HoaDonService" data-to="SocketGateway" data-type="association" data-marker-at="to" points="609.4333333333334,336 609.4333333333334,346 1021.8333333333333,346 1021.8333333333333,1200.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="CaLamViecService" data-to="CaLamViecModel" data-type="association" data-marker-at="to" points="1294.4499999999998,1140.3 1294.4499999999998,1150.3 1389.1406666666667,1150.3 1389.1406666666667,1226.9666666666667" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="CaLamViecService" data-to="YeuCauDoiCaModel" data-type="association" data-marker-at="to" points="1219.5,1140.3 1219.5,1608.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="CaLamViecService" data-to="SocketGateway" data-type="association" data-marker-at="to" points="1144.55,1140.3 1144.55,1150.3 1095.3666666666666,1150.3 1095.3666666666666,1200.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="BanAnModel" data-to="PhienBanModel" data-type="association" data-marker-at="to" data-label="sở hữu các phiên" data-from-cardinality="1" data-to-cardinality="0..*" points="298.23333333333335,624 298.23333333333335,714.3 233.73333333333335,714.3 233.73333333333335,764.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="PhienBanModel" data-to="DonGoiMonModel" data-type="association" data-marker-at="to" data-label="chứa các đợt gọi" data-from-cardinality="1" data-to-cardinality="0..*" points="269.40000000000003,972.3 269.40000000000003,982.3 348.5333333333333,982.3 348.5333333333333,1220.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="DonGoiMonModel" data-to="ChiTietDonMonModel" data-type="association" data-marker-at="to" data-label="gồm các món" data-from-cardinality="1" data-to-cardinality="1..*" points="378.7,1428.3 378.7,1558.6 319.4666666666667,1558.6 319.4666666666667,1608.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="MonAnModel" data-to="ChiTietDonMonModel" data-type="association" data-marker-at="to" data-label="được đặt" data-from-cardinality="1" data-to-cardinality="0..*" points="750.2533333333333,1438.3 750.2533333333333,1568.6 361.73333333333335,1568.6 361.73333333333335,1608.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="PhienBanModel" data-to="HoaDonModel" data-type="association" data-marker-at="to" data-label="thanh toán" data-from-cardinality="1" data-to-cardinality="0..*" points="198.06666666666666,972.3 198.06666666666666,1150.3 191.46666666666667,1150.3 191.46666666666667,1200.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="NhanVienModel" data-to="CaLamViecModel" data-type="association" data-marker-at="to" data-label="được xếp ca" data-from-cardinality="1" data-to-cardinality="0..*" points="1478.074,972.3 1478.0739999999998,1226.9666666666667" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="CaLamViecModel" data-to="YeuCauDoiCaModel" data-type="association" data-marker-at="to" data-label="đổi ca" data-from-cardinality="1" data-to-cardinality="0..*" points="1433.6073333333334,1414.9666666666667 1433.6073333333331,1558.6 1297.75,1558.6 1297.75,1608.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<polyline class="class-relationship" data-from="NhanVienModel" data-to="YeuCauDoiCaModel" data-type="association" data-marker-at="to" data-label="đề xuất" data-from-cardinality="1" data-to-cardinality="0..*" points="1534.0073333333332,972.3 1534.0073333333332,982.3 1607.0073333333332,982.3 1607.0073333333332,1568.6 1376,1568.6 1376,1608.6" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#cls-arrow)" />
+<g class="class-node" data-id="BanAnController" data-label="BanAnController">
+  <rect x="930.2333333333332" y="40" width="181" height="128" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="930.2333333333332" y="40" width="181" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1020.7333333333332" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">BanAnController</text>
+  <line x1="930.2333333333332" y1="72" x2="1111.2333333333331" y2="72" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="930.2333333333332" y1="80" x2="1111.2333333333331" y2="80" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="938.2333333333332" y="94" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">laySoDoBan(req, res)</tspan></text>
+  <text x="938.2333333333332" y="114" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">moBanMoi(req, res)</tspan></text>
+  <text x="938.2333333333332" y="134" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">chuyenGopBan(req, res)</tspan></text>
+  <text x="938.2333333333332" y="154" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">xacNhanDonBan(req, res)</tspan></text>
+</g>
+<g class="class-node" data-id="PhienBanController" data-label="PhienBanController">
+  <rect x="118.80000000000001" y="60" width="200.79999999999998" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="118.80000000000001" y="60" width="200.79999999999998" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="219.2" y="76" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">PhienBanController</text>
+  <line x1="118.80000000000001" y1="92" x2="319.6" y2="92" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="118.80000000000001" y1="100" x2="319.6" y2="100" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="126.80000000000001" y="114" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layHoacTaoPhien(req, res)</tspan></text>
+  <text x="126.80000000000001" y="134" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">dongPhienBan(req, res)</tspan></text>
+  <text x="126.80000000000001" y="154" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layThongTinPhien(req, res)</tspan></text>
+</g>
+<g class="class-node" data-id="DonGoiMonController" data-label="DonGoiMonController">
+  <rect x="676.5333333333333" y="864.3" width="194.2" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="676.5333333333333" y="864.3" width="194.2" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="773.6333333333333" y="880.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">DonGoiMonController</text>
+  <line x1="676.5333333333333" y1="896.3" x2="870.7333333333333" y2="896.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="676.5333333333333" y1="904.3" x2="870.7333333333333" y2="904.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="684.5333333333333" y="918.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoDonGoiMon(req, res)</tspan></text>
+  <text x="684.5333333333333" y="938.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layDonTheoPhien(req, res)</tspan></text>
+  <text x="684.5333333333333" y="958.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">huyMonAn(req, res)</tspan></text>
+</g>
+<g class="class-node" data-id="BepKDSController" data-label="BepKDSController">
+  <rect x="392.8333333333333" y="864.3" width="220.6" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="392.8333333333333" y="864.3" width="220.6" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="503.1333333333333" y="880.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">BepKDSController</text>
+  <line x1="392.8333333333333" y1="896.3" x2="613.4333333333333" y2="896.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="392.8333333333333" y1="904.3" x2="613.4333333333333" y2="904.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="400.8333333333333" y="918.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layHangDoiCheBien(req, res)</tspan></text>
+  <text x="400.8333333333333" y="938.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">capNhatTrangThaiMon(req, res)</tspan></text>
+  <text x="400.8333333333333" y="958.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">baoHetMon(req, res)</tspan></text>
+</g>
+<g class="class-node" data-id="HoaDonController" data-label="HoaDonController">
+  <rect x="415.70000000000005" y="40" width="200.79999999999998" height="128" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="415.70000000000005" y="40" width="200.79999999999998" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="516.1" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">HoaDonController</text>
+  <line x1="415.70000000000005" y1="72" x2="616.5" y2="72" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="415.70000000000005" y1="80" x2="616.5" y2="80" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="423.70000000000005" y="94" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">lapHoaDonTamTinh(req, res)</tspan></text>
+  <text x="423.70000000000005" y="114" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoMaVietQR(req, res)</tspan></text>
+  <text x="423.70000000000005" y="134" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">xacNhanThanhToan(req, res)</tspan></text>
+  <text x="423.70000000000005" y="154" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">tachHoaDon(req, res)</tspan></text>
+</g>
+<g class="class-node" data-id="CaLamViecController" data-label="CaLamViecController">
+  <rect x="1119.1" y="864.3" width="200.79999999999998" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1119.1" y="864.3" width="200.79999999999998" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1219.5" y="880.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">CaLamViecController</text>
+  <line x1="1119.1" y1="896.3" x2="1319.8999999999999" y2="896.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="1119.1" y1="904.3" x2="1319.8999999999999" y2="904.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1127.1" y="918.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layLichTuan(req, res)</tspan></text>
+  <text x="1127.1" y="938.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoYeuCauDoiCa(req, res)</tspan></text>
+  <text x="1127.1" y="958.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">duyetYeuCauDoiCa(req, res)</tspan></text>
+</g>
+<g class="class-node" data-id="BanAnService" data-label="BanAnService">
+  <rect x="907.1333333333332" y="228" width="227.2" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="907.1333333333332" y="228" width="227.2" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1020.7333333333332" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">BanAnService</text>
+  <line x1="907.1333333333332" y1="260" x2="1134.3333333333333" y2="260" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="907.1333333333332" y1="268" x2="1134.3333333333333" y2="268" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="915.1333333333332" y="282" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">kiemTraTrangThaiBan(banId)</tspan></text>
+  <text x="915.1333333333332" y="302" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">doiTrangThaiBan(banId, status)</tspan></text>
+  <text x="915.1333333333332" y="322" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taiSinhMaQrToken(banId)</tspan></text>
+</g>
+<g class="class-node" data-id="PhienBanService" data-label="PhienBanService">
+  <rect x="102.30000000000001" y="228" width="233.79999999999998" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="102.30000000000001" y="228" width="233.79999999999998" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="219.2" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">PhienBanService</text>
+  <line x1="102.30000000000001" y1="260" x2="336.1" y2="260" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="102.30000000000001" y1="268" x2="336.1" y2="268" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="110.30000000000001" y="282" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layPhienDangHoatDong(banId)</tspan></text>
+  <text x="110.30000000000001" y="302" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">khoiTaoPhienMoi(banId, soKhach)</tspan></text>
+  <text x="110.30000000000001" y="322" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">chotPhienThanhToan(phienId)</tspan></text>
+</g>
+<g class="class-node" data-id="DonGoiMonService" data-label="DonGoiMonService">
+  <rect x="656.7333333333333" y="1032.3" width="233.79999999999998" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="656.7333333333333" y="1032.3" width="233.79999999999998" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="773.6333333333333" y="1048.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">DonGoiMonService</text>
+  <line x1="656.7333333333333" y1="1064.3" x2="890.5333333333333" y2="1064.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="656.7333333333333" y1="1072.3" x2="890.5333333333333" y2="1072.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="664.7333333333333" y="1086.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">kiemTraConMon(dsMonId)</tspan></text>
+  <text x="664.7333333333333" y="1106.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">luuDonVaChiTiet(phienId, dsMon)</tspan></text>
+  <text x="664.7333333333333" y="1126.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">tinhTongTienTam(phienId)</tspan></text>
+</g>
+<g class="class-node" data-id="BepKDSService" data-label="BepKDSService">
+  <rect x="389.5333333333333" y="1032.3" width="227.2" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="389.5333333333333" y="1032.3" width="227.2" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="503.1333333333333" y="1048.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">BepKDSService</text>
+  <line x1="389.5333333333333" y1="1064.3" x2="616.7333333333333" y2="1064.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="389.5333333333333" y1="1072.3" x2="616.7333333333333" y2="1072.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="397.5333333333333" y="1086.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">dieuPhoiHangDoi()</tspan></text>
+  <text x="397.5333333333333" y="1106.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">batDauNau(chiTietId, dauBepId)</tspan></text>
+  <text x="397.5333333333333" y="1126.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">hoanThanhNau(chiTietId)</tspan></text>
+</g>
+<g class="class-node" data-id="HoaDonService" data-label="HoaDonService">
+  <rect x="376.1" y="228" width="280" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="376.1" y="228" width="280" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="516.1" y="244" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">HoaDonService</text>
+  <line x1="376.1" y1="260" x2="656.1" y2="260" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="376.1" y1="268" x2="656.1" y2="268" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="384.1" y="282" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">tinhTienHoaDon(phienId, voucher)</tspan></text>
+  <text x="384.1" y="302" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoPayloadVietQR(hoaDonId, tongTien)</tspan></text>
+  <text x="384.1" y="322" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">hoanTatThanhToan(hoaDonId, phuongThuc)</tspan></text>
+</g>
+<g class="class-node" data-id="CaLamViecService" data-label="CaLamViecService">
+  <rect x="1069.6" y="1032.3" width="299.8" height="108" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1069.6" y="1032.3" width="299.8" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1219.5" y="1048.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">CaLamViecService</text>
+  <line x1="1069.6" y1="1064.3" x2="1369.3999999999999" y2="1064.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="1069.6" y1="1072.3" x2="1369.3999999999999" y2="1072.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1077.6" y="1086.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layLichTuanTheoNhanVien(nhanVienId)</tspan></text>
+  <text x="1077.6" y="1106.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoYeuCauDoiCa(data)</tspan></text>
+  <text x="1077.6" y="1126.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">pheDuyetYeuCauDoiCa(id, quanLyId, status)</tspan></text>
+</g>
+<g class="class-node" data-id="BanAnModel" data-label="BanAnModel">
+  <rect x="191.23333333333335" y="396" width="214" height="228" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="191.23333333333335" y="396" width="214" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="298.23333333333335" y="412" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">BanAnModel</text>
+  <line x1="191.23333333333335" y1="428" x2="405.23333333333335" y2="428" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="199.23333333333335" y="442" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="199.23333333333335" y="462" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">khu_vuc_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="199.23333333333335" y="482" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ma_ban</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="199.23333333333335" y="502" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ten_ban</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="199.23333333333335" y="522" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">suc_chua</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="199.23333333333335" y="542" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">trang_thai</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="199.23333333333335" y="562" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ma_qr_token</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <line x1="191.23333333333335" y1="576" x2="405.23333333333335" y2="576" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="199.23333333333335" y="590" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">timTheoId(id)</tspan></text>
+  <text x="199.23333333333335" y="610" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">capNhatTrangThai(id, status)</tspan></text>
+</g>
+<g class="class-node" data-id="PhienBanModel" data-label="PhienBanModel">
+  <rect x="126.73333333333333" y="764.3" width="214" height="208" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="126.73333333333333" y="764.3" width="214" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="233.73333333333335" y="780.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">PhienBanModel</text>
+  <line x1="126.73333333333333" y1="796.3" x2="340.73333333333335" y2="796.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="134.73333333333335" y="810.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="134.73333333333335" y="830.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ban_an_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="134.73333333333335" y="850.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ma_phien</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="134.73333333333335" y="870.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">trang_thai</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="134.73333333333335" y="890.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">thoi_gian_bat_dau</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="134.73333333333335" y="910.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">thoi_gian_ket_thuc</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <line x1="126.73333333333333" y1="924.3" x2="340.73333333333335" y2="924.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="134.73333333333335" y="938.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoPhien(data)</tspan></text>
+  <text x="134.73333333333335" y="958.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">timPhienHienTai(banId)</tspan></text>
+</g>
+<g class="class-node" data-id="MonAnModel" data-label="MonAnModel">
+  <rect x="676.2533333333333" y="1230.3" width="148" height="208" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="676.2533333333333" y="1230.3" width="148" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="750.2533333333333" y="1246.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">MonAnModel</text>
+  <line x1="676.2533333333333" y1="1262.3" x2="824.2533333333333" y2="1262.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="684.2533333333333" y="1276.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="684.2533333333333" y="1296.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">danh_muc_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="684.2533333333333" y="1316.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ma_mon</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="684.2533333333333" y="1336.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ten_mon</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="684.2533333333333" y="1356.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">don_gia</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="684.2533333333333" y="1376.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">con_mon</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <line x1="676.2533333333333" y1="1390.3" x2="824.2533333333333" y2="1390.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="684.2533333333333" y="1404.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">timTheoId(id)</tspan></text>
+  <text x="684.2533333333333" y="1424.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">kiemTraConMon(ids)</tspan></text>
+</g>
+<g class="class-node" data-id="DonGoiMonModel" data-label="DonGoiMonModel">
+  <rect x="288.2" y="1220.3" width="181" height="208" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="288.2" y="1220.3" width="181" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="378.7" y="1236.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">DonGoiMonModel</text>
+  <line x1="288.2" y1="1252.3" x2="469.2" y2="1252.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="296.2" y="1266.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="296.2" y="1286.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">phien_ban_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="296.2" y="1306.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ma_don</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="296.2" y="1326.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">nguon_tao</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="296.2" y="1346.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">trang_thai</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="296.2" y="1366.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">thoi_gian_gui</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <line x1="288.2" y1="1380.3" x2="469.2" y2="1380.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="296.2" y="1394.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoDonMoi(data)</tspan></text>
+  <text x="296.2" y="1414.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layDsTheoPhien(phienId)</tspan></text>
+</g>
+<g class="class-node" data-id="ChiTietDonMonModel" data-label="ChiTietDonMonModel">
+  <rect x="234.93333333333334" y="1608.6" width="253.6" height="248" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="234.93333333333334" y="1608.6" width="253.6" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="361.73333333333335" y="1624.6" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">ChiTietDonMonModel</text>
+  <line x1="234.93333333333334" y1="1640.6" x2="488.5333333333333" y2="1640.6" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="242.93333333333334" y="1654.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="242.93333333333334" y="1674.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">don_goi_mon_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="242.93333333333334" y="1694.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">mon_an_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="242.93333333333334" y="1714.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">so_luong</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="242.93333333333334" y="1734.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">don_gia</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="242.93333333333334" y="1754.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">trang_thai_mon</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="242.93333333333334" y="1774.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">thoi_gian_bat_dau_nau</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <text x="242.93333333333334" y="1794.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">thoi_gian_hoan_thanh_nau</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">datetime</tspan></text>
+  <line x1="234.93333333333334" y1="1808.6" x2="488.5333333333333" y2="1808.6" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="242.93333333333334" y="1822.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">themChiTiet(items)</tspan></text>
+  <text x="242.93333333333334" y="1842.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">doiTrangThai(id, status)</tspan></text>
+</g>
+<g class="class-node" data-id="HoaDonModel" data-label="HoaDonModel">
+  <rect x="40" y="1200.3" width="227.2" height="268" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="40" y="1200.3" width="227.2" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="153.6" y="1216.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">HoaDonModel</text>
+  <line x1="40" y1="1232.3" x2="267.2" y2="1232.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="48" y="1246.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="48" y="1266.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">phien_ban_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="48" y="1286.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ma_hoa_don</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="48" y="1306.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">tong_tien_mon</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="48" y="1326.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">tien_vat</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="48" y="1346.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">tien_chiet_khau</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="48" y="1366.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">tong_tien_thanh_toan</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="48" y="1386.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">phuong_thuc_thanh_toan</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="48" y="1406.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">trang_thai</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <line x1="40" y1="1420.3" x2="267.2" y2="1420.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="48" y="1434.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoHoaDon(data)</tspan></text>
+  <text x="48" y="1454.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">capNhatThanhToan(id, data)</tspan></text>
+</g>
+<g class="class-node" data-id="NhanVienModel" data-label="NhanVienModel">
+  <rect x="1422.1406666666667" y="824.3" width="167.79999999999998" height="148" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1422.1406666666667" y="824.3" width="167.79999999999998" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1506.0406666666668" y="840.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">NhanVienModel</text>
+  <line x1="1422.1406666666667" y1="856.3" x2="1589.9406666666666" y2="856.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1430.1406666666667" y="870.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1430.1406666666667" y="890.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">tai_khoan_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1430.1406666666667" y="910.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ho_ten</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1430.1406666666667" y="930.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">so_dien_thoai</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <line x1="1422.1406666666667" y1="944.3" x2="1589.9406666666666" y2="944.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1430.1406666666667" y="958.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">timTheoId(id)</tspan></text>
+</g>
+<g class="class-node" data-id="CaLamViecModel" data-label="CaLamViecModel">
+  <rect x="1300.2073333333333" y="1226.9666666666667" width="266.79999999999995" height="188" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1300.2073333333333" y="1226.9666666666667" width="266.79999999999995" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1433.6073333333334" y="1242.9666666666667" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">CaLamViecModel</text>
+  <line x1="1300.2073333333333" y1="1258.9666666666667" x2="1567.0073333333332" y2="1258.9666666666667" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1308.2073333333333" y="1272.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1308.2073333333333" y="1292.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">nhan_vien_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1308.2073333333333" y="1312.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ngay_lam</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">date</tspan></text>
+  <text x="1308.2073333333333" y="1332.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ten_ca</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1308.2073333333333" y="1352.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">trang_thai</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <line x1="1300.2073333333333" y1="1366.9666666666667" x2="1567.0073333333332" y2="1366.9666666666667" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1308.2073333333333" y="1380.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">layLichTheoNhanVien(nhanVienId)</tspan></text>
+  <text x="1308.2073333333333" y="1400.9666666666667" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">hoanDoiNhanVien(caId, nhanVienMoiId)</tspan></text>
+</g>
+<g class="class-node" data-id="YeuCauDoiCaModel" data-label="YeuCauDoiCaModel">
+  <rect x="1141.25" y="1608.6" width="313" height="248" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1141.25" y="1608.6" width="313" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1297.75" y="1624.6" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">YeuCauDoiCaModel</text>
+  <line x1="1141.25" y1="1640.6" x2="1454.25" y2="1640.6" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1149.25" y="1654.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1149.25" y="1674.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">nhan_vien_yeu_cau_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1149.25" y="1694.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ca_lam_viec_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1149.25" y="1714.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">loai_yeu_cau</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1149.25" y="1734.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">nhan_vien_nhan_ca_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <text x="1149.25" y="1754.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">ly_do</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1149.25" y="1774.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">trang_thai</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">string</tspan></text>
+  <text x="1149.25" y="1794.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">quan_ly_duyet_id</tspan><tspan fill="var(--_text-faint)">: </tspan><tspan fill="var(--_text-muted)">int</tspan></text>
+  <line x1="1141.25" y1="1808.6" x2="1454.25" y2="1808.6" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1149.25" y="1822.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">taoYeuCau(data)</tspan></text>
+  <text x="1149.25" y="1842.6" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">capNhatTrangThaiDuyet(id, status, quanLyId)</tspan></text>
+</g>
+<g class="class-node" data-id="SocketGateway" data-label="SocketGateway">
+  <rect x="911.5333333333333" y="1200.3" width="220.6" height="168" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="911.5333333333333" y="1200.3" width="220.6" height="32" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1021.8333333333333" y="1216.3" text-anchor="middle" font-size="13" font-weight="700" fill="var(--_text)" dy="4.55">SocketGateway</text>
+  <line x1="911.5333333333333" y1="1232.3" x2="1132.1333333333332" y2="1232.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <line x1="911.5333333333333" y1="1240.3" x2="1132.1333333333332" y2="1240.3" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="919.5333333333333" y="1254.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">broadcastOrderNew(data)</tspan></text>
+  <text x="919.5333333333333" y="1274.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">broadcastCookingStatus(data)</tspan></text>
+  <text x="919.5333333333333" y="1294.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">broadcastDishReady(data)</tspan></text>
+  <text x="919.5333333333333" y="1314.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">broadcastPaymentSuccess(data)</tspan></text>
+  <text x="919.5333333333333" y="1334.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">broadcastShiftRequest(data)</tspan></text>
+  <text x="919.5333333333333" y="1354.3" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-faint)">+ </tspan><tspan fill="var(--_text-sec)">broadcastShiftApproval(data)</tspan></text>
+</g>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<text x="251.90733333333333" y="686.15" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">sở hữu các phiên</text>
+<text x="284.23333333333335" y="638" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1</text>
+<text x="219.73333333333335" y="750.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">0..*</text>
+<text x="303.9893333333333" y="1078.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">chứa các đợt gọi</text>
+<text x="255.40000000000003" y="986.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1</text>
+<text x="334.5333333333333" y="1206.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">0..*</text>
+<text x="342.17499999999995" y="1530.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">gồm các món</text>
+<text x="364.7" y="1442.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1</text>
+<text x="305.4666666666667" y="1594.6" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1..*</text>
+<text x="723.5293333333334" y="1530.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">được đặt</text>
+<text x="736.2533333333333" y="1452.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1</text>
+<text x="347.73333333333335" y="1594.6" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">0..*</text>
+<text x="167.18466666666666" y="1078.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">thanh toán</text>
+<text x="184.06666666666666" y="986.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1</text>
+<text x="177.46666666666667" y="1186.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">0..*</text>
+<text x="1442.7369999999999" y="1078.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">được xếp ca</text>
+<text x="1464.074" y="986.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1</text>
+<text x="1464.0739999999998" y="1212.9666666666667" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">0..*</text>
+<text x="1412.8233333333333" y="1530.45" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">đổi ca</text>
+<text x="1419.6073333333334" y="1428.9666666666667" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1</text>
+<text x="1283.75" y="1594.6" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">0..*</text>
+<text x="1631.7613333333331" y="1326.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">đề xuất</text>
+<text x="1520.0073333333332" y="986.3" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">1</text>
+<text x="1362" y="1594.6" font-size="11" text-anchor="middle" font-weight="400" fill="var(--_text-muted)" dy="3.8499999999999996">0..*</text>
+</svg>

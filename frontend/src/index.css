@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  
+  /* Màu sắc thương hiệu & Nhận diện Quán Mộc (Figma Design Tokens) */
+  --color-brand: #b64d2d;
+  --color-brand-subtle: #f9ede6;
+  --color-canvas: #f9f7f2;
+  --color-workspace: #f8f7f2;
+  --color-surface: #ffffff;
+  --color-feature: #2d4336;
+
+  /* Typography Colors */
+  --color-text-primary: #272d29;
+  --color-text-secondary: #6c746d;
+  --color-text-muted: #72776f;
+  --color-text-inverse: #ffffff;
+
+  /* Trạng thái nghiệp vụ */
+  --color-status-success: #226b4c;
+  --color-status-success-bg: #ebf4ed;
+  --color-status-notice: #795c21;
+  --color-status-notice-bg: #f6f0dd;
+  --color-status-urgent: #a42c35;
+  --color-status-error: #b33232;
+  --color-status-pending-bg: #fbf2dd;
+
+  /* Bếp KDS chuyên biệt */
+  --color-kitchen-header: #202e28;
+  --color-kitchen-header-text: #e1eae1;
+  --color-kitchen-header-muted: #b3c6ba;
+  --color-kitchen-header-connected: #d8ead9;
+  --color-kitchen-tab-bg: #dde5dd;
+  --color-kitchen-tab-text: #455c4b;
+  --color-kitchen-lane-active: #f0f1eb;
+  --color-kitchen-lane-completed: #eaf2eb;
+  --color-kitchen-ticket-ready: #e6f1e8;
+  --color-kitchen-counter-active: #f2e3da;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d8cf;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b0b5aa;
+}
+
+
+@media print {
+  body:has(.hoa-don-k80) * { visibility: hidden; }
+  .hoa-don-k80, .hoa-don-k80 * { visibility: visible !important; }
+  .hoa-don-k80 {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 76mm;
+    padding: 3mm;
+    overflow: visible;
+    background: white;
+    color: black;
+  }
+}

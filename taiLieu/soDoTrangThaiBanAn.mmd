@@ -1,0 +1,43 @@
+stateDiagram-v2
+    title BIỂU ĐỒ TRẠNG THÁI VÒNG ĐỜI BÀN ĂN (TABLE LIFECYCLE)
+
+    [*] --> Trong : Bàn sạch sẵn sàng đón khách
+
+    state Trong {
+        [*] --> SanSang
+        SanSang : Bàn trống, mã QR hoạt động
+    }
+
+    Trong --> CoKhach : Khách quét mã QR / Phục vụ mở bàn
+    
+    state CoKhach {
+        [*] --> KhachVaoBan
+        KhachVaoBan : Khởi tạo phiên bàn (phien_ban)
+    }
+
+    CoKhach --> ChoMon : Khách gửi đơn đặt món vào Bếp KDS
+    
+    state ChoMon {
+        [*] --> ChoCheBien
+        ChoCheBien : Bếp đang tiếp nhận và nấu món
+    }
+
+    ChoMon --> CoKhach : Toàn bộ món đã được bưng lên bàn (da_phuc_vu)
+    CoKhach --> ChoMon : Khách tiếp tục gọi thêm món
+
+    CoKhach --> YeuCauThanhToan : Khách bấm "Yêu cầu tính tiền" trên E-Menu
+    ChoMon --> YeuCauThanhToan : Khách muốn thanh toán sớm
+    
+    state YeuCauThanhToan {
+        [*] --> KhoaOrder
+        KhoaOrder : Thu ngân lập hóa đơn & xuất mã VietQR
+    }
+
+    YeuCauThanhToan --> CanDonDep : Xác nhận thanh toán (Tiền mặt / VietQR)
+    
+    state CanDonDep {
+        [*] --> ChoNhanVienDon
+        ChoNhanVienDon : Khách rời bàn, bàn chuyển màu xám
+    }
+
+    CanDonDep --> Trong : Phục vụ bấm "Đã dọn sạch" trên điện thoại

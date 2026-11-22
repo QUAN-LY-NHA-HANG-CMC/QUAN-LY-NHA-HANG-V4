@@ -1,111 +1,86 @@
-/**
- * Middleware xác thực danh tính người dùng bằng JWT Token
- * Phục vụ US-002, US-003, US-004 & Mục 7 (QUY_TAC_LAM_DU_AN.txt)
- */
+// ============================================================================
+// DỰ ÁN: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR TẠI BÀN (QUÁN MỘC POS & E-MENU)
+// MIDDLEWARE XÁC THỰC DANH TÍNH NGƯỜI DÙNG BẰNG JSON WEB TOKEN (JWT)
+// ============================================================================
+
 const jwt = require('jsonwebtoken');
-const cauHinhBaoMat = require('../cauHinh/cauHinhBaoMat');
+const cauHinh = require('../cauHinh/cauHinhChung');
 const { phanHoiLoi } = require('../tienIch/dinhDangPhanHoi');
-const { truyVanMotBanGhi, truyVanDanhSach } = require('../cauHinh/ketNoiCoSoDuLieu');
+const { truyVanMot } = require('../cauHinh/ketNoiCoSoDuLieu');
+
+function layTaiKhoanTuToken(token) {
+    const payload = jwt.verify(token, cauHinh.jwtSecret);
+    
+    // Kiểm tra tài khoản trong CSDL xem có bị tạm khóa hay xóa không
+    const sql = `
+        SELECT t.id as tai_khoan_id, t.ten_dang_nhap, t.trang_thai, v.ma_vai_tro,
+               n.id as nhan_vien_id, n.ho_ten
+        FROM tai_khoan t
+        JOIN vai_tro v ON t.vai_tro_id = v.id
+        LEFT JOIN nhan_vien n ON n.tai_khoan_id = t.id
+        WHERE t.id = ?;
+    `;
+    return truyVanMot(sql, [payload.taiKhoanId]);
+
+}
 
 /**
- * Middleware bắt buộc phải đăng nhập hợp lệ
+ * Middleware bắt buộc đăng nhập tài khoản nội bộ (Nhân viên, Quản lý)
  */
-async function xacThuc(req, res, next) {
+function xacThucNguoiDung(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return phanHoiLoi(res, 'Vui lòng đăng nhập để truy cập tài nguyên này', 401);
+    }
+
+    const token = authHeader.split(' ')[1];
     try {
-        let token = null;
-
-        // Trích xuất token từ Authorization Header (Bearer <token>)
-        const authHeader = req.headers.authorization;
-        if (authHeader && authHeader.startsWith('Bearer ')) {
-            token = authHeader.split(' ')[1];
-        } else if (req.cookies && req.cookies.access_token) {
-            token = req.cookies.access_token;
-        }
-
-        if (!token) {
-            return phanHoiLoi(
-                res,
-                'Yêu cầu chưa được xác thực. Vui lòng đăng nhập để tiếp tục.',
-                401
-            );
-        }
-
-        // Giải mã và kiểm tra chữ ký JWT
-        let payload;
-        try {
-            payload = jwt.verify(token, cauHinhBaoMat.jwt.biMatAccessToken);
-        } catch (err) {
-            if (err.name === 'TokenExpiredError') {
-                return phanHoiLoi(
-                    res,
-                    'Phiên đăng nhập đã hết hạn. Vui lòng làm mới token hoặc đăng nhập lại.',
-                    401,
-                    { hetHan: true }
-                );
-            }
-            return phanHoiLoi(
-                res,
-                'Mã xác thực không hợp lệ hoặc đã bị chỉnh sửa.',
-                401
-            );
-        }
-
-        // Kiểm tra tài khoản trong cơ sở dữ liệu
-        const taiKhoan = await truyVanMotBanGhi(
-            `SELECT id, ten_dang_nhap, ho_ten, so_dien_thoai, email, trang_thai 
-             FROM tai_khoan 
-             WHERE id = ?`,
-            [payload.taiKhoanId]
-        );
+        const taiKhoan = layTaiKhoanTuToken(token);
 
         if (!taiKhoan) {
-            return phanHoiLoi(res, 'Tài khoản không tồn tại trên hệ thống.', 401);
+            return phanHoiLoi(res, 'Tài khoản không tồn tại trên hệ thống', 401);
         }
 
-        if (Number(taiKhoan.trang_thai) !== 1 && taiKhoan.trang_thai !== 'hoat_dong') {
-            return phanHoiLoi(res, 'Tài khoản của bạn đã bị khóa hoặc ngừng hoạt động.', 403);
+        if (taiKhoan.trang_thai !== 'hoat_dong') {
+            return phanHoiLoi(res, 'Tài khoản của bạn đã bị khóa hoặc ngừng hoạt động', 403);
         }
 
-        // Lấy danh sách vai trò hiện tại của tài khoản
-        const danhSachVaiTro = await truyVanDanhSach(
-            `SELECT vt.id, vt.ma_vai_tro, vt.ten_vai_tro 
-             FROM vai_tro vt
-             INNER JOIN tai_khoan_vai_tro tkvt ON vt.id = tkvt.vai_tro_id
-             WHERE tkvt.tai_khoan_id = ? AND vt.trang_thai = 1`,
-            [taiKhoan.id]
-        );
-
-        const mangMaVaiTro = danhSachVaiTro.map(v => v.ma_vai_tro);
-
-        // Lấy danh sách mã quyền hạn của tài khoản thông qua các vai trò
-        const danhSachQuyen = await truyVanDanhSach(
-            `SELECT DISTINCT qh.ma_quyen 
-             FROM quyen_han qh
-             INNER JOIN vai_tro_quyen_han vtqh ON qh.id = vtqh.quyen_han_id
-             INNER JOIN tai_khoan_vai_tro tkvt ON vtqh.vai_tro_id = tkvt.vai_tro_id
-             WHERE tkvt.tai_khoan_id = ?`,
-            [taiKhoan.id]
-        );
-
-        const mangMaQuyen = danhSachQuyen.map(q => q.ma_quyen);
-
-        // Gắn thông tin tài khoản vào đối tượng req để các middleware và controller phía sau sử dụng
-        req.taiKhoan = {
-            id: taiKhoan.id,
+        // Gán thông tin người dùng vào request (Hỗ trợ cả camelCase và snake_case)
+        req.nguoiDung = {
+            id: taiKhoan.tai_khoan_id,
+            taiKhoanId: taiKhoan.tai_khoan_id,
+            tai_khoan_id: taiKhoan.tai_khoan_id,
             tenDangNhap: taiKhoan.ten_dang_nhap,
+            ten_dang_nhap: taiKhoan.ten_dang_nhap,
+            vaiTro: taiKhoan.ma_vai_tro,
+            vai_tro: taiKhoan.ma_vai_tro,
+            nhanVienId: taiKhoan.nhan_vien_id,
+            nhan_vien_id: taiKhoan.nhan_vien_id,
             hoTen: taiKhoan.ho_ten,
-            soDienThoai: taiKhoan.so_dien_thoai,
-            email: taiKhoan.email,
-            vaiTro: mangMaVaiTro,
-            danhSachQuyen: mangMaQuyen
+            ho_ten: taiKhoan.ho_ten
         };
 
         next();
     } catch (loi) {
-        next(loi);
+        if (loi.name === 'TokenExpiredError') {
+            return phanHoiLoi(res, 'Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại', 401);
+        }
+        return phanHoiLoi(res, 'Mã xác thực không hợp lệ', 401);
     }
 }
 
-xacThuc.xacThuc = xacThuc;
+/**
+ * Middleware tùy chọn (nếu có token thì gán, không có thì bỏ qua)
+ */
+function xacThucTuyChon(req, res, next) {
+    if (req.headers.authorization?.startsWith('Bearer ')) {
+        return xacThucNguoiDung(req, res, next);
+    }
+    next();
+}
 
-module.exports = xacThuc;
+module.exports = {
+    layTaiKhoanTuToken,
+    xacThucNguoiDung,
+    xacThucTuyChon
+};

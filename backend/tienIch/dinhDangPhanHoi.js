@@ -1,36 +1,35 @@
-/**
- * Chuẩn hóa định dạng phản hồi API theo Mục 9 (QUY_TAC_LAM_DU_AN.txt)
- * Thành công: { "ok": true, "data": ..., "msg": "..." }
- * Thất bại: { "ok": false, "data": null, "msg": "..." }
- */
+// ============================================================================
+// DỰ ÁN: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR TẠI BÀN (QUÁN MỘC POS & E-MENU)
+// ĐỊNH DẠNG CẤU TRÚC PHẢN HỒI API CHUẨN TOÀN HỆ THỐNG
+// ============================================================================
 
 /**
- * Trả về phản hồi thành công chuẩn RESTful
- * @param {Object} res - Đối tượng response của Express
- * @param {any} duLieu - Dữ liệu trả về cho client
- * @param {string} thongBao - Thông điệp thông báo
- * @param {number} maHttp - Mã trạng thái HTTP (mặc định 200, tạo mới 201)
+ * Định dạng phản hồi HTTP thành công chuẩn
+ * @param {import('express').Response} res 
+ * @param {*} data Dữ liệu trả về (mảng hoặc đối tượng)
+ * @param {string} msg Thông điệp kết quả
+ * @param {number} statusCode Mã trạng thái HTTP (mặc định 200)
  */
-function phanHoiThanhCong(res, duLieu = {}, thongBao = 'Thành công', maHttp = 200) {
-    return res.status(maHttp).json({
+function phanHoiThanhCong(res, data = {}, msg = 'Thành công', statusCode = 200) {
+    return res.status(statusCode).json({
         ok: true,
-        data: duLieu,
-        msg: thongBao
+        data,
+        msg
     });
 }
 
 /**
- * Trả về phản hồi lỗi chuẩn
- * @param {Object} res - Đối tượng response của Express
- * @param {string} thongBaoLoi - Thông điệp lỗi
- * @param {number} maHttp - Mã trạng thái HTTP (400, 401, 403, 404, 409, 429, 500)
- * @param {any} chiTietLoi - Dữ liệu bổ sung nếu cần (mặc định null)
+ * Định dạng phản hồi HTTP thất bại chuẩn
+ * @param {import('express').Response} res 
+ * @param {string} msg Diễn giải lỗi tiếng Việt
+ * @param {number} statusCode Mã trạng thái HTTP lỗi (400, 401, 403, 404, 500)
+ * @param {*} data Dữ liệu chi tiết lỗi (nếu có)
  */
-function phanHoiLoi(res, thongBaoLoi = 'Có lỗi xảy ra', maHttp = 400, chiTietLoi = null) {
-    return res.status(maHttp).json({
+function phanHoiLoi(res, msg = 'Dữ liệu không hợp lệ', statusCode = 400, data = null) {
+    return res.status(statusCode).json({
         ok: false,
-        data: chiTietLoi,
-        msg: thongBaoLoi
+        data,
+        msg
     });
 }
 

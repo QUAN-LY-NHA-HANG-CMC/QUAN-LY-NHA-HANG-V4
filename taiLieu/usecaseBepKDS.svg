@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1045.436 420.5" width="1045.436" height="420.5" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="SYSTEM" data-label="Phân hệ Bếp / Bar (KDS Display)">
+  <rect x="349.838" y="40" width="655.598" height="340.5" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="349.838" y="40" width="655.598" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="361.838" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Phân hệ Bếp / Bar (KDS Display)</text>
+</g>
+<polyline class="edge" data-from="Kitchen" data-to="UK01" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="283.838,120.38333333333333 324.838,120.38333333333333 324.838,346.05 365.838,346.05" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Kitchen" data-to="UK02" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="283.838,120.38333333333333 324.838,120.38333333333333 324.838,163.35000000000002 365.838,163.35000000000002" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Kitchen" data-to="UK03" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="283.838,120.38333333333333 324.838,120.38333333333333 324.838,102.45 365.838,102.45" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Kitchen" data-to="UK04" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="283.838,120.38333333333333 324.838,120.38333333333333 324.838,224.25 365.838,224.25" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Kitchen" data-to="UK05" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="283.838,120.38333333333333 324.838,120.38333333333333 324.838,285.15 365.838,285.15" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Admin" data-to="UK05" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;phát lệnh khẩn&gt;&gt;" points="142.712,291.3 365.838,291.3" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UK02" data-to="UK_FIFO" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;extend&gt;&gt;" points="644.167,169.5 656.167,169.5 656.167,193.8 789.653,193.8" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="UK02" data-to="UK_Batch" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="&lt;&lt;extend&gt;&gt;" points="644.167,157.2 656.167,157.2 656.167,132.90000000000003 789.653,132.9" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="Admin" data-to="UK05" data-label="&lt;&lt;phát lệnh khẩn&gt;&gt;">
+  <rect x="178.712" y="275.3" width="109.12600000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="233.275" y="290.45" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;phát lệnh khẩn&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UK02" data-to="UK_FIFO" data-label="&lt;&lt;extend&gt;&gt;">
+  <rect x="680.167" y="177.8" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="716.9100000000001" y="192.95000000000002" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;extend&gt;&gt;</text>
+</g>
+<g class="edge-label" data-from="UK02" data-to="UK_Batch" data-label="&lt;&lt;extend&gt;&gt;">
+  <rect x="680.167" y="116.9" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="716.9100000000001" y="132.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">&lt;&lt;extend&gt;&gt;</text>
+</g>
+<g class="node" data-id="Kitchen" data-label="👨‍🍳 Đầu bếp / Bar
+(KDS)" data-shape="stadium">
+  <rect x="125.55100000000002" y="93.48333333333332" width="158.287" height="53.800000000000004" rx="26.900000000000002" ry="26.900000000000002" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="204.6945" y="120.38333333333333" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="204.6945" dy="-3.9000000000000012">👨‍🍳 Đầu bếp / Bar</tspan><tspan x="204.6945" dy="16.900000000000002">(KDS)</tspan></text>
+</g>
+<g class="node" data-id="Admin" data-label="👔 Quản lý
+(Admin)" data-shape="stadium">
+  <rect x="40" y="264.4" width="102.71199999999999" height="53.800000000000004" rx="26.900000000000002" ry="26.900000000000002" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="91.356" y="291.29999999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="91.356" dy="-3.9000000000000012">👔 Quản lý</tspan><tspan x="91.356" dy="16.900000000000002">(Admin)</tspan></text>
+</g>
+<g class="node" data-id="UK01" data-label="UK01: Nhận đơn real-time &amp; Đo thời gian" data-shape="stadium">
+  <rect x="365.838" y="327.6" width="259.804" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="495.74" y="346.05" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UK01: Nhận đơn real-time &amp; Đo thời gian</text>
+</g>
+<g class="node" data-id="UK02" data-label="UK02: Chuyển đổi chế độ: Phiếu / Gom mẻ" data-shape="stadium">
+  <rect x="365.838" y="144.9" width="278.329" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="505.00250000000005" y="163.35000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UK02: Chuyển đổi chế độ: Phiếu / Gom mẻ</text>
+</g>
+<g class="node" data-id="UK_FIFO" data-label="Xem theo phiếu bàn (FIFO)" data-shape="stadium">
+  <rect x="789.653" y="175.35000000000002" width="193.11399999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="886.21" y="193.8" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Xem theo phiếu bàn (FIFO)</text>
+</g>
+<g class="node" data-id="UK_Batch" data-label="Xem gom mẻ xào nấu chung" data-shape="stadium">
+  <rect x="789.653" y="114.45" width="199.783" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="889.5445" y="132.9" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Xem gom mẻ xào nấu chung</text>
+</g>
+<g class="node" data-id="UK03" data-label="UK03: Đổi trạng thái: Đang nấu -&gt; Xong" data-shape="stadium">
+  <rect x="365.838" y="84" width="259.804" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="495.74" y="102.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UK03: Đổi trạng thái: Đang nấu -&gt; Xong</text>
+</g>
+<g class="node" data-id="UK04" data-label="UK04: Báo hết món tức thì" data-shape="stadium">
+  <rect x="365.838" y="205.8" width="189.409" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="460.5425" y="224.25" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UK04: Báo hết món tức thì</text>
+</g>
+<g class="node" data-id="UK05" data-label="UK05: Tiếp nhận lệnh ưu tiên khẩn cấp" data-shape="stadium">
+  <rect x="365.838" y="266.7" width="262.027" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="496.8515" y="285.15" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">UK05: Tiếp nhận lệnh ưu tiên khẩn cấp</text>
+</g>
+</svg>

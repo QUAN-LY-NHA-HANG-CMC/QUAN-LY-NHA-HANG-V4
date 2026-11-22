@@ -1,0 +1,562 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4896.431199999999 5122.589000000001" width="4896.431199999999" height="5122.589000000001" style="--bg:#1a1b26;--fg:#a9b1d6;--line:#3d59a1;--accent:#7aa2f7;--muted:#565f89;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="LANE_CUSTOMER" data-label="👤 1. KHÁCH HÀNG (CUSTOMER WEB QR)">
+  <rect x="2217.261533333333" y="82" width="1681.4114166666664" height="1145.7399999999998" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="2217.261533333333" y="82" width="1681.4114166666664" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="2229.261533333333" y="96" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">👤 1. KHÁCH HÀNG (CUSTOMER WEB QR)</text>
+</g>
+<g class="subgraph" data-id="LANE_WAITER" data-label="🤵 2. NHÂN VIÊN PHỤC VỤ (WAITER MOBILE)">
+  <rect x="125.01199999999983" y="1348.0399999999997" width="2799.133749999999" height="504.8499999999999" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="125.01199999999983" y="1348.0399999999997" width="2799.133749999999" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="137.01199999999983" y="1362.0399999999997" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">🤵 2. NHÂN VIÊN PHỤC VỤ (WAITER MOBILE)</text>
+</g>
+<g class="subgraph" data-id="LANE_KITCHEN" data-label="👨‍🍳 3. BỘ PHẬN BẾP / BAR (KDS DISPLAY)">
+  <rect x="858.0979166666665" y="4004.8190000000004" width="959.4469999999999" height="1027.77" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="858.0979166666665" y="4004.8190000000004" width="959.4469999999999" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="870.0979166666665" y="4018.8190000000004" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">👨‍🍳 3. BỘ PHẬN BẾP / BAR (KDS DISPLAY)</text>
+</g>
+<g class="subgraph" data-id="LANE_CASHIER" data-label="💳 4. NHÂN VIÊN THU NGÂN (CASHIER POS)">
+  <rect x="3261.4846166666657" y="1936.8899999999996" width="839.5799999999999" height="1291.5170000000003" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="3261.4846166666657" y="1936.8899999999996" width="839.5799999999999" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="3273.4846166666657" y="1950.8899999999996" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">💳 4. NHÂN VIÊN THU NGÂN (CASHIER POS)</text>
+</g>
+<g class="subgraph" data-id="LANE_ADMIN" data-label="👔 5. QUẢN TRỊ VIÊN / QUẢN LÝ (ADMIN DASHBOARD)">
+  <rect x="1486.1634499999996" y="3340.7070000000003" width="2160.4911666666662" height="551.812" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="1486.1634499999996" y="3340.7070000000003" width="2160.4911666666662" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="1498.1634499999996" y="3354.7070000000003" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">👔 5. QUẢN TRỊ VIÊN / QUẢN LÝ (ADMIN DASHBOARD)</text>
+</g>
+<polyline class="edge" data-from="C_SendOrder" data-to="W_ReceiveOrder" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2564.7719499999994,919.7469166666666 2564.7719499999994,1245.7399999999998 921.9351916666665,1245.7399999999998 921.9351916666665,1330.0399999999997 895.5789999999997,1330.0399999999997 895.5789999999997,1392.0399999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_CheckApproval" data-to="K_Receive" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Không (Tự động)" points="895.5789999999996,1696.922 895.5789999999996,1707.0899999999997 844.4867499999997,1707.0899999999997 844.4867499999997,3250.407 791.9720166666667,3250.407 791.9720166666667,3986.8190000000004 1089.0792166666665,3986.8190000000004 1089.0792166666665,4048.8190000000004" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_ApproveOrder" data-to="K_Receive" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1000.2087499999997,1836.8899999999996 1000.2087499999997,3250.407 1126.3353499999996,3250.407 1126.3353499999996,3986.8190000000004 1159.5650166666665,3986.8190000000004 1159.5650166666665,4048.8190000000004" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_RejectOrder" data-to="C_ReceiveOut" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="711.9947499999997,1836.8899999999996 711.9947499999997,3218.107 103.01199999999983,3218.107 103.01199999999983,64 2565.53095,64 2565.53095,463.71299999999997 2663.249783333333,463.71299999999997 2663.249783333333,552.2783333333333" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_OutBtn" data-to="C_ReceiveOut" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Khóa món tức thì" points="1065.1324166666666,4939.689 1065.1324166666666,5074.589000000001 4796.699199999999,5074.589000000001 4796.699199999999,40.00000000000091 2847.8169499999995,40.00000000000091 2847.8169499999995,463.71299999999974 2750.098116666666,463.71299999999974 2750.098116666666,552.2783333333332" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_Cook" data-to="C_Track" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Cập nhật tiến độ" points="1276.6132499999999,4939.689 1276.6132499999999,5062.589000000001 4699.487199999999,5062.589000000001 4699.487199999999,52.00000000000091 3122.572033333333,52.00000000000091 3122.572033333333,126" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_CookDone" data-to="W_ReceiveReady" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Socket chuông xong món" points="1604.3832499999999,5016.589 1604.3832499999999,5050.589000000001 4207.384616666666,5050.589000000001 4207.384616666666,1330.0400000000004 2449.6092499999995,1330.0400000000004 2449.6092499999995,1392.04" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_ServeDish" data-to="C_Enjoy" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2449.609249999999,1594.4649999999997 2449.60925,1870.8899999999996 4686.487199999999,1870.8899999999996 4686.487199999999,64 3419.714033333333,64 3419.7140333333327,126" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_BtnCall" data-to="W_ReceiveCall" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Socket chuông gọi" points="3188.3257833333323,619.4609999999999 3188.3257833333323,1269.7399999999998 2177.3988999999992,1269.7399999999998 2177.3988999999992,1330.0399999999997 2121.3452499999994,1330.0399999999997 2121.3452499999994,1392.0399999999997" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Enjoy" data-to="W_CancelReq" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Yêu cầu đổi/hủy" points="3375.5488666666656,162.9 3375.5488666666656,174.9 3098.5527833333326,174.9 3098.5527833333326,1257.7399999999998 1444.8102499999995,1257.7399999999998 1444.8102499999995,1392.0399999999997" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_DirectCancel" data-to="K_Receive" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="1579.6727499999997,1836.8899999999996 1579.6727499999997,3250.407 1463.16345,3250.407 1463.16345,3974.8190000000004 1230.0508166666664,3974.8190000000004 1230.0508166666664,4048.8190000000004" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_SendAdminCancel" data-to="A_ReceiveCancel" data-style="dotted" data-arrow-start="false" data-arrow-end="true" points="1309.9477499999998,1836.8899999999996 1309.9477499999998,3322.7070000000003 2252.1646166666665,3322.7070000000003 2252.164616666666,3384.7070000000003" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="A_ApproveCancel" data-to="K_Receive" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Gạch món" points="1995.108866666666,3799.6190000000006 1995.108866666666,3811.6190000000006 1502.1634499999996,3811.6190000000006 1502.1634499999996,3986.819000000001 1300.5366166666663,3986.819000000001 1300.5366166666663,4048.8190000000004" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="A_ApproveCancel" data-to="CS_CheckBill" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Trừ bill" points="2169.841366666666,3799.6190000000006 2169.841366666666,3811.6190000000006 2337.9774499999994,3811.6190000000006 2337.9774499999994,5038.589000000001 4111.064616666666,5038.589000000001 4111.064616666666,1918.8900000000003 3827.0808666666658,1918.8900000000003 3827.0808666666658,2029.79 3789.5007833333325,2029.79 3789.5007833333325,2057.79" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="A_EmergencyRush" data-to="K_ReceiveRush" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Lệnh bắt buộc ưu tiên" points="1706.7914499999995,3876.5190000000002 1706.7914499999995,3926.5190000000007 1651.4214499999996,3926.5190000000007 1651.4214499999996,3986.819000000001 1642.0029166666661,3986.819000000001 1642.0029166666661,4825.889000000001" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_PayQR" data-to="CS_CloseBill" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Socket báo tiền về" points="3338.119783333332,1211.7399999999998 3338.1197833333326,1318.0399999999997 4264.884616666666,1318.0399999999997 4264.884616666666,1882.8899999999996 3315.239741666666,1882.8899999999996 3315.2397416666654,3082.607 3352.9948666666655,3082.607 3352.9948666666655,3098.607" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_PayQRWhole" data-to="CS_CloseBill" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Socket báo tiền về" points="3607.4742833333326,1134.8399999999997 3607.474283333332,1306.0399999999997 4452.857866666666,1306.0399999999997 4452.857866666666,1894.8899999999996 3359.4948666666655,1894.8899999999996 3359.4948666666655,3070.607 3428.5051166666653,3070.607 3428.5051166666653,3098.607" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_ReqBill" data-to="CS_Desk" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Khách gọi tính tiền" points="3764.997449999999,919.7469166666666 3764.997449999999,1294.0399999999997 4628.019199999999,1294.0399999999997 4628.019199999999,1906.8899999999996 3638.6433666666658,1906.8899999999996 3638.6433666666653,1980.8899999999996" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_CloseBill" data-to="C_DonePayment" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Đóng đơn" points="3352.994866666666,3135.5069999999996 3352.994866666666,3310.7070000000003 67.00000000000045,3310.7070000000003 67.00000000000045,52 2707.17395,52 2707.173949999999,126" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_SendTableClean" data-to="W_CleanTable" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Báo dọn bàn" points="3577.187616666666,3212.407 3577.187616666666,3262.407 115.01200000000017,3262.407 115.01200000000017,1330.0399999999997 293.14400000000023,1330.0399999999997 293.1439999999998,1392.0399999999997" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_CloseBill" data-to="A_Report" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Doanh thu" points="3428.505116666666,3135.5069999999996 3428.505116666666,3384.7070000000003" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Start" data-to="C_Scan" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2371.3145333333327,162.9 2371.314533333333,270.4065" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Scan" data-to="C_Session" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2371.314533333333,307.3065 2371.3145333333327,414.813" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Session" data-to="C_Menu" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2371.3145333333327,451.71299999999997 2371.314533333333,582.5609999999999" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Menu" data-to="C_Cart" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2371.314533333333,619.4609999999999 2371.3145333333327,750.309" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Cart" data-to="C_SendOrder" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2371.3145333333327,787.209 2371.3145333333327,835.0279583333333 2564.77195,835.0279583333333 2564.77195,882.8469166666666" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_ReceiveOut" data-to="C_ChangeItem" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2706.6739499999994,589.1783333333333 2706.6739499999994,750.309" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_ChangeItem" data-to="C_SendOrder" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2706.6739499999994,787.209 2706.6739499999994,835.0279583333333 2564.77195,835.0279583333333 2564.77195,882.8469166666666" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Enjoy" data-to="C_CallSupport" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3463.8791999999994,162.9 3463.8791999999994,174.9 3478.9266166666657,174.9 3478.9266166666657,202.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_CallSupport" data-to="C_BtnCall" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Cần phục vụ" points="3450.274449999999,346.1608333333332 3450.274449999999,386.813 3188.3257833333328,386.813 3188.3257833333328,582.5609999999999" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_CallSupport" data-to="C_BillChoice" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Không / Muốn tính tiền" points="3507.5787833333325,346.1608333333333 3507.5787833333325,386.813 3586.2425333333326,386.813 3586.2425333333326,491.7130000000004" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_BillChoice" data-to="C_GroupSplit" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Quét VietQR tại bàn" points="3549.809866666666,673.8763333333337 3549.809866666666,722.309 3472.7970333333324,722.309 3472.7970333333324,827.209" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_GroupSplit" data-to="C_SplitCalc" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Chia đều tiền" points="3444.391866666666,969.2348333333334 3444.391866666666,1009.6399999999999 3338.1197833333326,1009.6399999999999 3338.1197833333326,1097.9399999999998" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_SplitCalc" data-to="C_PayQR" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3338.1197833333326,1134.8399999999997 3338.1197833333326,1174.8399999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_GroupSplit" data-to="C_PayQRWhole" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Trả trọn gói cả bàn" points="3501.2021999999993,969.2348333333331 3501.2021999999993,1009.6399999999999 3607.4742833333326,1009.6399999999999 3607.4742833333326,1097.9399999999998" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_BillChoice" data-to="C_ReqBill" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Thanh toán tại quầy" points="3622.675199999999,673.876333333333 3622.675199999999,722.309 3764.9974499999994,722.309 3764.9974499999994,882.8469166666666" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_DonePayment" data-to="C_Review" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2707.1739499999994,162.9 2707.1739499999994,270.4065" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="C_Review" data-to="C_End" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2707.1739499999994,307.3065 2707.1739499999994,414.813" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_TakeOrder" data-to="W_Send" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1761.2182499999994,1428.9399999999998 1761.2182499999994,1482.772" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_ReceiveOrder" data-to="W_CheckApproval" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="895.5789999999997,1428.9399999999998 895.5789999999996,1482.772" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_CheckApproval" data-to="W_ApproveOrder" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Có (Bật duyệt)" points="949.1164999999996,1536.3094999999998 949.1164999999996,1695.0899999999997 1000.2087499999997,1695.0899999999997 1000.2087499999997,1799.9899999999998" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_CheckApproval" data-to="W_RejectOrder" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Từ chối" points="842.0414999999997,1536.3094999999998 842.0414999999997,1695.0899999999997 711.9947499999997,1695.0899999999997 711.9947499999997,1799.9899999999998" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_ReceiveReady" data-to="W_ServeDish" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2449.6092499999995,1428.9399999999998 2449.6092499999986,1557.5649999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_ReceiveCall" data-to="W_ComeTable" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2121.3452499999994,1428.9399999999998 2121.3452499999994,1482.772" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_CancelReq" data-to="W_CheckCooking" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1444.8102499999995,1428.9399999999998 1444.8102499999995,1482.7720000000002" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_CheckCooking" data-to="W_DirectCancel" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Chưa nấu" points="1473.5859166666664,1626.6503333333333 1473.5859166666664,1695.0899999999997 1579.6727499999997,1695.0899999999997 1579.6727499999997,1799.9899999999998" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_CheckCooking" data-to="W_SendAdminCancel" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Đang nấu / Đã xong" points="1416.034583333333,1626.6503333333333 1416.034583333333,1695.0899999999997 1309.9477499999998,1695.0899999999997 1309.9477499999998,1799.9899999999998" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="W_CleanTable" data-to="W_Floor" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Bàn trống" points="293.1439999999997,1428.9399999999998 293.1439999999998,1723.0899999999997" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_ViewChoice" data-to="K_TicketMode" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Theo phiếu" points="1158.9927499999997,4381.694833333334 1158.9927499999997,4429.51 1021.4134166666664,4429.51 1021.4134166666665,4517.81" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_ViewChoice" data-to="K_BatchMode" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Gom mẻ" points="1230.6230833333332,4381.694833333334 1230.6230833333332,4429.51 1368.2024166666665,4429.51 1368.2024166666665,4517.81" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_Receive" data-to="K_ColorTimer" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1194.8079166666664,4085.7190000000005 1194.8079166666664,4125.719" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_ColorTimer" data-to="K_ViewChoice" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1194.8079166666664,4162.619000000001 1194.8079166666664,4202.619000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_TicketMode" data-to="K_CheckStock" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1021.4134166666665,4554.71 1021.4134166666665,4574.710000000001 1194.8079166666664,4574.710000000001 1194.8079166666664,4594.710000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_BatchMode" data-to="K_CheckStock" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1368.2024166666665,4554.71 1368.2024166666665,4574.710000000001 1194.8079166666664,4574.710000000001 1194.8079166666664,4594.710000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_CheckStock" data-to="K_OutBtn" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Hết nguyên liệu" points="1162.9447499999997,4754.025833333334 1162.9447499999997,4797.889 1065.1324166666664,4797.889 1065.1324166666664,4902.789000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_CheckStock" data-to="K_Cook" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Còn nguyên liệu" points="1226.6710833333332,4754.025833333334 1226.6710833333332,4797.889 1324.4834166666665,4797.889 1324.4834166666665,4902.789000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_Cook" data-to="K_CookDone" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1324.4834166666665,4939.689 1324.4834166666665,4959.689 1604.3832499999994,4959.689 1604.3832499999994,4979.689" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_ReceiveRush" data-to="K_RushCook" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1642.0029166666664,4862.789000000001 1642.0029166666664,4902.789000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="K_RushCook" data-to="K_CookDone" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="1642.0029166666661,4939.689 1642.0029166666661,4959.689 1604.3832499999994,4959.689 1604.3832499999994,4979.689" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_Desk" data-to="CS_CheckBill" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3638.6433666666658,2017.7899999999997 3638.6433666666658,2029.7899999999997 3676.223449999999,2029.7899999999997 3676.223449999999,2057.7899999999995" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_CheckBill" data-to="CS_Discount" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3732.8621166666658,2094.6899999999996 3732.8621166666658,2134.6899999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_Discount" data-to="CS_SplitChoice" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3732.8621166666658,2171.5899999999997 3732.8621166666658,2211.59" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_SplitChoice" data-to="CS_SplitSubBill" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Tách món lẻ" points="3698.405449999999,2383.873333333333 3698.405449999999,2430.3299999999995 3562.431616666666,2430.3299999999995 3562.431616666666,2518.6299999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_SplitSubBill" data-to="CS_PaymentMethod" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3562.431616666666,2555.5299999999997 3562.431616666666,2575.5299999999997 3732.8621166666658,2575.5299999999997 3732.8621166666658,2595.5299999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_SplitChoice" data-to="CS_MainBill" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Hóa đơn cả bàn" points="3767.3187833333322,2383.8733333333325 3767.3187833333322,2430.3299999999995 3903.2926166666657,2430.3299999999995 3903.2926166666657,2518.6299999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_MainBill" data-to="CS_PaymentMethod" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3903.2926166666657,2555.5299999999997 3903.2926166666657,2575.5299999999997 3732.8621166666658,2575.5299999999997 3732.8621166666658,2595.5299999999997" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_PaymentMethod" data-to="CS_PayCash" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Tiền mặt" points="3691.365949999999,2803.010833333333 3691.365949999999,2856.5069999999996 3552.7986166666656,2856.5069999999996 3552.7986166666656,2944.807" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_PaymentMethod" data-to="CS_PayVietQR" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="VietQR quầy" points="3774.358283333332,2803.0108333333333 3774.358283333332,2856.5069999999996 3912.9256166666655,2856.5069999999996 3912.9256166666655,2944.807" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_PayCash" data-to="CS_PrintBill" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3552.7986166666656,2981.707 3552.7986166666656,3001.7069999999994 3732.8621166666658,3001.7069999999994 3732.8621166666658,3021.7069999999994" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_PayVietQR" data-to="CS_PrintBill" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3912.9256166666655,2981.707 3912.9256166666655,3001.7069999999994 3732.8621166666658,3001.7069999999994 3732.8621166666658,3021.7069999999994" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_PrintBill" data-to="CS_CloseBill" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3732.8621166666658,3058.607 3732.8621166666658,3070.607 3504.0153666666656,3070.607 3504.0153666666656,3098.607" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="CS_CloseBill" data-to="CS_SendTableClean" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="3504.0153666666656,3135.5069999999996 3504.0153666666656,3147.5069999999996 3577.1876166666657,3147.5069999999996 3577.1876166666657,3175.5069999999996" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="A_ReceiveCancel" data-to="A_ReviewCancel" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2252.164616666666,3421.6070000000004 2252.164616666666,3461.6070000000004" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="A_ReviewCancel" data-to="A_ApproveCancel" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Đồng ý" points="2218.6959499999994,3628.9503333333337 2218.6959499999994,3674.4190000000003 2082.475116666666,3674.4190000000003 2082.475116666666,3762.7190000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="A_ApproveCancel" data-to="A_AuditLog" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="2082.475116666666,3799.6190000000006 2082.475116666666,3811.6190000000006 2126.1984499999994,3811.6190000000006 2126.1984499999994,3839.6190000000006" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="A_ReviewCancel" data-to="A_RejectCancel" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Từ chối" points="2285.6332833333327,3628.9503333333337 2285.6332833333327,3674.4190000000003 2421.8541166666664,3674.4190000000003 2421.854116666666,3762.7190000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="W_CheckApproval" data-to="K_Receive" data-label="Không (Tự động)">
+  <rect x="744.4720166666668" y="3949.5190000000002" width="94.87" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="791.9070166666668" y="3964.6690000000003" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Không (Tự động)</text>
+</g>
+<g class="edge-label" data-from="K_OutBtn" data-to="C_ReceiveOut" data-label="Khóa món tức thì">
+  <rect x="4748.699199999999" y="5037.289" width="95.46400000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="4796.431199999999" y="5052.438999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khóa món tức thì</text>
+</g>
+<g class="edge-label" data-from="K_Cook" data-to="C_Track" data-label="Cập nhật tiến độ">
+  <rect x="4653.987199999999" y="5025.289" width="90.71200000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="4699.343199999998" y="5040.438999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Cập nhật tiến độ</text>
+</g>
+<g class="edge-label" data-from="K_CookDone" data-to="W_ReceiveReady" data-label="Socket chuông xong món">
+  <rect x="4139.884616666666" y="5013.289" width="134.66800000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="4207.218616666666" y="5028.438999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Socket chuông xong món</text>
+</g>
+<g class="edge-label" data-from="C_BtnCall" data-to="W_ReceiveCall" data-label="Socket chuông gọi">
+  <rect x="2124.8988999999992" y="1276.7399999999998" width="104.37400000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="2177.085899999999" y="1291.8899999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Socket chuông gọi</text>
+</g>
+<g class="edge-label" data-from="C_Enjoy" data-to="W_CancelReq" data-label="Yêu cầu đổi/hủy">
+  <rect x="1397.8102499999995" y="1276.7399999999998" width="93.08800000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1444.3542499999996" y="1291.8899999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Yêu cầu đổi/hủy</text>
+</g>
+<g class="edge-label" data-from="A_ApproveCancel" data-to="K_Receive" data-label="Gạch món">
+  <rect x="1470.1634499999996" y="3933.5190000000002" width="63.388000000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1501.8574499999995" y="3948.6690000000003" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Gạch món</text>
+</g>
+<g class="edge-label" data-from="A_ApproveCancel" data-to="CS_CheckBill" data-label="Trừ bill">
+  <rect x="4085.5646166666656" y="5001.289" width="50.32000000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="4110.7246166666655" y="5016.438999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Trừ bill</text>
+</g>
+<g class="edge-label" data-from="A_EmergencyRush" data-to="K_ReceiveRush" data-label="Lệnh bắt buộc ưu tiên">
+  <rect x="1592.9214499999998" y="3933.5190000000002" width="116.25400000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1651.0484499999998" y="3948.6690000000003" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Lệnh bắt buộc ưu tiên</text>
+</g>
+<g class="edge-label" data-from="C_PayQR" data-to="CS_CloseBill" data-label="Socket báo tiền về">
+  <rect x="4213.384616666666" y="1833.5899999999997" width="102.59200000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="4264.6806166666665" y="1848.7399999999998" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Socket báo tiền về</text>
+</g>
+<g class="edge-label" data-from="C_PayQRWhole" data-to="CS_CloseBill" data-label="Socket báo tiền về">
+  <rect x="4401.357866666665" y="1833.5899999999997" width="102.59200000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="4452.653866666666" y="1848.7399999999998" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Socket báo tiền về</text>
+</g>
+<g class="edge-label" data-from="C_ReqBill" data-to="CS_Desk" data-label="Khách gọi tính tiền">
+  <rect x="4575.519199999999" y="1833.5899999999997" width="104.96800000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="4628.003199999999" y="1848.7399999999998" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khách gọi tính tiền</text>
+</g>
+<g class="edge-label" data-from="CS_CloseBill" data-to="C_DonePayment" data-label="Đóng đơn">
+  <rect x="36" y="3180.807" width="61.012" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="66.506" y="3195.957" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Đóng đơn</text>
+</g>
+<g class="edge-label" data-from="CS_SendTableClean" data-to="W_CleanTable" data-label="Báo dọn bàn">
+  <rect x="77.01200000000017" y="3225.107" width="75.86200000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="114.94300000000018" y="3240.257" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Báo dọn bàn</text>
+</g>
+<g class="edge-label" data-from="CS_CloseBill" data-to="A_Report" data-label="Doanh thu">
+  <rect x="3396.0051166666663" y="3269.407" width="64.57600000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3428.2931166666663" y="3284.5570000000002" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Doanh thu</text>
+</g>
+<g class="edge-label" data-from="C_CallSupport" data-to="C_BtnCall" data-label="Cần phục vụ">
+  <rect x="3150.3257833333328" y="418.113" width="75.86200000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3188.256783333333" y="433.263" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Cần phục vụ</text>
+</g>
+<g class="edge-label" data-from="C_CallSupport" data-to="C_BillChoice" data-label="Không / Muốn tính tiền">
+  <rect x="3524.7425333333326" y="418.113" width="122.19400000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3585.839533333333" y="433.263" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Không / Muốn tính tiền</text>
+</g>
+<g class="edge-label" data-from="C_BillChoice" data-to="C_GroupSplit" data-label="Quét VietQR tại bàn">
+  <rect x="3420.297033333333" y="753.6089999999999" width="104.96800000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3472.7810333333327" y="768.7589999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Quét VietQR tại bàn</text>
+</g>
+<g class="edge-label" data-from="C_GroupSplit" data-to="C_SplitCalc" data-label="Chia đều tiền">
+  <rect x="3299.1197833333326" y="1032.6399999999999" width="77.05000000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3337.6447833333327" y="1047.79" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Chia đều tiền</text>
+</g>
+<g class="edge-label" data-from="C_GroupSplit" data-to="C_PayQRWhole" data-label="Trả trọn gói cả bàn">
+  <rect x="3554.4742833333326" y="1032.6399999999999" width="105.56200000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3607.2552833333325" y="1047.79" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Trả trọn gói cả bàn</text>
+</g>
+<g class="edge-label" data-from="C_BillChoice" data-to="C_ReqBill" data-label="Thanh toán tại quầy">
+  <rect x="3710.4974499999994" y="753.6089999999999" width="108.53200000000004" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3764.7634499999995" y="768.7589999999999" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Thanh toán tại quầy</text>
+</g>
+<g class="edge-label" data-from="W_CheckApproval" data-to="W_ApproveOrder" data-label="Có (Bật duyệt)">
+  <rect x="959.2087499999998" y="1726.3899999999996" width="81.80200000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1000.1097499999997" y="1741.5399999999997" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Có (Bật duyệt)</text>
+</g>
+<g class="edge-label" data-from="W_CheckApproval" data-to="W_RejectOrder" data-label="Từ chối">
+  <rect x="685.4947499999997" y="1726.3899999999996" width="52.696000000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="711.8427499999997" y="1741.5399999999997" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Từ chối</text>
+</g>
+<g class="edge-label" data-from="W_CheckCooking" data-to="W_DirectCancel" data-label="Chưa nấu">
+  <rect x="1548.1727499999997" y="1726.3899999999996" width="62.2" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1579.2727499999996" y="1741.5399999999997" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Chưa nấu</text>
+</g>
+<g class="edge-label" data-from="W_CheckCooking" data-to="W_SendAdminCancel" data-label="Đang nấu / Đã xong">
+  <rect x="1257.4477499999998" y="1726.3899999999996" width="104.96800000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1309.9317499999997" y="1741.5399999999997" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Đang nấu / Đã xong</text>
+</g>
+<g class="edge-label" data-from="W_CleanTable" data-to="W_Floor" data-label="Bàn trống">
+  <rect x="261.14399999999983" y="1560.8649999999996" width="63.388000000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="292.83799999999985" y="1576.0149999999996" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Bàn trống</text>
+</g>
+<g class="edge-label" data-from="K_ViewChoice" data-to="K_TicketMode" data-label="Theo phiếu">
+  <rect x="985.9134166666664" y="4452.510000000001" width="70.516" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1021.1714166666665" y="4467.660000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Theo phiếu</text>
+</g>
+<g class="edge-label" data-from="K_ViewChoice" data-to="K_BatchMode" data-label="Gom mẻ">
+  <rect x="1341.7024166666665" y="4452.510000000001" width="52.696000000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1368.0504166666665" y="4467.660000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Gom mẻ</text>
+</g>
+<g class="edge-label" data-from="K_CheckStock" data-to="K_OutBtn" data-label="Hết nguyên liệu">
+  <rect x="1020.6324166666665" y="4829.189" width="88.93000000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1065.0974166666665" y="4844.339" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Hết nguyên liệu</text>
+</g>
+<g class="edge-label" data-from="K_CheckStock" data-to="K_Cook" data-label="Còn nguyên liệu">
+  <rect x="1277.9834166666662" y="4829.189" width="92.49400000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="1324.2304166666663" y="4844.339" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Còn nguyên liệu</text>
+</g>
+<g class="edge-label" data-from="CS_SplitChoice" data-to="CS_SplitSubBill" data-label="Tách món lẻ">
+  <rect x="3525.431616666666" y="2453.3299999999995" width="73.486" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3562.1746166666658" y="2468.4799999999996" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Tách món lẻ</text>
+</g>
+<g class="edge-label" data-from="CS_SplitChoice" data-to="CS_MainBill" data-label="Hóa đơn cả bàn">
+  <rect x="3858.2926166666653" y="2453.3299999999995" width="89.52400000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3903.0546166666654" y="2468.4799999999996" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Hóa đơn cả bàn</text>
+</g>
+<g class="edge-label" data-from="CS_PaymentMethod" data-to="CS_PayCash" data-label="Tiền mặt">
+  <rect x="3524.2986166666656" y="2879.5069999999996" width="56.26" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3552.4286166666657" y="2894.6569999999997" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Tiền mặt</text>
+</g>
+<g class="edge-label" data-from="CS_PaymentMethod" data-to="CS_PayVietQR" data-label="VietQR quầy">
+  <rect x="3874.9256166666655" y="2879.5069999999996" width="75.268" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="3912.5596166666655" y="2894.6569999999997" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">VietQR quầy</text>
+</g>
+<g class="edge-label" data-from="A_ReviewCancel" data-to="A_ApproveCancel" data-label="Đồng ý">
+  <rect x="2057.4751166666665" y="3697.4190000000003" width="49.132" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="2082.0411166666663" y="3712.5690000000004" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Đồng ý</text>
+</g>
+<g class="edge-label" data-from="A_ReviewCancel" data-to="A_RejectCancel" data-label="Từ chối">
+  <rect x="2395.3541166666664" y="3697.4190000000003" width="52.696000000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="2421.7021166666664" y="3712.5690000000004" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Từ chối</text>
+</g>
+<g class="node" data-id="C_Start" data-label="Khách đến nhà hàng &amp; ngồi vào bàn" data-shape="stadium">
+  <rect x="2247.711033333333" y="126" width="247.207" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2371.314533333333" y="144.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Khách đến nhà hàng &amp; ngồi vào bàn</text>
+</g>
+<g class="node" data-id="C_Scan" data-label="Quét mã QR tại bàn bằng điện thoại" data-shape="rectangle">
+  <rect x="2252.898033333333" y="270.4065" width="236.83299999999997" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2371.3145333333327" y="288.8565" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Quét mã QR tại bàn bằng điện thoại</text>
+</g>
+<g class="node" data-id="C_Session" data-label="Tự động gia nhập Shared Table Session" data-shape="rectangle">
+  <rect x="2233.261533333333" y="414.813" width="276.10599999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2371.3145333333327" y="433.263" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Tự động gia nhập Shared Table Session</text>
+</g>
+<g class="node" data-id="C_Menu" data-label="Duyệt E-Menu, xem combo &amp; món gợi ý" data-shape="rectangle">
+  <rect x="2241.783033333333" y="582.5609999999999" width="259.063" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2371.314533333333" y="601.011" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Duyệt E-Menu, xem combo &amp; món gợi ý</text>
+</g>
+<g class="node" data-id="C_Cart" data-label="Thêm món vào giỏ hàng chung &amp; ghi chú" data-shape="rectangle">
+  <rect x="2236.225533333333" y="750.309" width="270.178" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2371.3145333333327" y="768.759" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Thêm món vào giỏ hàng chung &amp; ghi chú</text>
+</g>
+<g class="node" data-id="C_SendOrder" data-label="Bấm nút Gửi yêu cầu đặt món" data-shape="rectangle">
+  <rect x="2463.0279499999997" y="882.8469166666666" width="203.488" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2564.77195" y="901.2969166666667" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Bấm nút Gửi yêu cầu đặt món</text>
+</g>
+<g class="node" data-id="C_ReceiveOut" data-label="Nhận chuông &amp; thông báo Bếp hết món" data-shape="rectangle">
+  <rect x="2576.4014499999994" y="552.2783333333333" width="260.54499999999996" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2706.6739499999994" y="570.7283333333334" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhận chuông &amp; thông báo Bếp hết món</text>
+</g>
+<g class="node" data-id="C_ChangeItem" data-label="Chọn món thay thế hoặc hủy món đó" data-shape="rectangle">
+  <rect x="2583.8114499999992" y="750.309" width="245.725" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2706.6739499999994" y="768.759" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chọn món thay thế hoặc hủy món đó</text>
+</g>
+<g class="node" data-id="C_Track" data-label="Theo dõi tiến độ món ăn theo thời gian thực" data-shape="rectangle">
+  <rect x="2981.9255333333326" y="126" width="281.29299999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3122.5720333333325" y="144.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Theo dõi tiến độ món ăn theo thời gian thực</text>
+</g>
+<g class="node" data-id="C_Enjoy" data-label="Thực khách thưởng thức món ăn tại bàn" data-shape="rectangle">
+  <rect x="3287.2185333333327" y="126" width="264.991" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3419.7140333333327" y="144.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Thực khách thưởng thức món ăn tại bàn</text>
+</g>
+<g class="node" data-id="C_CallSupport" data-label="Khách cần hỗ trợ?" data-shape="diamond">
+  <polygon points="3478.9266166666657,202.89999999999998 3564.883116666666,288.8565 3478.9266166666657,374.813 3392.9701166666655,288.8565" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3478.9266166666657" y="288.8565" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Khách cần hỗ trợ?</text>
+</g>
+<g class="node" data-id="C_BtnCall" data-label="Bấm nút Gọi phục vụ" data-shape="rectangle">
+  <rect x="3109.5527833333326" y="582.5609999999999" width="157.54600000000002" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3188.3257833333328" y="601.011" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Bấm nút Gọi phục vụ</text>
+</g>
+<g class="node" data-id="C_BillChoice" data-label="Chọn hình thức thanh toán" data-shape="diamond">
+  <polygon points="3586.242533333332,491.71299999999997 3695.540533333332,601.011 3586.242533333332,710.309 3476.9445333333324,601.011" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3586.242533333332" y="601.011" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chọn hình thức thanh toán</text>
+</g>
+<g class="node" data-id="C_GroupSplit" data-label="Có cưa tiền nhóm?" data-shape="diamond">
+  <polygon points="3472.7970333333324,827.209 3558.012533333332,912.4245 3472.7970333333324,997.64 3387.5815333333326,912.4245" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3472.7970333333324" y="912.4245" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Có cưa tiền nhóm?</text>
+</g>
+<g class="node" data-id="C_SplitCalc" data-label="Nhập số người N -&gt; Hệ thống chia đều tiền" data-shape="rectangle">
+  <rect x="3199.3257833333328" y="1097.9399999999998" width="277.58799999999997" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3338.1197833333326" y="1116.3899999999999" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhập số người N -&gt; Hệ thống chia đều tiền</text>
+</g>
+<g class="node" data-id="C_PayQR" data-label="Từng người quét mã VietQR động đã chia" data-shape="rectangle">
+  <rect x="3201.9192833333327" y="1174.8399999999997" width="272.40099999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3338.1197833333326" y="1193.2899999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Từng người quét mã VietQR động đã chia</text>
+</g>
+<g class="node" data-id="C_PayQRWhole" data-label="Quét mã VietQR động tổng bàn" data-shape="rectangle">
+  <rect x="3500.9137833333325" y="1097.9399999999998" width="213.12099999999998" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3607.4742833333326" y="1116.3899999999999" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Quét mã VietQR động tổng bàn</text>
+</g>
+<g class="node" data-id="C_ReqBill" data-label="Bấm nút Yêu cầu tính tiền tại quầy" data-shape="rectangle">
+  <rect x="3647.3219499999996" y="882.8469166666666" width="235.35099999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3764.9974499999994" y="901.2969166666667" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Bấm nút Yêu cầu tính tiền tại quầy</text>
+</g>
+<g class="node" data-id="C_DonePayment" data-label="Nhận thông báo thanh toán thành công" data-shape="rectangle">
+  <rect x="2576.5309499999994" y="126" width="261.28599999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2707.1739499999994" y="144.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhận thông báo thanh toán thành công</text>
+</g>
+<g class="node" data-id="C_Review" data-label="Chấm sao đánh giá món ăn &amp; dịch vụ" data-shape="rectangle">
+  <rect x="2580.9769499999993" y="270.4065" width="252.394" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2707.1739499999994" y="288.8565" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chấm sao đánh giá món ăn &amp; dịch vụ</text>
+</g>
+<g class="node" data-id="C_End" data-label="Khách hàng rời nhà hàng" data-shape="stadium">
+  <rect x="2613.5809499999996" y="414.813" width="187.18599999999998" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2707.1739499999994" y="433.263" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Khách hàng rời nhà hàng</text>
+</g>
+<g class="node" data-id="W_Login" data-label="Đăng nhập ca làm việc &amp; nhận bàn phụ trách" data-shape="rectangle">
+  <rect x="460.01349999999974" y="1392.0399999999997" width="293.149" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="606.5879999999997" y="1410.4899999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Đăng nhập ca làm việc &amp; nhận bàn phụ trách</text>
+</g>
+<g class="node" data-id="W_Floor" data-label="Theo dõi Sơ đồ bàn đổi màu theo thời gian thực" data-shape="rectangle">
+  <rect x="141.01199999999983" y="1723.0899999999997" width="304.26399999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="293.1439999999998" y="1741.5399999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Theo dõi Sơ đồ bàn đổi màu theo thời gian thực</text>
+</g>
+<g class="node" data-id="W_TakeOrder" data-label="Mở bàn &amp; Đặt món hộ cho khách (nếu khách không dùng QR)" data-shape="rectangle">
+  <rect x="1569.4427499999997" y="1392.0399999999997" width="383.55099999999993" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1761.2182499999997" y="1410.4899999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Mở bàn &amp; Đặt món hộ cho khách (nếu khách không dùng QR)</text>
+</g>
+<g class="node" data-id="W_Send" data-label="Gửi order vào hệ thống" data-shape="rectangle">
+  <rect x="1674.2942499999995" y="1482.772" width="173.848" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1761.2182499999994" y="1501.222" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Gửi order vào hệ thống</text>
+</g>
+<g class="node" data-id="W_ReceiveOrder" data-label="Nhận thông báo đơn món mới từ QR" data-shape="rectangle">
+  <rect x="777.1624999999997" y="1392.0399999999997" width="236.833" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="895.5789999999997" y="1410.4899999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhận thông báo đơn món mới từ QR</text>
+</g>
+<g class="node" data-id="W_CheckApproval" data-label="Bàn cấu hình Cần duyệt?" data-shape="diamond">
+  <polygon points="895.5789999999997,1482.772 1002.6539999999998,1589.847 895.5789999999997,1696.922 788.5039999999997,1589.847" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="895.5789999999997" y="1589.847" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Bàn cấu hình Cần duyệt?</text>
+</g>
+<g class="node" data-id="W_ApproveOrder" data-label="Kiểm tra order &amp; Bấm xác nhận chuyển bếp" data-shape="rectangle">
+  <rect x="855.4867499999997" y="1799.9899999999998" width="289.44399999999996" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1000.2087499999997" y="1818.4399999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Kiểm tra order &amp; Bấm xác nhận chuyển bếp</text>
+</g>
+<g class="node" data-id="W_RejectOrder" data-label="Từ chối đơn kèm lý do liên hệ khách" data-shape="rectangle">
+  <rect x="589.5027499999997" y="1799.9899999999998" width="244.984" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="711.9947499999996" y="1818.4399999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Từ chối đơn kèm lý do liên hệ khách</text>
+</g>
+<g class="node" data-id="W_ReceiveReady" data-label="Nhận chuông &amp; rung thông báo Bếp đã xong món" data-shape="rectangle">
+  <rect x="2289.696749999999" y="1392.0399999999997" width="319.825" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2449.609249999999" y="1410.4899999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhận chuông &amp; rung thông báo Bếp đã xong món</text>
+</g>
+<g class="node" data-id="W_ServeDish" data-label="Nhân viên bưng món ăn ra bàn cho khách" data-shape="rectangle">
+  <rect x="2310.0742499999988" y="1557.5649999999996" width="279.06999999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2449.6092499999986" y="1576.0149999999996" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhân viên bưng món ăn ra bàn cho khách</text>
+</g>
+<g class="node" data-id="W_ReceiveCall" data-label="Nhận chuông thông báo Khách gọi phục vụ" data-shape="rectangle">
+  <rect x="1976.9937499999996" y="1392.0399999999997" width="288.703" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2121.3452499999994" y="1410.4899999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhận chuông thông báo Khách gọi phục vụ</text>
+</g>
+<g class="node" data-id="W_ComeTable" data-label="Đến bàn hỗ trợ yêu cầu của thực khách" data-shape="rectangle">
+  <rect x="1989.2202499999994" y="1482.772" width="264.25" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2121.3452499999994" y="1501.222" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Đến bàn hỗ trợ yêu cầu của thực khách</text>
+</g>
+<g class="node" data-id="W_ChangeTable" data-label="Xử lý yêu cầu Chuyển bàn hoặc Gộp bàn" data-shape="rectangle">
+  <rect x="2633.521749999999" y="1392.0399999999997" width="274.624" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2770.833749999999" y="1410.4899999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Xử lý yêu cầu Chuyển bàn hoặc Gộp bàn</text>
+</g>
+<g class="node" data-id="W_CancelReq" data-label="Khách yêu cầu hủy/đổi món" data-shape="rectangle">
+  <rect x="1344.1777499999994" y="1392.0399999999997" width="201.265" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1444.8102499999993" y="1410.4899999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Khách yêu cầu hủy/đổi món</text>
+</g>
+<g class="node" data-id="W_CheckCooking" data-label="Món đã nấu chưa?" data-shape="diamond">
+  <polygon points="1444.8102499999998,1482.772 1531.1372499999998,1569.099 1444.8102499999998,1655.426 1358.4832499999998,1569.099" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1444.8102499999998" y="1569.099" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Món đã nấu chưa?</text>
+</g>
+<g class="node" data-id="W_DirectCancel" data-label="Hủy trực tiếp (Món chờ duyệt)" data-shape="rectangle">
+  <rect x="1474.9647499999996" y="1799.9899999999998" width="209.41599999999997" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1579.6727499999997" y="1818.4399999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Hủy trực tiếp (Món chờ duyệt)</text>
+</g>
+<g class="node" data-id="W_SendAdminCancel" data-label="Gửi yêu cầu hủy món lên Quản lý kèm lý do" data-shape="rectangle">
+  <rect x="1168.9307499999995" y="1799.9899999999998" width="282.034" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1309.9477499999996" y="1818.4399999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Gửi yêu cầu hủy món lên Quản lý kèm lý do</text>
+</g>
+<g class="node" data-id="W_CleanTable" data-label="Dọn dẹp bàn &amp; Bấm hoàn tất giải phóng bàn" data-shape="rectangle">
+  <rect x="150.27449999999976" y="1392.0399999999997" width="285.7389999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="293.1439999999997" y="1410.4899999999998" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Dọn dẹp bàn &amp; Bấm hoàn tất giải phóng bàn</text>
+</g>
+<g class="node" data-id="K_Receive" data-label="KDS nhận order mới tức thì qua Socket.io kèm chuông" data-shape="rectangle">
+  <rect x="1018.5934166666665" y="4048.8190000000004" width="352.4289999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1194.8079166666664" y="4067.2690000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">KDS nhận order mới tức thì qua Socket.io kèm chuông</text>
+</g>
+<g class="node" data-id="K_ColorTimer" data-label="Đồng hồ đo thời gian chờ: Xanh &lt; 10m -&gt; Vàng &lt; 20m -&gt; Đỏ &gt; 20m" data-shape="rectangle">
+  <rect x="996.7339166666665" y="4125.719" width="396.14799999999985" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1194.8079166666664" y="4144.169" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Đồng hồ đo thời gian chờ: Xanh &lt; 10m -&gt; Vàng &lt; 20m -&gt; Đỏ &gt; 20m</text>
+</g>
+<g class="node" data-id="K_ViewChoice" data-label="Chọn chế độ hiển thị KDS" data-shape="diamond">
+  <polygon points="1194.8079166666664,4202.619000000001 1302.2534166666665,4310.0645 1194.8079166666664,4417.51 1087.3624166666664,4310.0645" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1194.8079166666664" y="4310.0645" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chọn chế độ hiển thị KDS</text>
+</g>
+<g class="node" data-id="K_TicketMode" data-label="Chế độ Phiếu bàn FIFO (Làm theo thứ tự đơn)" data-shape="rectangle">
+  <rect x="874.0979166666665" y="4517.81" width="294.631" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1021.4134166666665" y="4536.26" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chế độ Phiếu bàn FIFO (Làm theo thứ tự đơn)</text>
+</g>
+<g class="node" data-id="K_BatchMode" data-label="Chế độ Gom mẻ (Gom cùng loại món xào nấu chung mẻ)" data-shape="rectangle">
+  <rect x="1192.7289166666665" y="4517.81" width="350.9469999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1368.2024166666665" y="4536.26" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chế độ Gom mẻ (Gom cùng loại món xào nấu chung mẻ)</text>
+</g>
+<g class="node" data-id="K_CheckStock" data-label="Còn nguyên liệu nấu?" data-shape="diamond">
+  <polygon points="1194.8079166666664,4594.710000000001 1290.3974166666665,4690.299500000001 1194.8079166666664,4785.889000000001 1099.2184166666664,4690.299500000001" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1194.8079166666664" y="4690.299500000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Còn nguyên liệu nấu?</text>
+</g>
+<g class="node" data-id="K_OutBtn" data-label="Bếp bấm nút Báo hết món" data-shape="rectangle">
+  <rect x="973.3919166666665" y="4902.789000000001" width="183.481" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1065.1324166666664" y="4921.2390000000005" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Bếp bấm nút Báo hết món</text>
+</g>
+<g class="node" data-id="K_Cook" data-label="Đầu bếp bấm Đang nấu &amp; tiến hành chế biến" data-shape="rectangle">
+  <rect x="1180.8729166666665" y="4902.789000000001" width="287.22099999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1324.4834166666665" y="4921.2390000000005" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Đầu bếp bấm Đang nấu &amp; tiến hành chế biến</text>
+</g>
+<g class="node" data-id="K_CookDone" data-label="Đầu bếp bấm Hoàn thành món ăn" data-shape="rectangle">
+  <rect x="1491.5242499999995" y="4979.689" width="225.718" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1604.3832499999994" y="4998.139" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Đầu bếp bấm Hoàn thành món ăn</text>
+</g>
+<g class="node" data-id="K_ReceiveRush" data-label="Nhận lệnh ưu tiên khẩn cấp từ Quản lý / Thu ngân" data-shape="rectangle">
+  <rect x="1482.4609166666664" y="4825.889" width="319.08399999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1642.0029166666664" y="4844.339" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhận lệnh ưu tiên khẩn cấp từ Quản lý / Thu ngân</text>
+</g>
+<g class="node" data-id="K_RushCook" data-label="Đưa món lên đầu hàng đợi và ưu tiên nấu ngay" data-shape="rectangle">
+  <rect x="1492.0939166666662" y="4902.789000000001" width="299.8179999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1642.0029166666661" y="4921.2390000000005" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Đưa món lên đầu hàng đợi và ưu tiên nấu ngay</text>
+</g>
+<g class="node" data-id="CS_Desk" data-label="Màn hình POS hiển thị sơ đồ bàn &amp; danh sách hóa đơn" data-shape="rectangle">
+  <rect x="3460.2058666666658" y="1980.8899999999996" width="356.87499999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3638.6433666666658" y="1999.3399999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Màn hình POS hiển thị sơ đồ bàn &amp; danh sách hóa đơn</text>
+</g>
+<g class="node" data-id="CS_CheckBill" data-label="Chọn bàn, kiểm tra danh sách món, số lượng, đơn giá" data-shape="rectangle">
+  <rect x="3562.9461166666656" y="2057.7899999999995" width="339.83199999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3732.8621166666658" y="2076.2399999999993" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chọn bàn, kiểm tra danh sách món, số lượng, đơn giá</text>
+</g>
+<g class="node" data-id="CS_Discount" data-label="Nhập mã giảm giá / chiết khấu khuyến mãi" data-shape="rectangle">
+  <rect x="3594.4386166666654" y="2134.6899999999996" width="276.847" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3732.8621166666653" y="2153.1399999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhập mã giảm giá / chiết khấu khuyến mãi</text>
+</g>
+<g class="node" data-id="CS_SplitChoice" data-label="Khách yêu cầu tách bill?" data-shape="diamond">
+  <polygon points="3732.8621166666653,2211.5899999999997 3836.232116666665,2314.9599999999996 3732.8621166666653,2418.3299999999995 3629.4921166666654,2314.9599999999996" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3732.8621166666653" y="2314.9599999999996" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Khách yêu cầu tách bill?</text>
+</g>
+<g class="node" data-id="CS_SplitSubBill" data-label="Chọn các món khách về trước -&gt; Tách tạo Sub-invoice" data-shape="rectangle">
+  <rect x="3386.217116666666" y="2518.6299999999997" width="352.4289999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3562.431616666666" y="2537.0799999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chọn các món khách về trước -&gt; Tách tạo Sub-invoice</text>
+</g>
+<g class="node" data-id="CS_MainBill" data-label="Giữ lại các món còn lại trên hóa đơn chính" data-shape="rectangle">
+  <rect x="3762.646116666666" y="2518.6299999999997" width="281.29299999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3903.2926166666657" y="2537.0799999999995" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Giữ lại các món còn lại trên hóa đơn chính</text>
+</g>
+<g class="node" data-id="CS_PaymentMethod" data-label="Phương thức thanh toán tại quầy" data-shape="diamond">
+  <polygon points="3732.8621166666658,2595.5299999999997 3857.3506166666657,2720.0184999999997 3732.8621166666658,2844.5069999999996 3608.373616666666,2720.0184999999997" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3732.8621166666658" y="2720.0184999999997" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Phương thức thanh toán tại quầy</text>
+</g>
+<g class="node" data-id="CS_PayCash" data-label="Tiền mặt: Nhập tiền khách đưa -&gt; Máy tính tiền thối" data-shape="rectangle">
+  <rect x="3388.8106166666657" y="2944.807" width="327.97599999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3552.7986166666656" y="2963.2569999999996" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Tiền mặt: Nhập tiền khách đưa -&gt; Máy tính tiền thối</text>
+</g>
+<g class="node" data-id="CS_PayVietQR" data-label="VietQR quầy: Hiển thị mã QR động trên màn hình phụ" data-shape="rectangle">
+  <rect x="3740.7866166666654" y="2944.807" width="344.27799999999996" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3912.9256166666655" y="2963.2569999999996" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">VietQR quầy: Hiển thị mã QR động trên màn hình phụ</text>
+</g>
+<g class="node" data-id="CS_PrintBill" data-label="In phiếu tạm tính / In hóa đơn nhiệt K80" data-shape="rectangle">
+  <rect x="3602.9601166666657" y="3021.7069999999994" width="259.804" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3732.8621166666658" y="3040.1569999999992" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">In phiếu tạm tính / In hóa đơn nhiệt K80</text>
+</g>
+<g class="node" data-id="CS_CloseBill" data-label="Chốt thanh toán thành công -&gt; Đóng phiên bàn" data-shape="rectangle">
+  <rect x="3277.4846166666657" y="3098.607" width="302.041" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3428.505116666666" y="3117.057" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chốt thanh toán thành công -&gt; Đóng phiên bàn</text>
+</g>
+<g class="node" data-id="CS_SendTableClean" data-label="Chuyển trạng thái bàn sang Cần dọn dẹp" data-shape="rectangle">
+  <rect x="3439.505116666666" y="3175.5069999999996" width="275.365" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3577.1876166666657" y="3193.9569999999994" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chuyển trạng thái bàn sang Cần dọn dẹp</text>
+</g>
+<g class="node" data-id="A_Config" data-label="Cấu hình thông tin quán, VAT, STK ngân hàng VietQR" data-shape="rectangle">
+  <rect x="2852.890616666666" y="3384.7070000000003" width="349.465" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3027.623116666666" y="3403.157" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Cấu hình thông tin quán, VAT, STK ngân hàng VietQR</text>
+</g>
+<g class="node" data-id="A_TableConfig" data-label="Cấu hình chế độ duyệt món tự động / cần duyệt theo từng bàn" data-shape="rectangle">
+  <rect x="2440.1526166666663" y="3384.7070000000003" width="388.7379999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2634.5216166666664" y="3403.157" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Cấu hình chế độ duyệt món tự động / cần duyệt theo từng bàn</text>
+</g>
+<g class="node" data-id="A_StaffConfig" data-label="Quản lý ca kíp, xếp lịch &amp; gán bàn phụ trách cho nhân viên" data-shape="rectangle">
+  <rect x="1682.1076166666662" y="3384.7070000000003" width="382.0689999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1873.1421166666662" y="3403.157" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Quản lý ca kíp, xếp lịch &amp; gán bàn phụ trách cho nhân viên</text>
+</g>
+<g class="node" data-id="A_ReceiveCancel" data-label="Nhận thông báo duyệt yêu cầu hủy món từ phục vụ" data-shape="rectangle">
+  <rect x="2088.176616666666" y="3384.7070000000003" width="327.97599999999994" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2252.164616666666" y="3403.157" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Nhận thông báo duyệt yêu cầu hủy món từ phục vụ</text>
+</g>
+<g class="node" data-id="A_ReviewCancel" data-label="Quản lý phê duyệt hủy?" data-shape="diamond">
+  <polygon points="2252.164616666666,3461.6070000000004 2352.570616666666,3562.0130000000004 2252.164616666666,3662.4190000000003 2151.758616666666,3562.0130000000004" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2252.164616666666" y="3562.0130000000004" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Quản lý phê duyệt hủy?</text>
+</g>
+<g class="node" data-id="A_ApproveCancel" data-label="Chấp thuận hủy: Gạch món trên KDS &amp; trừ tiền hóa đơn" data-shape="rectangle">
+  <rect x="1907.7426166666662" y="3762.7190000000005" width="349.4649999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2082.475116666666" y="3781.1690000000003" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Chấp thuận hủy: Gạch món trên KDS &amp; trừ tiền hóa đơn</text>
+</g>
+<g class="node" data-id="A_RejectCancel" data-label="Từ chối hủy món: Yêu cầu tiếp tục phục vụ" data-shape="rectangle">
+  <rect x="2281.207616666666" y="3762.7190000000005" width="281.29299999999995" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2421.854116666666" y="3781.1690000000003" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Từ chối hủy món: Yêu cầu tiếp tục phục vụ</text>
+</g>
+<g class="node" data-id="A_EmergencyRush" data-label="Phát lệnh chỉ đạo khẩn cấp bắt buộc ưu tiên món xuống KDS" data-shape="rectangle">
+  <rect x="1513.1634499999996" y="3839.6190000000006" width="387.256" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="1706.7914499999995" y="3858.0690000000004" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Phát lệnh chỉ đạo khẩn cấp bắt buộc ưu tiên món xuống KDS</text>
+</g>
+<g class="node" data-id="A_AuditLog" data-label="Hệ thống tự động ghi nhận mọi thay đổi nhạy cảm vào audit_logs" data-shape="rectangle">
+  <rect x="1924.4194499999994" y="3839.6190000000006" width="403.5579999999999" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="2126.1984499999994" y="3858.0690000000004" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Hệ thống tự động ghi nhận mọi thay đổi nhạy cảm vào audit_logs</text>
+</g>
+<g class="node" data-id="A_Report" data-label="Xem báo cáo doanh thu ngày/tháng, top món bán chạy (Chart.js)" data-shape="rectangle">
+  <rect x="3226.355616666666" y="3384.7070000000003" width="404.29899999999986" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="3428.505116666666" y="3403.157" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Xem báo cáo doanh thu ngày/tháng, top món bán chạy (Chart.js)</text>
+</g>
+</svg>

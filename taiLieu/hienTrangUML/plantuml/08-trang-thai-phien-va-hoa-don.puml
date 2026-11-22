@@ -1,0 +1,22 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+state "Phiên bàn" as Session {
+  state "dang_hoat_dong" as SOpen
+  state "da_dong" as SClosed
+  [*] --> SOpen
+  SOpen --> SClosed : thanhToanThanhCong hoặc gopBan [phiên nguồn]
+}
+state "Hóa đơn" as Bill {
+  state "chua_thanh_toan" as BOpen
+  state "da_thanh_toan" as BPaid
+  state "da_huy" as BCancelled
+  [*] --> BOpen
+  BOpen --> BPaid : xacNhanThuTien [bill khớp và đủ điều kiện]
+  BOpen --> BCancelled : thayTheHoaDon hoặc gopBan
+}
+note bottom of Session
+Hai vòng đời độc lập. Xác nhận thu tiền cập nhật
+phiên, hóa đơn và bàn trong cùng giao dịch.
+end note
+@enduml

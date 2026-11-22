@@ -1,0 +1,22 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Arial
+state "cho_duyet\n(chờ duyệt hoặc chờ nấu)" as Cho
+state "dang_nau" as Nau
+state "hoan_thanh" as Xong
+state "da_phuc_vu" as PhucVu
+state "yeu_cau_huy" as XinHuy
+state "da_huy" as Huy
+[*] --> Cho
+Cho --> Nau : batDauNau [đơn đã duyệt và phiên hoạt động]
+Nau --> Xong : hoanThanhNau [phiên hoạt động]
+Xong --> PhucVu : xacNhanBungMon [phiên hoạt động]
+Cho --> Huy : tuChoiDon hoặc huyTruocKhiNau
+Nau --> XinHuy : yeuCauHuy
+Xong --> XinHuy : yeuCauHuy
+PhucVu --> XinHuy : yeuCauHuy [phiên còn hoạt động]
+XinHuy --> Huy : chapThuanHuy
+XinHuy --> Nau : tuChoiHuy [trạng thái cũ là đang nấu]
+XinHuy --> Xong : tuChoiHuy [trạng thái cũ là hoàn thành]
+XinHuy --> PhucVu : tuChoiHuy [trạng thái cũ là đã phục vụ]
+@enduml

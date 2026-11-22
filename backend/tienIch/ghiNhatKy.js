@@ -1,81 +1,63 @@
-/**
- * Tiện ích ghi nhận nhật ký hệ thống (System Logs & Audit Trail)
- * Phục vụ US-044 & Mục 10.9 (QUY_TAC_LAM_DU_AN.txt)
- * Nghiêm cấm ghi mật khẩu, token hoặc thông tin nhạy cảm vào nhật ký
- */
+// ============================================================================
+// DỰ ÁN: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR TẠI BÀN (QUÁN MỘC POS & E-MENU)
+// TIỆN ÍCH GHI NHẬT KÝ KIỂM TOÁN CHỐNG THẤT THOÁT (AUDIT LOGS - FIGMA A20)
+// ============================================================================
+
 const { thucThi } = require('../cauHinh/ketNoiCoSoDuLieu');
 
 /**
- * Loại bỏ các trường nhạy cảm khỏi đối tượng trước khi ghi log
- * @param {Object} duLieu
- * @returns {string} Chuỗi JSON an toàn
+ * Ghi lại vết hành động nhạy cảm vào bảng nhat_ky_kiem_toan
+ * @param {Object} thamSo 
+ * @param {number|null} thamSo.taiKhoanId Tài khoản thực hiện
+ * @param {string} thamSo.hanhDong Mã hành động (VD: 'HUY_MON', 'DUYET_DOI_CA', 'TACH_BILL')
+ * @param {string} thamSo.bangAnhHuong Tên bảng CSDL bị tác động
+ * @param {number|null} thamSo.banGhiId ID bản ghi bị tác động
+ * @param {Object|null} thamSo.duLieuCu Snapshot dữ liệu trước khi đổi
+ * @param {Object|null} thamSo.duLieuMoi Snapshot dữ liệu sau khi đổi
+ * @param {string|null} thamSo.diaChiIp Địa chỉ IP thực hiện
+ * @param {string|null} thamSo.thietBi Thiết bị thao tác
+ * @param {string|null} thamSo.lyDo Diễn giải lý do
  */
-function locDuLieuNhayCam(duLieu) {
-    if (!duLieu) return null;
-    try {
-        const banSao = JSON.parse(JSON.stringify(duLieu));
-        const cacTruongNhayCam = [
-            'matKhau', 'matKhauCu', 'matKhauMoi', 'xacNhanMatKhau',
-            'password', 'oldPassword', 'newPassword',
-            'accessToken', 'refreshToken', 'token', 'authorization'
-        ];
-
-        function deQuyXoa(obj) {
-            if (obj && typeof obj === 'object') {
-                for (const key of Object.keys(obj)) {
-                    if (cacTruongNhayCam.includes(key)) {
-                        obj[key] = '***DA_GIAU_THONG_TIN_BAO_MAT***';
-                    } else if (typeof obj[key] === 'object') {
-                        deQuyXoa(obj[key]);
-                    }
-                }
-            }
-        }
-
-        deQuyXoa(banSao);
-        return JSON.stringify(banSao);
-    } catch {
-        return null;
-    }
-}
-
-/**
- * Ghi nhật ký hành động vào cơ sở dữ liệu
- * @param {Object} thamSo
- * @param {number|null} thamSo.taiKhoanId - ID tài khoản thực hiện (nếu có)
- * @param {string} thamSo.loaiHanhDong - Tên hành động (DANG_NHAP, DOI_MAT_KHAU, ...)
- * @param {string} thamSo.module - Tên phân hệ (TAI_KHOAN, VAI_TRO, CAU_HINH, ...)
- * @param {string} thamSo.moTa - Mô tả chi tiết hành động
- * @param {string} [thamSo.diaChiIp] - Địa chỉ IP máy khách
- * @param {string} [thamSo.thongTinThietBi] - User-Agent trình duyệt/thiết bị
- * @param {any} [thamSo.duLieuYeuCau] - Dữ liệu kèm theo yêu cầu (đã tự động lọc nhạy cảm)
- */
-async function ghiNhatKyHeThong({
+function ghiAuditLog({
     taiKhoanId = null,
-    loaiHanhDong,
-    module: tenModule,
-    moTa,
+    hanhDong,
+    bangAnhHuong = null,
+    doiTuong = null,
+    banGhiId = null,
+    doiTuongId = null,
+    duLieuCu = null,
+    duLieuMoi = null,
     diaChiIp = null,
-    thongTinThietBi = null,
-    duLieuYeuCau = null
+    thietBi = null,
+    lyDo = null
 }) {
     try {
-        const duLieuAnToan = locDuLieuNhayCam(duLieuYeuCau);
-        const thoiGian = new Date().toISOString().replace('T', ' ').substring(0, 19);
+        const tenBang = bangAnhHuong || doiTuong || 'he_thong';
+        const idBanGhi = banGhiId || doiTuongId || null;
 
-        await thucThi(
-            `INSERT INTO nhat_ky_he_thong 
-            (tai_khoan_id, loai_hanh_dong, module, mo_ta, dia_chi_ip, thong_tin_thiet_bi, du_lieu_yeu_cau, ngay_tao)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [taiKhoanId, loaiHanhDong, tenModule, moTa, diaChiIp, thongTinThietBi, duLieuAnToan, thoiGian]
-        );
+        const sql = `
+            INSERT INTO nhat_ky_kiem_toan (
+                tai_khoan_id, hanh_dong, bang_anh_huong, ban_ghi_id,
+                du_lieu_cu, du_lieu_moi, dia_chi_ip, thiet_bi, ly_do
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+        `;
+        thucThi(sql, [
+            taiKhoanId,
+            hanhDong,
+            tenBang,
+            idBanGhi,
+            duLieuCu ? JSON.stringify(duLieuCu) : null,
+            duLieuMoi ? JSON.stringify(duLieuMoi) : null,
+            diaChiIp,
+            thietBi,
+            lyDo
+        ]);
+        require('../cauHinh/cauHinhSocket').socketPhat.nhatKyThayDoi();
     } catch (loi) {
-        // Ghi nhật ký lỗi console, không để lỗi ghi log làm sập luồng chính
-        console.error('Lỗi khi ghi nhật ký hệ thống:', loi.message);
+        console.error('Lỗi khi ghi Audit Log:', loi.message);
     }
 }
 
 module.exports = {
-    ghiNhatKyHeThong,
-    locDuLieuNhayCam
+    ghiAuditLog
 };

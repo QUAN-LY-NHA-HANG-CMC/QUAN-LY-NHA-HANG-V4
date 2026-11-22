@@ -1,37 +1,30 @@
-/**
- * Định tuyến (Routes) phân hệ Tài khoản cá nhân & Xác thực
- * Phục vụ US-001 -> US-003, US-007 -> US-010
- */
+// ============================================================================
+// DỰ ÁN: HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR TẠI BÀN (QUÁN MỘC POS & E-MENU)
+// ĐỊNH TUYẾN ĐƯỜNG DẪN API TÀI KHOẢN VÀ XÁC THỰC
+// ============================================================================
+
 const express = require('express');
 const router = express.Router();
-
 const taiKhoanController = require('./taiKhoan.controller');
-const {
-    kiemTraDangNhap,
-    kiemTraLamMoiToken,
-    kiemTraDoiMatKhau,
-    kiemTraCapNhatHoSo
-} = require('./taiKhoan.validation');
+const { xacThucNguoiDung } = require('../../middleware/xacThuc');
+const { phanQuyen } = require('../../middleware/phanQuyen');
 
-const { xacThuc } = require('../../middleware/xacThuc');
-const { gioiHanDangNhap } = require('../../middleware/gioiHanYeuCau');
+// Public route: Đăng nhập
+router.post('/dang-nhap', taiKhoanController.dangNhap);
 
-// 1. Đăng nhập hệ thống (US-007)
-router.post('/dang-nhap', gioiHanDangNhap, kiemTraDangNhap, taiKhoanController.dangNhap);
+// Protected routes: Cần đăng nhập
+router.get('/me', xacThucNguoiDung, taiKhoanController.layThongTinMe);
+router.put('/doi-mat-khau', xacThucNguoiDung, taiKhoanController.doiMatKhau);
 
-// 2. Làm mới Token khi hết hạn (US-003)
-router.post('/lam-moi-token', kiemTraLamMoiToken, taiKhoanController.lamMoiToken);
-
-// 3. Đăng xuất khỏi hệ thống (US-008)
-router.post('/dang-xuat', taiKhoanController.dangXuat);
-
-// 4. Đổi mật khẩu cá nhân (US-009)
-router.put('/doi-mat-khau', xacThuc, gioiHanDangNhap, kiemTraDoiMatKhau, taiKhoanController.doiMatKhau);
-
-// 5. Xem thông tin hồ sơ cá nhân (US-010)
-router.get('/ho-so', xacThuc, taiKhoanController.layHoSo);
-
-// 6. Cập nhật thông tin hồ sơ cá nhân (US-010)
-router.put('/ho-so', xacThuc, kiemTraCapNhatHoSo, taiKhoanController.capNhatHoSo);
+// Quản trị Nhân sự toàn hệ thống (Chỉ Quản lý - Figma A02, A03, A04, A05)
+router.get('/nhan-su', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.layDanhSachNhanSu);
+router.post('/nhan-su', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.taoNhanSu);
+router.put('/nhan-su/:id/trang-thai', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.doiTrangThaiNhanSu);
+router.get('/nhan-su/ban-co-the-giao', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.layBanCoTheGiao);
+router.get('/nhan-su/:id', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.layChiTietNhanSu);
+router.put('/nhan-su/:id', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.capNhatNhanSu);
+router.delete('/nhan-su/:id', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.xoaNhanSu);
+router.get('/nhan-su/:id/ban-phu-trach', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.layBanPhuTrach);
+router.put('/nhan-su/:id/ban-phu-trach', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.capNhatBanPhuTrach);
 
 module.exports = router;

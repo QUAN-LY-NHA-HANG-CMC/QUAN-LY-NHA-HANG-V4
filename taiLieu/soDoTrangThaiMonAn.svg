@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1093.98 1220.8" width="1093.98" height="1220.8" style="--bg:#FFFFFF;--fg:#27272A;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="ChoDuyet" data-label="ChoDuyet">
+  <rect x="195.00700000000006" y="168.30000000000007" width="151.014" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="195.00700000000006" y="168.30000000000007" width="151.014" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="207.00700000000006" y="182.30000000000007" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">ChoDuyet</text>
+</g>
+<g class="subgraph" data-id="DangNau" data-label="DangNau">
+  <rect x="504.3315" y="417.5000000000001" width="150.273" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="504.3315" y="417.5000000000001" width="150.273" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="516.3315" y="431.5000000000001" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">DangNau</text>
+</g>
+<g class="subgraph" data-id="HoanThanh" data-label="HoanThanh">
+  <rect x="502.10850000000005" y="682.7" width="154.719" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="502.10850000000005" y="682.7" width="154.719" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="514.1085" y="696.7" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">HoanThanh</text>
+</g>
+<g class="subgraph" data-id="DaPhucVu" data-label="DaPhucVu">
+  <rect x="496.18050000000005" y="947.9" width="166.575" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="496.18050000000005" y="947.9" width="166.575" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="508.18050000000005" y="961.9" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">DaPhucVu</text>
+</g>
+<g class="subgraph" data-id="YeuCauHuy" data-label="YeuCauHuy">
+  <rect x="680.2440000000001" y="40" width="191.02799999999996" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="680.2440000000001" y="40" width="191.02799999999996" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="692.2440000000001" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">YeuCauHuy</text>
+</g>
+<g class="subgraph" data-id="HuyMon" data-label="HuyMon">
+  <rect x="875.6010000000001" y="305.20000000000005" width="177.69" height="164.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="875.6010000000001" y="305.20000000000005" width="177.69" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="887.6010000000001" y="319.20000000000005" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">HuyMon</text>
+</g>
+<polyline class="edge" data-from="_start" data-to="ChoDuyet" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Khách xác nhận gửi giỏ hàng E-Menu" points="270.514,68.00000000000007 270.51400000000007,168.30000000000007" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ChoDuyet" data-to="DangNau" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Đầu bếp nhấn &quot;Bắt đầu nấu&quot; trên KDS" points="295.68300000000005,333.20000000000005 295.68300000000005,361.20000000000005 381.028,361.20000000000005 381.028,405.5000000000001 541.89975,405.5000000000001 541.89975,417.5000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="DangNau" data-to="HoanThanh" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Đầu bếp nhấn &quot;Hoàn thành món&quot;" points="579.468,582.4000000000001 579.4680000000001,682.7" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="HoanThanh" data-to="DaPhucVu" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Nhân viên phục vụ bưng lên bàn &amp; bấm xác nhận" points="579.4680000000001,847.6 579.4680000000001,947.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="DaPhucVu" data-to="_end" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="579.4680000000001,1112.8 579.4680000000001,1152.8" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="ChoDuyet" data-to="DaHuy" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Phục vụ từ chối duyệt đơn / Khách hủy trước duyệt" points="245.34500000000006,333.20000000000005 245.34500000000006,361.20000000000005 160,361.20000000000005 160,439.3500000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="DangNau" data-to="YeuCauHuy" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Khách xin hủy khi đang nấu / Đợi quá lâu" points="579.468,417.5000000000001 579.4680000000001,345.20000000000005 728.0010000000001,345.20000000000005 728.0010000000001,204.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="YeuCauHuy" data-to="HuyMon" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Admin phê duyệt chấp thuận hủy món" points="823.5150000000001,204.9 823.5150000000001,232.9 964.4460000000001,232.9 964.4460000000001,305.20000000000005" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="YeuCauHuy" data-to="DangNau" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Admin từ chối (Tiếp tục nấu phục vụ)" points="775.7580000000002,204.9 775.758,405.5000000000001 617.03625,405.5000000000001 617.03625,417.5000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="HuyMon" data-to="_end2" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="964.4460000000001,470.1 964.4460000000001,519.8000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="DaHuy" data-to="_end3" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="160,476.25000000000006 160,519.8000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start2" data-to="HangDoiKDS" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="270.51400000000007,240.30000000000007 270.51400000000007,280.30000000000007" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start3" data-to="CheBienMon" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="579.468,467.3500000000001 579.468,519.8000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start4" data-to="ChoBungMon" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="579.4680000000001,754.7 579.4680000000001,794.7" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start5" data-to="HoanTatMonAn" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="579.4680000000001,1019.9 579.4680000000001,1059.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start6" data-to="ChoAdminPheDuyet" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="775.7580000000002,112 775.7580000000002,152" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="_start7" data-to="GhiNhanAuditLog" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="964.4460000000001,377.20000000000005 964.4460000000001,439.3500000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="_start" data-to="ChoDuyet" data-label="Khách xác nhận gửi giỏ hàng E-Menu">
+  <rect x="175.514" y="103.00000000000007" width="189.91000000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="270.46900000000005" y="118.15000000000008" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khách xác nhận gửi giỏ hàng E-Menu</text>
+</g>
+<g class="edge-label" data-from="ChoDuyet" data-to="DangNau" data-label="Đầu bếp nhấn &quot;Bắt đầu nấu&quot; trên KDS">
+  <rect x="287.528" y="368.20000000000005" width="186.94000000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="380.99800000000005" y="383.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Đầu bếp nhấn &quot;Bắt đầu nấu&quot; trên KDS</text>
+</g>
+<g class="edge-label" data-from="DangNau" data-to="HoanThanh" data-label="Đầu bếp nhấn &quot;Hoàn thành món&quot;">
+  <rect x="498.4680000000001" y="617.4000000000001" width="161.99200000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="579.464" y="632.5500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Đầu bếp nhấn &quot;Hoàn thành món&quot;</text>
+</g>
+<g class="edge-label" data-from="HoanThanh" data-to="DaPhucVu" data-label="Nhân viên phục vụ bưng lên bàn &amp; bấm xác nhận">
+  <rect x="459.968" y="882.6" width="238.61800000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="579.277" y="897.75" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Nhân viên phục vụ bưng lên bàn &amp; bấm xác nhận</text>
+</g>
+<g class="edge-label" data-from="ChoDuyet" data-to="DaHuy" data-label="Phục vụ từ chối duyệt đơn / Khách hủy trước duyệt">
+  <rect x="36.000000000000014" y="368.20000000000005" width="247.528" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="159.764" y="383.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Phục vụ từ chối duyệt đơn / Khách hủy trước duyệt</text>
+</g>
+<g class="edge-label" data-from="DangNau" data-to="YeuCauHuy" data-label="Khách xin hủy khi đang nấu / Đợi quá lâu">
+  <rect x="478.468" y="352.20000000000005" width="201.79000000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="579.363" y="367.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Khách xin hủy khi đang nấu / Đợi quá lâu</text>
+</g>
+<g class="edge-label" data-from="YeuCauHuy" data-to="HuyMon" data-label="Admin phê duyệt chấp thuận hủy món">
+  <rect x="870.4460000000001" y="239.9" width="187.53400000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="964.2130000000002" y="255.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Admin phê duyệt chấp thuận hủy món</text>
+</g>
+<g class="edge-label" data-from="YeuCauHuy" data-to="DangNau" data-label="Admin từ chối (Tiếp tục nấu phục vụ)">
+  <rect x="684.258" y="368.20000000000005" width="182.18800000000005" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="775.3520000000001" y="383.35" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Admin từ chối (Tiếp tục nấu phục vụ)</text>
+</g>
+<g class="node" data-id="_start" data-label="" data-shape="state-start">
+  <circle cx="270.514" cy="54.00000000000007" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="_end" data-label="" data-shape="state-end">
+  <circle cx="579.4680000000001" cy="1166.8" r="12" fill="none" stroke="var(--_text)" stroke-width="1.5" />
+  <circle cx="579.4680000000001" cy="1166.8" r="8" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="DaHuy" data-label="DaHuy" data-shape="rounded">
+  <rect x="119.01800000000001" y="439.3500000000001" width="81.964" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="160" y="457.80000000000007" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">DaHuy</text>
+</g>
+<g class="node" data-id="_end2" data-label="" data-shape="state-end">
+  <circle cx="964.4460000000001" cy="533.8000000000001" r="12" fill="none" stroke="var(--_text)" stroke-width="1.5" />
+  <circle cx="964.4460000000001" cy="533.8000000000001" r="8" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="_end3" data-label="" data-shape="state-end">
+  <circle cx="160" cy="533.8000000000001" r="12" fill="none" stroke="var(--_text)" stroke-width="1.5" />
+  <circle cx="160" cy="533.8000000000001" r="8" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="_start2" data-label="" data-shape="state-start">
+  <circle cx="270.51400000000007" cy="226.30000000000007" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="HangDoiKDS" data-label="HangDoiKDS" data-shape="rounded">
+  <rect x="211.00700000000006" y="280.30000000000007" width="119.014" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="270.51400000000007" y="298.75000000000006" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">HangDoiKDS</text>
+</g>
+<g class="node" data-id="_start3" data-label="" data-shape="state-start">
+  <circle cx="579.468" cy="453.3500000000001" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="CheBienMon" data-label="CheBienMon" data-shape="rounded">
+  <rect x="520.3315" y="519.8000000000001" width="118.273" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="579.468" y="538.2500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">CheBienMon</text>
+</g>
+<g class="node" data-id="_start4" data-label="" data-shape="state-start">
+  <circle cx="579.4680000000001" cy="740.7" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="ChoBungMon" data-label="ChoBungMon" data-shape="rounded">
+  <rect x="518.1085" y="794.7" width="122.71900000000001" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="579.4680000000001" y="813.1500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ChoBungMon</text>
+</g>
+<g class="node" data-id="_start5" data-label="" data-shape="state-start">
+  <circle cx="579.4680000000001" cy="1005.9" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="HoanTatMonAn" data-label="HoanTatMonAn" data-shape="rounded">
+  <rect x="512.1805" y="1059.9" width="134.575" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="579.4680000000001" y="1078.3500000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">HoanTatMonAn</text>
+</g>
+<g class="node" data-id="_start6" data-label="" data-shape="state-start">
+  <circle cx="775.7580000000002" cy="98" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="ChoAdminPheDuyet" data-label="ChoAdminPheDuyet" data-shape="rounded">
+  <rect x="696.2440000000001" y="152" width="159.02799999999996" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="775.7580000000002" y="170.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">ChoAdminPheDuyet</text>
+</g>
+<g class="node" data-id="_start7" data-label="" data-shape="state-start">
+  <circle cx="964.4460000000001" cy="363.20000000000005" r="12" fill="var(--_text)" stroke="none" />
+</g>
+<g class="node" data-id="GhiNhanAuditLog" data-label="GhiNhanAuditLog" data-shape="rounded">
+  <rect x="891.6010000000001" y="439.3500000000001" width="145.69" height="36.900000000000006" rx="6" ry="6" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="964.4460000000001" y="457.80000000000007" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">GhiNhanAuditLog</text>
+</g>
+</svg>

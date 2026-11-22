@@ -1,10 +1,12 @@
-const banAnRoutes = require('./banAn.routes');
+const router = require('./banAn.routes');
 const banAnService = require('./banAn.service');
 const banAnModel = require('./banAn.model');
+const banAnController = require('./banAn.controller');
 
 module.exports = {
-    banAnRoutes,
+    router,
+    banAnRoutes: router,
     banAnService,
     banAnModel,
-    router: banAnRoutes
+    banAnController
 };

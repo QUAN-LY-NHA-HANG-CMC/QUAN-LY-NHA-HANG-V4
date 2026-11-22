@@ -1,0 +1,237 @@
+classDiagram
+    %% =========================================================================
+    %% BIỂU ĐỒ LỚP KIẾN TRÚC HỆ THỐNG MVC (CLASS DIAGRAM)
+    %% HỆ THỐNG QUẢN LÝ NHÀ HÀNG & GỌI MÓN QR (QUÁN MỘC POS & E-MENU)
+    %% =========================================================================
+
+    %% --- CONTROLLERS ---
+    class BanAnController {
+        +laySoDoBan(req, res)
+        +moBanMoi(req, res)
+        +chuyenGopBan(req, res)
+        +xacNhanDonBan(req, res)
+    }
+
+    class PhienBanController {
+        +layHoacTaoPhien(req, res)
+        +dongPhienBan(req, res)
+        +layThongTinPhien(req, res)
+    }
+
+    class DonGoiMonController {
+        +taoDonGoiMon(req, res)
+        +layDonTheoPhien(req, res)
+        +huyMonAn(req, res)
+    }
+
+    class BepKDSController {
+        +layHangDoiCheBien(req, res)
+        +capNhatTrangThaiMon(req, res)
+        +baoHetMon(req, res)
+    }
+
+    class HoaDonController {
+        +lapHoaDonTamTinh(req, res)
+        +taoMaVietQR(req, res)
+        +xacNhanThanhToan(req, res)
+        +tachHoaDon(req, res)
+    }
+
+    class CaLamViecController {
+        +layLichTuan(req, res)
+        +taoYeuCauDoiCa(req, res)
+        +duyetYeuCauDoiCa(req, res)
+    }
+
+    %% --- SERVICES ---
+    class BanAnService {
+        +kiemTraTrangThaiBan(banId)
+        +doiTrangThaiBan(banId, status)
+        +taiSinhMaQrToken(banId)
+    }
+
+    class PhienBanService {
+        +layPhienDangHoatDong(banId)
+        +khoiTaoPhienMoi(banId, soKhach)
+        +chotPhienThanhToan(phienId)
+    }
+
+    class DonGoiMonService {
+        +kiemTraConMon(dsMonId)
+        +luuDonVaChiTiet(phienId, dsMon)
+        +tinhTongTienTam(phienId)
+    }
+
+    class BepKDSService {
+        +dieuPhoiHangDoi()
+        +batDauNau(chiTietId, dauBepId)
+        +hoanThanhNau(chiTietId)
+    }
+
+    class HoaDonService {
+        +tinhTienHoaDon(phienId, voucher)
+        +taoPayloadVietQR(hoaDonId, tongTien)
+        +hoanTatThanhToan(hoaDonId, phuongThuc)
+    }
+
+    class CaLamViecService {
+        +layLichTuanTheoNhanVien(nhanVienId)
+        +taoYeuCauDoiCa(data)
+        +pheDuyetYeuCauDoiCa(id, quanLyId, status)
+    }
+
+    %% --- MODELS / REPOSITORIES ---
+    class BanAnModel {
+        +int id
+        +int khu_vuc_id
+        +string ma_ban
+        +string ten_ban
+        +int suc_chua
+        +string trang_thai
+        +string ma_qr_token
+        +timTheoId(id)
+        +capNhatTrangThai(id, status)
+    }
+
+    class PhienBanModel {
+        +int id
+        +int ban_an_id
+        +string ma_phien
+        +string trang_thai
+        +datetime thoi_gian_bat_dau
+        +datetime thoi_gian_ket_thuc
+        +taoPhien(data)
+        +timPhienHienTai(banId)
+    }
+
+    class MonAnModel {
+        +int id
+        +int danh_muc_id
+        +string ma_mon
+        +string ten_mon
+        +int don_gia
+        +int con_mon
+        +timTheoId(id)
+        +kiemTraConMon(ids)
+    }
+
+    class DonGoiMonModel {
+        +int id
+        +int phien_ban_id
+        +string ma_don
+        +string nguon_tao
+        +string trang_thai
+        +datetime thoi_gian_gui
+        +taoDonMoi(data)
+        +layDsTheoPhien(phienId)
+    }
+
+    class ChiTietDonMonModel {
+        +int id
+        +int don_goi_mon_id
+        +int mon_an_id
+        +int so_luong
+        +int don_gia
+        +string trang_thai_mon
+        +datetime thoi_gian_bat_dau_nau
+        +datetime thoi_gian_hoan_thanh_nau
+        +themChiTiet(items)
+        +doiTrangThai(id, status)
+    }
+
+    class HoaDonModel {
+        +int id
+        +int phien_ban_id
+        +string ma_hoa_don
+        +int tong_tien_mon
+        +int tien_vat
+        +int tien_chiet_khau
+        +int tong_tien_thanh_toan
+        +string phuong_thuc_thanh_toan
+        +string trang_thai
+        +taoHoaDon(data)
+        +capNhatThanhToan(id, data)
+    }
+
+    class NhanVienModel {
+        +int id
+        +int tai_khoan_id
+        +string ho_ten
+        +string so_dien_thoai
+        +timTheoId(id)
+    }
+
+    class CaLamViecModel {
+        +int id
+        +int nhan_vien_id
+        +date ngay_lam
+        +string ten_ca
+        +string trang_thai
+        +layLichTheoNhanVien(nhanVienId)
+        +hoanDoiNhanVien(caId, nhanVienMoiId)
+    }
+
+    class YeuCauDoiCaModel {
+        +int id
+        +int nhan_vien_yeu_cau_id
+        +int ca_lam_viec_id
+        +string loai_yeu_cau
+        +int nhan_vien_nhan_ca_id
+        +string ly_do
+        +string trang_thai
+        +int quan_ly_duyet_id
+        +taoYeuCau(data)
+        +capNhatTrangThaiDuyet(id, status, quanLyId)
+    }
+
+    %% --- REALTIME GATEWAY ---
+    class SocketGateway {
+        +broadcastOrderNew(data)
+        +broadcastCookingStatus(data)
+        +broadcastDishReady(data)
+        +broadcastPaymentSuccess(data)
+        +broadcastShiftRequest(data)
+        +broadcastShiftApproval(data)
+    }
+
+    %% --- RELATIONSHIPS ARCHITECTURE ---
+    BanAnController --> BanAnService
+    PhienBanController --> PhienBanService
+    DonGoiMonController --> DonGoiMonService
+    BepKDSController --> BepKDSService
+    HoaDonController --> HoaDonService
+    CaLamViecController --> CaLamViecService
+
+    BanAnService --> BanAnModel
+    BanAnService --> SocketGateway
+
+    PhienBanService --> PhienBanModel
+    PhienBanService --> BanAnModel
+
+    DonGoiMonService --> DonGoiMonModel
+    DonGoiMonService --> ChiTietDonMonModel
+    DonGoiMonService --> MonAnModel
+    DonGoiMonService --> SocketGateway
+
+    BepKDSService --> ChiTietDonMonModel
+    BepKDSService --> SocketGateway
+
+    HoaDonService --> HoaDonModel
+    HoaDonService --> ChiTietDonMonModel
+    HoaDonService --> PhienBanModel
+    HoaDonService --> BanAnModel
+    HoaDonService --> SocketGateway
+
+    CaLamViecService --> CaLamViecModel
+    CaLamViecService --> YeuCauDoiCaModel
+    CaLamViecService --> SocketGateway
+
+    %% --- DATA ENTITY CARDINALITY ---
+    BanAnModel "1" --> "0..*" PhienBanModel : sở hữu các phiên
+    PhienBanModel "1" --> "0..*" DonGoiMonModel : chứa các đợt gọi
+    DonGoiMonModel "1" --> "1..*" ChiTietDonMonModel : gồm các món
+    MonAnModel "1" --> "0..*" ChiTietDonMonModel : được đặt
+    PhienBanModel "1" --> "0..*" HoaDonModel : thanh toán
+    NhanVienModel "1" --> "0..*" CaLamViecModel : được xếp ca
+    CaLamViecModel "1" --> "0..*" YeuCauDoiCaModel : đổi ca
+    NhanVienModel "1" --> "0..*" YeuCauDoiCaModel : đề xuất
