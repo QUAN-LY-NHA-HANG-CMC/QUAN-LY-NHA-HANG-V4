@@ -66,10 +66,10 @@ const taiKhoanModel = {
     // QUẢN LÝ NHÂN SỰ TOÀN HỆ THỐNG (A02, A03, A04, A05)
     // =========================================================================
 
-    layDanhSachNhanSu() {
+    layDanhSachNhanSu(baoGomLuuTru = false) {
         const sql = `
             SELECT n.id, n.tai_khoan_id, n.ho_ten, n.so_dien_thoai, n.email, n.cccd,
-                   n.hinh_thuc_lam_viec, n.muc_luong, n.ngay_vao_lam, n.trang_thai,
+                   n.hinh_thuc_lam_viec, n.muc_luong, n.ngay_vao_lam, n.trang_thai, n.ngay_luu_tru,
                    t.ten_dang_nhap, t.trang_thai as trang_thai_tk, t.lan_dang_nhap_cuoi,
                    v.id as vai_tro_id, v.ma_vai_tro, v.ten_vai_tro,
                    (
@@ -81,10 +81,10 @@ const taiKhoanModel = {
             FROM nhan_vien n
             JOIN tai_khoan t ON n.tai_khoan_id = t.id
             JOIN vai_tro v ON t.vai_tro_id = v.id
-            WHERE n.ngay_luu_tru IS NULL
+            WHERE (? = 1 OR n.ngay_luu_tru IS NULL)
             ORDER BY n.id ASC;
         `;
-        return truyVanNhieu(sql);
+        return truyVanNhieu(sql, [baoGomLuuTru ? 1 : 0]);
     },
 
     layChiTietNhanSu(id) {
@@ -225,6 +225,21 @@ const taiKhoanModel = {
         thucThi(sqlTk, [trangThaiTk, nv.tai_khoan_id]);
 
         return this.layChiTietNhanSu(id);
+    },
+
+    khoiPhucNhanSu(id) {
+        return chayGiaoDich(() => {
+            const ketQua = thucThi(`
+                UPDATE nhan_vien SET trang_thai = 'dang_lam', ngay_luu_tru = NULL,
+                    ngay_cap_nhat = CURRENT_TIMESTAMP WHERE id = ? AND ngay_luu_tru IS NOT NULL
+            `, [id]);
+            if (!ketQua.changes) return null;
+            thucThi(`
+                UPDATE tai_khoan SET trang_thai = 'hoat_dong', ngay_cap_nhat = CURRENT_TIMESTAMP
+                WHERE id = (SELECT tai_khoan_id FROM nhan_vien WHERE id = ?)
+            `, [id]);
+            return this.layChiTietNhanSu(id);
+        });
     },
 
     xoaNhanSu(id, taiKhoanThucHienId) {

@@ -23,6 +23,7 @@ router.put('/nhan-su/:id/trang-thai', xacThucNguoiDung, phanQuyen('quan_ly'), ta
 router.get('/nhan-su/ban-co-the-giao', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.layBanCoTheGiao);
 router.get('/nhan-su/:id', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.layChiTietNhanSu);
 router.put('/nhan-su/:id', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.capNhatNhanSu);
+router.put('/nhan-su/:id/khoi-phuc', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.khoiPhucNhanSu);
 router.delete('/nhan-su/:id', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.xoaNhanSu);
 router.get('/nhan-su/:id/ban-phu-trach', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.layBanPhuTrach);
 router.put('/nhan-su/:id/ban-phu-trach', xacThucNguoiDung, phanQuyen('quan_ly'), taiKhoanController.capNhatBanPhuTrach);

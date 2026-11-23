@@ -166,8 +166,8 @@ const taiKhoanService = {
     // QUẢN TRỊ NHÂN SỰ TOÀN HỆ THỐNG (A02, A03, A04, A05)
     // =========================================================================
 
-    layDanhSachNhanSu() {
-        return taiKhoanModel.layDanhSachNhanSu();
+    layDanhSachNhanSu(baoGomLuuTru) {
+        return taiKhoanModel.layDanhSachNhanSu(baoGomLuuTru);
     },
 
     layChiTietNhanSu(id) {
@@ -321,6 +321,21 @@ const taiKhoanService = {
         });
 
         return nvMoi;
+    },
+
+    khoiPhucNhanSu(id, nguoiThucHien) {
+        const nhanVien = taiKhoanModel.khoiPhucNhanSu(id);
+        if (!nhanVien) {
+            throw Object.assign(new Error('Không tìm thấy hồ sơ nhân sự đã lưu trữ.'), { status: 404 });
+        }
+        ghiAuditLog({
+            taiKhoanId: nguoiThucHien.taiKhoanId,
+            hanhDong: 'KHOI_PHUC_NHAN_SU',
+            bangAnhHuong: 'nhan_vien',
+            banGhiId: id,
+            lyDo: `Khôi phục hồ sơ và kích hoạt tài khoản của ${nhanVien.ho_ten}`
+        });
+        return nhanVien;
     },
 
     xoaNhanSu(id, nguoiThucHien) {
