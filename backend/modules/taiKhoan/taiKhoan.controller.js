@@ -52,7 +52,7 @@ const taiKhoanController = {
 
     layDanhSachNhanSu(req, res, next) {
         try {
-            const danhSach = taiKhoanService.layDanhSachNhanSu();
+            const danhSach = taiKhoanService.layDanhSachNhanSu(req.query.baoGomLuuTru === '1');
             return phanHoiThanhCong(res, danhSach, 'Lấy danh sách nhân sự thành công');
         } catch (loi) {
             next(loi);
@@ -125,6 +125,15 @@ const taiKhoanController = {
             const { trangThai } = req.body;
             const nhanVien = taiKhoanService.doiTrangThaiNhanSu(req.params.id, trangThai, req.nguoiDung);
             return phanHoiThanhCong(res, nhanVien, `Đổi trạng thái nhân sự thành "${trangThai}" thành công`);
+        } catch (loi) {
+            next(loi);
+        }
+    },
+
+    khoiPhucNhanSu(req, res, next) {
+        try {
+            const nhanVien = taiKhoanService.khoiPhucNhanSu(req.params.id, req.nguoiDung);
+            return phanHoiThanhCong(res, nhanVien, 'Khôi phục nhân sự thành công');
         } catch (loi) {
             next(loi);
         }

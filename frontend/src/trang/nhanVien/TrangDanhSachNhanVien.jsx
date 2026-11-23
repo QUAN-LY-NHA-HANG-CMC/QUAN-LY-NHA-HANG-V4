@@ -17,6 +17,7 @@ import { api } from '../../dungChung/api';
 
 export default function TrangDanhSachNhanVien() {
   const [danhSach, setDanhSach] = useState([]);
+  const [xemLuuTru, setXemLuuTru] = useState(false);
   const [dangTai, setDangTai] = useState(false);
   const [tuKhoa, setTuKhoa] = useState('');
   const [thongBao, setThongBao] = useState(null);
@@ -32,7 +33,7 @@ export default function TrangDanhSachNhanVien() {
   const taiDanhSach = async () => {
     setDangTai(true);
     try {
-      const res = await api.get('/api/tai-khoan/nhan-su');
+      const res = await api.get('/api/tai-khoan/nhan-su?baoGomLuuTru=1');
       if (Array.isArray(res)) {
         setDanhSach(res);
       }
@@ -141,7 +142,7 @@ export default function TrangDanhSachNhanVien() {
       onThucHien: async () => {
         try {
           await api.delete(`/api/tai-khoan/nhan-su/${nv.id}`);
-          setDanhSach(prev => prev.filter(item => item.id !== nv.id));
+          await taiDanhSach();
           showToast(`Đã xóa "${nv.ho_ten}" khỏi danh sách nhân sự.`);
         } catch (err) {
           showToast(`Lỗi khi xóa nhân viên: ${err.message}`, 'loi');
@@ -152,7 +153,27 @@ export default function TrangDanhSachNhanVien() {
     });
   };
 
-  const nhanSuLoc = danhSach.filter(nv => {
+  const khoiPhuc = nv => setXacNhanAction({
+    tieuDe: 'Khôi phục nhân viên',
+    noiDung: `Khôi phục hồ sơ của ${nv.ho_ten} và mở lại tài khoản ${nv.ten_dang_nhap}?`,
+    loai: 'moKhoa',
+    nhanNutXacNhan: 'Khôi phục',
+    onThucHien: async () => {
+      try {
+        const nhanVien = await api.put(`/api/tai-khoan/nhan-su/${nv.id}/khoi-phuc`, {});
+        setDanhSach(cu => cu.map(item => item.id === nv.id
+          ? { ...item, ...nhanVien, ngay_luu_tru: null } : item));
+        showToast(`Đã khôi phục ${nv.ho_ten}.`);
+      } catch (err) {
+        showToast(err.message, 'loi');
+      } finally {
+        setXacNhanAction(null);
+      }
+    }
+  });
+
+  const danhSachTheoTab = danhSach.filter(nv => Boolean(nv.ngay_luu_tru) === xemLuuTru);
+  const nhanSuLoc = danhSachTheoTab.filter(nv => {
     const ten = nv.ho_ten ? nv.ho_ten.toLowerCase() : '';
     const tk = nv.ten_dang_nhap ? nv.ten_dang_nhap.toLowerCase() : '';
     const sdt = nv.so_dien_thoai || '';
@@ -201,7 +222,7 @@ export default function TrangDanhSachNhanVien() {
             </button>
           </div>
           <p className="text-xs text-[#72776f] mt-1">
-            Tổng cộng: <b>{danhSach.length} nhân sự</b> · Hỗ trợ thêm mới, chỉnh sửa thông tin, đình chỉ công tác và xóa tài khoản
+            Tổng cộng: <b>{danhSachTheoTab.length} nhân sự</b>
           </p>
         </div>
 
@@ -227,6 +248,16 @@ export default function TrangDanhSachNhanVien() {
         </div>
       </div>
 
+      <div className="flex gap-2" aria-label="Danh sách nhân sự">
+        {[false, true].map(luuTru => (
+          <button key={String(luuTru)} type="button" aria-pressed={xemLuuTru === luuTru}
+            onClick={() => setXemLuuTru(luuTru)}
+            className="rounded-lg border border-stone-200 px-4 py-2 text-sm font-semibold aria-pressed:bg-[#b64d2d] aria-pressed:text-white">
+            {luuTru ? 'Đã lưu trữ' : 'Danh sách nhân viên'}
+          </button>
+        ))}
+      </div>
+
       {/* Bảng danh sách nhân sự */}
       <div className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
         <div className="overflow-x-auto">
@@ -247,7 +278,7 @@ export default function TrangDanhSachNhanVien() {
               {nhanSuLoc.length === 0 ? (
                 <tr>
                   <td colSpan={8} className="p-8 text-center text-stone-400">
-                    Không tìm thấy nhân viên nào phù hợp với từ khóa "{tuKhoa}"
+                    {tuKhoa ? `Không tìm thấy nhân viên phù hợp với "${tuKhoa}"` : 'Danh sách đang trống.'}
                   </td>
                 </tr>
               ) : (
@@ -290,7 +321,7 @@ export default function TrangDanhSachNhanVien() {
                         {nv.hinh_thuc_lam_viec === 'ban_thoi_gian' ? 'Part-time' : 'Full-time'}
                       </td>
                       <td className="p-4">
-                        {dangDinhChi ? (
+                        {xemLuuTru ? <span>Đã lưu trữ</span> : dangDinhChi ? (
                           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
                             <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
                             Đình chỉ / Tạm khóa
@@ -308,7 +339,12 @@ export default function TrangDanhSachNhanVien() {
                         )}
                       </td>
                       <td className="p-4 text-center">
-                        <div className="flex items-center justify-center gap-1.5">
+                        {xemLuuTru ? (
+                          <button type="button" onClick={() => khoiPhuc(nv)}
+                            className="rounded-lg px-3 py-1.5 font-bold text-emerald-700 hover:bg-emerald-50">
+                            Khôi phục
+                          </button>
+                        ) : <div className="flex items-center justify-center gap-1.5">
                           {/* 1. Xem chi tiết hồ sơ */}
                           <button
                             onClick={() => setNhanVienXem(nv)}
@@ -363,7 +399,7 @@ export default function TrangDanhSachNhanVien() {
                           >
                             <Trash2 size={16} />
                           </button>
-                        </div>
+                        </div>}
                       </td>
                     </tr>
                   );
