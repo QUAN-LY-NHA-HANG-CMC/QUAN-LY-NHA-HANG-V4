@@ -6,7 +6,7 @@
 const path = require('path');
 const { DatabaseSync } = require('node:sqlite');
 
-const TEP_CSDL = path.join(__dirname, 'coSoDuLieu.sqlite');
+const TEP_CSDL = process.env.DB_PATH || path.join(__dirname, 'coSoDuLieu.sqlite');
 const db = new DatabaseSync(TEP_CSDL, { readOnly: true });
 db.exec('PRAGMA foreign_keys = ON;');
 

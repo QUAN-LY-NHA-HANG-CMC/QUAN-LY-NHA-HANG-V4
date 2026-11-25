@@ -29,6 +29,7 @@ jobs:
 
     - name: Khởi tạo & Kiểm thử Toàn vẹn CSDL
       run: |
+        export DB_PATH="$(mktemp -d)/kiem-thu.sqlite"
         node database/sinhDuLieuMau.js
         node database/kiemTraDuLieu.js
 
