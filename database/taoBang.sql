@@ -345,6 +345,13 @@ CREATE TABLE IF NOT EXISTS giao_dich_thanh_toan (
     thoi_gian_tao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS phieu_thu_mot_phan (
+    giao_dich_id INTEGER PRIMARY KEY REFERENCES giao_dich_thanh_toan(id),
+    tong_hoa_don INTEGER NOT NULL,
+    da_thu_truoc INTEGER NOT NULL,
+    ten_ban TEXT NOT NULL
+);
+
 -- 24. Bảng phieu_thu_chi_noi_bo (Két tiền & Chốt ca Z-Report)
 CREATE TABLE IF NOT EXISTS phieu_thu_chi_noi_bo (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -485,3 +492,12 @@ CREATE TABLE IF NOT EXISTS yeu_cau_huy_mon_khach (
 CREATE INDEX IF NOT EXISTS idx_huy_mon_khach_chi_tiet ON yeu_cau_huy_mon_khach(chi_tiet_don_mon_id, id);
 CREATE UNIQUE INDEX IF NOT EXISTS idx_huy_mon_khach_cho_xu_ly
     ON yeu_cau_huy_mon_khach(chi_tiet_don_mon_id) WHERE trang_thai = 'cho_phuc_vu';
+CREATE TABLE IF NOT EXISTS xu_ly_mon_pos (
+    chi_tiet_id INTEGER PRIMARY KEY REFERENCES chi_tiet_don_mon(id),
+    lua_chon TEXT NOT NULL CHECK (lua_chon IN ('goi_mang_ve','dung_tai_ban','xac_nhan_bung','khong_lay')),
+    buoc TEXT NOT NULL CHECK (buoc IN ('bep','phuc_vu','thu_ngan','xong')),
+    nguoi_gui_id INTEGER REFERENCES tai_khoan(id),
+    ghi_chu TEXT NOT NULL DEFAULT '',
+    uu_tien INTEGER NOT NULL DEFAULT 0,
+    ngay_tao DATETIME DEFAULT CURRENT_TIMESTAMP
+);

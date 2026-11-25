@@ -16,7 +16,7 @@ import ThongBaoChiDao from '../../thanhPhan/ThongBaoChiDao';
 import { NHAN_VIEC_BAN, tiepNhanViecBan } from '../../dungChung/viecBan';
 import { hienThiGioVietNam } from '../../dungChung/thoiGian';
 import ModalTrungTamThongBao from './ModalTrungTamThongBao';
-import { dinhDangTien } from '../../dungChung/dinhDang';
+import { dinhDangTien, tinhPhutTroiQua } from '../../dungChung/dinhDang';
 import { api } from '../../dungChung/api';
 import { laySocket } from '../../dungChung/ketNoiSocket';
 
@@ -239,12 +239,12 @@ export default function TrangChiTietBan({
             </div>
             <div className="bg-stone-50 p-2 rounded-xl">
               <span className="text-[#72776f] block text-[11px]">Giờ vào</span>
-              <span className="font-bold text-[#272d29]">{ban.thoi_gian_bat_dau || '—'}</span>
+              <span className="font-bold text-[#272d29]">{hienThiGioVietNam(ban.thoi_gian_bat_dau)}</span>
             </div>
             <div className="bg-stone-50 p-2 rounded-xl">
               <span className="text-[#72776f] block text-[11px]">Thời gian ngồi</span>
               <span className="font-bold text-[#2d4336]">{ban.thoi_gian_bat_dau
-                ? `${Math.max(0, Math.floor((Date.now() - Date.parse(ban.thoi_gian_bat_dau.replace(' ', 'T') + 'Z')) / 60000))} phút`
+                ? `${tinhPhutTroiQua(ban.thoi_gian_bat_dau)} phút`
                 : '—'}</span>
             </div>
           </div>
@@ -295,7 +295,10 @@ export default function TrangChiTietBan({
                         <span>Giục bếp</span>
                       </button>
                     )}
-                    {item.trang_thai === 'hoan_thanh' && (
+                    {item.xu_ly_pos && <span className="text-xs text-amber-800">
+                      {item.xu_ly_pos === 'goi_mang_ve' ? 'Gói mang về' : 'Khách không lấy món'}
+                    </span>}
+                    {item.trang_thai === 'hoan_thanh' && !item.xu_ly_pos && (
                       <button disabled={dangLuu}
                         className="px-2 py-0.5 text-emerald-800 font-semibold"
                         onClick={() => luu(async () => {

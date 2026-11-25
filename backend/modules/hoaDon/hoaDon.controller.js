@@ -37,7 +37,8 @@ const hoaDonController = {
         try {
             const banId = parseInt(req.params.banId, 10);
             const chietKhau = req.query.chietKhau || 0;
-            const ketQua = await hoaDonService.layTamTinhTheoBan(banId, chietKhau);
+            const ketQua = await hoaDonService.layTamTinhTheoBan(banId, chietKhau,
+                ['thu_ngan', 'quan_ly'].includes(req.nguoiDung?.vaiTro));
             return phanHoiThanhCong(res, ketQua, 'Lấy bảng tính tạm hóa đơn bàn thành công');
         } catch (loi) {
             return phanHoiLoi(res, loi.message, 400);
@@ -71,6 +72,7 @@ const hoaDonController = {
                 tienKhachDua,
                 maGiaoDichNganHang,
                 caLamViecId,
+                soTienDuKien,
                 ghiChu
             } = req.body;
 
@@ -84,6 +86,7 @@ const hoaDonController = {
                     maGiaoDichNganHang,
                     thuNganId,
                     caLamViecId,
+                    soTienDuKien,
                     ghiChu
                 },
                 req.nguoiDung

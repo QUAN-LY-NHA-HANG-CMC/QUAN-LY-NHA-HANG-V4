@@ -2,11 +2,11 @@ const { DatabaseSync } = require('node:sqlite');
 const cauHinh = require('../backend/cauHinh/cauHinhChung');
 
 const BANG_GIAO_DICH = [
-  'tiep_nhan_viec_ban', 'gio_mon_ban', 'lenh_dieu_phoi', 'danh_gia', 'chia_tien_nhom', 'giao_dich_thanh_toan',
+  'xu_ly_mon_pos', 'tiep_nhan_viec_ban', 'gio_mon_ban', 'lenh_dieu_phoi', 'danh_gia', 'chia_tien_nhom', 'phieu_thu_mot_phan', 'giao_dich_thanh_toan',
   'chi_tiet_hoa_don', 'hoa_don', 'yeu_cau_huy_mon_khach', 'yeu_cau_huy_mon', 'yeu_cau_ho_tro', 'chi_tiet_don_mon',
-  'don_goi_mon', 'thiet_bi_phien_ban', 'phien_ban', 'yeu_cau_doi_ca', 'ca_lam_viec', 'phan_cong_ban',
-  'nhat_ky_kiem_toan', 'phieu_thu_chi_noi_bo'
+  'don_goi_mon', 'thiet_bi_phien_ban', 'phien_ban', 'nhat_ky_kiem_toan', 'phieu_thu_chi_noi_bo'
 ];
+const BANG_PHAN_CA = ['yeu_cau_doi_ca', 'ca_lam_viec', 'phan_cong_ban'];
 const BANG_DANH_MUC = [
   'combo_chi_tiet', 'mon_an', 'danh_muc_mon', 'ban_an', 'khu_vuc', 'cau_hinh_nha_hang'
 ];
@@ -25,7 +25,8 @@ function lamSachDuLieu({ toanBo = false } = {}) {
     }
 
     const coBang = db.prepare("SELECT 1 FROM sqlite_schema WHERE type='table' AND name=?");
-    const bangDaXoa = [...BANG_GIAO_DICH, ...(toanBo ? BANG_DANH_MUC : [])].filter(ten => coBang.get(ten));
+    const bangDaXoa = [...BANG_GIAO_DICH, ...(toanBo ? [...BANG_PHAN_CA, ...BANG_DANH_MUC] : [])]
+      .filter(ten => coBang.get(ten));
     for (const ten of bangDaXoa) db.exec('DELETE FROM ' + ten);
     if (toanBo) {
       const vaiTro = "(SELECT id FROM vai_tro WHERE ma_vai_tro='quan_ly')";

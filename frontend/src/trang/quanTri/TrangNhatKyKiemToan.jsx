@@ -21,7 +21,8 @@ export default function TrangNhatKyKiemToan() {
       id: log.id, thoiGian: log.thoi_gian_tao,
       nguoiThucHien: log.ten_nhan_vien || log.ten_dang_nhap || 'Hệ thống',
       hanhDong: log.hanh_dong, doiTuong: log.bang_anh_huong || log.doi_tuong || '',
-      chiTiet: log.ly_do || ''
+      chiTiet: log.ly_do || '',
+      mucDo: log.hanh_dong === 'THANH_TOAN_CHUA_XAC_NHAN_BUNG' ? 'chu_y' : undefined
     })))).catch(err => { if (!huy) setLoi(err.message); });
     nap();
     const socket = laySocket();
@@ -39,7 +40,8 @@ export default function TrangNhatKyKiemToan() {
   };
 
   const logLoc = nhatKy.filter(l => {
-    const khopTuKhoa = !tuKhoa || l.nguoiThucHien.toLowerCase().includes(tuKhoa.toLowerCase()) || l.doiTuong.toLowerCase().includes(tuKhoa.toLowerCase());
+    const khopTuKhoa = [l.nguoiThucHien, l.doiTuong, l.chiTiet]
+      .some(giaTri => giaTri.toLowerCase().includes(tuKhoa.toLowerCase()));
     const khopHd = hanhDongLoc === 'tat_ca' || l.hanhDong.includes(hanhDongLoc);
     return khopTuKhoa && khopHd;
   });
@@ -63,7 +65,7 @@ export default function TrangNhatKyKiemToan() {
               type="text"
               value={tuKhoa}
               onChange={(e) => setTuKhoa(e.target.value)}
-              placeholder="Tìm người dùng hoặc đối tượng..."
+              placeholder="Tìm người dùng, đối tượng hoặc chi tiết..."
               className="w-full bg-white border border-stone-200 rounded-xl pl-9 pr-3 py-2 text-xs focus:outline-none focus:border-[#b64d2d]"
             />
           </div>

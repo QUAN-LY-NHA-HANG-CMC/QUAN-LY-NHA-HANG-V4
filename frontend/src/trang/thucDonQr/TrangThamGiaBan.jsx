@@ -39,15 +39,16 @@ export default function TrangThamGiaBan({ ban, thamGia, onDangNhap }) {
 
 export function ThongBaoThamGia({ thamGia }) {
   const [now, setNow] = useState(Date.now);
-  const yeuCau = thamGia.phien?.yeuCau;
-  const coMa = yeuCau?.some(muc => muc.maMoi);
   const gioMayChu = Math.max(Date.now(), now) + (thamGia.phien?.chenhGio ?? 0);
+  const yeuCau = (thamGia.phien?.yeuCau ?? [])
+    .filter(muc => muc.hetHan == null || muc.hetHan > gioMayChu);
+  const coHan = yeuCau.some(muc => muc.hetHan != null);
   useEffect(() => {
-    if (!coMa) return;
+    if (!coHan) return;
     const timer = setInterval(() => setNow(Date.now()), 250);
     return () => clearInterval(timer);
-  }, [coMa]);
-  if (!yeuCau?.length) return null;
+  }, [coHan]);
+  if (!yeuCau.length) return null;
 
   return (
     <aside aria-label="Yêu cầu tham gia bàn" aria-live="polite"
@@ -58,7 +59,7 @@ export function ThongBaoThamGia({ thamGia }) {
           <p>Thiết bị <strong className="font-mono">{muc.id}</strong></p>
           {muc.maMoi ? (
             <div>
-              <p>Mã tham gia <strong className="font-mono text-lg tracking-wider">{muc.hetHan > gioMayChu ? muc.maMoi : 'Hết hạn'}</strong></p>
+              <p>Mã tham gia <strong className="font-mono text-lg tracking-wider">{muc.maMoi}</strong></p>
               <p>Còn {Math.min(40, Math.max(0, Math.ceil((muc.hetHan - gioMayChu) / 1000)))} giây</p>
             </div>
           ) : (

@@ -25,7 +25,10 @@ const dieuPhoiBepModel = {
             JOIN khu_vuc k ON b.khu_vuc_id = k.id
             JOIN mon_an m ON ct.mon_an_id = m.id
             WHERE ct.trang_thai_mon IN ('cho_duyet', 'dang_nau') 
-              AND dgm.trang_thai = 'da_duyet' AND pb.trang_thai = 'dang_hoat_dong'
+              AND dgm.trang_thai = 'da_duyet'
+              AND (pb.trang_thai = 'dang_hoat_dong' OR EXISTS (SELECT 1 FROM xu_ly_mon_pos x
+                  WHERE x.chi_tiet_id=ct.id AND x.lua_chon='goi_mang_ve' AND x.buoc='bep'))
+              AND NOT EXISTS (SELECT 1 FROM xu_ly_mon_pos x WHERE x.chi_tiet_id=ct.id AND x.lua_chon='khong_lay')
             ORDER BY ct.la_uu_tien DESC, ct.ngay_tao ASC;
         `;
         return truyVanNhieu(sql);
@@ -48,7 +51,10 @@ const dieuPhoiBepModel = {
             JOIN ban_an b ON pb.ban_an_id = b.id
             JOIN mon_an m ON ct.mon_an_id = m.id
             WHERE ct.trang_thai_mon IN ('cho_duyet', 'dang_nau') 
-              AND dgm.trang_thai = 'da_duyet' AND pb.trang_thai = 'dang_hoat_dong'
+              AND dgm.trang_thai = 'da_duyet'
+              AND (pb.trang_thai = 'dang_hoat_dong' OR EXISTS (SELECT 1 FROM xu_ly_mon_pos x
+                  WHERE x.chi_tiet_id=ct.id AND x.lua_chon='goi_mang_ve' AND x.buoc='bep'))
+              AND NOT EXISTS (SELECT 1 FROM xu_ly_mon_pos x WHERE x.chi_tiet_id=ct.id AND x.lua_chon='khong_lay')
             GROUP BY m.id, m.ten_mon, m.ma_mon, m.don_vi_tinh, m.anh_mon_an
             ORDER BY co_lenh_uu_tien DESC, so_phut_cho_lau_nhat DESC;
         `;
@@ -72,7 +78,8 @@ const dieuPhoiBepModel = {
             JOIN mon_an m ON ct.mon_an_id = m.id
             LEFT JOIN nhan_vien nv ON ct.dau_bep_id = nv.id
             WHERE ${choBung ? "ct.trang_thai_mon='hoan_thanh' AND pb.trang_thai='dang_hoat_dong' AND dgm.trang_thai='da_duyet'" :
-                "ct.trang_thai_mon IN ('hoan_thanh', 'da_phuc_vu') AND ct.thoi_gian_hoan_thanh_nau >= DATETIME('now', '-60 minutes')"}
+                "(ct.trang_thai_mon = 'da_phuc_vu' OR (ct.trang_thai_mon = 'hoan_thanh' AND pb.trang_thai = 'dang_hoat_dong')) AND ct.thoi_gian_hoan_thanh_nau >= DATETIME('now', '-60 minutes')"}
+              AND NOT EXISTS (SELECT 1 FROM xu_ly_mon_pos x WHERE x.chi_tiet_id=ct.id AND x.lua_chon IN ('goi_mang_ve','khong_lay'))
             ORDER BY ct.thoi_gian_hoan_thanh_nau DESC;
         `;
         return truyVanNhieu(sql);
@@ -81,10 +88,11 @@ const dieuPhoiBepModel = {
     timChiTietTheoId(chiTietId) {
         const sql = `
             SELECT ct.*, m.ten_mon, pb.ban_an_id, b.ten_ban, b.ma_ban,
-                   pb.trang_thai AS trang_thai_phien, dgm.trang_thai AS trang_thai_don
+                   pb.trang_thai AS trang_thai_phien, dgm.trang_thai AS trang_thai_don, x.lua_chon, x.buoc
             FROM chi_tiet_don_mon ct
             JOIN don_goi_mon dgm ON ct.don_goi_mon_id = dgm.id
             JOIN phien_ban pb ON dgm.phien_ban_id = pb.id
+            LEFT JOIN xu_ly_mon_pos x ON x.chi_tiet_id=ct.id
             JOIN ban_an b ON pb.ban_an_id = b.id
             JOIN mon_an m ON ct.mon_an_id = m.id
             WHERE ct.id = ?;

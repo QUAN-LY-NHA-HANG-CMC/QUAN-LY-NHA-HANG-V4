@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { X, Calendar, Clock, User, Check, AlertCircle, FileText } from 'lucide-react';
 import { api } from '../../dungChung/api';
+import { ngayVietNam } from '../../dungChung/thoiGian';
 
 export const CA_MAC_DINH = {
   ca_sang: { ten: 'Ca sáng', gioBatDau: '10:00', gioKetThuc: '15:00' },
@@ -22,7 +23,7 @@ export default function ModalThemCaLamViec({
   onThanhCong
 }) {
   const [nhanVienId, setNhanVienId] = useState(nhanVienMacDinhId || (danhSachNhanVien[0]?.id || ''));
-  const [ngayLam, setNgayLam] = useState(ngayMacDinh || new Date().toISOString().slice(0, 10));
+  const [ngayLam, setNgayLam] = useState(() => ngayMacDinh || ngayVietNam());
   const [tenCa, setTenCa] = useState('ca_toi');
   const [gioBatDau, setGioBatDau] = useState('17:00');
   const [gioKetThuc, setGioKetThuc] = useState('22:30');

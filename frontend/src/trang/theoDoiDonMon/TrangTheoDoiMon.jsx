@@ -70,7 +70,10 @@ export default function TrangTheoDoiMon({
       {daNhoPhucVu.includes(mon.id) && (
         <p role="status" className="mt-1 text-xs font-medium text-amber-800">Đã nhờ phục vụ kiểm tra</p>
       )}
-      {mon.trang_thai_huy_khach !== 'cho_phuc_vu' && !daNhoPhucVu.includes(mon.id) && (
+      {mon.xu_ly_pos && <p className="mt-1 text-xs text-stone-600">
+        {mon.xu_ly_pos === 'goi_mang_ve' ? 'Gói mang về' : 'Đã ghi nhận không lấy món'}
+      </p>}
+      {!mon.xu_ly_pos && mon.trang_thai_huy_khach !== 'cho_phuc_vu' && !daNhoPhucVu.includes(mon.id) && (
         <button type="button" className="mt-1 text-xs font-semibold text-rose-700 underline"
           aria-label={`${mon.coQuyenYeuCauHuy ? 'Yêu cầu hủy' : 'Nhờ phục vụ hủy'} ${mon.ten_mon}`} onClick={() => {
             setLyDoHuy('');

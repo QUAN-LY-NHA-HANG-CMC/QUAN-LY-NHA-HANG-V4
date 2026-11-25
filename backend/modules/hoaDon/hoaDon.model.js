@@ -6,6 +6,20 @@
 const { truyVanNhieu, truyVanMot, thucThi, chayGiaoDich } = require('../../cauHinh/ketNoiCoSoDuLieu');
 
 const hoaDonModel = {
+    layCacDotThu(phienId) {
+        return truyVanNhieu(`SELECT g.id,g.so_tien,g.phuong_thuc,g.thoi_gian_tao,
+            p.giao_dich_id IS NOT NULL AS mot_phan
+            FROM giao_dich_thanh_toan g JOIN hoa_don h ON h.id=g.hoa_don_id
+            LEFT JOIN phieu_thu_mot_phan p ON p.giao_dich_id=g.id
+            WHERE h.phien_ban_id=? AND g.trang_thai='thanh_cong' ORDER BY g.id`, [phienId]);
+    },
+
+    layPhieuThu(maGiaoDich) {
+        return truyVanMot(`SELECT g.id,g.hoa_don_id,g.so_tien,g.phuong_thuc,g.thoi_gian_tao,
+            p.tong_hoa_don,p.da_thu_truoc,p.ten_ban,h.ma_hoa_don,h.phien_ban_id
+            FROM phieu_thu_mot_phan p JOIN giao_dich_thanh_toan g ON g.id=p.giao_dich_id
+            JOIN hoa_don h ON h.id=g.hoa_don_id WHERE g.ma_giao_dich_ngan_hang=?`, [maGiaoDich]);
+    },
     /**
      * Lấy danh sách hóa đơn theo bộ lọc ngày và trạng thái
      */
@@ -27,11 +41,11 @@ const hoaDonModel = {
             params.push(trangThai);
         }
         if (tuNgay) {
-            sql += ` AND DATE(hd.ngay_tao) >= DATE(?)`;
+            sql += ` AND DATE(COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') >= DATE(?)`;
             params.push(tuNgay);
         }
         if (denNgay) {
-            sql += ` AND DATE(hd.ngay_tao) <= DATE(?)`;
+            sql += ` AND DATE(COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') <= DATE(?)`;
             params.push(denNgay);
         }
 

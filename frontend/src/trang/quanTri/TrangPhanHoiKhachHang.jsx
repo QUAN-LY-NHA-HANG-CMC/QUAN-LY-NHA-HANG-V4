@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Star, MessageSquareHeart, User, Calendar, Check } from 'lucide-react';
 import { api } from '../../dungChung/api';
+import { hienThiGioVietNam } from '../../dungChung/thoiGian';
 
 export default function TrangPhanHoiKhachHang() {
   const [danhGiaList, setDanhGiaList] = useState([]);
@@ -32,7 +33,7 @@ export default function TrangPhanHoiKhachHang() {
             <div className="flex justify-between items-start">
               <div>
                 <span className="font-extrabold text-sm text-[#272d29]">{dg.ten_ban}</span>
-                <p className="text-[11px] text-stone-400">{dg.ngay_tao}</p>
+                <p className="text-[11px] text-stone-400">{hienThiGioVietNam(dg.ngay_tao)}</p>
               </div>
 
               {/* Số sao */}

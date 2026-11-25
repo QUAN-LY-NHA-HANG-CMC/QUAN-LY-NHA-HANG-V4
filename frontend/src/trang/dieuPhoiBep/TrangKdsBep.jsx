@@ -10,6 +10,8 @@ import ModalChiDaoGapBatBuoc from './ModalChiDaoGapBatBuoc';
 import ModalDeNghiUuTien from './ModalDeNghiUuTien';
 import { laySocket } from '../../dungChung/ketNoiSocket';
 import { api } from '../../dungChung/api';
+import { dinhDangGio } from '../../dungChung/dinhDang';
+import { hienThiGioVietNam } from '../../dungChung/thoiGian';
 
 export default function TrangKdsBep({ ca, onDangXuat }) {
   const [tabHienTai, setTabHienTai] = useState('theoBan'); // 'theoBan' | 'gomMon' | 'daLamXong' | 'trangThaiMon'
@@ -110,7 +112,8 @@ export default function TrangKdsBep({ ca, onDangXuat }) {
 
   useEffect(() => {
     const socket = laySocket();
-    const suKien = ['connect', 'don_hang_moi', 'tien_do_mon_an', 'thuc_don:cap_nhat_con_mon', 'thuc_don:cap_nhat_so_suat'];
+    const suKien = ['connect', 'don_hang_moi', 'tien_do_mon_an', 'thanh_toan_thanh_cong', 'pos:xu_ly_mon',
+      'thuc_don:cap_nhat_con_mon', 'thuc_don:cap_nhat_so_suat'];
     suKien.forEach(ten => socket.on(ten, taiDuLieu));
     taiDuLieu();
     const henGio = setInterval(taiDuLieu, 30000);
@@ -241,7 +244,7 @@ export default function TrangKdsBep({ ca, onDangXuat }) {
                         </span>
                       </div>
                       <p className="text-xs opacity-90 mt-1">
-                        Gửi lúc: {phieu.thoi_gian_tao}
+                        Gửi lúc: {hienThiGioVietNam(phieu.thoi_gian_tao)}
                       </p>
                     </div>
 
@@ -406,7 +409,7 @@ export default function TrangKdsBep({ ca, onDangXuat }) {
                       <td className="p-3 font-bold text-sm text-[#272d29]">{item.ban}</td>
                       <td className="p-3 font-semibold">{item.ten_mon}</td>
                       <td className="p-3 font-bold text-[#b64d2d]">{item.so_luong}</td>
-                      <td className="p-3 text-stone-500">{item.thoi_gian_xong}</td>
+                      <td className="p-3 text-stone-500">{hienThiGioVietNam(item.thoi_gian_xong)}</td>
                       <td className="p-3 font-medium">{item.phuc_vu}</td>
                       <td className="p-3">
                         <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#ebf4ed] text-[#226b4c]">
@@ -483,7 +486,7 @@ export default function TrangKdsBep({ ca, onDangXuat }) {
                   id: cd.id,
                   tenNguoiTiepNhan: 'Bùi Văn Bếp Trưởng',
                   boPhan: 'bep',
-                  thoiGianTiepNhan: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+                  thoiGianTiepNhan: dinhDangGio(Date.now())
                 });
               }
             } catch (e) {
@@ -508,7 +511,7 @@ export default function TrangKdsBep({ ca, onDangXuat }) {
                 ...res,
                 tenBan: deNghiUuTienData?.tenBan || 'Bàn 03',
                 tenMon: deNghiUuTienData?.tenMon || 'Lẩu tôm chua cay',
-                thoiGianPhanHoi: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+                thoiGianPhanHoi: dinhDangGio(Date.now())
               });
             }
           }}

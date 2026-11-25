@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Printer, Calendar, Filter, Eye } from 'lucide-react';
 import { dinhDangTien } from '../../dungChung/dinhDang';
+import { hienThiGioVietNam } from '../../dungChung/thoiGian';
 
 import { api } from '../../dungChung/api';
 
@@ -87,7 +88,7 @@ export default function TrangLichSuHoaDonPos({ onXemChiTietIn }) {
               <tr key={hd.ma} className="hover:bg-stone-50/80 transition-colors">
                 <td className="p-4 font-mono font-bold text-[#b64d2d]">#{hd.ma}</td>
                 <td className="p-4 font-bold text-[#272d29]">{hd.ban}</td>
-                <td className="p-4 text-stone-500">{hd.gio}</td>
+                <td className="p-4 text-stone-500">{hienThiGioVietNam(hd.gio)}</td>
                 <td className="p-4">
                   <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold ${
                     hd.phuongThuc === 'VietQR' ? 'bg-emerald-50 text-[#226b4c]' : 'bg-amber-50 text-[#795c21]'

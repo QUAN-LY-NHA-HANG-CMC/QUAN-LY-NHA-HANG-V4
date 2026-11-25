@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Check, X } from 'lucide-react';
 import { dinhDangTien } from '../../dungChung/dinhDang';
+import { hienThiGioVietNam } from '../../dungChung/thoiGian';
 import ModalXacNhan from '../../thanhPhan/ModalXacNhan';
 
 import { api } from "../../dungChung/api";
@@ -92,7 +93,7 @@ export default function TrangDuyetHuyMonAdmin() {
 
               <div className="bg-stone-50 p-3 rounded-xl border border-stone-200 space-y-1">
                 <p><span className="font-bold text-stone-600">Nhân viên gửi:</span> {yc.nguoiYeuCau}</p>
-                <p><span className="font-bold text-stone-600">Thời gian:</span> {yc.thoiGian}</p>
+                <p><span className="font-bold text-stone-600">Thời gian:</span> {hienThiGioVietNam(yc.thoiGian)}</p>
                 <p><span className="font-bold text-stone-600">Lý do hủy:</span> "{yc.lyDo}"</p>
                 {yc.phanHoi && <p className="break-words"><strong>Lý do từ chối:</strong> {yc.phanHoi}</p>}
               </div>

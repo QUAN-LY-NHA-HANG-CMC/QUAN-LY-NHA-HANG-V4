@@ -130,7 +130,7 @@ const taiKhoanModel = {
 
             const sqlNv = `
                 INSERT INTO nhan_vien (tai_khoan_id, ho_ten, so_dien_thoai, email, cccd, hinh_thuc_lam_viec, muc_luong, ngay_vao_lam, trang_thai)
-                VALUES (?, ?, ?, ?, ?, ?, ?, COALESCE(?, CURRENT_DATE), 'dang_lam');
+                VALUES (?, ?, ?, ?, ?, ?, ?, COALESCE(?, DATE('now', '+7 hours')), 'dang_lam');
             `;
             const resNv = thucThi(sqlNv, [
                 taiKhoanId,

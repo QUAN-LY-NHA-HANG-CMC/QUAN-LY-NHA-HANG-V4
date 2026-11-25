@@ -63,7 +63,7 @@ export default function ModalHoSoNhanVien({
 
           <div className="bg-stone-50 p-3 rounded-xl border border-stone-200">
             <span className="text-stone-500 block text-[11px]">Ngày gia nhập nhà hàng</span>
-            <span className="font-semibold text-stone-800">{nhanVien.ngay_vao_lam || new Date().toISOString().slice(0, 10)}</span>
+            <span className="font-semibold text-stone-800">{nhanVien.ngay_vao_lam || '—'}</span>
           </div>
 
           {/* Đánh giá hiệu suất */}

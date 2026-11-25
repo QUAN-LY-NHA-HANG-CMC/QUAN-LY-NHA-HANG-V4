@@ -34,6 +34,7 @@ function layViecBan(banId = null) {
         FROM chi_tiet_don_mon c JOIN don_goi_mon d ON d.id=c.don_goi_mon_id
         JOIN phien_ban p ON p.id=d.phien_ban_id JOIN mon_an m ON m.id=c.mon_an_id
         WHERE p.trang_thai='dang_hoat_dong' AND d.trang_thai='da_duyet' AND c.trang_thai_mon='hoan_thanh'
+          AND NOT EXISTS (SELECT 1 FROM xu_ly_mon_pos x WHERE x.chi_tiet_id=c.id AND x.lua_chon IN ('goi_mang_ve','khong_lay'))
         UNION ALL
         SELECT 'don_ban',p.id,p.ban_an_id,'Dọn bàn sau thanh toán',p.thoi_gian_ket_thuc
         FROM phien_ban p JOIN ban_an b ON b.id=p.ban_an_id

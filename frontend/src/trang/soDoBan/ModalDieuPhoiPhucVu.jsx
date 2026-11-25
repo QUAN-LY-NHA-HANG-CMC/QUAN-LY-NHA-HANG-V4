@@ -6,6 +6,7 @@
 import React from 'react';
 import { AlertTriangle, Clock, User, CheckCircle2, X, MapPin, Sparkles } from 'lucide-react';
 import { api } from '../../dungChung/api';
+import { dinhDangGio } from '../../dungChung/dinhDang';
 import { laySocket } from '../../dungChung/ketNoiSocket';
 
 export default function ModalDieuPhoiPhucVu({
@@ -34,7 +35,7 @@ export default function ModalDieuPhoiPhucVu({
           tenNguoiTiepNhan: user?.ho_ten || 'Lê Văn Minh (Phục vụ)',
           boPhan: 'phuc_vu',
           tenBan,
-          thoiGianTiepNhan: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+          thoiGianTiepNhan: dinhDangGio(Date.now())
         });
       }
     } catch (e) {

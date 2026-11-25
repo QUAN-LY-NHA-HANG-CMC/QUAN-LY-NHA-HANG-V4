@@ -10,6 +10,7 @@ import {
   ArrowRightLeft, UserCheck, UserX, Info 
 } from 'lucide-react';
 import { api } from '../../dungChung/api';
+import { hienThiGioVietNam } from '../../dungChung/thoiGian';
 import ModalXacNhan from '../../thanhPhan/ModalXacNhan';
 
 export default function TrangDuyetNghiDoiCaAdmin({ onQuayLaiLich }) {
@@ -180,7 +181,7 @@ export default function TrangDuyetNghiDoiCaAdmin({ onQuayLaiLich }) {
                     }`}>
                       {laDoiCa ? 'Đổi ca làm việc' : 'Nghỉ ca làm'}
                     </span>
-                    <span className="text-stone-400 text-[11px]">· {yc.ngay_tao}</span>
+                    <span className="text-stone-400 text-[11px]">· {hienThiGioVietNam(yc.ngay_tao)}</span>
                   </div>
 
                   <div className="bg-stone-50 p-3 rounded-xl border border-stone-200 space-y-1 text-stone-700">

@@ -4,12 +4,18 @@
 // ============================================================================
 
 import React from 'react';
-import { X, Printer, Check } from 'lucide-react';
+import { X, Printer } from 'lucide-react';
 import { dinhDangTien } from '../../dungChung/dinhDang';
-export default function ModalInHoaDonK80({ ban, hoaDon, onDong }) {
-  const { danhSachMon: chiTiet, tong_tien_mon: tongTienMon,
+import { hienThiGioVietNam } from '../../dungChung/thoiGian';
+export default function ModalInHoaDonK80({ ban, hoaDon = {}, phieuThu, onDong }) {
+  const { danhSachMon: chiTiet = [], tong_tien_mon: tongTienMon,
     tien_vat: vat, tong_tien_thanh_toan: tongCong, tien_chiet_khau: giamGia,
-    ma_hoa_don: maHoaDon, ten_thu_ngan: thuNgan } = hoaDon;
+    ma_hoa_don: maHoaDon, ten_thu_ngan: thuNgan,
+    tien_khach_dua: tienKhachDua, tien_thoi_lai: tienThoiLai } = hoaDon;
+  const cacDotThu = hoaDon.cacDotThu ?? [];
+  const tienThuCuoi = tongCong - cacDotThu.filter(dot => dot.mot_phan).reduce((tong, dot) => tong + dot.so_tien, 0);
+  const daGhiNhanTienNhan = tienKhachDua != null && tienKhachDua >= tienThuCuoi;
+  const dinhDangPhuongThuc = ma => ({ VIETQR: 'VietQR', TIEN_MAT: 'Tiền mặt', THE_POS: 'Thẻ POS' })[ma] || ma;
 
   return (
     <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
@@ -20,7 +26,7 @@ export default function ModalInHoaDonK80({ ban, hoaDon, onDong }) {
             <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">
               XEM TRƯỚC BẢN IN
             </span>
-            <h3 className="font-bold text-sm">Hóa đơn nhiệt K80 (80mm)</h3>
+            <h3 className="font-bold text-sm">{phieuThu ? 'Phiếu thu K80' : 'Hóa đơn nhiệt K80 (80mm)'}</h3>
           </div>
           <button onClick={onDong} className="p-1 rounded-full hover:bg-white/10 text-white/70">
             <X size={18} />
@@ -34,6 +40,23 @@ export default function ModalInHoaDonK80({ ban, hoaDon, onDong }) {
             <h2 className="font-sans font-black text-2xl tracking-tighter text-[#b64d2d]">mộc</h2>
           </div>
 
+          {phieuThu ? (
+            <>
+            <h3 className="text-center text-sm font-bold">PHIẾU THU #{phieuThu.id}</h3>
+              <p>{phieuThu.ten_ban} · {phieuThu.ma_hoa_don}</p>
+              <p>{hienThiGioVietNam(phieuThu.thoi_gian_tao)} · {dinhDangPhuongThuc(phieuThu.phuong_thuc)}</p>
+              <dl className="space-y-2 border-y border-dashed border-stone-300 py-3">
+                {[
+                  ['Tổng bill tại lần thu', phieuThu.tong_hoa_don],
+                  ['Đã thu trước', phieuThu.da_thu_truoc],
+                  ['Thu lần này', phieuThu.so_tien],
+                  ['Tổng đã thanh toán', phieuThu.da_thu_truoc + phieuThu.so_tien],
+                  ['Còn phải thu', phieuThu.tong_hoa_don - phieuThu.da_thu_truoc - phieuThu.so_tien]
+                ].map(([nhan, tien]) => <div key={nhan} className="flex justify-between"><dt>{nhan}</dt><dd>{dinhDangTien(tien)}</dd></div>)}
+              </dl>
+              <p className="text-center">Bàn tiếp tục phục vụ.</p>
+            </>
+          ) : <>
           {/* Thông tin hóa đơn */}
           <div className="py-2 border-b border-dashed border-stone-300 space-y-1 text-[11px]">
             <div className="flex justify-between">
@@ -41,7 +64,7 @@ export default function ModalInHoaDonK80({ ban, hoaDon, onDong }) {
               <span>BÀN: {ban.ten_ban}</span>
             </div>
             <div className="flex justify-between">
-              <span>Ngày: {hoaDon.thoi_gian_thanh_toan || hoaDon.ngay_tao}</span>
+              <span>Ngày: {hienThiGioVietNam(hoaDon.thoi_gian_thanh_toan || hoaDon.ngay_tao)}</span>
               <span>Thu ngân: {thuNgan}</span>
             </div>
           </div>
@@ -82,6 +105,25 @@ export default function ModalInHoaDonK80({ ban, hoaDon, onDong }) {
               <span>TỔNG CỘNG:</span>
               <span>{dinhDangTien(tongCong)}</span>
             </div>
+            {hoaDon.trang_thai === 'da_thanh_toan' && (
+              <>
+                {cacDotThu.length > 0 && <div className="space-y-1">
+                  <p className="font-bold">Đã thanh toán {cacDotThu.length} đợt</p>
+                  {cacDotThu.map((dot, i) => <div key={dot.id} className="flex justify-between">
+                    <span>Đợt {i + 1} · {dinhDangPhuongThuc(dot.phuong_thuc)}</span>
+                    <span>{dinhDangTien(dot.so_tien)}</span>
+                  </div>)}
+                </div>}
+                <div className="flex justify-between">
+                  <span>{cacDotThu.some(dot => dot.mot_phan) ? 'Tiền nhận khi chốt bàn:' : 'Tiền nhận từ khách:'}</span>
+                  <span>{daGhiNhanTienNhan ? dinhDangTien(tienKhachDua) : 'Chưa ghi nhận'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Tiền thối lại:</span>
+                  <span>{daGhiNhanTienNhan && tienThoiLai != null ? dinhDangTien(tienThoiLai) : 'Chưa ghi nhận'}</span>
+                </div>
+              </>
+            )}
           </div>
 
           {/* QR đánh giá & Lời cảm ơn */}
@@ -89,6 +131,7 @@ export default function ModalInHoaDonK80({ ban, hoaDon, onDong }) {
             <p className="font-bold text-[11px]">CẢM ƠN QUÝ KHÁCH & HẸN GẶP LẠI!</p>
             <p className="text-[10px] text-stone-500">Quét mã QR trên bàn để gửi góp ý cho nhà hàng</p>
           </div>
+          </>}
         </div>
 
         {/* Nút in */}
@@ -101,7 +144,7 @@ export default function ModalInHoaDonK80({ ban, hoaDon, onDong }) {
             className="w-full py-3.5 bg-[#2d4336] hover:bg-[#202e28] text-white rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
           >
             <Printer size={18} />
-            <span>In hóa đơn K80</span>
+            <span>{phieuThu ? 'In phiếu thu' : 'In hóa đơn K80'}</span>
           </button>
         </div>
       </div>

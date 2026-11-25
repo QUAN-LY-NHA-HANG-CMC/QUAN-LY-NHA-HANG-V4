@@ -6,6 +6,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import DinhTuyenUngDung from './dinhTuyen/DinhTuyenUngDung';
 import ThongBaoToast from './thanhPhan/ThongBaoToast';
+import ThongBaoXuLyMonPos from './thanhPhan/ThongBaoXuLyMonPos';
 import { taoKetNoiSocket } from './dungChung/ketNoiSocket';
 import { api } from './dungChung/api';
 import { layThamSoUrl, capNhatUrl } from './dungChung/dieuHuongUrl';
@@ -138,6 +139,8 @@ export default function App() {
     <div className="min-h-screen bg-[#f9f7f2] text-[#272d29] flex flex-col font-sans selection:bg-[#f9ede6] selection:text-[#b64d2d]">
       {/* Vùng hiển thị màn hình 100% chuẩn Figma (Không có thanh công cụ trên cùng) */}
       <main className="flex-1 flex flex-col">
+        {['bep', 'phuc_vu', 'thu_ngan', 'quan_ly'].includes(api.layNguoiDung()?.vaiTro) &&
+          ['bep', 'phucVu', 'thuNgan'].includes(phanHe) && <ThongBaoXuLyMonPos key={phanHe} />}
         <Suspense fallback={<p role="status" className="p-5">Đang tải màn hình…</p>}>
           <DinhTuyenUngDung
             phanHeHienTai={phanHe}

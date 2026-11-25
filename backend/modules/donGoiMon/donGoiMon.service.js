@@ -29,6 +29,8 @@ function timMonConPhien(chiTietId) {
 }
 
 function huyMonTrongGiaoDich(mon, nhanVienId, lyDo) {
+    if (truyVanMot("SELECT 1 FROM xu_ly_mon_pos WHERE chi_tiet_id=? AND lua_chon IN ('goi_mang_ve','khong_lay')", [mon.id]))
+        throw loiNghiepVu('Thu ngân đã ghi nhận cách xử lý món này.');
     const trangThai = mon.trang_thai_mon;
     if (!TRANG_THAI_CO_THE_HUY.includes(trangThai)) throw loiNghiepVu('Món đã hủy hoặc đang chờ duyệt hủy.');
     if (trangThai === 'cho_duyet') {
@@ -280,7 +282,8 @@ const donGoiMonService = {
                 if (thiet_bi_tao_id !== thietBiId) return { ...mon, coQuyenYeuCauHuy: false };
                 return {
                     ...mon, trang_thai_huy_khach,
-                    coQuyenYeuCauHuy: TRANG_THAI_CO_THE_HUY.includes(mon.trang_thai_mon) && trang_thai_huy_khach !== 'cho_phuc_vu'
+                    coQuyenYeuCauHuy: !mon.xu_ly_pos && TRANG_THAI_CO_THE_HUY.includes(mon.trang_thai_mon) &&
+                        trang_thai_huy_khach !== 'cho_phuc_vu'
                 };
             });
         return {
@@ -379,6 +382,8 @@ const donGoiMonService = {
             if (mon?.phien_id !== thietBi.phien_ban_id || mon?.thiet_bi_tao_id !== thietBi.id)
                 throw loiNghiepVu('Chỉ thiết bị đã đặt món này mới được yêu cầu hủy.', 403);
             if (!TRANG_THAI_CO_THE_HUY.includes(mon.trang_thai_mon)) throw loiNghiepVu('Món đã hủy hoặc đang chờ duyệt hủy.');
+            if (truyVanMot("SELECT 1 FROM xu_ly_mon_pos WHERE chi_tiet_id=? AND lua_chon IN ('goi_mang_ve','khong_lay')", [chiTietId]))
+                throw loiNghiepVu('Thu ngân đã ghi nhận cách xử lý món này.');
             const cu = truyVanMot("SELECT id FROM yeu_cau_huy_mon_khach WHERE chi_tiet_don_mon_id=? AND trang_thai='cho_phuc_vu'", [chiTietId]);
             const id = cu?.id ?? Number(thucThi(`INSERT INTO yeu_cau_huy_mon_khach
                 (chi_tiet_don_mon_id, ly_do, trang_thai) VALUES (?, ?, 'cho_phuc_vu')`, [chiTietId, lyDo.trim()]).lastInsertRowid);
@@ -403,10 +408,11 @@ const donGoiMonService = {
         return { huyNgay: false, tuChoi: true };
     },
 
-    yeuCauHuyMon({ chiTietDonMonId, nhanVienYeuCauId, lyDoHuy }) {
+    yeuCauHuyMon({ chiTietDonMonId, nhanVienYeuCauId, lyDoHuy, chonChiTiet }) {
         if (!chiTietDonMonId || !nhanVienYeuCauId || typeof lyDoHuy !== 'string' || !lyDoHuy.trim())
             throw loiNghiepVu('Vui lòng chọn món cần hủy và nhập lý do giải trình.', 400);
         const { mon, phieuQuanLyId } = chayGiaoDich(() => {
+            if (chonChiTiet) chiTietDonMonId = chonChiTiet().id;
             const mon = timMonConPhien(chiTietDonMonId);
             if (!mon) throw loiNghiepVu('Không tìm thấy dòng món ăn cần hủy.', 404);
             const phieuQuanLyId = huyMonTrongGiaoDich(mon, nhanVienYeuCauId, lyDoHuy.trim());

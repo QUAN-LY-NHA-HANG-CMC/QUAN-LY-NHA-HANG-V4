@@ -131,6 +131,9 @@ function phatChoPhucVuTheoBan(ten, duLieu) {
 }
 
 const socketPhat = {
+    xuLyMonPosThayDoi: () => {
+        if (io) io.to(['bep', 'phuc_vu', 'thu_ngan', 'quan_ly']).emit('pos:xu_ly_mon');
+    },
     viecBanThayDoi: () => {
         if (io) io.to(['phuc_vu', 'thu_ngan', 'quan_ly']).emit('ban:cap_nhat_cong_viec');
     },
@@ -180,6 +183,7 @@ const socketPhat = {
     thanhToanThanhCong: (duLieu) => {
         if (!io) return;
         phatChoPhucVuTheoBan('thanh_toan_thanh_cong', duLieu);
+        io.to('bep').emit('thanh_toan_thanh_cong', { banId: duLieu.banId });
         socketPhat.viecBanThayDoi();
         io.to('thu_ngan').emit('thanh_toan_thanh_cong', duLieu);
         io.to('quan_ly').emit('thanh_toan_thanh_cong', duLieu);

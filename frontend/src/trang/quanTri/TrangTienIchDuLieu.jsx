@@ -47,13 +47,13 @@ export default function TrangTienIchDuLieu() {
     });
   };
 
-  // Làm sạch đơn hàng & ca làm việc (giữ danh mục, món ăn, bàn ăn, nhân viên)
+  // Làm sạch dữ liệu giao dịch
   const handleLamSachNghiepVu = () => {
     setXacNhanAction({
       tieuDe: 'Làm sạch đơn gọi món & phiên bàn',
       phanLoai: 'DỌN DẸP DỮ LIỆU GIAO DỊCH',
-      noiDung: 'Hành động này sẽ xóa sạch: toàn bộ đơn gọi món, hóa đơn, lịch sử chia tiền, phiên bàn và yêu cầu hỗ trợ (vẫn giữ nguyên danh mục món, bàn ăn và nhân viên).',
-      canhBaoPhu: 'Thao tác này phù hợp khi bạn muốn bắt đầu một ngày kinh doanh mới.',
+      noiDung: 'Xóa đơn gọi món, phiên bàn, hóa đơn, thanh toán, yêu cầu hỗ trợ và hủy món, công việc và chỉ đạo liên quan, đánh giá, phiếu thu chi và nhật ký kiểm toán. Trạng thái bàn sẽ về Trống.',
+      canhBaoPhu: 'Lịch làm việc, yêu cầu đổi ca, phân công bàn, nhân viên và danh mục được giữ lại.',
       loai: 'canhBao',
       nhanNutXacNhan: 'Làm sạch giao dịch',
       onThucHien: async () => {
@@ -85,7 +85,7 @@ export default function TrangTienIchDuLieu() {
     setXacNhanAction({
       tieuDe: 'Xóa trắng dữ liệu và giữ quản lý',
       phanLoai: 'CẢNH BÁO NGUY HIỂM TỐI CAO',
-      noiDung: 'Thao tác này xóa giao dịch, món ăn, phòng bàn, cấu hình và tài khoản nhân viên khác. Tài khoản, hồ sơ và quyền quản lý được giữ lại.',
+      noiDung: 'Thao tác này xóa giao dịch, ca làm việc, yêu cầu đổi ca, phân công bàn, món ăn, phòng bàn, cấu hình và tài khoản nhân viên khác. Tài khoản, hồ sơ và quyền quản lý được giữ lại.',
       canhBaoPhu: '⚠️ Dữ liệu sau khi xóa sẽ không thể phục hồi trừ khi bạn đã sao lưu hoặc nạp lại dữ liệu mẫu.',
       loai: 'nguyHiem',
       nhanNutXacNhan: 'Xóa trắng CSDL',
@@ -226,7 +226,7 @@ export default function TrangTienIchDuLieu() {
               <span>Làm Sạch Giao Dịch</span>
             </div>
             <p className="text-[11px] text-amber-700 leading-relaxed">
-              Dọn dẹp sạch toàn bộ đơn gọi món, hóa đơn, thanh toán, phiên bàn. Giữ nguyên danh mục món ăn, danh sách bàn và tài khoản nhân viên.
+              Xóa dữ liệu giao dịch và đưa bàn về Trống. Giữ lại ca làm việc, yêu cầu đổi ca, phân công bàn, danh mục và nhân viên.
             </p>
           </div>
           <button

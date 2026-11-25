@@ -33,7 +33,8 @@ import {
 } from 'lucide-react';
 import { api } from '../../dungChung/api';
 import { laySocket } from '../../dungChung/ketNoiSocket';
-import { dinhDangTien } from '../../dungChung/dinhDang';
+import { dinhDangGio, dinhDangNgay, dinhDangTien } from '../../dungChung/dinhDang';
+import { hienThiGioVietNam, ngayVietNam } from '../../dungChung/thoiGian';
 import { layThamSoUrl, capNhatUrl } from '../../dungChung/dieuHuongUrl';
 
 export default function TrangBaoCaoDoanhThu() {
@@ -119,7 +120,7 @@ export default function TrangBaoCaoDoanhThu() {
       const res = await api.get(`/api/bao-cao/tat-ca?ky=${kyBaoCao}`);
       if (res) {
         setDuLieuBaoCao(res);
-        setThoiGianCapNhat(new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+        setThoiGianCapNhat(dinhDangGio(Date.now()));
       }
     } catch (err) {
       setDuLieuBaoCao(null);
@@ -218,9 +219,9 @@ export default function TrangBaoCaoDoanhThu() {
               }}
               className="bg-[#f7f5f0] border border-stone-200 rounded-xl px-4 py-2.5 text-xs font-bold text-[#272d29] hover:border-stone-300 focus:outline-hidden focus:ring-2 focus:ring-[#2d4336]/20 transition-all cursor-pointer"
             >
-              <option value="hom_nay">Hôm nay ({new Date().toLocaleDateString('vi-VN')})</option>
+              <option value="hom_nay">Hôm nay ({dinhDangNgay(ngayVietNam())})</option>
               <option value="7_ngay">7 ngày gần nhất</option>
-              <option value="thang_nay">Tháng này ({new Date().getMonth() + 1}/{new Date().getFullYear()})</option>
+              <option value="thang_nay">Tháng này ({ngayVietNam().slice(5, 7)}/{ngayVietNam().slice(0, 4)})</option>
               <option value="tat_ca">Toàn bộ thời gian</option>
             </select>
           </div>
@@ -856,7 +857,7 @@ export default function TrangBaoCaoDoanhThu() {
                       ) : (
                         soQuy.danhSachPhieu?.map((p, idx) => (
                           <tr key={idx} className="hover:bg-[#fbf9f5] transition-colors">
-                            <td className="py-3.5 px-4 text-stone-500 font-medium">{p.thoi_gian_tao}</td>
+                            <td className="py-3.5 px-4 text-stone-500 font-medium">{hienThiGioVietNam(p.thoi_gian_tao)}</td>
                             <td className="py-3.5 px-3 text-center">
                               <span
                                 className={`px-2.5 py-0.5 rounded-full text-[10px] font-black ${
@@ -995,7 +996,7 @@ export default function TrangBaoCaoDoanhThu() {
                         "{dg.nhan_xet}"
                       </p>
                       <span className="text-[10px] text-stone-400 block pt-1 border-t border-stone-200/50">
-                        {dg.ngay_tao}
+                        {hienThiGioVietNam(dg.ngay_tao)}
                       </span>
                     </div>
                   ))}

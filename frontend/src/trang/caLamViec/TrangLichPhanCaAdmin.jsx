@@ -10,23 +10,21 @@ import {
   Trash2, AlertCircle, RefreshCw, Eye, Sparkles, Filter 
   , X } from 'lucide-react';
 import { api } from '../../dungChung/api';
+import { ngayVietNam } from '../../dungChung/thoiGian';
 import ModalThemCaLamViec from './ModalThemCaLamViec';
 import ModalXacNhan from '../../thanhPhan/ModalXacNhan';
 
 // Hàm lấy ngày Thứ 2 đầu tuần của 1 ngày bất kỳ
-function layThuHaiDauTuan(d = new Date()) {
-  const date = new Date(d);
-  const day = date.getDay();
-  const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Thứ 2 là ngày bắt đầu tuần
-  return new Date(date.setDate(diff));
+function layThuHaiDauTuan() {
+  const date = new Date(ngayVietNam() + 'T00:00:00Z');
+  const day = date.getUTCDay();
+  const diff = date.getUTCDate() - day + (day === 0 ? -6 : 1);
+  return new Date(date.setUTCDate(diff));
 }
 
 // Định dạng YYYY-MM-DD
 function dinhDangYYYYMMDD(d) {
-  const nam = d.getFullYear();
-  const thang = String(d.getMonth() + 1).padStart(2, '0');
-  const ngay = String(d.getDate()).padStart(2, '0');
-  return `${nam}-${thang}-${ngay}`;
+  return d.toISOString().slice(0, 10);
 }
 
 export default function TrangLichPhanCaAdmin({ onChuyenSangDuyetNghi }) {
@@ -48,11 +46,11 @@ export default function TrangLichPhanCaAdmin({ onChuyenSangDuyetNghi }) {
   // Sinh 7 ngày trong tuần từ Thứ 2 đến Chủ nhật
   const cacNgayTrongTuan = Array.from({ length: 7 }, (_, i) => {
     const d = new Date(ngayDauTuan);
-    d.setDate(ngayDauTuan.getDate() + i);
+    d.setUTCDate(ngayDauTuan.getUTCDate() + i);
     const tenThu = i === 6 ? 'Chủ nhật' : `Thứ ${i + 2}`;
-    const ngayThang = `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+    const ngayThang = `${String(d.getUTCDate()).padStart(2, '0')}/${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
     const yyyymmdd = dinhDangYYYYMMDD(d);
-    const laHomNay = yyyymmdd === dinhDangYYYYMMDD(new Date());
+    const laHomNay = yyyymmdd === ngayVietNam();
     return { tenThu, ngayThang, yyyymmdd, laHomNay };
   });
 
@@ -100,13 +98,13 @@ export default function TrangLichPhanCaAdmin({ onChuyenSangDuyetNghi }) {
   // Điều hướng tuần
   const chuyenTuanTruoc = () => {
     const d = new Date(ngayDauTuan);
-    d.setDate(ngayDauTuan.getDate() - 7);
+    d.setUTCDate(ngayDauTuan.getUTCDate() - 7);
     setNgayDauTuan(d);
   };
 
   const chuyenTuanSau = () => {
     const d = new Date(ngayDauTuan);
-    d.setDate(ngayDauTuan.getDate() + 7);
+    d.setUTCDate(ngayDauTuan.getUTCDate() + 7);
     setNgayDauTuan(d);
   };
 
@@ -426,7 +424,7 @@ export default function TrangLichPhanCaAdmin({ onChuyenSangDuyetNghi }) {
           canhBaoPhu="Ca làm việc này sẽ được loại bỏ khỏi lịch tuần của nhân viên."
           loai="nguyHiem"
           nhanNutXacNhan="Xóa ca"
-          onDong={() => setCaXoa(null)}
+          onHuy={() => setCaXoa(null)}
           onXacNhan={handleXacNhanXoaCa}
         />
       )}

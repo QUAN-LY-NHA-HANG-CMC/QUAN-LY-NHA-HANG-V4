@@ -254,8 +254,30 @@ async function kiemThuThamGiaBan({ baseUrl, db, headersQuanLy, headersThuNgan, h
     const urlBill = '/hoa-don/ban/' + ban.id + '/hoa-don';
     const billB = await request(urlBill, B);
     await request('/hoa-don/' + bill.id + '/thanh-toan', B, 'POST', {}, 401);
-    await request('/hoa-don/' + bill.id + '/thanh-toan', headersThuNgan, 'POST',
-        { phuongThucThanhToan: 'tien_mat', tienKhachDua: bill.tong_tien_thanh_toan });
+    const chiTiet = (await request('/hoa-don/tam-tinh/' + ban.id, headersThuNgan)).chiTietXuLyMon;
+    for (const mon of chiTiet.filter(muc => muc.trang_thai_don === 'da_duyet' &&
+        ['cho_duyet', 'dang_nau', 'hoan_thanh'].includes(muc.trang_thai_mon))) {
+        await request('/hoa-don/ban/' + ban.id + '/mon/' + mon.id + '/xu-ly', headersThuNgan, 'POST',
+            { luaChon: mon.id === idMonA ? 'goi_mang_ve' : 'khong_lay', trangThai: mon.trang_thai_mon });
+    }
+    const thuDu = { soTien: bill.tong_tien_thanh_toan, phuongThuc: 'vietqr', maYeuCau: randomUUID() };
+    assert.equal((await request('/hoa-don/' + bill.id + '/qr-mot-phan', headersThuNgan, 'POST', thuDu)).soTien, thuDu.soTien);
+    await request('/hoa-don/' + bill.id + '/thu-mot-phan', headersThuNgan, 'POST', thuDu);
+    assert.equal((await request('/hoa-don/tam-tinh/' + ban.id, headersThuNgan)).conPhaiThu, 0);
+    assert.equal(db.prepare('SELECT trang_thai FROM phien_ban WHERE id=?').get(a.phienId).trang_thai, 'dang_hoat_dong');
+    await docGio(B);
+    const chot = await request('/hoa-don/' + bill.id + '/thanh-toan', headersThuNgan, 'POST',
+        { phuongThucThanhToan: 'tien_mat', tienKhachDua: 0, soTienDuKien: 0 });
+    assert.equal(chot.cacDotThu.length, 1);
+    assert.equal(chot.cacDotThu[0].so_tien, thuDu.soTien);
+    log('POS', 'thu đủ vẫn giữ bàn mở, chốt 0đ không tạo giao dịch trùng');
+    const hangDoiSauThanhToan = await request('/dieu-phoi-bep/hang-doi', headersBep);
+    assert.ok(hangDoiSauThanhToan.some(mon => mon.chi_tiet_id === idMonA));
+    for (const trangThaiMoi of ['dang_nau', 'hoan_thanh']) {
+        await request('/dieu-phoi-bep/chi-tiet/' + idMonA + '/trang-thai', headersBep, 'PUT', { trangThaiMoi });
+    }
+    await request('/hoa-don/chi-dao-mon/' + idMonA, headersBep, 'PUT', { buoc: 'bep' });
+    log('POS', 'bếp tiếp tục chế biến và gói món mang về sau khi thanh toán đóng bàn');
     await nhapMa(D, d.id, moiD.maMoi, 403);
     await request(urlGio, A, 'GET', null, 403);
     await request(urlGio, B, 'PUT', { phienId: a.phienId, phienSua: 0, monId: 1, soLuong: 1 }, 403);
@@ -277,6 +299,23 @@ async function kiemThuThamGiaBan({ baseUrl, db, headersQuanLy, headersThuNgan, h
     const datHo = await request('/don-goi-mon', headersQuanLy, 'POST', { banId: ban.id, nguonTao: 'phuc_vu_dat_ho',
         danhSachMon: [{ monAnId: 1, soLuong: 1 }] }, 201);
     assert.equal(datHo.trangThai, 'da_duyet');
+    const chiTietDatHo = db.prepare('SELECT id FROM chi_tiet_don_mon WHERE don_goi_mon_id=?').get(datHo.donGoiMonId).id;
+    for (const trangThaiMoi of ['dang_nau', 'hoan_thanh', 'da_phuc_vu']) {
+        await request('/dieu-phoi-bep/chi-tiet/' + chiTietDatHo + '/trang-thai',
+            trangThaiMoi === 'da_phuc_vu' ? headersQuanLy : headersBep, 'PUT', { trangThaiMoi });
+    }
+    const yeuCau = await request('/don-goi-mon/huy-mon', headersThuNgan, 'POST',
+        { chiTietDonMonId: chiTietDatHo, lyDoHuy: 'Khách xin hủy món cuối' });
+    await request('/don-goi-mon/yeu-cau-huy-mon/' + yeuCau.yeuCauId + '/phe-duyet', headersQuanLy, 'PUT', { chapNhan: true });
+    const billRong = await request('/hoa-don/tam-tinh/' + ban.id, headersThuNgan);
+    assert.equal(billRong.coTheChotBillRong, true);
+    const hdRong = await request('/hoa-don/tao-hoa-don', headersThuNgan, 'POST', { banId: ban.id }, 201);
+    assert.equal(hdRong.tong_tien_thanh_toan, 0);
+    const chotRong = await request('/hoa-don/' + hdRong.id + '/thanh-toan', headersThuNgan, 'POST',
+        { tienKhachDua: 0, soTienDuKien: 0 });
+    assert.deepEqual(chotRong.cacDotThu, []);
+    assert.equal(db.prepare('SELECT trang_thai FROM ban_an WHERE id=?').get(ban.id).trang_thai, 'can_don_dep');
+    log('POS', 'duyệt hủy món cuối đã bưng vẫn chốt bill 0đ và chuyển bàn sang cần dọn');
     log('TC-18–20', 'đóng phiên thu hồi quyền, bill đúng thiết bị và luồng nhân viên đặt hộ vẫn hoạt động');
 }
 

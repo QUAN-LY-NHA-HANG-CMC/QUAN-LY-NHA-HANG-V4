@@ -22,6 +22,7 @@ import {
   ShieldAlert
 } from 'lucide-react';
 import { api } from '../../dungChung/api';
+import { hienThiGioVietNam } from '../../dungChung/thoiGian';
 import { laySocket } from '../../dungChung/ketNoiSocket';
 
 export default function TrangDieuPhoiKhanCap() {
@@ -529,7 +530,7 @@ export default function TrangDieuPhoiKhanCap() {
                     <div className="flex items-center gap-3 text-[11px] text-stone-400">
                       <span>Người phát: <b className="text-stone-600">{l.ten_nguoi_gui || 'Quản lý'}</b></span>
                       <span>•</span>
-                      <span>{l.thoi_gian_tao}</span>
+                      <span>{hienThiGioVietNam(l.thoi_gian_tao)}</span>
                     </div>
                   </div>
 

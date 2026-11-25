@@ -49,7 +49,10 @@ const dieuPhoiBepService = {
             throw new Error('Không tìm thấy chi tiết món ăn trong hàng đợi bếp');
         }
 
-        if (chiTiet.trang_thai_phien !== 'dang_hoat_dong' || chiTiet.trang_thai_don !== 'da_duyet') {
+        const dangLamMangVe = chiTiet.lua_chon === 'goi_mang_ve' && chiTiet.buoc === 'bep';
+        if (chiTiet.trang_thai_don !== 'da_duyet' || chiTiet.lua_chon === 'khong_lay' ||
+            (chiTiet.lua_chon === 'goi_mang_ve' && trangThaiMoi === 'da_phuc_vu') ||
+            (chiTiet.trang_thai_phien !== 'dang_hoat_dong' && !dangLamMangVe)) {
             throw new Error('Món chưa được duyệt hoặc phiên bàn đã đóng');
         }
         const trangThaiKeTiep = { cho_duyet: 'dang_nau', dang_nau: 'hoan_thanh', hoan_thanh: 'da_phuc_vu' };

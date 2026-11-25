@@ -6,6 +6,7 @@
 import React from 'react';
 import { CreditCard, Clock, User, CheckCircle2, X, AlertTriangle, Receipt } from 'lucide-react';
 import { api } from '../../dungChung/api';
+import { dinhDangGio } from '../../dungChung/dinhDang';
 import { laySocket } from '../../dungChung/ketNoiSocket';
 
 export default function ModalDieuPhoiThuNgan({
@@ -33,7 +34,7 @@ export default function ModalDieuPhoiThuNgan({
           tenNguoiTiepNhan: user?.ho_ten || 'Trần Thị Thu Ngân (Thu ngân)',
           boPhan: 'thu_ngan',
           tenBan,
-          thoiGianTiepNhan: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
+          thoiGianTiepNhan: dinhDangGio(Date.now())
         });
       }
     } catch (e) {

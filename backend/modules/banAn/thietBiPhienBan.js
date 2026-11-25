@@ -32,7 +32,8 @@ function yeuCauQuyen(banId, khoa) {
 }
 
 function layYeuCau(phienId) {
-    return truyVanNhieu(`SELECT id, trang_thai, ma_moi AS maMoi, ma_het_han AS hetHan
+    return truyVanNhieu(`SELECT id, trang_thai, ma_moi AS maMoi,
+        CASE WHEN trang_thai = 'cho_duyet' THEN doi_den ELSE ma_het_han END AS hetHan
         FROM thiet_bi_phien_ban WHERE phien_ban_id = ? AND (
             (trang_thai = 'cho_duyet' AND doi_den > ?) OR
             (trang_thai = 'cho_ma' AND ma_het_han > ?)

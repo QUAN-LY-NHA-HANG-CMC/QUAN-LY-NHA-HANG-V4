@@ -6,6 +6,7 @@
 import React from 'react';
 import { X, CheckCircle2, XCircle, Send } from 'lucide-react';
 import { dinhDangTien } from '../../dungChung/dinhDang';
+import { hienThiGioVietNam } from '../../dungChung/thoiGian';
 
 export default function ModalDuyetDonQr({
   donMon,
@@ -41,7 +42,7 @@ export default function ModalDuyetDonQr({
         </div>
 
         <p className="text-xs text-[#72776f] my-3 leading-relaxed">
-          Khách vừa gửi yêu cầu qua QR lúc {donMon.thoi_gian || '19:25'}. Vui lòng kiểm tra lại trước khi chuyển xuống Bếp KDS.
+          Khách vừa gửi yêu cầu qua QR lúc {hienThiGioVietNam(donMon.thoi_gian)}. Vui lòng kiểm tra lại trước khi chuyển xuống Bếp KDS.
         </p>
 
         {/* Danh sách món */}

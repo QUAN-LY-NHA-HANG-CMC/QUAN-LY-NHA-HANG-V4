@@ -384,7 +384,7 @@ export default function DinhTuyenUngDung({ phanHeHienTai, onChuyenPhanHe, thongT
       return (
         <TrangVietQrKhach
           ban={thongTinBan}
-          tongTien={hoaDonKhach.tong_tien_thanh_toan}
+          tongTien={hoaDonKhach.conPhaiThu ?? hoaDonKhach.tong_tien_thanh_toan}
           vietQr={hoaDonKhach.vietQr}
           onQuayLaiYeuCau={() => setTrangKhach('yeuCauThanhToan')}
           onChuyenTab={chuyenTabKhach}

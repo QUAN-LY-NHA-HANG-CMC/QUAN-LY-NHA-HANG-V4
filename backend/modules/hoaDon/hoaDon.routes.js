@@ -16,6 +16,32 @@ const { phanHoiThanhCong, phanHoiLoi } = require('../../tienIch/dinhDangPhanHoi'
 const hoaDonController = require('./hoaDon.controller');
 const { xacThucNguoiDung, xacThucTuyChon } = require('../../middleware/xacThuc');
 const { phanQuyen } = require('../../middleware/phanQuyen');
+const yeuCauVaoCa = require('../../middleware/yeuCauVaoCa');
+const xuLyMonPos = require('./xuLyMonPos');
+
+router.post('/:id/qr-mot-phan', xacThucNguoiDung, phanQuyen('thu_ngan', 'quan_ly'), yeuCauVaoCa,
+    (req, res) => phanHoiThanhCong(res, hoaDonService.taoQrMotPhan(Number(req.params.id), req.body)));
+router.post('/:id/thu-mot-phan', xacThucNguoiDung, phanQuyen('thu_ngan', 'quan_ly'), yeuCauVaoCa,
+    (req, res) => phanHoiThanhCong(res, hoaDonService.thuMotPhan(Number(req.params.id), req.body, req.nguoiDung)));
+router.get('/chi-dao-mon', xacThucNguoiDung, phanQuyen('thu_ngan', 'bep', 'phuc_vu', 'quan_ly'), yeuCauVaoCa,
+    (req, res) => phanHoiThanhCong(res, xuLyMonPos.danhSach(req.nguoiDung)));
+router.put('/chi-dao-mon/:id', xacThucNguoiDung, phanQuyen('thu_ngan', 'bep', 'phuc_vu', 'quan_ly'), yeuCauVaoCa,
+    async (req, res) => {
+        await xuLyMonPos.xacNhan(Number(req.params.id), req.body, req.nguoiDung);
+        return phanHoiThanhCong(res, null);
+    });
+router.post('/ban/:banId/mon/:id/xu-ly', xacThucNguoiDung, phanQuyen('thu_ngan', 'quan_ly'), yeuCauVaoCa,
+    (req, res) => {
+        const { luaChon, trangThai, ghiChu, soLuong, soLuongHienTai } = req.body;
+        const banId = Number(req.params.banId);
+        const id = Number(req.params.id);
+        if (luaChon === 'huy') {
+            const ketQua = xuLyMonPos.chonHuy(banId, id, trangThai, soLuong, soLuongHienTai, ghiChu, req.nguoiDung);
+            return phanHoiThanhCong(res, ketQua);
+        }
+        xuLyMonPos.chon(banId, id, req.body, req.nguoiDung);
+        return phanHoiThanhCong(res, null);
+    });
 
 // 1. Danh sách hóa đơn (Thu ngân, Quản lý)
 router.get(
@@ -60,6 +86,8 @@ router.get('/ban/:banId/hoa-don', xacThucBan, async (req, res) => {
         ma_hoa_don: bill.ma_hoa_don,
         trang_thai: bill.trang_thai,
         tong_tien_thanh_toan: bill.tong_tien_thanh_toan,
+        daThu: bill.daThu,
+        conPhaiThu: bill.conPhaiThu,
         thoi_gian_thanh_toan: bill.thoi_gian_thanh_toan,
         phuong_thuc_thanh_toan: bill.phuong_thuc_thanh_toan,
         vietQr: bill.trang_thai === 'chua_thanh_toan' ? bill.vietQr : null, billToken

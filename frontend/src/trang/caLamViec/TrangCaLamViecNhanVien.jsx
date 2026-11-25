@@ -9,7 +9,7 @@ import { Calendar, Clock, CheckCircle2, AlertCircle, Send, RefreshCw, X, ArrowRi
 import HeaderNhanVien from '../../thanhPhan/HeaderNhanVien';
 import { api } from '../../dungChung/api';
 import { laySocket } from '../../dungChung/ketNoiSocket';
-import { hienThiGioVietNam, trongKhungGioCa } from '../../dungChung/thoiGian';
+import { hienThiGioVietNam, ngayVietNam, trongKhungGioCa } from '../../dungChung/thoiGian';
 
 export default function TrangCaLamViecNhanVien({
   nhanVien = { hoTen: 'Lê Văn Minh', ca: 'Ca tối' },
@@ -138,9 +138,9 @@ export default function TrangCaLamViecNhanVien({
     }
   };
 
-  const homNay = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh' }).format(new Date());
-  const caHomNay = trangThaiCa?.caDangLam || lichCaNhan.find(c => c.ngay_lam === homNay);
   const gioMayChu = trangThaiCa?.thoiGianMayChu ?? Date.now();
+  const homNay = ngayVietNam(gioMayChu);
+  const caHomNay = trangThaiCa?.caDangLam || lichCaNhan.find(c => c.ngay_lam === homNay);
 
   return (
     <div className="w-full max-w-[430px] mx-auto min-h-screen bg-[#f9f7f2] flex flex-col justify-between pb-8 shadow-xl border-x border-[#272d29]/5">

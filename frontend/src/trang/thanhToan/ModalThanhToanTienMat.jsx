@@ -13,6 +13,7 @@ export default function ModalThanhToanTienMat({
   onXacNhanThanhToan
 }) {
   const [tienKhachDua, setTienKhachDua] = useState(0);
+  const chiDongBan = tongTien === 0;
 
   const tienThoi = Math.max(0, tienKhachDua - tongTien);
   const chuaDu = tienKhachDua < tongTien;
@@ -35,7 +36,7 @@ export default function ModalThanhToanTienMat({
               QUẦY THU NGÂN
             </span>
             <h3 className="text-lg font-bold text-[#272d29]">
-              Thanh toán tiền mặt
+              {chiDongBan ? 'Chốt bill, đóng bàn' : 'Thanh toán tiền mặt'}
             </h3>
           </div>
           <button onClick={onDong} className="p-1 rounded-full hover:bg-stone-100 text-stone-500">
@@ -54,6 +55,7 @@ export default function ModalThanhToanTienMat({
             </h2>
           </div>
 
+          {chiDongBan ? <p className="text-center text-sm text-stone-600">Số tiền còn phải thu là 0đ. Xác nhận để hoàn tất bill và chuyển bàn sang Cần dọn dẹp.</p> : <>
           {/* Ô nhập tiền khách đưa */}
           <div>
             <label className="block font-bold text-stone-700 mb-1.5">
@@ -104,6 +106,7 @@ export default function ModalThanhToanTienMat({
               {dinhDangTien(chuaDu ? (tongTien - tienKhachDua) : tienThoi)}
             </span>
           </div>
+          </>}
         </div>
 
         {loi && <p role="alert" className="text-red-700">{loi}</p>}
@@ -113,7 +116,7 @@ export default function ModalThanhToanTienMat({
           className="w-full py-3.5 bg-[#226b4c] hover:bg-[#1a553c] text-white rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50"
         >
           <Check size={18} />
-          <span>Xác nhận nhận đủ tiền & In bill</span>
+          <span>{chiDongBan ? 'Xác nhận đóng bàn & In bill' : 'Xác nhận nhận đủ tiền & In bill'}</span>
         </button>
       </div>
     </div>

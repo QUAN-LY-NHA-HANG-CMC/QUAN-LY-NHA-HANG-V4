@@ -36,12 +36,14 @@ const donGoiMonModel = {
                    ct.ngay_tao,
                    m.id as mon_an_id, m.ten_mon, m.ma_mon, m.don_vi_tinh, m.anh_mon_an,
                    dgm.ma_don, dgm.nguon_tao, dgm.trang_thai as trang_thai_don, dgm.thiet_bi_tao_id,
+                   CASE WHEN x.lua_chon IN ('goi_mang_ve','khong_lay') THEN x.lua_chon END AS xu_ly_pos,
                    h.id AS id_yeu_cau_huy_khach, h.ly_do AS ly_do_huy_khach,
                    COALESCE(hq.trang_thai_yeu_cau, h.trang_thai) AS trang_thai_huy_khach,
                    CASE WHEN ql.trang_thai_yeu_cau = 'tu_choi' THEN ql.phan_hoi_admin END AS ly_do_quan_ly_tu_choi_huy
             FROM chi_tiet_don_mon ct
             JOIN don_goi_mon dgm ON ct.don_goi_mon_id = dgm.id
             JOIN mon_an m ON ct.mon_an_id = m.id
+            LEFT JOIN xu_ly_mon_pos x ON x.chi_tiet_id=ct.id
             LEFT JOIN yeu_cau_huy_mon_khach h ON h.id = (SELECT MAX(id) FROM yeu_cau_huy_mon_khach WHERE chi_tiet_don_mon_id = ct.id)
             LEFT JOIN yeu_cau_huy_mon hq ON hq.id = h.phieu_quan_ly_id
             LEFT JOIN yeu_cau_huy_mon ql ON ql.id = (SELECT MAX(id) FROM yeu_cau_huy_mon WHERE chi_tiet_don_mon_id = ct.id)

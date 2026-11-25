@@ -253,6 +253,7 @@ async function chayKiemThu() {
             for (const [trangThaiMoi, headers] of [
                 ['dang_nau', headersBep], ['hoan_thanh', headersBep], ['da_phuc_vu', headersPhucVu]
             ]) {
+                if (trangThaiMoi === 'da_phuc_vu' && mon === monDonQr[1]) continue;
                 const capNhat = await fetch(`${BASE_URL}/api/dieu-phoi-bep/chi-tiet/${mon.chi_tiet_id}/trang-thai`, {
                     method: 'PUT', headers, body: JSON.stringify({ trangThaiMoi })
                 });
@@ -267,7 +268,7 @@ async function chayKiemThu() {
         const resTamTinh = await fetch(`${BASE_URL}/api/hoa-don/tam-tinh/${banB08.id}`, { headers: headersKhach });
         const jsonTamTinh = await resTamTinh.json();
         inKetQua('Tính tạm tính hóa đơn bàn B08 thành công (kèm VAT 8%)', jsonTamTinh.ok === true && jsonTamTinh.data.tongTienThanhToan > 0);
-        inKetQua('Sinh liên kết VietQR động chuẩn Napas', !!jsonTamTinh.data.vietQr && jsonTamTinh.data.vietQr.qrUrl.includes('vietqr.io'));
+        inKetQua('Chưa phát VietQR khi còn món chưa bưng cần xử lý', !jsonTamTinh.data.vietQr);
 
         // Lấy danh sách hóa đơn sẵn có
         const resDsHd = await fetch(`${BASE_URL}/api/hoa-don`, {
@@ -358,14 +359,94 @@ async function chayKiemThu() {
             inKetQua('Phục vụ đọc lý do quản lý từ chối yêu cầu do nhân viên gửi', (await monSauTuChoi.json()).data?.danhSachMon
                 .find(mon => mon.chi_tiet_id === monDonQr[0].chi_tiet_id)?.ly_do_quan_ly_tu_choi_huy === 'Khách đã sử dụng món');
 
-            inKetQua('Thu đủ tiền và ghi nhận hóa đơn', (await thuTien(hoaDon.tong_tien_thanh_toan)).ok);
+            const layMonDaXong = async () => {
+                const res = await fetch(`${BASE_URL}/api/dieu-phoi-bep/da-hoan-thanh`, { headers: headersBep });
+                return (await res.json()).data;
+            };
+            const monChoBungId = monDonQr[1].chi_tiet_id;
+            inKetQua('Bếp thấy món chờ bưng trước khi thanh toán',
+                (await layMonDaXong()).some(mon => mon.chi_tiet_id === monChoBungId && mon.trang_thai_mon === 'hoan_thanh'));
+            await xacNhanChanThu('Chặn đóng bàn khi chưa xử lý món', 'Cần xử lý món chưa bưng');
+            const urlXuLyMon = `${BASE_URL}/api/hoa-don/ban/${banB08.id}/mon`;
+            const xuLy = (id, body) => fetch(`${urlXuLyMon}/${id}/xu-ly`, {
+                method: 'POST', headers: headersThuNgan, body: JSON.stringify(body)
+            });
+            const monChuaBung = db.prepare(`SELECT c.id,c.so_luong,c.trang_thai_mon FROM chi_tiet_don_mon c
+                JOIN don_goi_mon d ON d.id=c.don_goi_mon_id WHERE d.phien_ban_id=? AND d.trang_thai='da_duyet'
+                AND c.trang_thai_mon IN ('cho_duyet','dang_nau','hoan_thanh')`).all(hoaDon.phien_ban_id);
+            const monGoi = monChuaBung.find(mon => mon.id === monChoBungId);
+            inKetQua('Thu ngân yêu cầu gói một phần của dòng món', monGoi.so_luong > 1 &&
+                (await xuLy(monChoBungId, { luaChon: 'goi_mang_ve', trangThai: 'hoan_thanh', soLuong: 1 })).ok);
+            for (const mon of monChuaBung) {
+                inKetQua('Khách không lấy, vẫn giữ tiền món', (await xuLy(mon.id,
+                    { luaChon: 'khong_lay', trangThai: mon.trang_thai_mon })).ok);
+            }
+            const layChiDao = async headers => {
+                const res = await fetch(`${BASE_URL}/api/hoa-don/chi-dao-mon`, { headers });
+                return (await res.json()).data;
+            };
+            const goi = (await layChiDao(headersBep)).find(mon => mon.lua_chon === 'goi_mang_ve');
+            inKetQua('Bếp nhận đúng một phần gói, giữ nguyên tổng số suất', goi?.so_luong === 1 && goi.id !== monChoBungId &&
+                db.prepare('SELECT so_luong FROM chi_tiet_don_mon WHERE id=?').get(monChoBungId).so_luong + goi.so_luong === monGoi.so_luong);
+            const billSanSang = await fetch(`${BASE_URL}/api/hoa-don/${hoaDon.id}`, { headers: headersThuNgan });
+            inKetQua('Sinh VietQR chuẩn Napas khi các món đã có hướng xử lý',
+                (await billSanSang.json()).data?.vietQr?.qrUrl.includes('vietqr.io'));
+            const thaoTacThu = (duongDan, body) => fetch(`${BASE_URL}/api/hoa-don/${hoaDon.id}/${duongDan}`, {
+                method: 'POST', headers: headersThuNgan, body: JSON.stringify(body)
+            });
+            const lanMot = { soTien: 10000, maYeuCau: randomUUID(), phuongThuc: 'tien_mat' };
+            const lanHai = { soTien: 15000, maYeuCau: randomUUID(), phuongThuc: 'vietqr' };
+            const phieuMot = (await (await thaoTacThu('thu-mot-phan', lanMot)).json()).data;
+            const phieuLap = (await (await thaoTacThu('thu-mot-phan', lanMot)).json()).data;
+            inKetQua('Thu một phần giữ bàn mở và gửi lại không thu trùng',
+                phieuMot?.so_tien === 10000 && phieuMot.id === phieuLap?.id &&
+                db.prepare('SELECT trang_thai FROM phien_ban WHERE id=?').get(hoaDon.phien_ban_id).trang_thai === 'dang_hoat_dong');
+            const qrMotPhan = (await (await thaoTacThu('qr-mot-phan', lanHai)).json()).data;
+            const phieuHai = (await (await thaoTacThu('thu-mot-phan', lanHai)).json()).data;
+            inKetQua('Mã QR đúng tiền đợt thu và phiếu lưu khoản đã trả trước',
+                qrMotPhan?.soTien === 15000 && phieuHai?.da_thu_truoc === 10000 && phieuHai?.so_tien === 15000);
+            const conPhaiThu = hoaDon.tong_tien_thanh_toan - 25000;
+            const soDu = await fetch(`${BASE_URL}/api/hoa-don/${hoaDon.id}`, { headers: headersThuNgan });
+            const billConNo = (await soDu.json()).data;
+            inKetQua('Chốt bill chỉ tạo QR cho số tiền còn thiếu',
+                billConNo?.daThu === 25000 && billConNo?.conPhaiThu === conPhaiThu && billConNo?.vietQr?.soTien === conPhaiThu);
+            const tienKhachDua = conPhaiThu + 20000;
+            const resThuTien = await thuTien(tienKhachDua);
+            const ketQuaThuTien = (await resThuTien.json()).data;
+            inKetQua('Thu tiền mặt và trả về số tiền nhận, tiền thối', resThuTien.ok &&
+                ketQuaThuTien?.tienKhachDua === tienKhachDua && ketQuaThuTien?.tienThoiLai === 20000);
+            const billDeIn = await fetch(`${BASE_URL}/api/hoa-don/${hoaDon.id}`, { headers: headersThuNgan });
+            const duLieuIn = (await billDeIn.json()).data;
+            inKetQua('Đọc lại tiền nhận và tiền thối đã lưu để in hóa đơn', billDeIn.ok &&
+                duLieuIn?.tien_khach_dua === tienKhachDua && duLieuIn?.tien_thoi_lai === 20000);
+            inKetQua('Bill tổng lưu đủ ba đợt thanh toán', duLieuIn.cacDotThu.length === 3 &&
+                duLieuIn.cacDotThu.map(dot => dot.so_tien).join(',') === [10000, 15000, conPhaiThu].join(','));
             inKetQua('Từ chối thu lặp trên cùng hóa đơn', (await thuTien(hoaDon.tong_tien_thanh_toan)).status === 400);
+            const monDaXong = await layMonDaXong();
+            inKetQua('Sau thanh toán, bếp ẩn món chờ bưng và vẫn hiển thị món đã phục vụ',
+                !monDaXong.some(mon => mon.chi_tiet_id === monChoBungId) &&
+                monDaXong.some(mon => mon.chi_tiet_id === monDonQr[0].chi_tiet_id && mon.trang_thai_mon === 'da_phuc_vu'));
+            const nhatKyBatThuong = db.prepare(`
+                SELECT ban_ghi_id, ly_do FROM nhat_ky_kiem_toan
+                WHERE hanh_dong = 'THANH_TOAN_CHUA_XAC_NHAN_BUNG' AND json_extract(du_lieu_moi, '$.hoaDonId') = ?
+            `).all(hoaDon.id);
+            inKetQua('Món đã có hướng xử lý không bị ghi bất thường khi đóng bàn', nhatKyBatThuong.length === 0);
+            const xacNhanChiDao = (headers, buoc) => fetch(`${BASE_URL}/api/hoa-don/chi-dao-mon/${goi.id}`, {
+                method: 'PUT', headers, body: JSON.stringify({ buoc })
+            });
+            inKetQua('Bếp có thể xác nhận đã gói sau khi đóng bàn', (await xacNhanChiDao(headersBep, 'bep')).ok);
+            inKetQua('Phục vụ nhận và xác nhận đưa món ra quầy',
+                (await layChiDao(headersPhucVu)).some(mon => mon.id === goi.id) &&
+                (await xacNhanChiDao(headersPhucVu, 'phuc_vu')).ok);
+            inKetQua('Thu ngân nhận thông báo có món tại quầy',
+                (await layChiDao(headersThuNgan)).some(mon => mon.id === goi.id) &&
+                (await xacNhanChiDao(headersThuNgan, 'thu_ngan')).ok);
             const giaoDich = db.prepare('SELECT so_tien, phuong_thuc FROM giao_dich_thanh_toan WHERE hoa_don_id = ?').all(hoaDon.id);
             const phienDong = db.prepare('SELECT trang_thai FROM phien_ban WHERE id = ?').get(hoaDon.phien_ban_id);
             const banCanDon = db.prepare('SELECT trang_thai FROM ban_an WHERE id = ?').get(banB08.id);
-            inKetQua('Thanh toán ghi đúng một giao dịch, đóng phiên và chuyển bàn sang cần dọn',
-                giaoDich.length === 1 && giaoDich[0].so_tien === hoaDon.tong_tien_thanh_toan &&
-                giaoDich[0].phuong_thuc === 'TIEN_MAT' && phienDong.trang_thai === 'da_dong' &&
+            inKetQua('Tổng ba giao dịch khớp bill, đóng phiên và chuyển bàn sang cần dọn',
+                giaoDich.length === 3 && giaoDich.reduce((tong, dot) => tong + dot.so_tien, 0) === hoaDon.tong_tien_thanh_toan &&
+                phienDong.trang_thai === 'da_dong' &&
                 banCanDon.trang_thai === 'can_don_dep');
             const headersBill = { ...headersBan, 'X-Bill-Token': billKhach.billToken };
             const resDaThanhToan = await fetch(`${BASE_URL}/api/hoa-don/ban/${banB08.id}/hoa-don`, { headers: headersBill });

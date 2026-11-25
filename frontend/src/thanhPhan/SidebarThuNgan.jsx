@@ -10,7 +10,7 @@ import { LayoutGrid, History, CreditCard, BarChart3, LogOut, CheckCircle2 } from
 export default function SidebarThuNgan({
   tabHienTai = 'soDoHoaDon',
   onChuyenTab,
-  soBanChoThanhToan = 2,
+  soBanChoThanhToan = 0,
   nhanVien,
   onDangXuat = null
 }) {

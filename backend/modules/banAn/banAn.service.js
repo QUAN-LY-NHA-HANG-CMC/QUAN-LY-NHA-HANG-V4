@@ -219,6 +219,10 @@ const banAnService = {
             if (!phienNguon || !phienDich) {
                 throw new Error('Cả hai bàn phải đều đang có phiên hoạt động thì mới gộp được');
             }
+            if (db.prepare(`SELECT 1 FROM hoa_don h JOIN giao_dich_thanh_toan g ON g.hoa_don_id=h.id
+                WHERE h.phien_ban_id=? AND g.trang_thai='thanh_cong' LIMIT 1`).get(phienNguon.id)) {
+                throw Object.assign(new Error('Bàn nguồn đã thu tiền trước. Hãy chọn bàn này làm bàn đích để giữ khoản đã thu.'), { status: 409 });
+            }
 
             db.prepare(`UPDATE hoa_don SET trang_thai = 'da_huy'
                 WHERE phien_ban_id IN (?, ?) AND trang_thai = 'chua_thanh_toan'`).run(phienNguon.id, phienDich.id);

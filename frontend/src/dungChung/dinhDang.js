@@ -3,6 +3,8 @@
 // HÀM TIỆN ÍCH ĐỊNH DẠNG TIỀN TỆ, THỜI GIAN
 // ============================================================================
 
+import { docMocThoiGian } from './thoiGian';
+
 export function dinhDangTien(soTien) {
   if (soTien === undefined || soTien === null || isNaN(soTien)) return '0đ';
   return Number(soTien).toLocaleString('vi-VN') + 'đ';
@@ -10,21 +12,22 @@ export function dinhDangTien(soTien) {
 
 export function dinhDangGio(chuoiNgay) {
   if (!chuoiNgay) return '--:--';
-  const d = new Date(chuoiNgay);
+  const d = docMocThoiGian(chuoiNgay);
   if (isNaN(d.getTime())) return chuoiNgay;
-  return d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+  return d.toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit' });
 }
 
 export function dinhDangNgay(chuoiNgay) {
   if (!chuoiNgay) return '';
-  const d = new Date(chuoiNgay);
+  const d = docMocThoiGian(chuoiNgay);
   if (isNaN(d.getTime())) return chuoiNgay;
-  return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  return d.toLocaleDateString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
 export function tinhPhutTroiQua(thoiGianBatDau) {
   if (!thoiGianBatDau) return 0;
-  const start = new Date(thoiGianBatDau).getTime();
+  const start = docMocThoiGian(thoiGianBatDau).getTime();
+  if (!Number.isFinite(start)) return 0;
   const now = Date.now();
   return Math.max(0, Math.floor((now - start) / 60000));
 }

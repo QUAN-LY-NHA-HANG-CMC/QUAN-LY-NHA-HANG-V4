@@ -8,16 +8,16 @@ const { truyVanNhieu, truyVanMot } = require('../../cauHinh/ketNoiCoSoDuLieu');
 /**
  * Trả về điều kiện lọc WHERE theo kỳ thời gian
  * @param {string} ky 'hom_nay' | '7_ngay' | 'thang_nay' | 'tat_ca'
- * @param {string} cotThoiGian Tên cột ngày/giờ (mặc định 'hd.ngay_tao')
+ * @param {string} cotThoiGian Tên cột ngày/giờ (mặc định 'COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao)')
  */
-function taoDieuKienThoiGian(ky = 'hom_nay', cotThoiGian = 'hd.ngay_tao') {
+function taoDieuKienThoiGian(ky = 'hom_nay', cotThoiGian = 'COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao)') {
     switch (ky) {
         case 'hom_nay':
-            return `DATE(${cotThoiGian}) = CURRENT_DATE`;
+            return `DATE(${cotThoiGian}, '+7 hours') = DATE('now', '+7 hours')`;
         case '7_ngay':
-            return `DATE(${cotThoiGian}) >= DATE('now', '-7 days')`;
+            return `DATE(${cotThoiGian}, '+7 hours') BETWEEN DATE('now', '+7 hours', '-6 days') AND DATE('now', '+7 hours')`;
         case 'thang_nay':
-            return `strftime('%Y-%m', ${cotThoiGian}) = strftime('%Y-%m', 'now')`;
+            return `strftime('%Y-%m', ${cotThoiGian}, '+7 hours') = strftime('%Y-%m', 'now', '+7 hours')`;
         case 'tat_ca':
         default:
             return `1=1`;
@@ -29,7 +29,7 @@ const baoCaoModel = {
      * 1. BÁO CÁO TỔNG QUAN & TÀI CHÍNH
      */
     layBaoCaoTongQuan(ky = 'hom_nay') {
-        const dieuKien = taoDieuKienThoiGian(ky, 'hd.ngay_tao');
+        const dieuKien = taoDieuKienThoiGian(ky, 'COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao)');
 
         // Tổng hợp chỉ số tài chính cơ bản
         const tongHop = truyVanMot(`
@@ -46,11 +46,11 @@ const baoCaoModel = {
         `) || { tong_so_hoa_don: 0, tong_doanh_thu: 0, tong_tien_mon: 0, tong_chiet_khau: 0, tong_vat: 0, tong_khach_hang: 0 };
 
         // Doanh thu kỳ trước để tính tăng trưởng
-        let dieuKienKyTruoc = `DATE(hd.ngay_tao) = DATE('now', '-1 day')`;
+        let dieuKienKyTruoc = `DATE(COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') = DATE('now', '+7 hours', '-1 day')`;
         if (ky === '7_ngay') {
-            dieuKienKyTruoc = `DATE(hd.ngay_tao) >= DATE('now', '-14 days') AND DATE(hd.ngay_tao) < DATE('now', '-7 days')`;
+            dieuKienKyTruoc = `DATE(COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') >= DATE('now', '+7 hours', '-13 days') AND DATE(COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') < DATE('now', '+7 hours', '-6 days')`;
         } else if (ky === 'thang_nay') {
-            dieuKienKyTruoc = `strftime('%Y-%m', hd.ngay_tao) = strftime('%Y-%m', DATE('now', 'start of month', '-1 month'))`;
+            dieuKienKyTruoc = `strftime('%Y-%m', COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') = strftime('%Y-%m', DATE('now', '+7 hours', 'start of month', '-1 month'))`;
         }
 
         const tongHopKyTruoc = truyVanMot(`
@@ -103,28 +103,28 @@ const baoCaoModel = {
      * 2. BÁO CÁO XU HƯỚNG THEO THỜI GIAN & CA LÀM VIỆC
      */
     layBaoCaoTheoThoiGian(ky = '7_ngay') {
-        const dieuKien = taoDieuKienThoiGian(ky, 'hd.ngay_tao');
+        const dieuKien = taoDieuKienThoiGian(ky, 'COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao)');
 
         // Doanh thu theo từng ngày
         const theoNgay = truyVanNhieu(`
             SELECT 
-                DATE(hd.ngay_tao) as ngay,
+                DATE(COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') as ngay,
                 COUNT(hd.id) as so_hoa_don,
                 COALESCE(SUM(hd.tong_tien_thanh_toan), 0) as tong_doanh_thu,
                 COALESCE(SUM(pb.so_luong_khach), 0) as so_khach
             FROM hoa_don hd
             LEFT JOIN phien_ban pb ON hd.phien_ban_id = pb.id
             WHERE hd.trang_thai = 'da_thanh_toan' AND ${dieuKien}
-            GROUP BY DATE(hd.ngay_tao)
-            ORDER BY DATE(hd.ngay_tao) ASC;
+            GROUP BY DATE(COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours')
+            ORDER BY DATE(COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') ASC;
         `);
 
         // Doanh thu phân bổ theo Ca làm việc (Dựa vào giờ phát sinh hóa đơn)
         const theoCa = truyVanNhieu(`
             SELECT 
                 CASE 
-                    WHEN CAST(strftime('%H', hd.ngay_tao) AS INTEGER) BETWEEN 6 AND 14 THEN 'Ca Sáng (06h - 14h)'
-                    WHEN CAST(strftime('%H', hd.ngay_tao) AS INTEGER) BETWEEN 15 AND 22 THEN 'Ca Tối (15h - 22h)'
+                    WHEN CAST(strftime('%H', COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') AS INTEGER) BETWEEN 6 AND 14 THEN 'Ca Sáng (06h - 14h)'
+                    WHEN CAST(strftime('%H', COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') AS INTEGER) BETWEEN 15 AND 22 THEN 'Ca Tối (15h - 22h)'
                     ELSE 'Ca Đêm / Ngoài giờ'
                 END as ten_ca,
                 COUNT(hd.id) as so_hoa_don,
@@ -138,12 +138,12 @@ const baoCaoModel = {
         // Biến động theo khung giờ trong ngày (Peak hours)
         const theoKhungGio = truyVanNhieu(`
             SELECT 
-                strftime('%H:00', hd.ngay_tao) as khung_gio,
+                strftime('%H:00', COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours') as khung_gio,
                 COUNT(hd.id) as so_hoa_don,
                 COALESCE(SUM(hd.tong_tien_thanh_toan), 0) as tong_doanh_thu
             FROM hoa_don hd
             WHERE hd.trang_thai = 'da_thanh_toan' AND ${dieuKien}
-            GROUP BY strftime('%H:00', hd.ngay_tao)
+            GROUP BY strftime('%H:00', COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao), '+7 hours')
             ORDER BY khung_gio ASC;
         `);
 
@@ -158,7 +158,7 @@ const baoCaoModel = {
      * 3. BÁO CÁO MÓN ĂN & MẶT HÀNG BÁN CHẠY (BEST SELLERS)
      */
     layBaoCaoMonAn(ky = 'hom_nay') {
-        const dieuKien = taoDieuKienThoiGian(ky, 'hd.ngay_tao');
+        const dieuKien = taoDieuKienThoiGian(ky, 'COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao)');
 
         // Xếp hạng món bán chạy nhất theo doanh thu
         const topMonDoanhThu = truyVanNhieu(`
@@ -251,7 +251,7 @@ const baoCaoModel = {
      * 4. BÁO CÁO DOANH THU THEO KHU VỰC & PHÒNG BÀN
      */
     layBaoCaoKhuVucBan(ky = 'hom_nay') {
-        const dieuKien = taoDieuKienThoiGian(ky, 'hd.ngay_tao');
+        const dieuKien = taoDieuKienThoiGian(ky, 'COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao)');
 
         // Doanh thu theo từng Khu vực (Tầng 1, Tầng 2, VIP)
         const theoKhuVuc = truyVanNhieu(`
@@ -299,26 +299,27 @@ const baoCaoModel = {
      * 5. BÁO CÁO SỔ QUỸ & CHỐT CA THU - CHI NỘI BỘ (Z-REPORT)
      */
     layBaoCaoSoQuy(ky = 'hom_nay') {
-        const dieuKienHd = taoDieuKienThoiGian(ky, 'hd.ngay_tao');
+        const dieuKienThu = taoDieuKienThoiGian(ky, 'thoi_gian_thu');
         const dieuKienPtc = taoDieuKienThoiGian(ky, 'ptc.thoi_gian_tao');
 
-        // Doanh số tiền mặt thực thu qua hóa đơn
-        const tienMatHd = truyVanMot(`
-            SELECT COALESCE(SUM(hd.tong_tien_thanh_toan), 0) as tong_tien_mat
-            FROM hoa_don hd
-            WHERE hd.trang_thai = 'da_thanh_toan' 
-              AND hd.phuong_thuc_thanh_toan = 'tien_mat'
-              AND ${dieuKienHd};
-        `)?.tong_tien_mat || 0;
-
-        // Doanh số VietQR chuyển khoản
-        const vietQrHd = truyVanMot(`
-            SELECT COALESCE(SUM(hd.tong_tien_thanh_toan), 0) as tong_vietqr
-            FROM hoa_don hd
-            WHERE hd.trang_thai = 'da_thanh_toan' 
-              AND hd.phuong_thuc_thanh_toan = 'vietqr'
-              AND ${dieuKienHd};
-        `)?.tong_vietqr || 0;
+        const { tienMatHd, vietQrHd } = truyVanMot(`
+            WITH cac_dot_thu AS (
+                SELECT so_tien, phuong_thuc, thoi_gian_tao AS thoi_gian_thu
+                FROM giao_dich_thanh_toan WHERE trang_thai='thanh_cong'
+                UNION ALL
+                SELECT hd.tong_tien_thanh_toan, UPPER(hd.phuong_thuc_thanh_toan),
+                    COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao)
+                FROM hoa_don hd WHERE hd.trang_thai='da_thanh_toan'
+                AND NOT EXISTS (
+                    SELECT 1 FROM giao_dich_thanh_toan g JOIN hoa_don h ON h.id=g.hoa_don_id
+                    WHERE g.hoa_don_id=hd.id OR (h.phien_ban_id=hd.phien_ban_id
+                        AND EXISTS (SELECT 1 FROM phieu_thu_mot_phan p WHERE p.giao_dich_id=g.id))
+                )
+            )
+            SELECT COALESCE(SUM(CASE WHEN phuong_thuc='TIEN_MAT' THEN so_tien END),0) AS tienMatHd,
+                COALESCE(SUM(CASE WHEN phuong_thuc='VIETQR' THEN so_tien END),0) AS vietQrHd
+            FROM cac_dot_thu WHERE ${dieuKienThu}
+        `);
 
         // Tổng chi nội bộ từ phiếu thu chi
         const tongChiNoiBo = truyVanMot(`
@@ -411,7 +412,7 @@ const baoCaoModel = {
         `);
 
         // Hiệu suất doanh số theo nhân sự thu ngân / phục vụ
-        const dieuKienHd = taoDieuKienThoiGian(ky, 'hd.ngay_tao');
+        const dieuKienHd = taoDieuKienThoiGian(ky, 'COALESCE(hd.thoi_gian_thanh_toan, hd.ngay_tao)');
         const hieuSuatNhanSu = truyVanNhieu(`
             SELECT 
                 nv.id as nhan_vien_id,

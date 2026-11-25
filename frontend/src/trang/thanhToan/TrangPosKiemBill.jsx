@@ -20,10 +20,12 @@ import SidebarThuNgan from '../../thanhPhan/SidebarThuNgan';
 import ModalGiamGiaChietKhau from './ModalGiamGiaChietKhau';
 import ModalThanhToanTienMat from './ModalThanhToanTienMat';
 import ModalThanhToanVietQrPos from './ModalThanhToanVietQrPos';
+import ModalThuMotPhan from './ModalThuMotPhan';
 import ModalChiaDeuHoaDon from './ModalChiaDeuHoaDon';
 import ModalInHoaDonK80 from './ModalInHoaDonK80';
 import ModalHoanTatDonBan from './ModalHoanTatDonBan';
 import ThongBaoChiDao from '../../thanhPhan/ThongBaoChiDao';
+import XuLyMonPos from './XuLyMonPos';
 import TrangLichSuHoaDonPos from './TrangLichSuHoaDonPos';
 import ModalChuyenBan from '../soDoBan/ModalChuyenBan';
 import ModalGopBan from '../soDoBan/ModalGopBan';
@@ -40,6 +42,9 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
   const [hienGiamGia, setHienGiamGia] = useState(false);
   const [hienTienMat, setHienTienMat] = useState(false);
   const [hienVietQr, setHienVietQr] = useState(false);
+  const [buocThanhToan, setBuocThanhToan] = useState('');
+  const [phuongThucChon, setPhuongThucChon] = useState('');
+  const [phieuThu, setPhieuThu] = useState(null);
   const [hienChiaDeu, setHienChiaDeu] = useState(false);
   const [hienInK80, setHienInK80] = useState(false);
   const [hienDonBan, setHienDonBan] = useState(false);
@@ -53,26 +58,32 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
   const [phanTram, setPhanTram] = useState(0);
   const [loi, setLoi] = useState('');
   const [dangLuu, setDangLuu] = useState(false);
+  const [lanNapBill, setLanNapBill] = useState(0);
   const khoa = useRef(false);
-  const banId = banDangChon?.id;
-  const banHienTai = danhSachBan.find(ban => ban.id === banId);
+  const dangXemBanChoThanhToan = tabSidebar === 'banChoThanhToan';
+  const banChoThanhToan = danhSachBan.filter(ban => ban.trang_thai === 'yeu_cau_thanh_toan');
+  const banHienTai = (dangXemBanChoThanhToan ? banChoThanhToan : danhSachBan)
+    .find(ban => ban.id === banDangChon?.id);
+  const banId = banHienTai?.id;
   const dangCoPhien = Boolean(banHienTai && !['trong', 'can_don_dep'].includes(banHienTai.trang_thai));
 
   useEffect(() => {
     let huy = false;
+    let lanTai = 0;
     const socket = laySocket();
     const taiBan = async () => {
+      const lan = ++lanTai;
       try {
         const data = await api.get('/api/ban-an');
-        if (huy) return;
+        if (huy || lan !== lanTai) return;
         const banAn = data.banAn.map(ban => ({ ...ban, khu_vuc: ban.ten_khu_vuc, so_khach: ban.so_luong_khach, tam_tinh: ban.tong_tien_tam_tinh }));
         setDanhSachBan(banAn);
         setKhuVucChon(khu => khu || banAn[0]?.khu_vuc || '');
       } catch (err) {
-        if (!huy) setLoi(err.message);
+        if (!huy && lan === lanTai) setLoi(err.message);
       }
     };
-    const suKien = ['trang_thai_ban', 'thanh_toan_thanh_cong', 'connect'];
+    const suKien = ['trang_thai_ban', 'khach_yeu_cau_thanh_toan', 'thanh_toan_thanh_cong', 'connect'];
     taiBan();
     suKien.forEach(ten => socket.on(ten, taiBan));
     return () => {
@@ -106,7 +117,7 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
       }
       taiBill();
     };
-    const suKien = ['tien_do_mon_an', 'ban:cap_nhat_cong_viec', 'connect'];
+    const suKien = ['tien_do_mon_an', 'ban:cap_nhat_cong_viec', 'pos:xu_ly_mon', 'connect'];
     taiBill();
     suKien.forEach(ten => socket.on(ten, taiBill));
     socket.on('trang_thai_ban', doiTrangThaiBan);
@@ -117,12 +128,18 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
       suKien.forEach(ten => socket.off(ten, taiBill));
       socket.off('trang_thai_ban', doiTrangThaiBan);
     };
-  }, [banId, dangCoPhien, phanTram]);
+  }, [banId, dangCoPhien, phanTram, lanNapBill]);
 
   const billHienTai = dangCoPhien && bill?.banId === banId && bill.phanTram === phanTram ? bill : null;
-  const banLoc = danhSachBan.filter(b => b.khu_vuc === khuVucChon);
+  const banLoc = dangXemBanChoThanhToan ? banChoThanhToan : danhSachBan.filter(b => b.khu_vuc === khuVucChon);
   const lyDoChanThu = billHienTai?.lyDoChanThu;
+  const thieuChiTietMon = Boolean(billHienTai && !Array.isArray(billHienTai.chiTietXuLyMon));
+  const lyDoChanDong = thieuChiTietMon
+    ? 'Chưa nhận được trạng thái món từ máy chủ. Hãy tải lại trước khi thanh toán.'
+    : billHienTai?.lyDoChanDong;
+  const chiTietXuLyMon = billHienTai?.chiTietXuLyMon ?? [];
   const choPhepThu = Boolean(billHienTai?.danhSachMon.length) && !lyDoChanThu && !dangLuu;
+  const choPhepThanhToan = choPhepThu || Boolean(billHienTai?.coTheChotBillRong && !lyDoChanThu && !dangLuu);
   const luu = async (thaoTac) => {
     if (khoa.current) return;
     khoa.current = true;
@@ -138,25 +155,35 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
     }
   };
 
-  const moThanhToan = phuongThuc => luu(async () => {
+  const moThanhToan = motPhan => luu(async () => {
+    const phuongThuc = phuongThucChon;
     const hd = await api.post('/api/hoa-don/tao-hoa-don', {
       banId, phanTramChietKhau: phanTram, phuongThuc
     });
     setBanDaThuTien(null);
     setHoaDon(hd);
-    if (phuongThuc === 'vietqr') setHienVietQr(true);
-    else setHienTienMat(true);
+    if (motPhan) setBuocThanhToan('nhap_mot_phan');
+    else if (phuongThuc === 'vietqr' && hd.conPhaiThu > 0) {
+      if (!hd.vietQr) throw new Error('Chưa có mã VietQR cho hóa đơn này. Hãy kiểm tra lại cấu hình hoặc chọn Tiền mặt.');
+      setHienVietQr(true);
+    } else setHienTienMat(true);
+    if (!motPhan) setBuocThanhToan('');
   });
 
   const xacNhanThanhToan = (phuongThucThanhToan, tienKhachDua) => luu(async () => {
-    const ketQua = await api.post(`/api/hoa-don/${hoaDon.id}/thanh-toan`, { phuongThucThanhToan, tienKhachDua });
+    const ketQua = await api.post(`/api/hoa-don/${hoaDon.id}/thanh-toan`, {
+      phuongThucThanhToan, tienKhachDua, soTienDuKien: hoaDon.conPhaiThu
+    });
     if (ketQua?.trangThai !== 'da_thanh_toan' || ketQua.hoaDonId !== hoaDon.id) {
       throw new Error('Chưa nhận được xác nhận thanh toán cho hóa đơn này.');
     }
     const daThu = await api.get(`/api/hoa-don/${hoaDon.id}`).catch(() => ({
       ...hoaDon,
       trang_thai: ketQua.trangThai,
-      phuong_thuc_thanh_toan: ketQua.phuongThucThanhToan
+      phuong_thuc_thanh_toan: ketQua.phuongThucThanhToan,
+      tien_khach_dua: ketQua.tienKhachDua,
+      tien_thoi_lai: ketQua.tienThoiLai,
+      cacDotThu: ketQua.cacDotThu
     }));
     setBanDaThuTien(banDangChon);
     setHoaDon(daThu);
@@ -191,6 +218,7 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
       <SidebarThuNgan
         nhanVien={nhanVien}
         tabHienTai={tabSidebar}
+        soBanChoThanhToan={banChoThanhToan.length}
         onChuyenTab={setTabSidebar}
         onDangXuat={onDangXuat}
       />
@@ -215,15 +243,15 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
               <div className="flex justify-between items-center pb-4 border-b border-stone-200 mb-4">
                 <div>
                   <h1 className="text-xl font-black text-[#272d29] tracking-tight">
-                    Sơ đồ bàn & kiểm bill
+                    {dangXemBanChoThanhToan ? 'Bàn chờ thanh toán' : 'Sơ đồ bàn & kiểm bill'}
                   </h1>
                   <p className="text-xs text-[#72776f] mt-0.5">
-                    Kiểm tra món và số tiền trước khi xác nhận thanh toán
+                    {dangXemBanChoThanhToan ? 'Các bàn đang yêu cầu tính tiền' : 'Kiểm tra món và số tiền trước khi xác nhận thanh toán'}
                   </p>
                 </div>
 
                 {/* Khu vực Tabs */}
-                <div className="flex items-center gap-1.5 bg-stone-200/60 p-1 rounded-xl text-xs font-semibold">
+                {!dangXemBanChoThanhToan && <div className="flex items-center gap-1.5 bg-stone-200/60 p-1 rounded-xl text-xs font-semibold">
                   {[...new Set(danhSachBan.map(ban => ban.khu_vuc))].map(kv => (
                     <button
                       key={kv}
@@ -235,18 +263,21 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
                       {kv}
                     </button>
                   ))}
-                </div>
+                </div>}
               </div>
 
               {/* Lưới các bàn ăn */}
+              {dangXemBanChoThanhToan && !banLoc.length && (
+                <p role="status" className="text-sm text-stone-600">Chưa có bàn nào yêu cầu tính tiền.</p>
+              )}
               <div className="grid grid-cols-3 gap-3">
                 {banLoc.map((b) => {
-                  const chon = banDangChon?.ma_ban === b.ma_ban;
+                  const chon = banId === b.id;
                   const badgeClass = mauTrangThai[b.trang_thai] || 'bg-stone-100 text-stone-600';
                   return (
                     <div
                       key={b.ma_ban}
-                      onClick={() => { setBanDangChon(b); setBill(null); setPhanTram(0); setLoi(''); }}
+                      onClick={() => { if (!chon) { setBanDangChon(b); setBill(null); setPhanTram(0); setLoi(''); } }}
                       className={`p-4 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between h-32 ${
                         chon
                           ? 'bg-white border-2 border-[#b64d2d] shadow-md ring-2 ring-[#b64d2d]/10'
@@ -262,7 +293,7 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
 
                       <div className="space-y-1">
                         <div className="flex justify-between text-xs text-stone-500">
-                          <span>{b.so_cho} chỗ</span>
+                          <span>{b.suc_chua} chỗ</span>
                           {b.so_khach > 0 && <span>{b.so_khach} khách</span>}
                         </div>
                         {b.tam_tinh > 0 && (
@@ -287,7 +318,7 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
                       HÓA ĐƠN CHI TIẾT
                     </span>
                     <h2 className="text-xl font-black text-[#272d29]">
-                      {banDangChon?.ten_ban || 'Chọn bàn'}
+                      {banHienTai?.ten_ban || 'Chọn bàn'}
                     </h2>
                     <p className="text-xs text-stone-500 mt-0.5">
                       {banHienTai?.khu_vuc} {banHienTai?.so_khach ? `· ${banHienTai.so_khach} khách` : ''}
@@ -303,8 +334,10 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
               <div className="flex-1 p-5 overflow-y-auto space-y-3 text-xs">
                 {loi && <p role="alert" className="text-red-700">{loi}</p>}
                 {lyDoChanThu && lyDoChanThu !== loi && <p role="status" className="rounded-lg bg-amber-50 p-2 text-amber-900">{lyDoChanThu}</p>}
+                {!lyDoChanThu && lyDoChanDong && <p role="status" className="rounded-lg bg-amber-50 p-2 text-amber-900">{lyDoChanDong}</p>}
                 {(billHienTai?.danhSachMon ?? []).map((item) => (
-                  <div key={`${item.mon_an_id}-${item.don_gia}`} className="flex justify-between items-start pb-2 border-b border-stone-100">
+                  <div key={`${banId}-${item.mon_an_id}-${item.don_gia}`} className="pb-2 border-b border-stone-100">
+                  <div className="flex justify-between items-start gap-2">
                     <div>
                       <h4 className="font-bold text-[#272d29]">{item.ten_mon}</h4>
                       <p className="text-[11px] text-stone-500">
@@ -318,7 +351,18 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
                       {dinhDangTien(item.tong_thanh_tien)}
                     </span>
                   </div>
+                    {!thieuChiTietMon && <XuLyMonPos mon={item} banId={banId} onDaXuLy={() => setLanNapBill(lan => lan + 1)}
+                    chiTiet={chiTietXuLyMon.filter(muc => muc.trang_thai_don === 'da_duyet' &&
+                      !['huy_mon', 'da_huy'].includes(muc.trang_thai_mon) &&
+                        muc.mon_an_id === item.mon_an_id && muc.don_gia === item.don_gia)} />}
+                  </div>
                 ))}
+                {chiTietXuLyMon.filter(muc => muc.trang_thai_don === 'cho_duyet' ||
+                  muc.trang_thai_don === 'tu_choi' || ['huy_mon', 'da_huy'].includes(muc.trang_thai_mon)).map(muc =>
+                  <p key={muc.id} className="text-stone-600">{muc.ten_mon} × {muc.so_luong} {muc.don_vi_tinh} · {
+                    muc.trang_thai_don === 'tu_choi' ? 'Đơn bị từ chối' :
+                    ['huy_mon', 'da_huy'].includes(muc.trang_thai_mon) ? 'Đã hủy' : 'Chờ phục vụ duyệt đơn'
+                  }</p>)}
               </div>
 
               {/* Khối tính tiền */}
@@ -341,30 +385,20 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
                   <span>TỔNG THANH TOÁN:</span>
                   <span className="text-xl text-[#b64d2d]">{dinhDangTien(tongPhaiThu)}</span>
                 </div>
+                {billHienTai?.daThu > 0 && <div className="space-y-1">
+                  <div className="flex justify-between"><span>Đã thanh toán</span><strong>{dinhDangTien(billHienTai.daThu)}</strong></div>
+                  <div className="flex justify-between"><span>Còn phải thu</span><strong>{dinhDangTien(billHienTai.conPhaiThu)}</strong></div>
+                </div>}
               </div>
 
               {/* Nhóm nút thanh toán & nghiệp vụ hóa đơn */}
               <div className="p-4 bg-white border-t border-stone-200 space-y-2">
-                {/* 2 nút thanh toán chính */}
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    disabled={!choPhepThu || !billHienTai?.vietQr}
-                    onClick={() => moThanhToan('vietqr')}
-                    className="py-3 px-3 bg-[#2d4336] hover:bg-[#202e28] text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
-                  >
-                    <QrCode size={16} />
-                    <span>VietQR (P04)</span>
-                  </button>
-
-                  <button
-                    disabled={!choPhepThu}
-                    onClick={() => moThanhToan('tien_mat')}
-                    className="py-3 px-3 bg-[#b64d2d] hover:bg-[#a14022] text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
-                  >
-                    <Banknote size={16} />
-                    <span>Tiền mặt (P03)</span>
-                  </button>
-                </div>
+                <button disabled={!choPhepThanhToan || thieuChiTietMon} onClick={() => {
+                  setLoi('');
+                  setBuocThanhToan('phuong_thuc');
+                }} className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#b64d2d] px-3 py-3 text-sm font-bold text-white disabled:opacity-50">
+                  <Banknote size={16} /> Thanh toán
+                </button>
 
                 {/* Các nút nghiệp vụ phụ */}
                 <div className="grid grid-cols-4 gap-1 text-[11px] font-bold text-stone-700">
@@ -477,15 +511,54 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
         />
       )}
 
+      {['phuong_thuc', 'kieu'].includes(buocThanhToan) && (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 p-4">
+          <section role="dialog" aria-modal="true" aria-label="Thanh toán" className="w-full max-w-md space-y-4 rounded-2xl bg-white p-6">
+            <h2 className="text-lg font-bold">{buocThanhToan === 'phuong_thuc' ? 'Chọn phương thức thanh toán' : 'Chọn kiểu thanh toán'}</h2>
+            {buocThanhToan === 'phuong_thuc' ? (
+              <div className="grid grid-cols-2 gap-2">
+                {[['tien_mat', 'Tiền mặt', Banknote], ['vietqr', 'VietQR', QrCode]].map(([id, nhan, Icon]) =>
+                  <button key={id} onClick={() => { setPhuongThucChon(id); setBuocThanhToan('kieu'); }}
+                    className="flex items-center justify-center gap-2 rounded-xl border p-3 font-bold"><Icon size={16} />{nhan}</button>)}
+              </div>
+            ) : (
+              <>
+                <p className="text-sm text-stone-600">{phuongThucChon === 'vietqr' ? 'VietQR' : 'Tiền mặt'} · Còn phải thu {dinhDangTien(billHienTai?.conPhaiThu ?? 0)}</p>
+                <button disabled={dangLuu || !!lyDoChanThu || !!lyDoChanDong || !billHienTai} onClick={() => moThanhToan(false)}
+                  className="w-full rounded-xl bg-emerald-900 p-3 font-bold text-white disabled:opacity-50">Chốt bill, đóng bàn</button>
+                <button disabled={dangLuu || !!lyDoChanThu || thieuChiTietMon || !(billHienTai?.conPhaiThu > 0)} onClick={() => moThanhToan(true)}
+                  className="w-full rounded-xl border p-3 font-bold disabled:opacity-50">Thanh toán, giữ bàn mở</button>
+                {(lyDoChanThu || lyDoChanDong || loi) && <p role="alert" className="text-sm text-rose-800">{loi || lyDoChanThu || lyDoChanDong}</p>}
+              </>
+            )}
+            <div className="flex justify-end gap-3">
+              {buocThanhToan === 'kieu' && <button disabled={dangLuu} onClick={() => { setLoi(''); setBuocThanhToan('phuong_thuc'); }}>Quay lại</button>}
+              <button disabled={dangLuu} onClick={() => { setLoi(''); setBuocThanhToan(''); }}>Hủy bỏ</button>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {buocThanhToan === 'nhap_mot_phan' && (
+        <ModalThuMotPhan hoaDon={hoaDon} phuongThuc={phuongThucChon} chanThu={lyDoChanThu}
+          onDong={() => setBuocThanhToan('')}
+          onDaThu={phieu => {
+            setPhieuThu(phieu);
+            setBuocThanhToan('');
+            setLanNapBill(lan => lan + 1);
+          }} />
+      )}
+      {phieuThu && <ModalInHoaDonK80 phieuThu={phieuThu} onDong={() => setPhieuThu(null)} />}
+
       {/* Modal P03 Tiền mặt */}
       {hienTienMat && (
         <ModalThanhToanTienMat
-          tongTien={hoaDon.tong_tien_thanh_toan}
+          tongTien={hoaDon.conPhaiThu}
           dangLuu={dangLuu}
-          chanThu={Boolean(lyDoChanThu)}
-          loi={lyDoChanThu || loi}
+          chanThu={Boolean(lyDoChanThu || lyDoChanDong)}
+          loi={lyDoChanThu || lyDoChanDong || loi}
           onDong={() => !dangLuu && setHienTienMat(false)}
-          onXacNhanThanhToan={({ tienKhachDua }) => xacNhanThanhToan('tien_mat', tienKhachDua)}
+          onXacNhanThanhToan={({ tienKhachDua }) => xacNhanThanhToan(phuongThucChon, tienKhachDua)}
         />
       )}
 
@@ -493,10 +566,10 @@ export default function TrangPosKiemBill({ nhanVien, onDangXuat, onMoCaLamViec }
       {hienVietQr && (
         <ModalThanhToanVietQrPos
           ban={banDangChon}
-          tongTien={hoaDon.tong_tien_thanh_toan}
-          vietQr={lyDoChanThu ? null : hoaDon.vietQr}
+          tongTien={hoaDon.conPhaiThu}
+          vietQr={lyDoChanThu || lyDoChanDong ? null : hoaDon.vietQr}
           dangLuu={dangLuu}
-          loi={lyDoChanThu || loi}
+          loi={lyDoChanThu || lyDoChanDong || loi}
           onDong={() => !dangLuu && setHienVietQr(false)}
           onXacNhanThanhToan={() => xacNhanThanhToan('vietqr')}
         />

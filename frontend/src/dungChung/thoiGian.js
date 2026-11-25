@@ -1,12 +1,21 @@
 const DINH_DANG = new Intl.DateTimeFormat('vi-VN', {
   timeZone: 'Asia/Ho_Chi_Minh', dateStyle: 'short', timeStyle: 'medium'
 });
+const NGAY_VIET_NAM = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' });
+
+export function ngayVietNam(moc = Date.now()) {
+  return NGAY_VIET_NAM.format(moc);
+}
+
+export function docMocThoiGian(giaTri) {
+  const chuoi = typeof giaTri === 'string' && /^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}(\.\d+)?$/.test(giaTri)
+    ? giaTri.replace(' ', 'T') + 'Z' : giaTri;
+  return new Date(chuoi);
+}
 
 export function hienThiGioVietNam(giaTri) {
   if (!giaTri) return '—';
-  const chuoi = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}(\.\d+)?$/.test(giaTri)
-    ? giaTri.replace(' ', 'T') + 'Z' : giaTri;
-  const moc = new Date(chuoi);
+  const moc = docMocThoiGian(giaTri);
   return Number.isNaN(moc.getTime()) ? '—' : DINH_DANG.format(moc);
 }
 
